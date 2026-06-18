@@ -1,0 +1,3459 @@
+{
+  "sites": [
+    {
+      "id": "A0001",
+      "lat": 39.371693,
+      "lng": -104.865836,
+      "name": "Castlerock",
+      "customerId": "CSRKCOCF",
+      "digitizedStatus": "Digitized"
+    },
+    {
+      "id": "A1002",
+      "lat": 40.186075,
+      "lng": -104.817409,
+      "name": "Plateville",
+      "customerId": "PTVLCO03",
+      "digitizedStatus": "Not Digitized"
+    },
+    {
+      "id": "A004",
+      "lat": 39.125068,
+      "lng": -104.907596,
+      "name": "Palmer Lake",
+      "customerId": "PLLKCO01",
+      "digitizedStatus": "Not Digitized"
+    }
+  ],
+  "owners": [
+    {
+      "id": "OWN_LUMEN",
+      "name": "Lumen",
+      "color": "#FFFF00"
+    },
+    {
+      "id": "OWN_CUSTOMER",
+      "name": "Customer",
+      "color": "#FF00FF"
+    }
+  ],
+  "history": [],
+  "vendors": [],
+  "rackDefs": [
+    {
+      "id": "RACK_42U",
+      "name": "Standard 42U Cabinet",
+      "color": "#1e293b",
+      "depth": 1.25,
+      "width": 2,
+      "height": 6.46,
+      "totalU": 42
+    }
+  ],
+  "statuses": [
+    {
+      "id": "RETAIN",
+      "color": "#e2e8f0",
+      "label": "Existing to be retained"
+    }
+  ],
+  "buildings": [
+    {
+      "x": -20,
+      "z": 0,
+      "id": "B-A0001-0001",
+      "name": "Building 0001",
+      "label": "0001",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A0001-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A0001-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A0001-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A0001-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A0001-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A0001-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A0001-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A0001-005-001",
+          "bayNo": "001",
+          "label": "005.001",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A0001-005-002",
+          "bayNo": "002",
+          "label": "005.002",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A0001-WMT-001",
+          "bayNo": "001",
+          "label": "WMT.001",
+          "lineUp": "WMT",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A0001",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-21096143",
+          "name": "CSRKCOCF.OSPOCP.001.0001..001.001.8",
+          "rackId": "R-A0001-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-21096144",
+          "name": "CSRKCOCF.OSPOCP.001.0001..001.001.41",
+          "rackId": "R-A0001-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-20952415",
+          "name": "CSRKCOCF.OSPFDP.001.0001..001.002.2",
+          "rackId": "R-A0001-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-21587767",
+          "name": "CSRKCOCF.OSPFDP.001.0001..001.003.1",
+          "rackId": "R-A0001-001-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-20952416",
+          "name": "CSRKCOCF.OSPFDP.001.0001..001.003.11",
+          "rackId": "R-A0001-001-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-20952418",
+          "name": "CSRKCOCF.OSPFDP.001.0001..001.004.1",
+          "rackId": "R-A0001-001-004",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-20952417",
+          "name": "CSRKCOCF.OSPFDP.001.0001..001.005.2",
+          "rackId": "R-A0001-001-005",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-436253417",
+          "name": "CSRKCOCF.CIENA.6500.00001.SHELF-1",
+          "rackId": "R-A0001-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-462348663",
+          "name": "CSRKCOCF.OSPOSX.001.0001..005.001.19",
+          "rackId": "R-A0001-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-462348662",
+          "name": "CSRKCOCF.OSPOSX.001.0001..005.001.25",
+          "rackId": "R-A0001-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-462348665",
+          "name": "CSRKCOCF.OSPOSX.001.0001..005.002.19",
+          "rackId": "R-A0001-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-462348664",
+          "name": "CSRKCOCF.OSPOSX.001.0001..005.002.25",
+          "rackId": "R-A0001-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-21296776",
+          "name": "CSRKCOCF.OSPFDP.001.0001..WMT.001.78",
+          "rackId": "R-A0001-WMT-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-21296780",
+          "name": "CSRKCOCF.OSPFDP.001.0001..WMT.001.79",
+          "rackId": "R-A0001-WMT-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 10,
+      "z": 0,
+      "id": "B-A0001-0002",
+      "name": "Building 0002",
+      "label": "0002",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A0001-R01-001",
+          "bayNo": "001",
+          "label": "R01.001",
+          "lineUp": "R01",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A0001-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A0001-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A0001-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A0001-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A0001-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A0001-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A0001-402-001",
+          "bayNo": "001",
+          "label": "402.001",
+          "lineUp": "402",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A0001-402-002",
+          "bayNo": "002",
+          "label": "402.002",
+          "lineUp": "402",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A0001-402-003",
+          "bayNo": "003",
+          "label": "402.003",
+          "lineUp": "402",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A0001",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-8300393",
+          "name": "CSRKCOCF.TBDOSX.001.0002..R01.001.1",
+          "rackId": "R-A0001-R01-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8282680",
+          "name": "CSRKCOCF.TBDOSX.001.0002..R01.001.5",
+          "rackId": "R-A0001-R01-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 40,
+      "z": 0,
+      "id": "B-A0001-0003",
+      "name": "Building 0003",
+      "label": "0003",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A0001-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A0001-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A0001-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A0001-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A0001-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A0001-001-006",
+          "bayNo": "006",
+          "label": "001.006",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A0001-001-007",
+          "bayNo": "007",
+          "label": "001.007",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A0001-001-008",
+          "bayNo": "008",
+          "label": "001.008",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A0001-001-009",
+          "bayNo": "009",
+          "label": "001.009",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A0001-001-010",
+          "bayNo": "010",
+          "label": "001.010",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A0001-001-011",
+          "bayNo": "011",
+          "label": "001.011",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -2,
+          "id": "R-A0001-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -2,
+          "id": "R-A0001-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -2,
+          "id": "R-A0001-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -2,
+          "id": "R-A0001-002-004",
+          "bayNo": "004",
+          "label": "002.004",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -2,
+          "id": "R-A0001-002-005",
+          "bayNo": "005",
+          "label": "002.005",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": 1,
+          "id": "R-A0001-002-006",
+          "bayNo": "006",
+          "label": "002.006",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": 1,
+          "id": "R-A0001-002-007",
+          "bayNo": "007",
+          "label": "002.007",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": 1,
+          "id": "R-A0001-002-008",
+          "bayNo": "008",
+          "label": "002.008",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": 1,
+          "id": "R-A0001-002-009",
+          "bayNo": "009",
+          "label": "002.009",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "id": "R-A0001-002-010",
+          "bayNo": "010",
+          "label": "002.010",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": 1,
+          "id": "R-A0001-002-011",
+          "bayNo": "011",
+          "label": "002.011",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "id": "R-A0001-002-012",
+          "bayNo": "012",
+          "label": "002.012",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A0001",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 0,
+      "z": 0,
+      "id": "B-A1002-0002",
+      "name": "Building 0002",
+      "label": "0002",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A1002-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A1002-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A1002-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A1002-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A1002-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A1002-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A1002-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A1002-002-004",
+          "bayNo": "004",
+          "label": "002.004",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A1002-003-005",
+          "bayNo": "005",
+          "label": "003.005",
+          "lineUp": "003",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A1002-00Z-003",
+          "bayNo": "003",
+          "label": "00Z.003",
+          "lineUp": "00Z",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A1002-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A1002",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-2656301",
+          "name": "PTVLCO03STEMFP 001.0002.230.001.001.041",
+          "rackId": "R-A1002-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 25,
+      "z": -5,
+      "id": "B-A1002-0004",
+      "name": "Building 0004",
+      "label": "0004",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A1002-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A1002-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A1002-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A1002-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A1002-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A1002-001-006",
+          "bayNo": "006",
+          "label": "001.006",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A1002-001-007",
+          "bayNo": "007",
+          "label": "001.007",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A1002-001-008",
+          "bayNo": "008",
+          "label": "001.008",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A1002-001-009",
+          "bayNo": "009",
+          "label": "001.009",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A1002-001-010",
+          "bayNo": "010",
+          "label": "001.010",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A1002-001-011",
+          "bayNo": "011",
+          "label": "001.011",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -2,
+          "id": "R-A1002-001-02A",
+          "bayNo": "02A",
+          "label": "001.02A",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -2,
+          "id": "R-A1002-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -2,
+          "id": "R-A1002-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -2,
+          "id": "R-A1002-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -2,
+          "id": "R-A1002-002-004",
+          "bayNo": "004",
+          "label": "002.004",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": 1,
+          "id": "R-A1002-002-005",
+          "bayNo": "005",
+          "label": "002.005",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": 1,
+          "id": "R-A1002-002-006",
+          "bayNo": "006",
+          "label": "002.006",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": 1,
+          "id": "R-A1002-002-007",
+          "bayNo": "007",
+          "label": "002.007",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": 1,
+          "id": "R-A1002-002-008",
+          "bayNo": "008",
+          "label": "002.008",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "id": "R-A1002-002-009",
+          "bayNo": "009",
+          "label": "002.009",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": 1,
+          "id": "R-A1002-002-010",
+          "bayNo": "010",
+          "label": "002.010",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "id": "R-A1002-002-011",
+          "bayNo": "011",
+          "label": "002.011",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A1002",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-8925410",
+          "name": "PTVLCO03COLMFP 001.0004..001.002.039",
+          "rackId": "R-A1002-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2633810",
+          "name": "PTVLCO03COLMFP 001.0004..002.006.039",
+          "rackId": "R-A1002-002-006",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3775143",
+          "name": "PTVLCO03###.INFINERA.INFINERA.00001.DCM-1",
+          "rackId": "R-A1002-002-008",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2237903",
+          "name": "PTVLCO03###.INFINERA.INFINERA.00001.DCM-2",
+          "rackId": "R-A1002-002-008",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4057123",
+          "name": "PTVLCO03###.INFINERA.INFINERA.00001.1",
+          "rackId": "R-A1002-002-008",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 50,
+      "z": 0,
+      "id": "B-A1002-0005",
+      "name": "Building 0005",
+      "label": "0005",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A1002-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A1002-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A1002-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A1002-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A1002-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A1002-001-006",
+          "bayNo": "006",
+          "label": "001.006",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A1002-001-007",
+          "bayNo": "007",
+          "label": "001.007",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A1002-001-008",
+          "bayNo": "008",
+          "label": "001.008",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A1002-001-009",
+          "bayNo": "009",
+          "label": "001.009",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A1002-001-010",
+          "bayNo": "010",
+          "label": "001.010",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A1002-001-011",
+          "bayNo": "011",
+          "label": "001.011",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -2,
+          "id": "R-A1002-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -2,
+          "id": "R-A1002-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -2,
+          "id": "R-A1002-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -2,
+          "id": "R-A1002-002-004",
+          "bayNo": "004",
+          "label": "002.004",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -2,
+          "id": "R-A1002-002-005",
+          "bayNo": "005",
+          "label": "002.005",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": 1,
+          "id": "R-A1002-002-006",
+          "bayNo": "006",
+          "label": "002.006",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": 1,
+          "id": "R-A1002-002-007",
+          "bayNo": "007",
+          "label": "002.007",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": 1,
+          "id": "R-A1002-002-008",
+          "bayNo": "008",
+          "label": "002.008",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": 1,
+          "id": "R-A1002-002-009",
+          "bayNo": "009",
+          "label": "002.009",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "id": "R-A1002-002-010",
+          "bayNo": "010",
+          "label": "002.010",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": 1,
+          "id": "R-A1002-002-011",
+          "bayNo": "011",
+          "label": "002.011",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "id": "R-A1002-002-012",
+          "bayNo": "012",
+          "label": "002.012",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": 1,
+          "id": "R-A1002-002-013",
+          "bayNo": "013",
+          "label": "002.013",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": 4,
+          "id": "R-A1002-WALLA-001",
+          "bayNo": "001",
+          "label": "WALLA.001",
+          "lineUp": "WALLA",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": 4,
+          "id": "R-A1002-WALLB-001",
+          "bayNo": "001",
+          "label": "WALLB.001",
+          "lineUp": "WALLB",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": 4,
+          "id": "R-A1002-WALLC-001",
+          "bayNo": "001",
+          "label": "WALLC.001",
+          "lineUp": "WALLC",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": 4,
+          "id": "R-A1002-WALLD-001",
+          "bayNo": "001",
+          "label": "WALLD.001",
+          "lineUp": "WALLD",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A1002",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-6063360",
+          "name": "PTVLCO03.VARIOUS.FAP.00001.FPNL_99",
+          "rackId": "R-A1002-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3352839",
+          "name": "PTVLCO03.VARIOUS.FAP.00002.FPNL_99",
+          "rackId": "R-A1002-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8555056",
+          "name": "PTVLCO03.VARIOUS.FAP.00003.FPNL_99",
+          "rackId": "R-A1002-001-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4569096",
+          "name": "PTVLCO03.VARIOUS.FAP.00004.FPNL_99",
+          "rackId": "R-A1002-001-004",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-9407902",
+          "name": "PTVLCO03.VARIOUS.FAP.00005.FPNL_99",
+          "rackId": "R-A1002-001-005",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-5166848",
+          "name": "PTVLCO03.VARIOUS.FAP.00006.FPNL_99",
+          "rackId": "R-A1002-001-006",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-6229940",
+          "name": "PTVLCO03.VARIOUS.FAP.00007.FPNL_99",
+          "rackId": "R-A1002-001-007",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-7445918",
+          "name": "PTVLCO03.VARIOUS.FAP.00008.FPNL_99",
+          "rackId": "R-A1002-001-008",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-9030794",
+          "name": "PTVLCO03.VARIOUS.FAP.00009.FPNL_99",
+          "rackId": "R-A1002-001-009",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3278303",
+          "name": "PTVLCO03.ISPR45.001.0005..001.010.42",
+          "rackId": "R-A1002-001-010",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8422966",
+          "name": "PTVLCO03.OSPOSX.001.0005..001.010.21",
+          "rackId": "R-A1002-001-010",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2890449",
+          "name": "PTVLCO03.VARIOUS.FAP.00010.FPNL_99",
+          "rackId": "R-A1002-001-010",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-5549093",
+          "name": "PTVLCO03.ABB.BDFB.00001.BDCBB_01B",
+          "rackId": "R-A1002-001-011",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2172780",
+          "name": "PTVLCO03.ABB.BDFB.00002.BDCBB_01A",
+          "rackId": "R-A1002-001-011",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4555233",
+          "name": "PTVLCO03.VARIOUS.FAP.00011.FPNL_99",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3025446",
+          "name": "PTVLCO03.VARIOUS.FAP.00012.FPNL_99",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-1988449",
+          "name": "PTVLCO03.VARIOUS.FAP.00013.FPNL_99",
+          "rackId": "R-A1002-002-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3798146",
+          "name": "PTVLCO03.VARIOUS.FAP.00014.FPNL_99",
+          "rackId": "R-A1002-002-004",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8601611",
+          "name": "PTVLCO03.VARIOUS.FAP.00015.FPNL_99",
+          "rackId": "R-A1002-002-005",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2683149",
+          "name": "PTVLCO03.VARIOUS.FAP.00016.FPNL_99",
+          "rackId": "R-A1002-002-006",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4495062",
+          "name": "PTVLCO03.VARIOUS.FAP.00017.FPNL_99",
+          "rackId": "R-A1002-002-007",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8721680",
+          "name": "PTVLCO03.VARIOUS.FAP.00018.FPNL_99",
+          "rackId": "R-A1002-002-008",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-6989108",
+          "name": "PTVLCO03.VARIOUS.FAP.00019.FPNL_99",
+          "rackId": "R-A1002-002-009",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8291684",
+          "name": "PTVLCO03.VARIOUS.FAP.00020.FPNL_99",
+          "rackId": "R-A1002-002-010",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-7152996",
+          "name": "PTVLCO03.VARIOUS.FAP.00021.FPNL_99",
+          "rackId": "R-A1002-002-011",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2891870",
+          "name": "PTVLCO03.VARIOUS.FAP.00022.FPNL_99",
+          "rackId": "R-A1002-002-012",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2105357",
+          "name": "PTVLCO03.VARIOUS.FAP.00023.FPNL_99",
+          "rackId": "R-A1002-002-013",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2758228",
+          "name": "PTVLCO03.EATON.AC-PNL.00001.ACPNL_01",
+          "rackId": "R-A1002-WALLA-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3461937",
+          "name": "PTVLCO03.EATON.AC-PNL.00002.ACPNL_02",
+          "rackId": "R-A1002-WALLC-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 75,
+      "z": 5,
+      "id": "B-A1002-H101",
+      "name": "Telecom H101",
+      "label": "H101",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A1002-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A1002-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A1002-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A1002-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A1002-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A1002-003-001",
+          "bayNo": "001",
+          "label": "003.001",
+          "lineUp": "003",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A1002-003-002",
+          "bayNo": "002",
+          "label": "003.002",
+          "lineUp": "003",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A1002-004-001",
+          "bayNo": "001",
+          "label": "004.001",
+          "lineUp": "004",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A1002-005-001",
+          "bayNo": "001",
+          "label": "005.001",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A1002-005-002",
+          "bayNo": "002",
+          "label": "005.002",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A1002-00Z-001",
+          "bayNo": "001",
+          "label": "00Z.001",
+          "lineUp": "00Z",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -2,
+          "id": "R-A1002-00Z-002",
+          "bayNo": "002",
+          "label": "00Z.002",
+          "lineUp": "00Z",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -2,
+          "id": "R-A1002-T0001-001",
+          "bayNo": "001",
+          "label": "T0001.001",
+          "lineUp": "T0001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A1002",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-8763888",
+          "name": "PTVLCO03GWYOSX 001.H101..001.001.001",
+          "rackId": "R-A1002-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4160507",
+          "name": "PTVLCO03GWYOSX 001.H101..001.002.001",
+          "rackId": "R-A1002-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8831410",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00639.DCM-1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3163582",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00496.DCM-1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2246353",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00157.DCM-1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3664905",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00171.DCM-1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3490149",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00496.1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4654012",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00639.1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8793914",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00171.1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3702523",
+          "name": "PTVLCO03O##.INFINERA.INFINERA.00157.1",
+          "rackId": "R-A1002-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8563091",
+          "name": "PTVLCO03D##.CISCO.2811.01003.040",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8768367",
+          "name": "PTVLCO03.JUNIPER.EX.00001.0",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-6902582",
+          "name": "PTVLCO03.ADVA.FSP 3000RE.00002.1-1-EMDM2",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-5993902",
+          "name": "PTVLCO03D##.CISCO.2811.01003.037",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3688882",
+          "name": "PTVLCO03.GWYFDP.001.H101..002.002.31",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8672307",
+          "name": "PTVLCO03.ADVA.FSP 3000RE.00002.1-1",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3627138",
+          "name": "PTVLCO03.ADVA.FSP 3000RE.00002.1-2",
+          "rackId": "R-A1002-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4437094",
+          "name": "PTVLCO03.ADVA.FSP 3000R7.00001.SHELF-1",
+          "rackId": "R-A1002-002-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-6745116",
+          "name": "PTVLCO03###.CISCO.1924.01001.N/A",
+          "rackId": "R-A1002-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8897449",
+          "name": "PTVLCO03D##.CISCO.2511.01002.001",
+          "rackId": "R-A1002-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3998772",
+          "name": "PTVLCO03D##.CISCO.2511.01002.PATCH",
+          "rackId": "R-A1002-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-7788578",
+          "name": "PTVLCO03##W.CISCO.7204.01004.N/A",
+          "rackId": "R-A1002-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2054992",
+          "name": "PTVLCO03RG#.CANOGA.CP9101.01000.N/A",
+          "rackId": "R-A1002-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-7142019",
+          "name": "PTVLCO03.GWYOSX.001.H101..005.001.37",
+          "rackId": "R-A1002-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-7056646",
+          "name": "PTVLCO03.GWYOSX.001.H101..005.001.7",
+          "rackId": "R-A1002-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-6193199",
+          "name": "PTVLCO03.OSPOSX.001.H101..005.001.25",
+          "rackId": "R-A1002-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3683646",
+          "name": "PTVLCO03.OSPOSX.001.H101..005.001.13",
+          "rackId": "R-A1002-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3980496",
+          "name": "PTVLCO03.OSPOSX.001.H101..005.001.19",
+          "rackId": "R-A1002-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2203938",
+          "name": "PTVLCO03.GWYOSX.001.H101..005.002.37",
+          "rackId": "R-A1002-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-1723065",
+          "name": "PTVLCO03.GWYOSX.001.H101..005.002.7",
+          "rackId": "R-A1002-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4786633",
+          "name": "PTVLCO03.OSPOSX.001.H101..005.002.13",
+          "rackId": "R-A1002-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-5720218",
+          "name": "PTVLCO03.OSPOSX.001.H101..005.002.25",
+          "rackId": "R-A1002-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-4902371",
+          "name": "PTVLCO03.OSPOSX.001.H101..005.002.19",
+          "rackId": "R-A1002-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-3471923",
+          "name": "PTVLCO03GWYFEC 001.H101..00Z.001.001",
+          "rackId": "R-A1002-00Z-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2860587",
+          "name": "PTVLCO03GWYFEC 001.H101..00Z.002.001",
+          "rackId": "R-A1002-00Z-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-6239237",
+          "name": "PTVLCO03.TXCFDP.001.H101..T0001.001.1",
+          "rackId": "R-A1002-T0001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-8095371",
+          "name": "PTVLCO03.TXCFDP.001.H101..T0001.001.8",
+          "rackId": "R-A1002-T0001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 0,
+      "z": 0,
+      "id": "B-A004-0001",
+      "name": "Building 0001",
+      "label": "0001",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A004-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A004-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A004-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A004-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A004",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-2111111",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00001.DCM2",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2771971",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00001.DCM1",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2327548",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00001.BAFFLE 1",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2173430",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00001.SHELF-1",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 25,
+      "z": 0,
+      "id": "B-A004-0002",
+      "name": "Building 0002",
+      "label": "0002",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A004-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A004-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A004-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A004-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A004-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A004-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A004-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A004-002-004",
+          "bayNo": "004",
+          "label": "002.004",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A004-003-005",
+          "bayNo": "005",
+          "label": "003.005",
+          "lineUp": "003",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A004-00Z-003",
+          "bayNo": "003",
+          "label": "00Z.003",
+          "lineUp": "00Z",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A004-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A004",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-2787515",
+          "name": "PLLKCO01.INFINERA.DTN-X.00002.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2408375",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00002.DCM2",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2704862",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00002.DCM1",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2478389",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00002.BAFFLE 1",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2112595",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00002.BAFFLE 2",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2206601",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00002.ROADM 2",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2150286",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00002.ROADM 1",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2312955",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00003.BAFFLE 2",
+          "rackId": "R-A004-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2731487",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00003.BAFFLE 1",
+          "rackId": "R-A004-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2611082",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00003.SHELF-2",
+          "rackId": "R-A004-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2669999",
+          "name": "PLLKCO01###.HUAWEI.OPTIX.00003.SHELF-1",
+          "rackId": "R-A004-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2604719",
+          "name": "PLLKCO01.CIENA.6500.00001.SHELF-1",
+          "rackId": "R-A004-001-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2724275",
+          "name": "PLLKCO01.CIENA.6500.00002.SHELF-1",
+          "rackId": "R-A004-001-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 50,
+      "z": 10,
+      "id": "B-A004-0004",
+      "name": "Building 0004",
+      "label": "0004",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A004-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A004-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A004-001-003",
+          "bayNo": "003",
+          "label": "001.003",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A004-001-004",
+          "bayNo": "004",
+          "label": "001.004",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A004-001-005",
+          "bayNo": "005",
+          "label": "001.005",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A004-001-006",
+          "bayNo": "006",
+          "label": "001.006",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A004-001-007",
+          "bayNo": "007",
+          "label": "001.007",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A004-001-008",
+          "bayNo": "008",
+          "label": "001.008",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A004-001-009",
+          "bayNo": "009",
+          "label": "001.009",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A004-001-010",
+          "bayNo": "010",
+          "label": "001.010",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A004-001-011",
+          "bayNo": "011",
+          "label": "001.011",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -2,
+          "id": "R-A004-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -2,
+          "id": "R-A004-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -2,
+          "id": "R-A004-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -2,
+          "id": "R-A004-002-004",
+          "bayNo": "004",
+          "label": "002.004",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -2,
+          "id": "R-A004-002-005",
+          "bayNo": "005",
+          "label": "002.005",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": 1,
+          "id": "R-A004-002-006",
+          "bayNo": "006",
+          "label": "002.006",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": 1,
+          "id": "R-A004-002-007",
+          "bayNo": "007",
+          "label": "002.007",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": 1,
+          "id": "R-A004-002-008",
+          "bayNo": "008",
+          "label": "002.008",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": 1,
+          "id": "R-A004-002-009",
+          "bayNo": "009",
+          "label": "002.009",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "id": "R-A004-002-010",
+          "bayNo": "010",
+          "label": "002.010",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": 1,
+          "id": "R-A004-002-011",
+          "bayNo": "011",
+          "label": "002.011",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A004",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-2500168",
+          "name": "PLLKCO01COLMFP 001.0004..001.001.037",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2894627",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00003.DCM-1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2813437",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00003.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2761321",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00004.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2741465",
+          "name": "PLLKCO01STEMFP 001.0004..002.002.040",
+          "rackId": "R-A004-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2605080",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00002.DCM-2",
+          "rackId": "R-A004-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2397824",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00002.DCM-1",
+          "rackId": "R-A004-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2556525",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00002.1",
+          "rackId": "R-A004-002-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    },
+    {
+      "x": 75,
+      "z": 0,
+      "id": "B-A004-H101",
+      "name": "Telecom H101",
+      "label": "H101",
+      "racks": [
+        {
+          "x": -10,
+          "y": -5,
+          "id": "R-A004-001-001",
+          "bayNo": "001",
+          "label": "001.001",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -5,
+          "id": "R-A004-001-002",
+          "bayNo": "002",
+          "label": "001.002",
+          "lineUp": "001",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -5,
+          "id": "R-A004-002-001",
+          "bayNo": "001",
+          "label": "002.001",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -5,
+          "id": "R-A004-002-002",
+          "bayNo": "002",
+          "label": "002.002",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -5,
+          "id": "R-A004-002-003",
+          "bayNo": "003",
+          "label": "002.003",
+          "lineUp": "002",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -5,
+          "id": "R-A004-003-001",
+          "bayNo": "001",
+          "label": "003.001",
+          "lineUp": "003",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "id": "R-A004-003-002",
+          "bayNo": "002",
+          "label": "003.002",
+          "lineUp": "003",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 7.5,
+          "y": -5,
+          "id": "R-A004-004-001",
+          "bayNo": "001",
+          "label": "004.001",
+          "lineUp": "004",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -10,
+          "y": -2,
+          "id": "R-A004-005-001",
+          "bayNo": "001",
+          "label": "005.001",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -7.5,
+          "y": -2,
+          "id": "R-A004-005-002",
+          "bayNo": "002",
+          "label": "005.002",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -5,
+          "y": -2,
+          "id": "R-A004-005-003",
+          "bayNo": "003",
+          "label": "005.003",
+          "lineUp": "005",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": -2.5,
+          "y": -2,
+          "id": "R-A004-006-001",
+          "bayNo": "001",
+          "label": "006.001",
+          "lineUp": "006",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 0,
+          "y": -2,
+          "id": "R-A004-006-002",
+          "bayNo": "002",
+          "label": "006.002",
+          "lineUp": "006",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 2.5,
+          "y": -2,
+          "id": "R-A004-00Z-001",
+          "bayNo": "001",
+          "label": "00Z.001",
+          "lineUp": "00Z",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        },
+        {
+          "x": 5,
+          "y": -2,
+          "id": "R-A004-00Z-002",
+          "bayNo": "002",
+          "label": "00Z.002",
+          "lineUp": "00Z",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "RACK_42U"
+        }
+      ],
+      "siteId": "A004",
+      "status": "RETAIN",
+      "suites": [],
+      "ownerId": "OWN_LUMEN",
+      "equipment": [
+        {
+          "id": "E-2668081",
+          "name": "PLLKCO01GWYOSX 001.H101..001.001.001",
+          "rackId": "R-A004-001-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2340473",
+          "name": "PLLKCO01GWYOSX 001.H101..001.002.001",
+          "rackId": "R-A004-001-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2192438",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00001.DCM-1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2121282",
+          "name": "PLLKCO01O##.INFINERA.INFINERA.00190.DCM-1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2527854",
+          "name": "PLLKCO01O##.INFINERA.INFINERA.00387.DCM-1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2235057",
+          "name": "PLLKCO01O##.INFINERA.INFINERA.00679.DCM-1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2664322",
+          "name": "PLLKCO01###.INFINERA.INFINERA.00001.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2842439",
+          "name": "PLLKCO01O##.INFINERA.INFINERA.00190.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2599424",
+          "name": "PLLKCO01O##.INFINERA.INFINERA.00679.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2148837",
+          "name": "PLLKCO01O##.INFINERA.INFINERA.00387.1",
+          "rackId": "R-A004-002-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2161614",
+          "name": "PLLKCO01###.CISCO.2811.00001.N/A",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2800427",
+          "name": "PLLKCO01###.CISCO.1924.01002.N/A",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2664468",
+          "name": "PLLKCO01D##.CISCO.2511.01003.001",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2302096",
+          "name": "PLLKCO01D##.CISCO.2511.01003.PATCH",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2733778",
+          "name": "PLLKCO01###.CISCO.2811.00001.001",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2352448",
+          "name": "PLLKCO01##W.CISCO.7204.01004.N/A",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2333047",
+          "name": "PLLKCO01RG#.CANOGA.CP9101.01000.N/A",
+          "rackId": "R-A004-004-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2419907",
+          "name": "PLLKCO01.GWYOSX.001.H101..005.001.7",
+          "rackId": "R-A004-005-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2199793",
+          "name": "PLLKCO01.INFINERA.DTN-X.00001.1",
+          "rackId": "R-A004-005-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2475804",
+          "name": "PLLKCO01.ADVA.FSP 3000R7.00002.SH1HU-P-1",
+          "rackId": "R-A004-005-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2633461",
+          "name": "PLLKCO01.ADVA.FSP 3000R7.00001.40CSM-NE",
+          "rackId": "R-A004-005-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2207134",
+          "name": "PLLKCO01.ADVA.FSP 3000R7.00002.40CSM-NE",
+          "rackId": "R-A004-005-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2604002",
+          "name": "PLLKCO01.ADVA.FSP 3000R7.00001.SHELF-1",
+          "rackId": "R-A004-005-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2221728",
+          "name": "PLLKCO01.ADVA.FSP 3000R7.00002.SHELF-1",
+          "rackId": "R-A004-005-003",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2694808",
+          "name": "PLLKCO01.GWYOSX.001.H101..006.001.37",
+          "rackId": "R-A004-006-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2539961",
+          "name": "PLLKCO01.GWYOSX.001.H101..006.001.7",
+          "rackId": "R-A004-006-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2237133",
+          "name": "PLLKCO01.OSPOCP.001.H101..006.001.13",
+          "rackId": "R-A004-006-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2799496",
+          "name": "PLLKCO01.GWYOSX.001.H101..006.002.37",
+          "rackId": "R-A004-006-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2583312",
+          "name": "PLLKCO01.GWYOSX.001.H101..006.002.7",
+          "rackId": "R-A004-006-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2472752",
+          "name": "PLLKCO01.OSPOCP.001.H101..006.002.13",
+          "rackId": "R-A004-006-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2434994",
+          "name": "PLLKCO01GWYFEC 001.H101..00Z.001.001",
+          "rackId": "R-A004-00Z-001",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        },
+        {
+          "id": "E-2783199",
+          "name": "PLLKCO01GWYFEC 001.H101..00Z.002.001",
+          "rackId": "R-A004-00Z-002",
+          "status": "RETAIN",
+          "baseRMU": 1,
+          "ownerId": "OWN_LUMEN",
+          "definitionId": "EQ_SERVER_1U"
+        }
+      ],
+      "floorPlans": [],
+      "definitionId": "TYPE_A",
+      "activeFloorPlanId": null
+    }
+  ],
+  "buildingDefs": [
+    {
+      "id": "TYPE_A",
+      "name": "Type A (16 x 12)",
+      "color": "#d2c29d",
+      "depth": 12,
+      "width": 16,
+      "height": 10,
+      "svgPath": "M -8,-6 L 8,-6 L 8,6 L -8,6 Z",
+      "roofColor": "#ffffff"
+    }
+  ],
+  "proInventory": [],
+  "equipmentDefs": [
+    {
+      "id": "EQ_SERVER_1U",
+      "name": "Generic 1U Server",
+      "color": "#3b82f6",
+      "depth": 1.15,
+      "heightU": 1,
+      "category": "SERVER",
+      "powerWatts": 450,
+      "manufacturer": "BBBB"
+    }
+  ]
+}

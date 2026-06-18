@@ -1,0 +1,1761 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ambiflo Actions + Projects Tracker (Mockup)</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --muted:#6b7280;
+      --text:#111827;
+      --border:#e5e7eb;
+      --border2:#f1f5f9;
+      --hover:#f8fafc;
+
+      --accent:#2563eb;
+      --accent2:#1d4ed8;
+      --accentSoft: rgba(37,99,235,.10);
+      --accentSoft2: rgba(37,99,235,.16);
+
+      --ok:#16a34a;
+      --okSoft: rgba(22,163,74,.12);
+
+      --warn:#f59e0b;
+      --warnSoft: rgba(245,158,11,.14);
+
+      --danger:#dc2626;
+      --dangerSoft: rgba(220,38,38,.12);
+
+      --chip:#f3f4f6;
+      --shadow: 0 1px 0 rgba(17,24,39,.04);
+      --radius: 14px;
+      --radius2: 10px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    [data-theme="dark"]{
+      --bg:#0b1220;
+      --panel:#0f172a;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --border:#1f2a44;
+      --border2:#16213a;
+      --hover:#0b1b35;
+
+      --accent:#60a5fa;
+      --accent2:#93c5fd;
+      --accentSoft: rgba(96,165,250,.16);
+      --accentSoft2: rgba(96,165,250,.22);
+
+      --ok:#34d399;
+      --okSoft: rgba(52,211,153,.14);
+
+      --warn:#fbbf24;
+      --warnSoft: rgba(251,191,36,.14);
+
+      --danger:#fb7185;
+      --dangerSoft: rgba(251,113,133,.14);
+
+      --chip:#13213f;
+      --shadow: 0 1px 0 rgba(0,0,0,.25);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.35;
+    }
+
+    /* Layout */
+    .app{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      height:100vh;
+      transition: grid-template-columns .18s ease;
+    }
+    body.sidebar-collapsed .app{
+      grid-template-columns: 72px 1fr;
+    }
+
+    .sidebar{
+      border-right:1px solid var(--border);
+      background: linear-gradient(180deg, var(--panel) 0%, rgba(37,99,235,.03) 100%);
+      padding:16px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      overflow:auto;
+    }
+
+    .main{
+      display:grid;
+      grid-template-rows: 56px 1fr;
+      min-width:0;
+    }
+
+    .topbar{
+      border-bottom:1px solid var(--border);
+      background: linear-gradient(90deg, var(--panel) 0%, rgba(37,99,235,.03) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 16px;
+      gap:12px;
+    }
+
+    .content{
+      padding:16px;
+      overflow:auto;
+    }
+
+    /* Branding */
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:6px 8px;
+      min-height:42px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      border:1px solid var(--border);
+      display:grid;place-items:center;
+      background: linear-gradient(180deg, var(--bg), rgba(37,99,235,.06));
+      font-weight:700;
+      letter-spacing:.2px;
+      color: var(--accent2);
+      flex:0 0 auto;
+    }
+    .brand .name{
+      display:flex;flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .brand .name strong{ font-size:14px; font-weight:700; }
+    .brand .name span{ font-size:12px; color:var(--muted); }
+
+    body.sidebar-collapsed .brand .name{ display:none; }
+
+    /* Controls */
+    .row{ display:flex; align-items:center; gap:8px; }
+    .grow{ flex:1; }
+    .input{
+      width:100%;
+      border:1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 12px;
+      padding:10px 12px;
+      font-size:13px;
+      outline:none;
+    }
+    .input:focus{
+      border-color: rgba(37,99,235,.45);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+    .btn{
+      border:1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 12px;
+      padding:9px 12px;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+      box-shadow: var(--shadow);
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{ background: var(--hover); }
+    .btn.primary{
+      border-color: rgba(37,99,235,.25);
+      background: var(--accentSoft);
+    }
+    .btn.primary:hover{ background: var(--accentSoft2); }
+    .btn.ghost{
+      border-color: transparent;
+      background: transparent;
+      box-shadow: none;
+    }
+    .btn.ghost:hover{
+      border-color: var(--border);
+      background: var(--hover);
+      box-shadow: var(--shadow);
+    }
+
+    .btn.filter-on{
+      border-color: rgba(245,158,11,.35);
+      background: var(--warnSoft);
+    }
+
+    .icon{
+      width:16px;height:16px;display:inline-block;
+      color: var(--muted);
+      flex: 0 0 auto;
+    }
+
+    /* Sidebar nav */
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      padding:0 6px;
+    }
+    .nav a{
+      text-decoration:none;
+      color: var(--text);
+      font-size:13px;
+      padding:10px 10px;
+      border-radius: 12px;
+      display:flex; align-items:center; gap:10px;
+      border:1px solid transparent;
+      min-height:40px;
+    }
+    .nav a:hover{ background: var(--hover); }
+    .nav a.active{
+      background: var(--accentSoft);
+      border-color: rgba(37,99,235,.18);
+    }
+    .nav a .label{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    body.sidebar-collapsed .nav a .label{ display:none; }
+    body.sidebar-collapsed .nav a{ justify-content:center; padding:10px; }
+
+    .section-title{
+      font-size:12px;
+      color: var(--muted);
+      padding:10px 10px 4px 10px;
+    }
+    body.sidebar-collapsed .section-title{ display:none; }
+
+    /* Customers tree */
+    .tree{
+      padding:0 6px 12px 6px;
+      border-top:1px solid var(--border2);
+      margin-top:6px;
+    }
+    .tree .header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 10px 6px 10px;
+      gap:10px;
+    }
+    .tree .header .title{
+      font-size:12px;
+      color: var(--muted);
+    }
+    body.sidebar-collapsed .tree{ display:none; } /* keep it clean when collapsed */
+
+    .tree-item{
+      padding:8px 10px;
+      border-radius: 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+    }
+    .tree-item:hover{ background: var(--hover); }
+    .tree-item .left{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .pill{
+      font-size:12px;
+      background: var(--chip);
+      border:1px solid var(--border);
+      padding:3px 8px;
+      border-radius: 999px;
+      color: var(--muted);
+      white-space:nowrap;
+    }
+    .tree-children{
+      margin-left:26px;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      padding:4px 0 10px 0;
+    }
+    .project-item{
+      padding:8px 10px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+    .project-item:hover{ background: var(--hover); }
+    .project-item.active{
+      background: var(--accentSoft);
+      border-color: rgba(37,99,235,.18);
+    }
+    .project-item .meta{
+      display:flex; align-items:center; gap:6px;
+      min-width:0;
+      color: var(--muted);
+      font-size:12px;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:99px;background: var(--muted);
+      opacity:.55;
+    }
+
+    /* Cards and grids */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 1100px){
+      .app{ grid-template-columns: 240px 1fr; }
+      body.sidebar-collapsed .app{ grid-template-columns: 72px 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border:1px solid var(--border);
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .card-head{
+      padding:14px 14px 10px 14px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      border-bottom:1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(37,99,235,.04), transparent);
+    }
+    [data-theme="dark"] .card .card-head{
+      background: linear-gradient(180deg, rgba(96,165,250,.06), transparent);
+    }
+    .card .card-head h2{
+      margin:0;
+      font-size:14px;
+      font-weight:750;
+    }
+    .card .card-head .sub{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
+    .card .card-body{ padding:14px; }
+
+    .stat-grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:10px;
+    }
+    @media (max-width: 1200px){
+      .stat-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .stat{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg), rgba(37,99,235,.03));
+      border-radius: 14px;
+      padding:12px;
+    }
+    [data-theme="dark"] .stat{
+      background: linear-gradient(180deg, var(--bg), rgba(96,165,250,.05));
+    }
+    .stat .k{ font-size:12px; color:var(--muted); }
+    .stat .v{ font-size:22px; font-weight:800; margin-top:4px; }
+    .stat .hint{ font-size:12px; color:var(--muted); margin-top:4px; }
+
+    /* Tabs */
+    .tabs{
+      display:flex; gap:8px; align-items:center;
+    }
+    .tab{
+      font-size:13px;
+      padding:8px 10px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: var(--bg);
+      cursor:pointer;
+      color: var(--text);
+      user-select:none;
+    }
+    .tab.active{
+      background: var(--accentSoft);
+      border-color: rgba(37,99,235,.18);
+    }
+
+    /* Table */
+    .table-wrap{
+      border:1px solid var(--border);
+      background: var(--bg);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      font-size:13px;
+    }
+    thead th{
+      text-align:left;
+      font-weight:650;
+      color: var(--muted);
+      background: var(--panel);
+      padding:10px 10px;
+      border-bottom:1px solid var(--border2);
+      position:sticky;
+      top:0;
+      z-index:2;
+      white-space:nowrap;
+    }
+    tbody td{
+      padding:10px 10px;
+      border-bottom:1px solid var(--border2);
+      vertical-align:top;
+    }
+    tbody tr:hover{ background: var(--hover); }
+    .mono{ font-family: var(--mono); font-size:12px; color: var(--muted); }
+    .chip{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: var(--chip);
+      font-size:12px;
+      color: var(--muted);
+      white-space:nowrap;
+    }
+    .chip.status-prog{ border-color: rgba(37,99,235,.25); background: var(--accentSoft); color: var(--text); }
+    .chip.status-done{ border-color: rgba(22,163,74,.25); background: var(--okSoft); color: var(--text); }
+    .chip.status-overdue{ border-color: rgba(220,38,38,.28); background: var(--dangerSoft); color: var(--text); }
+
+    .right{ text-align:right; }
+    .muted{ color: var(--muted); }
+
+    /* Gantt mock */
+    .gantt{
+      border:1px solid var(--border);
+      background: var(--bg);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    .gantt-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--border2);
+      background: linear-gradient(90deg, var(--panel), rgba(37,99,235,.03));
+    }
+    .gantt-body{
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      min-height: 380px;
+    }
+    .gantt-left{
+      border-right:1px solid var(--border2);
+      overflow:auto;
+    }
+    .gantt-right{
+      overflow:auto;
+      position:relative;
+    }
+    .timeline{
+      min-width: 900px;
+      height: 100%;
+      position:relative;
+      background:
+        linear-gradient(to right, var(--border2) 1px, transparent 1px) 0 0 / 60px 100%;
+    }
+    .timeline-header{
+      position:sticky;
+      top:0;
+      z-index:3;
+      background: var(--panel);
+      border-bottom:1px solid var(--border2);
+      display:flex;
+      min-width: 900px;
+    }
+    .timeline-header div{
+      width:60px;
+      padding:10px 0;
+      text-align:center;
+      font-size:12px;
+      color: var(--muted);
+      border-right:1px solid var(--border2);
+    }
+    .bar{
+      position:absolute;
+      height:18px;
+      border-radius: 999px;
+      background: var(--accentSoft2);
+      border:1px solid rgba(37,99,235,.30);
+    }
+    .bar.done{
+      background: rgba(22,163,74,.16);
+      border-color: rgba(22,163,74,.30);
+    }
+    .bar.prog{
+      background: rgba(245,158,11,.18);
+      border-color: rgba(245,158,11,.30);
+    }
+    .baseline{
+      position:absolute;
+      height:6px;
+      border-radius:999px;
+      background: rgba(148,163,184,.22);
+      border:1px solid rgba(148,163,184,.25);
+      top: 26px;
+    }
+    .dep-line{
+      position:absolute;
+      height:1px;
+      background: rgba(148,163,184,.55);
+    }
+    .dep-node{
+      position:absolute;
+      width:6px;height:6px;border-radius:99px;
+      background: rgba(148,163,184,.85);
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      background: var(--panel);
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding:10px 12px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+      color: var(--text);
+      font-size:13px;
+      display:none;
+      max-width: 380px;
+    }
+    .toast.show{ display:block; }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(15,23,42,.32);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:50;
+    }
+    [data-theme="dark"] .modal-backdrop{
+      background: rgba(0,0,0,.55);
+    }
+    .modal-backdrop.show{ display:flex; }
+    .modal{
+      width:min(520px, 100%);
+      border-radius: 18px;
+      border:1px solid var(--border);
+      background: var(--panel);
+      box-shadow: 0 24px 60px rgba(0,0,0,.20);
+      overflow:hidden;
+    }
+    .modal-head{
+      padding:14px 14px 10px 14px;
+      border-bottom:1px solid var(--border2);
+      background: linear-gradient(180deg, rgba(37,99,235,.05), transparent);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .modal-head h3{
+      margin:0;
+      font-size:14px;
+      font-weight:800;
+    }
+    .modal-head p{
+      margin:6px 0 0 0;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .modal-body{ padding:14px; }
+    .modal-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 560px){
+      .modal-grid{ grid-template-columns: 1fr; }
+    }
+    .choice{
+      border:1px solid var(--border);
+      background: var(--bg);
+      border-radius: 16px;
+      padding:12px;
+      cursor:pointer;
+    }
+    .choice:hover{ background: var(--hover); }
+    .choice .t{
+      font-weight:800;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .choice .d{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    /* Sidebar footer */
+    .sidebar-footer{
+      margin-top:auto;
+      padding:8px 6px 6px 6px;
+    }
+    body.sidebar-collapsed .sidebar-footer .pill{ display:none; }
+    body.sidebar-collapsed .sidebar-footer .btn{ padding:9px 10px; }
+  </style>
+</head>
+
+<body data-theme="light">
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">a</div>
+        <div class="name">
+          <strong>Ambiflo</strong>
+          <span>actions and projects</span>
+        </div>
+      </div>
+
+      <div class="row" style="padding:0 6px;" id="sidebarSearchRow">
+        <input class="input" id="globalSearch" placeholder="Search actions, projects, customers" />
+      </div>
+
+      <nav class="nav">
+        <div class="section-title">Navigation</div>
+        <a href="#" class="active" data-view="dashboard">
+          <span class="icon">⌂</span><span class="label">Dashboard</span>
+        </a>
+        <a href="#" data-view="my-actions">
+          <span class="icon">✓</span><span class="label">My actions</span>
+        </a>
+        <a href="#" data-view="customers-projects">
+          <span class="icon">▦</span><span class="label">Customers and projects</span>
+        </a>
+        <a href="#" data-view="admin">
+          <span class="icon">⚙</span><span class="label">Admin and settings</span>
+        </a>
+      </nav>
+
+      <div class="tree">
+        <div class="header">
+          <div class="title">Customers</div>
+          <button class="btn" id="btnNewProject">
+            <span class="icon">＋</span> New
+          </button>
+        </div>
+        <div id="customerTree"></div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="row" style="justify-content:space-between;">
+          <div class="row" style="gap:10px;">
+            <span class="pill" id="whoami">Ray</span>
+            <span class="pill">Standard user</span>
+          </div>
+          <button class="btn" id="themeToggle" title="Toggle theme">
+            <span class="icon">◐</span>
+            <span class="label" style="color:var(--muted);">Theme</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <section class="main">
+      <header class="topbar">
+        <div class="row" style="gap:10px; min-width:0;">
+          <button class="btn ghost" id="sidebarToggle" title="Collapse sidebar">
+            <span class="icon" id="sidebarToggleIcon">≡</span>
+          </button>
+          <div style="min-width:0;">
+            <div style="font-weight:800; font-size:14px;" id="pageTitle">Dashboard</div>
+            <div style="font-size:12px; color:var(--muted);" id="pageSubtitle">Overview of open actions and active projects</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="btn" id="btnDownloadTemplate">
+            <span class="icon">⇩</span> Download action template
+          </button>
+          <button class="btn primary" id="btnUploadExcel">
+            <span class="icon">⇧</span> Upload actions (Excel)
+          </button>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- Dashboard view -->
+        <div class="view" id="view-dashboard">
+          <div class="card" style="margin-bottom:16px;">
+            <div class="card-head">
+              <div>
+                <h2>Key metrics</h2>
+                <div class="sub">Mock data for layout only</div>
+              </div>
+              <div class="row">
+                <button class="btn" id="btnRefreshMock"><span class="icon">⟲</span> Refresh</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="stat-grid">
+                <div class="stat">
+                  <div class="k">Open actions</div>
+                  <div class="v" id="statOpen">24</div>
+                  <div class="hint">Across all customers</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Due this week</div>
+                  <div class="v" id="statWeek">7</div>
+                  <div class="hint">Owner based</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Overdue</div>
+                  <div class="v" id="statOverdue">3</div>
+                  <div class="hint"><span style="color:var(--danger); font-weight:800;">needs attention</span></div>
+                </div>
+                <div class="stat">
+                  <div class="k">Active projects</div>
+                  <div class="v" id="statProjects">5</div>
+                  <div class="hint">Gantt and tracker</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Actions snapshot</h2>
+                  <div class="sub">Sorted by due date</div>
+                </div>
+                <div class="row">
+                  <span class="pill">Owner: Ray</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Description</th>
+                        <th>Due</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dashActions"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Active projects</h2>
+                  <div class="sub">Quick access</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="dashProjects" style="display:flex; flex-direction:column; gap:8px;"></div>
+                <div style="margin-top:12px; font-size:12px; color:var(--muted);">
+                  Tip: select a project under a customer to open it in tracker or Gantt.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- My actions view -->
+        <div class="view" id="view-my-actions" style="display:none;">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>My actions</h2>
+                <div class="sub">Actions you own, and actions where someone is waiting for you</div>
+              </div>
+              <div class="row">
+                <button class="btn" id="btnWaitingForMeFilter" title="Toggle: show actions where I'm the Waiting For person">
+                  <span class="icon">⏳</span> I'm waiting for
+                </button>
+                <button class="btn" id="btnBulkStatus"><span class="icon">✎</span> Bulk status</button>
+                <button class="btn" id="btnBulkDue"><span class="icon">🗓</span> Bulk due date</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+                <div class="tabs">
+                  <div class="tab active" data-actions-tab="owned">Actions I own</div>
+                  <div class="tab" data-actions-tab="completed">Completed</div>
+                </div>
+                <div class="row" style="gap:8px;">
+                  <select class="input" id="filterCustomer" style="width:180px; padding:9px 10px;">
+                    <option value="">Customer: all</option>
+                  </select>
+                  <select class="input" id="filterStatus" style="width:160px; padding:9px 10px;">
+                    <option value="">Status: all</option>
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:34px;"><input type="checkbox" id="selectAll" /></th>
+                      <th>ID</th>
+                      <th>Customer</th>
+                      <th>Project</th>
+                      <th>Description</th>
+                      <th>Due</th>
+                      <th>Status</th>
+                      <th>Waiting for</th>
+                    </tr>
+                  </thead>
+                  <tbody id="myActionsTbody"></tbody>
+                </table>
+              </div>
+
+              <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+                Button “I'm waiting for” is a fast filter that shows actions where <span class="pill">Waiting For = you</span>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customers and projects view -->
+        <div class="view" id="view-customers-projects" style="display:none;">
+          <div class="grid">
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Customer overview</h2>
+                  <div class="sub">Projects, share settings, and quick open</div>
+                </div>
+                <div class="row">
+                  <button class="btn" id="btnNewProjectInline"><span class="icon">＋</span> New project</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row" style="gap:10px; margin-bottom:10px;">
+                  <span class="pill" id="custNamePill">Select a customer</span>
+                  <span class="pill" id="custProjectsPill">Projects: 0</span>
+                </div>
+
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Project</th>
+                        <th>Type</th>
+                        <th>Visibility</th>
+                        <th>Status</th>
+                        <th class="right">Open</th>
+                      </tr>
+                    </thead>
+                    <tbody id="custProjectsTable"></tbody>
+                  </table>
+                </div>
+
+                <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+                  New projects are created under a customer. When creating, user chooses <span class="pill">Gantt</span> or <span class="pill">Table</span>.
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="projectRightPane">
+              <div class="card-head">
+                <div>
+                  <h2 id="rightPaneTitle">Project view</h2>
+                  <div class="sub" id="rightPaneSub">Select a project under a customer</div>
+                </div>
+                <div class="row" id="rightPaneButtons">
+                  <button class="btn"><span class="icon">⇧</span> Import</button>
+                  <button class="btn"><span class="icon">⇩</span> Export</button>
+                  <button class="btn primary"><span class="icon">🔗</span> Share</button>
+                </div>
+              </div>
+
+              <div class="card-body" id="rightPaneBody">
+                <div class="muted" style="font-size:13px;">
+                  Select a project from the left customer list to show either:
+                  <ul style="margin:10px 0 0 18px; color:var(--muted);">
+                    <li>Table tracker view, or</li>
+                    <li>Gantt planner view</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Gantt view (still a view, but not a sidebar nav item) -->
+        <div class="view" id="view-gantt" style="display:none;">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Gantt planner</h2>
+                <div class="sub" id="ganttSub">Select a Gantt project under a customer</div>
+              </div>
+              <div class="row">
+                <button class="btn"><span class="icon">⇧</span> Import Excel</button>
+                <button class="btn"><span class="icon">⇩</span> Export Excel</button>
+                <button class="btn"><span class="icon">📋</span> Paste rows</button>
+                <button class="btn primary"><span class="icon">🔗</span> Share</button>
+              </div>
+            </div>
+
+            <div class="card-body" style="padding:0;">
+              <div class="gantt">
+                <div class="gantt-head">
+                  <div class="row" style="gap:10px;">
+                    <span class="pill" id="ganttProjectPill">No project selected</span>
+                    <span class="pill">Dependencies</span>
+                    <span class="pill">Baselines</span>
+                    <span class="pill">Lead and lag</span>
+                  </div>
+                  <div class="row">
+                    <button class="btn" id="btnBackToCustomer"><span class="icon">←</span> Back to customer</button>
+                  </div>
+                </div>
+
+                <div class="gantt-body">
+                  <div class="gantt-left">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th style="width:64px;">Task</th>
+                          <th>Task name</th>
+                          <th style="width:120px;">Owner</th>
+                          <th style="width:120px;">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="ganttLeftRows"></tbody>
+                    </table>
+                  </div>
+
+                  <div class="gantt-right">
+                    <div class="timeline-header" id="timelineHeader"></div>
+                    <div class="timeline" id="timeline"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:12px 14px; font-size:12px; color:var(--muted); border-top:1px solid var(--border2);">
+                Mock only: real implementation must support FS, SS, FF, SF dependencies plus lag, lead, baseline start and finish.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin view -->
+        <div class="view" id="view-admin" style="display:none;">
+          <div class="grid">
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Admin and settings</h2>
+                  <div class="sub">Users, dropdown values, template schema</div>
+                </div>
+              </div>
+              <div class="card-body" style="display:flex; flex-direction:column; gap:12px;">
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th class="right">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Ray</td>
+                        <td><span class="chip">Standard user</span></td>
+                        <td class="muted">ray@ambiflo.example</td>
+                        <td class="right"><span class="chip status-prog">active</span></td>
+                      </tr>
+                      <tr>
+                        <td>Beth</td>
+                        <td><span class="chip">Admin</span></td>
+                        <td class="muted">beth@ambiflo.example</td>
+                        <td class="right"><span class="chip status-prog">active</span></td>
+                      </tr>
+                      <tr>
+                        <td>Lance</td>
+                        <td><span class="chip">Standard user</span></td>
+                        <td class="muted">lance@ambiflo.example</td>
+                        <td class="right"><span class="chip status-prog">active</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="card" style="border-radius:14px;">
+                  <div class="card-head">
+                    <div>
+                      <h2>Action template schema</h2>
+                      <div class="sub">Columns expected in Excel upload</div>
+                    </div>
+                    <button class="btn"><span class="icon">✎</span> Edit</button>
+                  </div>
+                  <div class="card-body">
+                    <div class="row" style="flex-wrap:wrap; gap:8px;">
+                      <span class="chip">Meeting Name</span>
+                      <span class="chip">Meeting Date</span>
+                      <span class="chip">Customer Name</span>
+                      <span class="chip">Action Description</span>
+                      <span class="chip">Action Owner</span>
+                      <span class="chip">Customer Contact</span>
+                      <span class="chip">Waiting For</span>
+                      <span class="chip">Due Date</span>
+                      <span class="chip">Priority</span>
+                    </div>
+                    <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+                      System fields like Action ID and Created Date are generated automatically.
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Sharing controls</h2>
+                  <div class="sub">Customer link settings</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row" style="justify-content:space-between; padding:12px; border:1px solid var(--border); border-radius:14px; background:var(--bg);">
+                  <div>
+                    <div style="font-weight:800;">Share link expiry</div>
+                    <div class="muted" style="font-size:12px; margin-top:2px;">Recommended for customer access</div>
+                  </div>
+                  <select class="input" style="width:180px; padding:9px 10px;">
+                    <option>7 days</option>
+                    <option>30 days</option>
+                    <option>90 days</option>
+                    <option>Never</option>
+                  </select>
+                </div>
+
+                <div class="row" style="justify-content:space-between; padding:12px; border:1px solid var(--border); border-radius:14px; background:var(--bg); margin-top:10px;">
+                  <div>
+                    <div style="font-weight:800;">Allow export</div>
+                    <div class="muted" style="font-size:12px; margin-top:2px;">Enable CSV and Excel downloads on shared pages</div>
+                  </div>
+                  <button class="btn"><span class="icon">○</span> Toggle</button>
+                </div>
+
+                <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+                  Customer sharing must be read-only by default.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </section>
+  </div>
+
+  <!-- New Project Modal -->
+  <div class="modal-backdrop" id="newProjectModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="newProjectTitle">
+      <div class="modal-head">
+        <div>
+          <h3 id="newProjectTitle">New project</h3>
+          <p>Create a project under a customer. Choose a Gantt chart or a table tracker.</p>
+        </div>
+        <button class="btn ghost" id="closeNewProject"><span class="icon">✕</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin-bottom:10px;">
+          <select class="input" id="newProjectCustomer" style="padding:9px 10px;">
+            <!-- populated by JS -->
+          </select>
+        </div>
+
+        <div class="modal-grid">
+          <div class="choice" id="createGantt">
+            <div class="t"><span class="icon">▤</span> New Gantt chart</div>
+            <div class="d">Timeline plan with dependencies, lag/lead, baseline.</div>
+          </div>
+          <div class="choice" id="createTable">
+            <div class="t"><span class="icon">▦</span> New Table tracker</div>
+            <div class="d">Customer action list style table, shareable read-only.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px; font-size:12px; color:var(--muted);">
+          Mock behaviour: creates a placeholder project under the selected customer and opens it.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Mock data
+    const customers = [
+      {
+        id: "c-wegman",
+        name: "Wegman",
+        projects: [
+          { id: "p-wegman-gantt", name: "ILA rollout plan", type: "Gantt", visibility: "Shareable", status: "In progress" },
+          { id: "p-wegman-tracker", name: "Weekly actions tracker", type: "Table", visibility: "Shareable", status: "Active" }
+        ]
+      },
+      {
+        id: "c-nexsysone",
+        name: "NexsysOne",
+        projects: [
+          { id: "p-nex-api", name: "API discovery and integration", type: "Gantt", visibility: "Internal", status: "Not started" },
+          { id: "p-nex-actions", name: "Customer actions", type: "Table", visibility: "Shareable", status: "Active" }
+        ]
+      }
+    ];
+
+    const actions = [
+      {
+        id: "A-01024",
+        customer: "Wegman",
+        project: "Weekly actions tracker",
+        desc: "Send revised field client offline test checklist",
+        owner: "Ray",
+        waitingFor: "Beth",
+        due: "2026-03-05",
+        status: "In Progress"
+      },
+      {
+        id: "A-01025",
+        customer: "Wegman",
+        project: "ILA rollout plan",
+        desc: "Confirm customer contacts for access to shared Gantt view",
+        owner: "Beth",
+        waitingFor: "Ray",
+        due: "2026-03-04",
+        status: "Not Started"
+      },
+      {
+        id: "A-01026",
+        customer: "NexsysOne",
+        project: "API discovery and integration",
+        desc: "Document data mapping requirements for action template import",
+        owner: "Ray",
+        waitingFor: "Andy",
+        due: "2026-03-06",
+        status: "Not Started"
+      },
+      {
+        id: "A-01027",
+        customer: "NexsysOne",
+        project: "Customer actions",
+        desc: "Share proposed project phasing and local-first dev plan",
+        owner: "Lance",
+        waitingFor: "Ray",
+        due: "2026-03-07",
+        status: "Completed"
+      }
+    ];
+
+    // Mock gantt rows
+    const ganttRows = [
+      { taskId:"T-01", name:"Kickoff and scope", owner:"Ray", status:"In Progress", start:1, end:3, bStart:1, bEnd:2 },
+      { taskId:"T-02", name:"Data model and schema draft", owner:"Beth", status:"Not Started", start:3, end:6, bStart:3, bEnd:5, depFrom:"T-01" },
+      { taskId:"T-03", name:"Actions import validation", owner:"Andy", status:"Not Started", start:6, end:9, bStart:6, bEnd:8, depFrom:"T-02" },
+      { taskId:"T-04", name:"Gantt dependency engine", owner:"Lance", status:"Not Started", start:8, end:12, bStart:8, bEnd:11, depFrom:"T-02" },
+      { taskId:"T-05", name:"Customer sharing and read-only view", owner:"Beth", status:"Not Started", start:12, end:15, bStart:12, bEnd:14, depFrom:"T-04" }
+    ];
+
+    // Utilities
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+    const ME = "Ray";
+
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2400);
+    }
+
+    function showView(key){
+      const viewMap = {
+        "dashboard": { title:"Dashboard", sub:"Overview of open actions and active projects", el:"#view-dashboard" },
+        "my-actions": { title:"My actions", sub:"Actions you own and actions waiting on you", el:"#view-my-actions" },
+        "customers-projects": { title:"Customers and projects", sub:"Projects under customers (table or Gantt)", el:"#view-customers-projects" },
+        "gantt": { title:"Customers and projects", sub:"Gantt view (opened from a customer project)", el:"#view-gantt" },
+        "admin": { title:"Admin and settings", sub:"Users, settings, and templates", el:"#view-admin" },
+      };
+      Object.values(viewMap).forEach(v => $(v.el).style.display = "none");
+      $(viewMap[key].el).style.display = "block";
+      $("#pageTitle").textContent = viewMap[key].title;
+      $("#pageSubtitle").textContent = viewMap[key].sub;
+
+      // highlight nav item (only those that exist)
+      $$(".nav a").forEach(x => x.classList.remove("active"));
+      const nav = document.querySelector(`.nav a[data-view="${key}"]`);
+      if(nav) nav.classList.add("active");
+      else {
+        // if gantt view, keep Customers highlighted
+        const custNav = document.querySelector(`.nav a[data-view="customers-projects"]`);
+        if(custNav) custNav.classList.add("active");
+      }
+    }
+
+    // Theme toggle
+    $("#themeToggle").addEventListener("click", () => {
+      const body = document.body;
+      body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
+    });
+
+    // Sidebar collapse toggle
+    $("#sidebarToggle").addEventListener("click", () => {
+      document.body.classList.toggle("sidebar-collapsed");
+      const collapsed = document.body.classList.contains("sidebar-collapsed");
+      $("#sidebarToggleIcon").textContent = collapsed ? "→" : "≡";
+    });
+
+    // Top buttons (mock)
+    $("#btnDownloadTemplate").addEventListener("click", () => toast("Mock: download template (.xlsx)"));
+    $("#btnUploadExcel").addEventListener("click", () => toast("Mock: upload Excel (validate, preview, import)"));
+    $("#btnRefreshMock").addEventListener("click", () => toast("Mock refresh"));
+
+    // Navigation (no separate Gantt nav item)
+    $$(".nav a").forEach(a => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        showView(a.dataset.view);
+      });
+    });
+
+    // Customer + project selection
+    let selectedCustomerId = null;
+    let selectedProjectId = null;
+
+    function statusChip(status){
+      if(status === "Completed") return `<span class="chip status-done">Completed</span>`;
+      if(status === "In Progress") return `<span class="chip status-prog">In progress</span>`;
+      return `<span class="chip">Not started</span>`;
+    }
+
+    function renderCustomerTree(){
+      const wrap = $("#customerTree");
+      wrap.innerHTML = "";
+
+      customers.forEach(c => {
+        const customerRow = document.createElement("div");
+        customerRow.className = "tree-item";
+        customerRow.dataset.customerId = c.id;
+        customerRow.innerHTML = `
+          <div class="left">
+            <span class="icon">▾</span>
+            <div style="min-width:0;">
+              <div style="font-weight:800; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.name}</div>
+              <div class="muted" style="font-size:12px;">${c.projects.length} projects</div>
+            </div>
+          </div>
+          <span class="pill">customer</span>
+        `;
+
+        const children = document.createElement("div");
+        children.className = "tree-children";
+
+        c.projects.forEach(p => {
+          const item = document.createElement("div");
+          item.className = "project-item";
+          item.dataset.projectId = p.id;
+          item.dataset.customerId = c.id;
+          item.innerHTML = `
+            <div style="min-width:0;">
+              <div style="display:flex; align-items:center; gap:8px; min-width:0;">
+                <span class="icon">${p.type === "Gantt" ? "▤" : "▦"}</span>
+                <div style="min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</div>
+              </div>
+              <div class="meta">
+                <span class="dot"></span>
+                <span>${p.visibility}</span>
+                <span style="opacity:.5;">•</span>
+                <span>${p.status}</span>
+              </div>
+            </div>
+            <span class="pill">${p.type}</span>
+          `;
+
+          item.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectedCustomerId = c.id;
+            selectedProjectId = p.id;
+            $$(".project-item").forEach(x => x.classList.remove("active"));
+            item.classList.add("active");
+
+            applyCustomerContext(c, p);
+            toast(`Selected: ${c.name} / ${p.name}`);
+
+            // Open the correct view based on project type
+            if(p.type === "Gantt") showView("gantt");
+            else showView("customers-projects");
+          });
+
+          children.appendChild(item);
+        });
+
+        let expanded = true;
+        customerRow.addEventListener("click", () => {
+          expanded = !expanded;
+          children.style.display = expanded ? "flex" : "none";
+          customerRow.querySelector(".icon").textContent = expanded ? "▾" : "▸";
+          selectedCustomerId = c.id;
+          applyCustomerOnlyContext(c);
+        });
+
+        wrap.appendChild(customerRow);
+        wrap.appendChild(children);
+      });
+    }
+
+    function renderCustomerProjectsTable(customer){
+      const tbody = $("#custProjectsTable");
+      tbody.innerHTML = "";
+
+      customer.projects.forEach(p => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${p.name}</td>
+          <td><span class="chip">${p.type}</span></td>
+          <td class="muted">${p.visibility}</td>
+          <td class="muted">${p.status}</td>
+          <td class="right"><a href="#" style="color:var(--accent); text-decoration:none;" data-open="${p.id}">Open</a></td>
+        `;
+        tr.querySelector("a").addEventListener("click", (e) => {
+          e.preventDefault();
+          selectedCustomerId = customer.id;
+          selectedProjectId = p.id;
+          applyCustomerContext(customer, p);
+          if(p.type === "Gantt") showView("gantt");
+          else showView("customers-projects");
+        });
+        tbody.appendChild(tr);
+      });
+    }
+
+    function applyCustomerOnlyContext(customer){
+      $("#custNamePill").textContent = customer.name;
+      $("#custProjectsPill").textContent = `Projects: ${customer.projects.length}`;
+      renderCustomerProjectsTable(customer);
+      syncCustomerFilterOptions();
+    }
+
+    function applyCustomerContext(customer, project){
+      applyCustomerOnlyContext(customer);
+
+      // Right pane in Customers view: show either table tracker or link to gantt
+      if(project.type === "Table"){
+        $("#rightPaneTitle").textContent = `Table tracker - ${project.name}`;
+        $("#rightPaneSub").textContent = `${customer.name} • shareable table tracker`;
+        $("#rightPaneBody").innerHTML = `
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Description</th>
+                  <th>Owner</th>
+                  <th>Waiting for</th>
+                  <th>Due</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="trackerTbody"></tbody>
+            </table>
+          </div>
+          <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+            This is the customer-facing table alternative to a Gantt chart.
+          </div>
+        `;
+        renderTracker(customer, project);
+      } else {
+        $("#rightPaneTitle").textContent = `Gantt chart - ${project.name}`;
+        $("#rightPaneSub").textContent = `${customer.name} • open to view timeline and dependencies`;
+        $("#rightPaneBody").innerHTML = `
+          <div style="border:1px solid var(--border); border-radius:14px; padding:12px; background:var(--bg);">
+            <div style="font-weight:800; font-size:13px;">This project is a Gantt chart</div>
+            <div class="muted" style="margin-top:6px; font-size:12px;">
+              Open the Gantt view to plan with dependencies, lag/lead, and baselines.
+            </div>
+            <div class="row" style="margin-top:10px;">
+              <button class="btn primary" id="openGanttFromPane"><span class="icon">▤</span> Open Gantt</button>
+            </div>
+          </div>
+        `;
+        $("#openGanttFromPane").addEventListener("click", () => showView("gantt"));
+      }
+
+      // Gantt header pills
+      $("#ganttProjectPill").textContent = `${customer.name} - ${project.name}`;
+      $("#ganttSub").textContent = `Project: ${project.name} (Gantt)`;
+      renderGantt();
+    }
+
+    // Dashboard rendering
+    function renderDashboard(){
+      const dashActions = $("#dashActions");
+      dashActions.innerHTML = "";
+
+      actions
+        .filter(a => a.owner === ME && a.status !== "Completed")
+        .sort((a,b) => a.due.localeCompare(b.due))
+        .slice(0, 6)
+        .forEach(a => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td class="mono">${a.id}</td>
+            <td>${a.customer}</td>
+            <td>${a.desc}</td>
+            <td class="muted">${a.due}</td>
+            <td>${statusChip(a.status)}</td>
+          `;
+          dashActions.appendChild(tr);
+        });
+
+      const projWrap = $("#dashProjects");
+      projWrap.innerHTML = "";
+      customers.forEach(c => c.projects.forEach(p => {
+        const row = document.createElement("div");
+        row.className = "row";
+        row.style.justifyContent = "space-between";
+        row.style.padding = "10px 12px";
+        row.style.border = "1px solid var(--border)";
+        row.style.borderRadius = "14px";
+        row.style.background = "var(--bg)";
+        row.innerHTML = `
+          <div style="min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:0;">
+              <span class="icon">${p.type === "Gantt" ? "▤" : "▦"}</span>
+              <div style="font-weight:800; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</div>
+            </div>
+            <div class="muted" style="font-size:12px; margin-top:2px;">${c.name} • ${p.visibility}</div>
+          </div>
+          <button class="btn" data-openproj="${p.id}">Open</button>
+        `;
+        row.querySelector("button").addEventListener("click", () => {
+          selectedCustomerId = c.id;
+          selectedProjectId = p.id;
+          applyCustomerContext(c, p);
+          if(p.type === "Gantt") showView("gantt");
+          else showView("customers-projects");
+        });
+        projWrap.appendChild(row);
+      }));
+    }
+
+    // My actions: tabs + filters + "I'm waiting for" button
+    let actionsTab = "owned";
+    let waitingForMeOnly = false;
+
+    function syncCustomerFilterOptions(){
+      const sel = $("#filterCustomer");
+      const current = sel.value;
+      const names = [...new Set(actions.map(a => a.customer))].sort();
+      sel.innerHTML = `<option value="">Customer: all</option>` + names.map(n => `<option>${n}</option>`).join("");
+      sel.value = current;
+    }
+
+    function renderMyActions(){
+      const tbody = $("#myActionsTbody");
+      tbody.innerHTML = "";
+
+      const cust = $("#filterCustomer").value;
+      const stat = $("#filterStatus").value;
+
+      let rows = actions.slice();
+
+      if(actionsTab === "owned"){
+        rows = rows.filter(a => a.owner === ME);
+      } else {
+        rows = rows.filter(a => a.status === "Completed");
+      }
+
+      // NEW: fast filter: show actions where Waiting For = me
+      if(waitingForMeOnly){
+        rows = rows.filter(a => a.waitingFor === ME && a.status !== "Completed");
+      }
+
+      if(cust) rows = rows.filter(a => a.customer === cust);
+      if(stat) rows = rows.filter(a => a.status === stat);
+
+      rows
+        .sort((a,b) => a.due.localeCompare(b.due))
+        .forEach(a => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><input type="checkbox" class="rowCheck" /></td>
+            <td class="mono">${a.id}</td>
+            <td>${a.customer}</td>
+            <td class="muted">${a.project || "-"}</td>
+            <td>${a.desc}</td>
+            <td class="muted">${a.due}</td>
+            <td>${statusChip(a.status)}</td>
+            <td class="muted">${a.waitingFor || "-"}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+    }
+
+    $$(".tab").forEach(t => {
+      t.addEventListener("click", () => {
+        $$(".tab").forEach(x => x.classList.remove("active"));
+        t.classList.add("active");
+        actionsTab = t.dataset.actionsTab;
+
+        // If user switches to completed, turn off waiting-for filter (keeps UX clean)
+        if(actionsTab === "completed" && waitingForMeOnly){
+          waitingForMeOnly = false;
+          $("#btnWaitingForMeFilter").classList.remove("filter-on");
+        }
+
+        renderMyActions();
+      });
+    });
+
+    $("#filterCustomer").addEventListener("change", renderMyActions);
+    $("#filterStatus").addEventListener("change", renderMyActions);
+
+    $("#selectAll").addEventListener("change", (e) => {
+      $$(".rowCheck").forEach(cb => cb.checked = e.target.checked);
+    });
+
+    $("#btnBulkStatus").addEventListener("click", () => toast("Mock: bulk status update"));
+    $("#btnBulkDue").addEventListener("click", () => toast("Mock: bulk due date update"));
+
+    // NEW: "I'm waiting for" filter button
+    $("#btnWaitingForMeFilter").addEventListener("click", () => {
+      waitingForMeOnly = !waitingForMeOnly;
+      $("#btnWaitingForMeFilter").classList.toggle("filter-on", waitingForMeOnly);
+
+      // If user has Completed tab active, move them back to Owned (waiting-for filter makes more sense there)
+      if(waitingForMeOnly && actionsTab === "completed"){
+        actionsTab = "owned";
+        $$(".tab").forEach(x => x.classList.remove("active"));
+        document.querySelector('.tab[data-actions-tab="owned"]').classList.add("active");
+      }
+
+      renderMyActions();
+    });
+
+    // Tracker
+    function renderTracker(customer, project){
+      const tbody = document.querySelector("#trackerTbody");
+      if(!tbody) return;
+
+      tbody.innerHTML = "";
+      const rows = actions.filter(a => a.customer === customer.name && a.project === project.name);
+
+      if(rows.length === 0){
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="6" class="muted">No actions mapped to this project (mock)</td>`;
+        tbody.appendChild(tr);
+        return;
+      }
+
+      rows.forEach(a => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="mono">${a.id}</td>
+          <td>${a.desc}</td>
+          <td class="muted">${a.owner}</td>
+          <td class="muted">${a.waitingFor || "-"}</td>
+          <td class="muted">${a.due}</td>
+          <td>${statusChip(a.status)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Gantt mock render
+    function renderGantt(){
+      const left = $("#ganttLeftRows");
+      left.innerHTML = "";
+      ganttRows.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="mono">${r.taskId}</td>
+          <td>${r.name}</td>
+          <td class="muted">${r.owner}</td>
+          <td>${statusChip(r.status)}</td>
+        `;
+        left.appendChild(tr);
+      });
+
+      const hdr = $("#timelineHeader");
+      hdr.innerHTML = "";
+      for(let i=1;i<=15;i++){
+        const d = document.createElement("div");
+        d.textContent = i;
+        hdr.appendChild(d);
+      }
+
+      const tl = $("#timeline");
+      tl.innerHTML = "";
+      const rowHeight = 42;
+      const unit = 60;
+
+      ganttRows.forEach((r, idx) => {
+        const y = 52 + idx * rowHeight;
+        const x1 = (r.start - 1) * unit + 10;
+        const w = Math.max(18, (r.end - r.start) * unit - 20);
+
+        const bx1 = (r.bStart - 1) * unit + 10;
+        const bw = Math.max(10, (r.bEnd - r.bStart) * unit - 20);
+
+        const base = document.createElement("div");
+        base.className = "baseline";
+        base.style.left = bx1 + "px";
+        base.style.top = (y + 22) + "px";
+        base.style.width = bw + "px";
+        tl.appendChild(base);
+
+        const bar = document.createElement("div");
+        bar.className = "bar";
+        if(r.status === "Completed") bar.classList.add("done");
+        if(r.status === "In Progress") bar.classList.add("prog");
+        bar.style.left = x1 + "px";
+        bar.style.top = y + "px";
+        bar.style.width = w + "px";
+        tl.appendChild(bar);
+
+        if(r.depFrom){
+          const depIndex = ganttRows.findIndex(x => x.taskId === r.depFrom);
+          if(depIndex >= 0){
+            const fromY = 52 + depIndex * rowHeight + 9;
+            const fromX = (ganttRows[depIndex].end - 1) * unit + 10;
+            const toX = x1;
+
+            const line = document.createElement("div");
+            line.className = "dep-line";
+            line.style.left = Math.min(fromX, toX) + "px";
+            line.style.top = fromY + "px";
+            line.style.width = Math.abs(toX - fromX) + "px";
+            tl.appendChild(line);
+
+            const node1 = document.createElement("div");
+            node1.className = "dep-node";
+            node1.style.left = (fromX - 3) + "px";
+            node1.style.top = (fromY - 3) + "px";
+            tl.appendChild(node1);
+
+            const node2 = document.createElement("div");
+            node2.className = "dep-node";
+            node2.style.left = (toX - 3) + "px";
+            node2.style.top = (fromY - 3) + "px";
+            tl.appendChild(node2);
+          }
+        }
+      });
+    }
+
+    $("#btnBackToCustomer").addEventListener("click", () => showView("customers-projects"));
+
+    // Global search (mock)
+    $("#globalSearch").addEventListener("keydown", (e) => {
+      if(e.key === "Enter") toast("Mock search: wire to actions and projects dataset");
+    });
+
+    // New Project modal behaviour
+    function openNewProjectModal(){
+      const modal = $("#newProjectModal");
+      const sel = $("#newProjectCustomer");
+      sel.innerHTML = customers.map(c => `<option value="${c.id}">${c.name}</option>`).join("");
+
+      // default to currently selected customer if any
+      if(selectedCustomerId) sel.value = selectedCustomerId;
+
+      modal.classList.add("show");
+    }
+    function closeNewProjectModal(){
+      $("#newProjectModal").classList.remove("show");
+    }
+
+    $("#btnNewProject").addEventListener("click", openNewProjectModal);
+    $("#btnNewProjectInline").addEventListener("click", openNewProjectModal);
+    $("#closeNewProject").addEventListener("click", closeNewProjectModal);
+    $("#newProjectModal").addEventListener("click", (e) => {
+      if(e.target.id === "newProjectModal") closeNewProjectModal();
+    });
+
+    function createProject(type){
+      const custId = $("#newProjectCustomer").value;
+      const customer = customers.find(c => c.id === custId);
+      if(!customer) return;
+
+      const newId = `p-${custId}-${type.toLowerCase()}-${Math.floor(Math.random()*9000+1000)}`;
+      const name = type === "Gantt" ? "New Gantt project" : "New Table tracker";
+
+      const proj = {
+        id: newId,
+        name,
+        type: type === "Gantt" ? "Gantt" : "Table",
+        visibility: "Internal",
+        status: "Not started"
+      };
+
+      customer.projects.unshift(proj);
+      selectedCustomerId = customer.id;
+      selectedProjectId = proj.id;
+
+      closeNewProjectModal();
+      renderCustomerTree();
+      applyCustomerContext(customer, proj);
+      toast(`Created: ${customer.name} / ${proj.name}`);
+
+      if(proj.type === "Gantt") showView("gantt");
+      else showView("customers-projects");
+    }
+
+    $("#createGantt").addEventListener("click", () => createProject("Gantt"));
+    $("#createTable").addEventListener("click", () => createProject("Table"));
+
+    // Initial render
+    function init(){
+      renderCustomerTree();
+      renderDashboard();
+      syncCustomerFilterOptions();
+      renderMyActions();
+      renderGantt();
+
+      // Default right pane placeholder
+      $("#custNamePill").textContent = "Select a customer";
+      $("#custProjectsPill").textContent = "Projects: 0";
+    }
+
+    init();
+  </script>
+</body>
+</html>

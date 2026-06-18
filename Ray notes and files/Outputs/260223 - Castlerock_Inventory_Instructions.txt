@@ -1,0 +1,140 @@
+LUMEN ASSET LCM - INVENTORY RECONCILIATION REPORT
+Ambiflo Site No: A0001
+CLLI code:       CSRKCOCF
+Site Name:       Castlerock
+Coordinates:     39.371693, -104.865836
+Generated:       2026-02-23
+--------------------------------------------------
+
+1. NEW ITEMS FOUND IN BIM (Create in System of Record)
+   Total: 10
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0001
+     Suite:         
+     Line Up:       002
+     Bay:           004
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0001
+     Suite:         
+     Line Up:       004
+     Bay:           001
+
+   - [EQUIPMENT] Name: NEW Unidentified 1U Server
+     Building:         0002
+     Suite:            
+     Line Up:          001
+     Bay:              001
+     U:                34
+
+   - [EQUIPMENT] Name: NEW Unidentified 1U Server
+     Building:         0002
+     Suite:            
+     Line Up:          001
+     Bay:              001
+     U:                24
+
+   - [EQUIPMENT] Name: NEW Unidentified 1U Server
+     Building:         0002
+     Suite:            
+     Line Up:          001
+     Bay:              001
+     U:                7
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0002
+     Suite:            
+     Line Up:          001
+     Bay:              002
+     U:                6
+
+   - [EQUIPMENT] Name: NEW Unidentified 1U Server
+     Building:         0002
+     Suite:            
+     Line Up:          001
+     Bay:              002
+     U:                27
+
+   - [EQUIPMENT] Name: NEW Unidentified 1U Server
+     Building:         0002
+     Suite:            
+     Line Up:          001
+     Bay:              005
+     U:                13
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            
+     Line Up:          002
+     Bay:              008
+     U:                20
+
+   - [EQUIPMENT] Name: NEW Unidentified 4U
+     Building:         0003
+     Suite:            001
+     Line Up:          001
+     Bay:              010
+     U:                16
+
+2. ATTRIBUTE MISMATCHES
+   Total: 9
+   - [undefined] (ID: 22077725)
+     > Line Up: BIM "002" → PRO "001"
+     > Bay No: BIM "003" → PRO "005"
+   - [undefined] (ID: 462348774)
+     > Line Up: BIM "003" → PRO "005"
+   - [undefined] (ID: 462348775)
+     > Line Up: BIM "003" → PRO "005"
+   - [undefined] (ID: 22077721)
+     > Line Up: BIM "004" → PRO "WMT"
+     > Bay No: BIM "002" → PRO "001"
+   - [undefined] (ID: 446535034)
+     > Line Up: BIM "001" → PRO "002"
+   - [undefined] (ID: 446648767)
+     > Bay No: BIM "002" → PRO "003"
+   - [undefined] (ID: 244224280)
+     > Line Up: BIM "001" → PRO "402"
+     > Bay No: BIM "003" → PRO "002"
+   - [undefined] (ID: 393074091)
+     > Line Up: BIM "001" → PRO "402"
+     > Bay No: BIM "004" → PRO "003"
+   - [undefined] (ID: 22462006)
+     > Line Up: BIM "001" → PRO "402"
+     > Bay No: BIM "005" → PRO "001"
+
+3. MISSING IN BIM (Remove from System of Record)
+   Total: 17
+   - [RACK     ] ID: 21603449     | CSRKCOCF.001.0002..R01.001
+     Loc: CSRKCOCF.001.0002..R01.001
+   - [EQUIPMENT] ID: 21096143     | Generic OSP OCP Frame
+     Loc: CSRKCOCF.001.0001..001.001
+   - [EQUIPMENT] ID: 21096144     | Generic OSP OCP Frame
+     Loc: CSRKCOCF.001.0001..001.001
+   - [EQUIPMENT] ID: 20952415     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..001.002
+   - [EQUIPMENT] ID: 21587767     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..001.003
+   - [EQUIPMENT] ID: 20952416     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..001.003
+   - [EQUIPMENT] ID: 20952418     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..001.004
+   - [EQUIPMENT] ID: 20952417     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..001.005
+   - [EQUIPMENT] ID: 436253417    | CIENA 6500
+     Loc: CSRKCOCF.001.0001..002.002
+   - [EQUIPMENT] ID: 462348663    | Generic Optical Splitter (OSPOSX)
+     Loc: CSRKCOCF.001.0001..005.001
+   - [EQUIPMENT] ID: 462348662    | Generic Optical Splitter (OSPOSX)
+     Loc: CSRKCOCF.001.0001..005.001
+   - [EQUIPMENT] ID: 462348665    | Generic Optical Splitter (OSPOSX)
+     Loc: CSRKCOCF.001.0001..005.002
+   - [EQUIPMENT] ID: 462348664    | Generic Optical Splitter (OSPOSX)
+     Loc: CSRKCOCF.001.0001..005.002
+   - [EQUIPMENT] ID: 21296776     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..WMT.001
+   - [EQUIPMENT] ID: 21296780     | Generic Fiber Dist Panel
+     Loc: CSRKCOCF.001.0001..WMT.001
+   - [EQUIPMENT] ID: 8300393      | Unknown Unidentified Device
+     Loc: CSRKCOCF.001.0002..R01.001
+   - [EQUIPMENT] ID: 8282680      | Unknown Unidentified Device
+     Loc: CSRKCOCF.001.0002..R01.001

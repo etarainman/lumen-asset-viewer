@@ -1,0 +1,26 @@
+{
+  "buildings": [
+    {
+      "id": "B-1767",
+      "siteId": "UNK",
+      "label": "UNK",
+      "x": 0,
+      "z": -206
+    },
+    {
+      "id": "B-1",
+      "siteId": "UNK",
+      "label": "UNK",
+      "x": 0,
+      "z": -206
+    },
+    {
+      "id": "B-176744437130",
+      "siteId": "UNK",
+      "label": "UNK",
+      "x": 0,
+      "z": -206
+    }
+  ],
+  "fps": []
+}

@@ -1,0 +1,183 @@
+
+==========================================
+DEEP INVENTORY AUDIT: snapshot-2026-03-05T07-52-29-327Z.json
+==========================================
+
+--- [VENDORS LIBRARY] ---
+[V] HUAWEI (ID: V_HUAWEI)
+[V] INFINERA (ID: V_INFINERA)
+[V] CIENA (ID: V_CIENA)
+[V] CISCO (ID: V_CISCO)
+[V] ADVA (ID: V_ADVA)
+[V] ABB (ID: V_ABB)
+[V] JUNIPER (ID: V_JUNIPER)
+[V] CANOGA (ID: V_CANOGA)
+[V] EATON (ID: V_EATON)
+[V] FUJITSU (ID: V_FUJITSU)
+[V] NOKIA (ID: V_NOKIA)
+[V] ALCATEL (ID: V_ALCATEL)
+[V] LUCENT (ID: V_LUCENT)
+
+--- [EQUIPMENT DEFINITIONS (LIBRARY)] ---
+[D] CIENA - 6500 (1U, 8ft)
+[D] HUAWEI - OPTIX (1U, 12ft)
+[D] INFINERA - DTN-X (13U, 9.3ft)
+[D] INFINERA - INFINERA (2U, 11ft)
+[D] CISCO - 2811 (2U, 16.3ft)
+[D] CISCO - 1924 (2U, 8ft)
+[D] CISCO - 2511 (2U, 11ft)
+[D] CISCO - 7204 (5U, 17ft)
+[D] CANOGA - CP9101 (9U, 15ft)
+[D] ADVA - FSP 3000R7 (3U, 10.65ft)
+[D] ABB - BDFB (1U, 8ft)
+[D] EATON - AC-PNL (1U, 8ft)
+[D] JUNIPER - EX (2U, 16.4ft)
+[D] ADVA - FSP 3000RE (2U, 12ft)
+
+--- [SITE LAYOUT & PLACED INVENTORY] ---
+
+[SITE] Castlerock (CSRKCOCF)
+
+[SITE] Plateville (PTVLCO03)
+
+[SITE] Palmer Lake (PLLKCO01)
+
+[TOP-LEVEL BUILDINGS (LEGACY)]
+  └─ [BLD] 0001
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 005.001
+      └─ [RACK] 005.002
+      └─ [RACK] WMT.001
+      └─ [RACK] 002.004
+      └─ [RACK] 004.001
+  └─ [BLD] 0002
+      └─ [RACK] R01.001
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 402.001
+      └─ [RACK] 402.002
+      └─ [RACK] 402.003
+  └─ [BLD] 0003
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 001.006
+      └─ [RACK] 001.007
+      └─ [RACK] 001.008
+      └─ [RACK] 001.009
+      └─ [RACK] 001.010
+      └─ [RACK] 001.011
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 002.005
+      └─ [RACK] 002.006
+      └─ [RACK] 002.007
+      └─ [RACK] 002.008
+      └─ [RACK] 002.009
+      └─ [RACK] 002.010
+      └─ [RACK] 002.011
+      └─ [RACK] 002.012
+  └─ [BLD] 0002
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 003.005
+      └─ [RACK] 00Z.003
+      └─ [RACK] 001.005
+      └─ [RACK] 01.00
+      └─ [RACK] RR1.04
+      └─ [RACK] RR1.03
+      └─ [RACK] RR1.01
+  └─ [BLD] 0004
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 001.006
+      └─ [RACK] 001.007
+      └─ [RACK] 001.008
+      └─ [RACK] 001.009
+      └─ [RACK] 001.010
+      └─ [RACK] 001.011
+      └─ [RACK] 001.02A
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 002.005
+      └─ [RACK] 002.006
+      └─ [RACK] 002.007
+      └─ [RACK] 002.008
+      └─ [RACK] 002.009
+      └─ [RACK] 002.010
+      └─ [RACK] 002.011
+  └─ [BLD] 0005
+  └─ [BLD] H101
+  └─ [BLD] 0001
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] H03.02
+  └─ [BLD] 0002
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 003.005
+      └─ [RACK] 00Z.003
+      └─ [RACK] 001.005
+      └─ [RACK] 01.00
+      └─ [RACK] RR1.04
+      └─ [RACK] RR1.03
+      └─ [RACK] RR1.01
+  └─ [BLD] 0004
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 001.006
+      └─ [RACK] 001.007
+      └─ [RACK] 001.008
+      └─ [RACK] 001.009
+      └─ [RACK] 001.010
+      └─ [RACK] 001.011
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 002.005
+      └─ [RACK] 002.006
+      └─ [RACK] 002.007
+      └─ [RACK] 002.008
+      └─ [RACK] 002.009
+      └─ [RACK] 002.010
+      └─ [RACK] 002.011
+  └─ [BLD] H101
+
+==========================================

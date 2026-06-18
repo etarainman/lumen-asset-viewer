@@ -1,0 +1,460 @@
+{
+  "vendors": [
+    {
+      "id": "V_HUAWEI",
+      "name": "HUAWEI",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_INFINERA",
+      "name": "INFINERA",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_CIENA",
+      "name": "CIENA",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_CISCO",
+      "name": "CISCO",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_ADVA",
+      "name": "ADVA",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_ABB",
+      "name": "ABB",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_JUNIPER",
+      "name": "JUNIPER",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_CANOGA",
+      "name": "CANOGA",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_EATON",
+      "name": "EATON",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_FUJITSU",
+      "name": "FUJITSU",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_NOKIA",
+      "name": "NOKIA",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_ALCATEL",
+      "name": "ALCATEL",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_LUCENT",
+      "name": "LUCENT",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_OSPOCP",
+      "name": "OSPOCP",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_OSPFDP",
+      "name": "OSPFDP",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_OSPOSX",
+      "name": "OSPOSX",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_TBDOSX",
+      "name": "TBDOSX",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_0004",
+      "name": "0004",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_H101",
+      "name": "H101",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_GWYOSX",
+      "name": "GWYOSX",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_ISPR45",
+      "name": "ISPR45",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_0002",
+      "name": "0002",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_VARIOUS",
+      "name": "VARIOUS",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_GWYFDP",
+      "name": "GWYFDP",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_TXCFDP",
+      "name": "TXCFDP",
+      "color": "#64748b"
+    },
+    {
+      "id": "V_TWRC",
+      "name": "TWRC",
+      "color": "#64748b"
+    }
+  ],
+  "equipmentModels": [
+    {
+      "id": "EQ_GENERIC_OPTICAL_SPLITTER__OSPOSX_",
+      "name": "Optical Splitter (OSPOSX)",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_OPTICAL_GATEWAY__GWYOSX_",
+      "name": "Optical Gateway (GWYOSX)",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_FIBER_ADAPTER_PANEL",
+      "name": "Fiber Adapter Panel",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_AC_PANEL",
+      "name": "AC Panel",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_POWER_DIST__BDFB_",
+      "name": "Power Dist (BDFB)",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_FIBER_DIST_PANEL",
+      "name": "Fiber Dist Panel",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_ISPR_FRAME",
+      "name": "ISPR Frame",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_OSP_OCP_FRAME",
+      "name": "OSP OCP Frame",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GENERIC_UNIDENTIFIED_DEVICE",
+      "name": "Unidentified Device",
+      "manufacturer": "GENERIC",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_OSPOCP_001",
+      "name": "001",
+      "manufacturer": "OSPOCP",
+      "depth": 18,
+      "heightU": 6,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_OSPFDP_001",
+      "name": "001",
+      "manufacturer": "OSPFDP",
+      "depth": 10,
+      "heightU": 7,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_CIENA_6500",
+      "name": "6500",
+      "manufacturer": "CIENA",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_OSPOSX_001",
+      "name": "001",
+      "manufacturer": "OSPOSX",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_TBDOSX_001",
+      "name": "001",
+      "manufacturer": "TBDOSX",
+      "depth": 12,
+      "heightU": 7,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_HUAWEI_OPTIX",
+      "name": "OPTIX",
+      "manufacturer": "HUAWEI",
+      "depth": 12,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_INFINERA_DTN_X",
+      "name": "DTN-X",
+      "manufacturer": "INFINERA",
+      "depth": 9.3,
+      "heightU": 13,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_0004_",
+      "name": "",
+      "manufacturer": "0004",
+      "depth": 11,
+      "heightU": 4,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_INFINERA_INFINERA",
+      "name": "INFINERA",
+      "manufacturer": "INFINERA",
+      "depth": 11,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_H101_",
+      "name": "",
+      "manufacturer": "H101",
+      "depth": 24,
+      "heightU": 84,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_CISCO_2811",
+      "name": "2811",
+      "manufacturer": "CISCO",
+      "depth": 16.3,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_CISCO_1924",
+      "name": "1924",
+      "manufacturer": "CISCO",
+      "depth": 8,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_CISCO_2511",
+      "name": "2511",
+      "manufacturer": "CISCO",
+      "depth": 11,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_CISCO_7204",
+      "name": "7204",
+      "manufacturer": "CISCO",
+      "depth": 17,
+      "heightU": 5,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_CANOGA_CP9101",
+      "name": "CP9101",
+      "manufacturer": "CANOGA",
+      "depth": 15,
+      "heightU": 9,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GWYOSX_001",
+      "name": "001",
+      "manufacturer": "GWYOSX",
+      "depth": 18,
+      "heightU": 7,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_ADVA_FSP_3000R7",
+      "name": "FSP 3000R7",
+      "manufacturer": "ADVA",
+      "depth": 10.65,
+      "heightU": 3,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_ISPR45_001",
+      "name": "001",
+      "manufacturer": "ISPR45",
+      "depth": 2,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_0002_230",
+      "name": "230",
+      "manufacturer": "0002",
+      "depth": 11,
+      "heightU": 4,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_VARIOUS_FAP",
+      "name": "FAP",
+      "manufacturer": "VARIOUS",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_ABB_BDFB",
+      "name": "BDFB",
+      "manufacturer": "ABB",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_EATON_AC_PNL",
+      "name": "AC-PNL",
+      "manufacturer": "EATON",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_JUNIPER_EX",
+      "name": "EX",
+      "manufacturer": "JUNIPER",
+      "depth": 16.4,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_ADVA_FSP_3000RE",
+      "name": "FSP 3000RE",
+      "manufacturer": "ADVA",
+      "depth": 12,
+      "heightU": 2,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_GWYFDP_001",
+      "name": "001",
+      "manufacturer": "GWYFDP",
+      "depth": 10,
+      "heightU": 5,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_TXCFDP_001",
+      "name": "001",
+      "manufacturer": "TXCFDP",
+      "depth": 8,
+      "heightU": 1,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "EQ_TWRC_",
+      "name": "",
+      "manufacturer": "TWRC",
+      "depth": 10,
+      "heightU": 22,
+      "category": "NETWORK",
+      "color": "#3b82f6"
+    }
+  ]
+}

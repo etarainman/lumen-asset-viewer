@@ -1,0 +1,638 @@
+{
+  "metadata": {
+    "date": "2026-02-23",
+    "generatedBy": "Lumen Asset LCM",
+    "version": "1.1",
+    "site": "Castlerock",
+    "clli": "CSRKCOCF",
+    "siteNo": "A0001",
+    "latitude": 39.371693,
+    "longitude": -104.865836
+  },
+  "safeguards": {
+    "ignoredBuildings": [],
+    "mode": "INTERACTIVE_RESOLUTION"
+  },
+  "summary": {
+    "creates": 10,
+    "updates": 9,
+    "deletes": 17
+  },
+  "operations": {
+    "create": [
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0001",
+          "lineUp": "002",
+          "bayNo": "004",
+          "label": "002.004"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "FUTURE",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "label": "002.004",
+          "lineUp": "002",
+          "bayNo": "004"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0001",
+          "lineUp": "004",
+          "bayNo": "001",
+          "label": "004.001"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "label": "004.001",
+          "lineUp": "004",
+          "bayNo": "001"
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 1U Server",
+        "details": {
+          "building": "0002",
+          "rackLabel": "001.001",
+          "baseRMU": 34
+        },
+        "attributes": {
+          "name": "Unidentified 1U Server",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 34
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 1U Server",
+        "details": {
+          "building": "0002",
+          "rackLabel": "001.001",
+          "baseRMU": 24
+        },
+        "attributes": {
+          "name": "Unidentified 1U Server",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "building": "0002",
+          "vendorId": "V_JUNIPER",
+          "baseRMU": 24
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 1U Server",
+        "details": {
+          "building": "0002",
+          "rackLabel": "001.001",
+          "baseRMU": 7
+        },
+        "attributes": {
+          "name": "Unidentified 1U Server",
+          "status": "RETAIN",
+          "ownerId": "OWN_CUSTOMER",
+          "building": "0002",
+          "vendorId": "V_OTHER",
+          "baseRMU": 7
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0002",
+          "rackLabel": "001.002",
+          "baseRMU": 6
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 6
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 1U Server",
+        "details": {
+          "building": "0002",
+          "rackLabel": "001.002",
+          "baseRMU": 27
+        },
+        "attributes": {
+          "name": "Unidentified 1U Server",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 27
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 1U Server",
+        "details": {
+          "building": "0002",
+          "rackLabel": "001.005",
+          "baseRMU": 13
+        },
+        "attributes": {
+          "name": "Unidentified 1U Server",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 13
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "002.008",
+          "baseRMU": 20
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 20
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 4U",
+        "details": {
+          "building": "0003",
+          "rackLabel": "001.010",
+          "baseRMU": 16
+        },
+        "attributes": {
+          "name": "Unidentified 4U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 16
+        }
+      }
+    ],
+    "update": [
+      {
+        "id": "22077725",
+        "changes": [
+          "Line Up: BIM \"002\" → PRO \"001\"",
+          "Bay No: BIM \"003\" → PRO \"005\""
+        ]
+      },
+      {
+        "id": "462348774",
+        "changes": [
+          "Line Up: BIM \"003\" → PRO \"005\""
+        ]
+      },
+      {
+        "id": "462348775",
+        "changes": [
+          "Line Up: BIM \"003\" → PRO \"005\""
+        ]
+      },
+      {
+        "id": "22077721",
+        "changes": [
+          "Line Up: BIM \"004\" → PRO \"WMT\"",
+          "Bay No: BIM \"002\" → PRO \"001\""
+        ]
+      },
+      {
+        "id": "446535034",
+        "changes": [
+          "Line Up: BIM \"001\" → PRO \"002\""
+        ]
+      },
+      {
+        "id": "446648767",
+        "changes": [
+          "Bay No: BIM \"002\" → PRO \"003\""
+        ]
+      },
+      {
+        "id": "244224280",
+        "changes": [
+          "Line Up: BIM \"001\" → PRO \"402\"",
+          "Bay No: BIM \"003\" → PRO \"002\""
+        ]
+      },
+      {
+        "id": "393074091",
+        "changes": [
+          "Line Up: BIM \"001\" → PRO \"402\"",
+          "Bay No: BIM \"004\" → PRO \"003\""
+        ]
+      },
+      {
+        "id": "22462006",
+        "changes": [
+          "Line Up: BIM \"001\" → PRO \"402\"",
+          "Bay No: BIM \"005\" → PRO \"001\""
+        ]
+      }
+    ],
+    "delete": [
+      {
+        "id": "21603449",
+        "original": {
+          "id": "21603449",
+          "rmu": "0",
+          "name": "CSRKCOCF.001.0002..R01.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "24",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "",
+          "usage": "",
+          "lineUp": "R01",
+          "rackId": "21603449",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "CSRKCOCF.001.0002..R01.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 20,
+          "proInventoryId": "21603449"
+        }
+      },
+      {
+        "id": "21096143",
+        "original": {
+          "id": "21096143",
+          "rmu": "8",
+          "name": "Generic OSP OCP Frame",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "OSP OCP Frame",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "434375269",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.001",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 5,
+          "proInventoryId": "21096143"
+        }
+      },
+      {
+        "id": "21096144",
+        "original": {
+          "id": "21096144",
+          "rmu": "41",
+          "name": "Generic OSP OCP Frame",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "OSP OCP Frame",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "434375269",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.001",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 6,
+          "proInventoryId": "21096144"
+        }
+      },
+      {
+        "id": "20952415",
+        "original": {
+          "id": "20952415",
+          "rmu": "2",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "22077722",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.002",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 7,
+          "proInventoryId": "20952415"
+        }
+      },
+      {
+        "id": "21587767",
+        "original": {
+          "id": "21587767",
+          "rmu": "1",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "22077723",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.003",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 8,
+          "proInventoryId": "21587767"
+        }
+      },
+      {
+        "id": "20952416",
+        "original": {
+          "id": "20952416",
+          "rmu": "11",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "22077723",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.003",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 9,
+          "proInventoryId": "20952416"
+        }
+      },
+      {
+        "id": "20952418",
+        "original": {
+          "id": "20952418",
+          "rmu": "1",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "004",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "22077724",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.004",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 10,
+          "proInventoryId": "20952418"
+        }
+      },
+      {
+        "id": "20952417",
+        "original": {
+          "id": "20952417",
+          "rmu": "2",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "005",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "22077725",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..001.005",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 11,
+          "proInventoryId": "20952417"
+        }
+      },
+      {
+        "id": "436253417",
+        "original": {
+          "id": "436253417",
+          "rmu": "0",
+          "name": "CIENA 6500",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "6500",
+          "suite": "",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "436016115",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..002.002",
+          "ownerName": "Lumen",
+          "vendorName": "CIENA",
+          "csvRowNumber": 13,
+          "proInventoryId": "436253417"
+        }
+      },
+      {
+        "id": "462348663",
+        "original": {
+          "id": "462348663",
+          "rmu": "19",
+          "name": "Generic Optical Splitter (OSPOSX)",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Optical Splitter (OSPOSX)",
+          "suite": "",
+          "usage": "",
+          "lineUp": "005",
+          "rackId": "462348775",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..005.001",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 14,
+          "proInventoryId": "462348663"
+        }
+      },
+      {
+        "id": "462348662",
+        "original": {
+          "id": "462348662",
+          "rmu": "25",
+          "name": "Generic Optical Splitter (OSPOSX)",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Optical Splitter (OSPOSX)",
+          "suite": "",
+          "usage": "",
+          "lineUp": "005",
+          "rackId": "462348775",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..005.001",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 15,
+          "proInventoryId": "462348662"
+        }
+      },
+      {
+        "id": "462348665",
+        "original": {
+          "id": "462348665",
+          "rmu": "19",
+          "name": "Generic Optical Splitter (OSPOSX)",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "Optical Splitter (OSPOSX)",
+          "suite": "",
+          "usage": "",
+          "lineUp": "005",
+          "rackId": "462348774",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..005.002",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 16,
+          "proInventoryId": "462348665"
+        }
+      },
+      {
+        "id": "462348664",
+        "original": {
+          "id": "462348664",
+          "rmu": "25",
+          "name": "Generic Optical Splitter (OSPOSX)",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "Optical Splitter (OSPOSX)",
+          "suite": "",
+          "usage": "",
+          "lineUp": "005",
+          "rackId": "462348774",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..005.002",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 17,
+          "proInventoryId": "462348664"
+        }
+      },
+      {
+        "id": "21296776",
+        "original": {
+          "id": "21296776",
+          "rmu": "78",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "WMT",
+          "rackId": "22077721",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..WMT.001",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 18,
+          "proInventoryId": "21296776"
+        }
+      },
+      {
+        "id": "21296780",
+        "original": {
+          "id": "21296780",
+          "rmu": "79",
+          "name": "Generic Fiber Dist Panel",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Fiber Dist Panel",
+          "suite": "",
+          "usage": "",
+          "lineUp": "WMT",
+          "rackId": "22077721",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "CSRKCOCF.001.0001..WMT.001",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 19,
+          "proInventoryId": "21296780"
+        }
+      },
+      {
+        "id": "8300393",
+        "original": {
+          "id": "8300393",
+          "rmu": "1",
+          "name": "Unknown Unidentified Device",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Unidentified Device",
+          "suite": "",
+          "usage": "",
+          "lineUp": "R01",
+          "rackId": "21603449",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "CSRKCOCF.001.0002..R01.001",
+          "ownerName": "Lumen",
+          "vendorName": "Unknown",
+          "csvRowNumber": 20,
+          "proInventoryId": "8300393"
+        }
+      },
+      {
+        "id": "8282680",
+        "original": {
+          "id": "8282680",
+          "rmu": "5",
+          "name": "Unknown Unidentified Device",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Unidentified Device",
+          "suite": "",
+          "usage": "",
+          "lineUp": "R01",
+          "rackId": "21603449",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "CSRKCOCF.001.0002..R01.001",
+          "ownerName": "Lumen",
+          "vendorName": "Unknown",
+          "csvRowNumber": 21,
+          "proInventoryId": "8282680"
+        }
+      }
+    ]
+  }
+}

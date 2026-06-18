@@ -1,0 +1,25 @@
+Suites Logic
+
+In some cases the Granite (Pro Inventory) system will have Suite numbers against Racks and Equipment, whereas on site, these suites have been removed.
+
+This can result in a need for re-labelling, for example where there are now duplicate Line Up and Bay pairs (that were unique when there was different suites)
+
+When we import the CSV file (and generate the inventory instructions file), it should be done as a site level action, i.e. for all buildings on the site, not individual ones
+
+The application should check across all buildings and inform the user of any discrepancies between the BIM Model and the Pro Inventory and should give the user two options; cancel the import (to add/correct the suites per building) or proceed (because the suites have been correctly added/updated)
+
+When we drag & drop the Granite rows onto the BIM Model rows, we want the BIM Model to be the source of truth for the following fields;
+
+Line Up 
+Bay No
+Suite
+RMU (for the Equipment)
+
+The Pro Inventory is the source of truth for the following fields
+RACK ID
+EQUIPMENT ID
+EQUIPMENT Name
+
+Import CSV and Generate Instructions should be on a site level, 
+
+When we Add, Update or Remove Suites, the BIM Inventory table should automatically be updated for the Racks and Equipment

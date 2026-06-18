@@ -1,0 +1,637 @@
+LUMEN ASSET LCM - INVENTORY RECONCILIATION REPORT
+Ambiflo Site No: A1002
+CLLI code:       PTVLCO03 
+Site Name:       plateville
+Coordinates:     40.186075, -104.817409
+Generated:       2026-02-23
+WARNING: The following buildings were IGNORED (Not modeled in 3D):
+         0005, H101, TWRC
+--------------------------------------------------
+
+1. NEW ITEMS FOUND IN BIM (Create in System of Record)
+   Total: 57
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0001
+     Suite:         
+     Line Up:       H03
+     Bay:           02
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0002
+     Suite:         240
+     Line Up:       01
+     Bay:           00
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0002
+     Suite:         
+     Line Up:       RR1
+     Bay:           04
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0002
+     Suite:         
+     Line Up:       RR1
+     Bay:           03
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0002
+     Suite:         
+     Line Up:       RR1
+     Bay:           01
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         340
+     Line Up:       340
+     Bay:           02
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         340
+     Line Up:       340
+     Bay:           03
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         310
+     Line Up:       310
+     Bay:           01
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         310
+     Line Up:       310
+     Bay:           02
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         310
+     Line Up:       310
+     Bay:           03
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         310
+     Line Up:       310
+     Bay:           04
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         330
+     Line Up:       330
+     Bay:           02
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         330
+     Line Up:       330
+     Bay:           03
+
+   - [RACK] Name:   NEW 23 x 15 x 84 Generic Rack
+     Building:      0003
+     Suite:         330
+     Line Up:       330
+     Bay:           04
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              001
+     U:                15
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              001
+     U:                23
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              001
+     U:                8
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              001
+     U:                30
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              001
+     U:                1
+
+   - [EQUIPMENT] Name: NEW Infinera DTN-X
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              002
+     U:                18
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              002
+     U:                3
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              003
+     U:                7
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0001
+     Suite:            110
+     Line Up:          001
+     Bay:              003
+     U:                17
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0002
+     Suite:            
+     Line Up:          RR1
+     Bay:              03
+     U:                1
+
+   - [EQUIPMENT] Name: NEW Infinera
+     Building:         0002
+     Suite:            
+     Line Up:          RR1
+     Bay:              03
+     U:                9
+
+   - [EQUIPMENT] Name: NEW Unidentified 6U
+     Building:         0002
+     Suite:            
+     Line Up:          RR1
+     Bay:              03
+     U:                18
+
+   - [EQUIPMENT] Name: NEW Unidentified 6U
+     Building:         0002
+     Suite:            
+     Line Up:          RR1
+     Bay:              03
+     U:                27
+
+   - [EQUIPMENT] Name: NEW Unidentified 10U
+     Building:         0002
+     Suite:            
+     Line Up:          RR1
+     Bay:              04
+     U:                24
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              04
+     U:                19
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              04
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              03
+     U:                10
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              03
+     U:                19
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              03
+     U:                1
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              03
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0003
+     Suite:            310
+     Line Up:          310
+     Bay:              01
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          H03
+     Bay:              01
+     U:                10
+
+   - [EQUIPMENT] Name: NEW Unidentified 2U
+     Building:         0004
+     Suite:            
+     Line Up:          H03
+     Bay:              01
+     U:                24
+
+   - [EQUIPMENT] Name: NEW Unidentified 2U
+     Building:         0004
+     Suite:            
+     Line Up:          H03
+     Bay:              01
+     U:                22
+
+   - [EQUIPMENT] Name: NEW Unidentified 2U
+     Building:         0004
+     Suite:            
+     Line Up:          H03
+     Bay:              01
+     U:                20
+
+   - [EQUIPMENT] Name: NEW Unidentified 2U
+     Building:         0004
+     Suite:            
+     Line Up:          H03
+     Bay:              01
+     U:                26
+
+   - [EQUIPMENT] Name: NEW Unidentified 2U
+     Building:         0004
+     Suite:            
+     Line Up:          H03
+     Bay:              01
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              04
+     U:                24
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              04
+     U:                15
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              05
+     U:                1
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              05
+     U:                10
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              05
+     U:                20
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              05
+     U:                30
+
+   - [EQUIPMENT] Name: NEW Unidentified 4U
+     Building:         0004
+     Suite:            
+     Line Up:          420
+     Bay:              05
+     U:                20
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              07
+     U:                20
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              07
+     U:                11
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              07
+     U:                1
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          420
+     Bay:              06
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          420
+     Bay:              07
+     U:                17
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          420
+     Bay:              07
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          420
+     Bay:              09
+     U:                28
+
+   - [EQUIPMENT] Name: NEW Ciena 6500 MUX
+     Building:         0004
+     Suite:            
+     Line Up:          420
+     Bay:              09
+     U:                17
+
+   - [EQUIPMENT] Name: NEW Lucent Unidentified 6U
+     Building:         0004
+     Suite:            
+     Line Up:          410
+     Bay:              08
+     U:                24
+
+2. ATTRIBUTE MISMATCHES
+   Total: 25
+   - [undefined] (ID: 8612720)
+     > Line Up: BIM "H03" → PRO "001"
+     > Bay No: BIM "01" → PRO "001"
+   - [undefined] (ID: 8651989)
+     > Line Up: BIM "01" → PRO "001"
+     > Bay No: BIM "04" → PRO "004"
+   - [undefined] (ID: 8612720)
+     > Line Up: BIM "340" → PRO "001"
+     > Bay No: BIM "01" → PRO "001"
+   - [undefined] (ID: 8612720)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "01" → PRO "001"
+   - [undefined] (ID: 8612713)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "02" → PRO "002"
+   - [undefined] (ID: 8612732)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "02" → PRO "002"
+   - [undefined] (ID: 8629189)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "03" → PRO "003"
+   - [undefined] (ID: 8652003)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "04" → PRO "004"
+   - [undefined] (ID: 8612724)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "05" → PRO "005"
+   - [undefined] (ID: 8612728)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "06" → PRO "006"
+   - [undefined] (ID: 8629195)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "07" → PRO "007"
+   - [undefined] (ID: 8629192)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "08" → PRO "008"
+   - [undefined] (ID: 8629185)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "09" → PRO "009"
+   - [undefined] (ID: 8652002)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "10" → PRO "010"
+   - [undefined] (ID: 8612717)
+     > Line Up: BIM "410" → PRO "001"
+     > Bay No: BIM "11" → PRO "011"
+   - [undefined] (ID: 8629177)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "01" → PRO "001"
+   - [undefined] (ID: 8612709)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "03" → PRO "003"
+   - [undefined] (ID: 8652000)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "04" → PRO "004"
+   - [undefined] (ID: 8635149)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "05" → PRO "005"
+   - [undefined] (ID: 8635146)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "06" → PRO "006"
+   - [undefined] (ID: 8635152)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "07" → PRO "007"
+   - [undefined] (ID: 8651999)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "08" → PRO "008"
+   - [undefined] (ID: 8629181)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "09" → PRO "009"
+   - [undefined] (ID: 8652001)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "10" → PRO "010"
+   - [undefined] (ID: 8612705)
+     > Line Up: BIM "420" → PRO "002"
+     > Bay No: BIM "11" → PRO "011"
+
+3. MISSING IN BIM (Remove from System of Record)
+   Total: 80
+   - [RACK     ] ID: 8628918      | PTVLCO03.001.0001.130.001.001
+     Loc: PTVLCO03.001.0001.130.001.001
+   - [RACK     ] ID: 8651982      | PTVLCO03.001.0001.130.001.002
+     Loc: PTVLCO03.001.0001.130.001.002
+   - [RACK     ] ID: 8635106      | PTVLCO03.001.0001.130.001.003
+     Loc: PTVLCO03.001.0001.130.001.003
+   - [RACK     ] ID: 8635108      | PTVLCO03.001.0001.130.001.004
+     Loc: PTVLCO03.001.0001.130.001.004
+   - [RACK     ] ID: 8628922      | PTVLCO03.001.0001.140.001.001
+     Loc: PTVLCO03.001.0001.140.001.001
+   - [RACK     ] ID: 8612646      | PTVLCO03.001.0001.140.001.002
+     Loc: PTVLCO03.001.0001.140.001.002
+   - [RACK     ] ID: 8635110      | PTVLCO03.001.0001.140.001.003
+     Loc: PTVLCO03.001.0001.140.001.003
+   - [RACK     ] ID: 8612650      | PTVLCO03.001.0001.140.001.004
+     Loc: PTVLCO03.001.0001.140.001.004
+   - [RACK     ] ID: 8635137      | PTVLCO03.001.0002.200.001.001
+     Loc: PTVLCO03.001.0002.200.001.001
+   - [RACK     ] ID: 8629156      | PTVLCO03.001.0002.200.001.002
+     Loc: PTVLCO03.001.0002.200.001.002
+   - [RACK     ] ID: 8651993      | PTVLCO03.001.0002.200.001.003
+     Loc: PTVLCO03.001.0002.200.001.003
+   - [RACK     ] ID: 8651992      | PTVLCO03.001.0002.200.001.004
+     Loc: PTVLCO03.001.0002.200.001.004
+   - [RACK     ] ID: 8635134      | PTVLCO03.001.0002.200.002.001
+     Loc: PTVLCO03.001.0002.200.002.001
+   - [RACK     ] ID: 8629150      | PTVLCO03.001.0002.200.002.002
+     Loc: PTVLCO03.001.0002.200.002.002
+   - [RACK     ] ID: 8651990      | PTVLCO03.001.0002.200.002.003
+     Loc: PTVLCO03.001.0002.200.002.003
+   - [RACK     ] ID: 8612680      | PTVLCO03.001.0002.200.002.004
+     Loc: PTVLCO03.001.0002.200.002.004
+   - [RACK     ] ID: 8629153      | PTVLCO03.001.0002.200.003.005
+     Loc: PTVLCO03.001.0002.200.003.005
+   - [RACK     ] ID: 8651991      | PTVLCO03.001.0002.200.00Z.003
+     Loc: PTVLCO03.001.0002.200.00Z.003
+   - [RACK     ] ID: 8629168      | PTVLCO03.001.0002.210.001.001
+     Loc: PTVLCO03.001.0002.210.001.001
+   - [RACK     ] ID: 8629162      | PTVLCO03.001.0002.210.001.002
+     Loc: PTVLCO03.001.0002.210.001.002
+   - [RACK     ] ID: 8629165      | PTVLCO03.001.0002.210.001.003
+     Loc: PTVLCO03.001.0002.210.001.003
+   - [RACK     ] ID: 8612699      | PTVLCO03.001.0002.210.001.004
+     Loc: PTVLCO03.001.0002.210.001.004
+   - [RACK     ] ID: 8612696      | PTVLCO03.001.0002.210.001.005
+     Loc: PTVLCO03.001.0002.210.001.005
+   - [RACK     ] ID: 8612676      | PTVLCO03.001.0002.220.001.001
+     Loc: PTVLCO03.001.0002.220.001.001
+   - [RACK     ] ID: 8651988      | PTVLCO03.001.0002.220.001.002
+     Loc: PTVLCO03.001.0002.220.001.002
+   - [RACK     ] ID: 8651987      | PTVLCO03.001.0002.220.001.003
+     Loc: PTVLCO03.001.0002.220.001.003
+   - [RACK     ] ID: 8635131      | PTVLCO03.001.0002.220.001.005
+     Loc: PTVLCO03.001.0002.220.001.005
+   - [RACK     ] ID: 8635128      | PTVLCO03.001.0002.230.001.001
+     Loc: PTVLCO03.001.0002.230.001.001
+   - [RACK     ] ID: 8629147      | PTVLCO03.001.0002.230.001.002
+     Loc: PTVLCO03.001.0002.230.001.002
+   - [RACK     ] ID: 8651986      | PTVLCO03.001.0002.230.001.003
+     Loc: PTVLCO03.001.0002.230.001.003
+   - [RACK     ] ID: 8635125      | PTVLCO03.001.0002.230.001.004
+     Loc: PTVLCO03.001.0002.230.001.004
+   - [RACK     ] ID: 8612684      | PTVLCO03.001.0002.240.001.001
+     Loc: PTVLCO03.001.0002.240.001.001
+   - [RACK     ] ID: 8612692      | PTVLCO03.001.0002.240.001.002
+     Loc: PTVLCO03.001.0002.240.001.002
+   - [RACK     ] ID: 8612688      | PTVLCO03.001.0002.240.001.003
+     Loc: PTVLCO03.001.0002.240.001.003
+   - [RACK     ] ID: 8629159      | PTVLCO03.001.0002.240.001.004
+     Loc: PTVLCO03.001.0002.240.001.004
+   - [RACK     ] ID: 8612658      | PTVLCO03.001.0003.310.001.001
+     Loc: PTVLCO03.001.0003.310.001.001
+   - [RACK     ] ID: 8629135      | PTVLCO03.001.0003.310.001.002
+     Loc: PTVLCO03.001.0003.310.001.002
+   - [RACK     ] ID: 8612666      | PTVLCO03.001.0003.310.001.003
+     Loc: PTVLCO03.001.0003.310.001.003
+   - [RACK     ] ID: 8612662      | PTVLCO03.001.0003.310.001.004
+     Loc: PTVLCO03.001.0003.310.001.004
+   - [RACK     ] ID: 8612670      | PTVLCO03.001.0003.320.001.001
+     Loc: PTVLCO03.001.0003.320.001.001
+   - [RACK     ] ID: 8629141      | PTVLCO03.001.0003.320.001.002
+     Loc: PTVLCO03.001.0003.320.001.002
+   - [RACK     ] ID: 8629144      | PTVLCO03.001.0003.320.001.003
+     Loc: PTVLCO03.001.0003.320.001.003
+   - [RACK     ] ID: 8651984      | PTVLCO03.001.0003.330.001.001
+     Loc: PTVLCO03.001.0003.330.001.001
+   - [RACK     ] ID: 8651983      | PTVLCO03.001.0003.330.001.002
+     Loc: PTVLCO03.001.0003.330.001.002
+   - [RACK     ] ID: 8635113      | PTVLCO03.001.0003.330.001.003
+     Loc: PTVLCO03.001.0003.330.001.003
+   - [RACK     ] ID: 8612673      | PTVLCO03.001.0003.330.001.004
+     Loc: PTVLCO03.001.0003.330.001.004
+   - [RACK     ] ID: 8651985      | PTVLCO03.001.0003.340.001.001
+     Loc: PTVLCO03.001.0003.340.001.001
+   - [RACK     ] ID: 8635119      | PTVLCO03.001.0003.340.001.002
+     Loc: PTVLCO03.001.0003.340.001.002
+   - [RACK     ] ID: 8635122      | PTVLCO03.001.0003.340.001.003
+     Loc: PTVLCO03.001.0003.340.001.003
+   - [RACK     ] ID: 8635116      | PTVLCO03.001.0003.340.001.004
+     Loc: PTVLCO03.001.0003.340.001.004
+   - [EQUIPMENT] ID: 1651994      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 4124093      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 4098468      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 5660741      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 2894135      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 3028584      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 6203011      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 3851515      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0001.110.001.001
+   - [EQUIPMENT] ID: 4733819      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0001.110.001.002
+   - [EQUIPMENT] ID: 2984682      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0001.110.001.002
+   - [EQUIPMENT] ID: 5458706      | HUAWEI OPTIX
+     Loc: PTVLCO03.001.0001.110.001.003
+   - [EQUIPMENT] ID: 4063611      | HUAWEI OPTIX
+     Loc: PTVLCO03.001.0001.110.001.003
+   - [EQUIPMENT] ID: 4682690      | CIENA 6500
+     Loc: PTVLCO03.001.0001.110.001.003
+   - [EQUIPMENT] ID: 9223566      | HUAWEI OPTIX
+     Loc: PTVLCO03.001.0001.110.001.003
+   - [EQUIPMENT] ID: 6780706      | CIENA 6500
+     Loc: PTVLCO03.001.0001.110.001.003
+   - [EQUIPMENT] ID: 4903313      | CIENA 6500
+     Loc: PTVLCO03.001.0001.110.001.003
+   - [EQUIPMENT] ID: 3423242      | HUAWEI OPTIX
+     Loc: PTVLCO03.001.0001.130.001.001
+   - [EQUIPMENT] ID: 2572581      | HUAWEI OPTIX
+     Loc: PTVLCO03.001.0001.130.001.001
+   - [EQUIPMENT] ID: 4966053      | HUAWEI OPTIX
+     Loc: PTVLCO03.001.0001.130.001.001
+   - [EQUIPMENT] ID: 1996480      | Generic ISPR Frame
+     Loc: PTVLCO03.001.0001.130.001.002
+   - [EQUIPMENT] ID: 2656301      | Unknown Unidentified Device
+     Loc: PTVLCO03.001.0002.230.001.001
+   - [EQUIPMENT] ID: 4869549      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0003.340.001.001
+   - [EQUIPMENT] ID: 3795296      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0003.340.001.001
+   - [EQUIPMENT] ID: 2402889      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0003.340.001.002
+   - [EQUIPMENT] ID: 7831601      | INFINERA DTN-X
+     Loc: PTVLCO03.001.0003.340.001.002
+   - [EQUIPMENT] ID: 8925410      | Unknown Unidentified Device
+     Loc: PTVLCO03.001.0004..001.002
+   - [EQUIPMENT] ID: 2633810      | Unknown Unidentified Device
+     Loc: PTVLCO03.001.0004..002.006
+   - [EQUIPMENT] ID: 3775143      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0004..002.008
+   - [EQUIPMENT] ID: 2237903      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0004..002.008
+   - [EQUIPMENT] ID: 4057123      | INFINERA INFINERA
+     Loc: PTVLCO03.001.0004..002.008

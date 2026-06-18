@@ -1,0 +1,3 @@
+Building,Floor,Room,Suite,RACK_ID,Start_Unit,End_Unit,Equipment_Type,Equipment_ID,Model,Manufacturer
+CSRKCOCF,1,01,01,1001,1,42,Rack,R-1001,Standard Rack,Generic
+CSRKCOCF,1,01,01,1001,10,12,Equipment,EQ-1001,Server,Dell

@@ -1,0 +1,30 @@
+In the BIM Model, before we import the CSV there would not be any Rack IDs or Equipment IDs so these should be blank initially, but the user should be able to manually add these. 
+
+A key function for this application is - 
+
+Step 1: build out an accurate BIM Model that aligns with reality (e.g. a site capture) - as noted above Rack and Equipment IDs would not be expected at this stage, then 
+
+Step 2: user imports the CSV file so that we can transfer Rack IDs and Equipment IDs from the CSV to the BIM Model entries and then 
+
+step 3: (after the user has processed each building) the user would hit a "Process Inventory Instruction" button that would issue an instruction file - this instruction file could be 2 formats to perform CRUD functions - i.e. 
+
+ - Create new entries (items that are on site but NOT in Granite) 
+ - Review - we don't need any functions here
+ - Update - Update some of the values such as the RMU value for the equipment - say the CSV says its RMU "8" but on site we find that its "15"
+ - Delete - items that are in the Granit CSV but are no longer on site 
+
+1) a human readable form 
+2) a machine readable JSON format that would need to be formatted/structured for the Granite system - for now we can assume the structure/format. 
+
+Note that the assumption is that when updating the Granite system, this might need to be a 2 stage process - 
+step 1 - process the racks - the thinking here is that because there may be Racks with Equipment to be added in Granite, we would need to add the Rack first and fetch back the Rack ID so that we ca
+step 2 - process the Equipment. We need to have the Rack ID value when adding new equipment
+
+When he user hits the button, the Inventory Instructions system should first highlight anomalies and allows the user to dismiss the process to work through any such anomalies but then should show all of CRUD for Racks and the CRUD for Equipment.
+
+An idea for how to manage for the time where we don't yet have the Rack ID, perhaps the BIM Model system should assign a temporary Rack ID (perhaps its just the Line Up + Bay) that later gets swapped out.
+
+In the final solution, we would connect this application directly to the Granite system so that the BIM Model inventor is updated fully with all IDs from the Granite system
+
+
+

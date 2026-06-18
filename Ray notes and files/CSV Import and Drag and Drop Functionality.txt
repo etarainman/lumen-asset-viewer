@@ -1,0 +1,46 @@
+Refer to the "CSV Explained.csv" for instructions on how to read the 
+
+When the user Imports the CSV it should load for all buildings and the UI should show that the CSV has been imported. The user should be able to de-couple the CSV so that he can re-load an updated version
+
+
+When the CSV is loaded, we only see the rows for the current building only
+
+When we go to another building, the CSV data will already be visible in the UI (for that building)
+
+The Inventory should have "Source" as the 1st column and should be either "BIM Model" or "CSV" in both tabs
+
+The BIM Model rows and CSV rows should be visually contrasted.
+
+####User Journey#####
+1) The user will load the CSV file 
+2) The UI will surface any anomalies (Racks and Equipment) and allow the user to "Cancel" (to manually correct) or "Proceed"
+ - Rack Size - e.g. "CSV says 23 x 15 x 84 whereas the BIM Model is "26 x 15 x 84" 
+ - Stakeholder. The USAGE field will tell us what Racks are Customer, but these will likely not have a RACK ID value
+ - Suites - inform the user if there is a discrepancy between the BIM and CSV wrt Suites. Explain the exact issue
+ - Equipment models that exist in the CSV that do not exist in the BIM Model database
+
+3) The user will likely manually  sort / filter the entire table by Line Up & Bay so that the rows will be alternating (if the CSV file and BIM Model have the same account of the racks)
+4) The user will drag the CSV row onto the BIM Model row
+5) The UI will pair these 2 rows and will transfer the following data from the CSV row to the BIM
+ - RACK ID
+
+Note that it is likely that in the CSV file there may have been a suite that existed previously that has since been removed. Hence the Line up and Bay reference in the CSV could be Suite 001, Line Up 001 and Bay 001 but in the BIM Model, the Suite is now gone and the Line Up and Bay could be quite different - e.g. "001.007" or "005.001"
+
+The pairing/linking of the rows is important for later, when we need to write the inventory instructions file which will need to have an Update (CRUD) logged for this CSV row - which will be identified by the RACK and/or Equipment ID values.
+
+6) The user will likely complete the RACK updates between the CSV and BIM before moving to the equipment
+
+
+####EQUIPMENT###
+In the Equipment Tab, when the user drags a CSV row onto a BIM Model row, the UI should pair the rows (as per the Racks UJ above) and should highlight discrepancies between the CSV and BIM for Equipment type (make/model). The UI should allow "Cancel" or "Proceed" and in the event of "Proceed", should transfer the following fields from the CSV to the BIM fields
+ - Equipment ID from the CSV row to the BIM Model row
+
+
+####CSV Loading and Un-loading####
+The following is the sequence and UI we need in place
+
+1) When the user clicks on "Load CSV" (was "Import CSV"), the user should be presented with a summary of the Racks and Equipment, broken down per building. 2) The UI should allow the User to "Cancel" or "Proceed". 
+ - The button should change to "CSV attached" when a CSV has been loaded. 
+3) If the user clicks on the "CSV attached" button, they  should get an option to "Detach CSV". 
+6) If the user detaches the CSV, the button goes back to "Import CSV"
+

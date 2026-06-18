@@ -1,0 +1,197 @@
+
+==========================================
+DEEP INVENTORY AUDIT: 260307 - snapshot-2026-03-07T07-54-55-909Z.json
+==========================================
+
+--- [VENDORS LIBRARY] ---
+[V] HUAWEI (ID: V_HUAWEI)
+[V] INFINERA (ID: V_INFINERA)
+[V] CIENA (ID: V_CIENA)
+[V] CISCO (ID: V_CISCO)
+[V] ADVA (ID: V_ADVA)
+[V] ABB (ID: V_ABB)
+[V] JUNIPER (ID: V_JUNIPER)
+[V] CANOGA (ID: V_CANOGA)
+[V] EATON (ID: V_EATON)
+[V] FUJITSU (ID: V_FUJITSU)
+[V] NOKIA (ID: V_NOKIA)
+[V] ALCATEL (ID: V_ALCATEL)
+[V] LUCENT (ID: V_LUCENT)
+[V] Unidentified (ID: V_1772700189095)
+[V] Nortel (ID: V_1772732423241)
+
+--- [EQUIPMENT DEFINITIONS (LIBRARY)] ---
+[D] CIENA - 6500 (9U, 1.25ft)
+[D] HUAWEI - OPTIX (2U, 1.25ft)
+[D] INFINERA - Infinera 9U (9U, 1.25ft)
+[D] INFINERA - INFINERA 2U (2U, 1.25ft)
+[D] CISCO - 2811 (2U, 1.25ft)
+[D] CISCO - CISCO 1924 (2U, 1.25ft)
+[D] CISCO - 2511 (2U, 1.25ft)
+[D] CISCO - 7204 (5U, 1.25ft)
+[D] CANOGA - CP9101 (9U, 1.25ft)
+[D] ADVA - FSP 3000R7 (3U, 1.25ft)
+[D] ABB - BDFB (11U, 2.5ft)
+[D] EATON - AC-PNL (4U, 1.25ft)
+[D] JUNIPER - EX (2U, 1.25ft)
+[D] ADVA - FSP 3000RE (2U, 1.25ft)
+[D] Unidentified - Generic 1U Server (1U, 1.15ft)
+[D] Unidentified - Dual-Node 2U Server (2U, 1.15ft)
+[D] Unidentified - 48-Port Edge Switch (1U, 1ft)
+[D] Unidentified - 60-Bay Storage Array (4U, 1.2ft)
+[D] Unidentified - 24-Port Patch Panel (2U, 1.25ft)
+[D] INFINERA - Infinera 4U (4U, 1.25ft)
+[D] Unidentified - Optical Gateway (GWYOSX) (42U, 1ft)
+[D] Unidentified - OSP OCP Frame (42U, 1ft)
+[D] Unidentified - ISPR Frame (42U, 1ft)
+[D] Unidentified - Fiber Adapter Panel (4U, 1.25ft)
+[D] Unidentified - Optical Splitter (6U, 1.25ft)
+[D] Unidentified - Fiber Dist Panel (6U, 1ft)
+[D] Nortel - NORTEL 13U (13U, 1.25ft)
+
+--- [SITE LAYOUT & PLACED INVENTORY] ---
+
+[SITE] Castlerock (CSRKCOCF)
+
+[SITE] Plateville (PTVLCO03)
+
+[SITE] Palmer Lake (PLLKCO01)
+
+[TOP-LEVEL BUILDINGS (LEGACY)]
+  └─ [BLD] 0001
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 005.001
+      └─ [RACK] 005.002
+      └─ [RACK] WMT.001
+      └─ [RACK] 002.004
+      └─ [RACK] 004.001
+  └─ [BLD] 0002
+      └─ [RACK] R01.001
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 402.001
+      └─ [RACK] 402.002
+      └─ [RACK] 402.003
+  └─ [BLD] 0003
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 001.006
+      └─ [RACK] 001.007
+      └─ [RACK] 001.008
+      └─ [RACK] 001.009
+      └─ [RACK] 001.010
+      └─ [RACK] 001.011
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 002.005
+      └─ [RACK] 002.006
+      └─ [RACK] 002.007
+      └─ [RACK] 002.008
+      └─ [RACK] 002.009
+      └─ [RACK] 002.010
+      └─ [RACK] 002.011
+      └─ [RACK] 002.012
+  └─ [BLD] 0002
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 003.005
+      └─ [RACK] 00Z.003
+      └─ [RACK] 001.005
+      └─ [RACK] 01.00
+      └─ [RACK] RR1.04
+      └─ [RACK] RR1.03
+      └─ [RACK] RR1.01
+  └─ [BLD] 0004
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 001.005
+      └─ [RACK] 001.006
+      └─ [RACK] 001.007
+      └─ [RACK] 001.008
+      └─ [RACK] 001.009
+      └─ [RACK] 001.010
+      └─ [RACK] 001.011
+      └─ [RACK] 001.02A
+      └─ [RACK] 002.001
+      └─ [RACK] 002.002
+      └─ [RACK] 002.003
+      └─ [RACK] 002.004
+      └─ [RACK] 002.005
+      └─ [RACK] 002.006
+      └─ [RACK] 002.007
+      └─ [RACK] 002.008
+      └─ [RACK] 002.009
+      └─ [RACK] 002.010
+      └─ [RACK] 002.011
+  └─ [BLD] 0003
+  └─ [BLD] 0001
+  └─ [BLD] 0001
+  └─ [BLD] 0002
+      └─ [RACK] 001.001
+      └─ [RACK] 001.002
+      └─ [RACK] 001.003
+      └─ [RACK] 001.004
+      └─ [RACK] 002.001
+      └─ [RACK] 02.00
+      └─ [RACK] 02.01
+      └─ [RACK] 01.02
+      └─ [RACK] 01.03
+      └─ [RACK] 01.04
+      └─ [RACK] 01.00
+      └─ [RACK] 01.01
+      └─ [RACK] 02.02
+      └─ [RACK] 02.03
+      └─ [RACK] 02.04
+      └─ [RACK] FP1.01
+      └─ [RACK] FP1.02
+      └─ [RACK] FP1.03
+      └─ [RACK] FP1.04
+  └─ [BLD] 0004
+      └─ [RACK] 410.02
+      └─ [RACK] 410.03
+      └─ [RACK] 410.04
+      └─ [RACK] 410.05
+      └─ [RACK] 410.06
+      └─ [RACK] 410.07
+      └─ [RACK] 410.08
+      └─ [RACK] 410.09
+      └─ [RACK] 410.10
+      └─ [RACK] 410.11
+      └─ [RACK] 410.01
+      └─ [RACK] 420.02
+      └─ [RACK] 420.03
+      └─ [RACK] 420.04
+      └─ [RACK] 420.05
+      └─ [RACK] 420.06
+      └─ [RACK] 420.07
+      └─ [RACK] 420.08
+      └─ [RACK] 420.09
+      └─ [RACK] 420.10
+      └─ [RACK] 420.11
+      └─ [RACK] 420.01
+  └─ [BLD] 0003
+
+==========================================

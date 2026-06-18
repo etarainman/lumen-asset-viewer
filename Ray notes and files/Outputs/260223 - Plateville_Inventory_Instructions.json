@@ -1,0 +1,3065 @@
+{
+  "metadata": {
+    "date": "2026-02-23",
+    "generatedBy": "Lumen Asset LCM",
+    "version": "1.1",
+    "site": "plateville",
+    "clli": "PTVLCO03 ",
+    "siteNo": "A1002",
+    "latitude": 40.186075,
+    "longitude": -104.817409
+  },
+  "safeguards": {
+    "ignoredBuildings": [
+      "0005",
+      "H101",
+      "TWRC"
+    ],
+    "mode": "INTERACTIVE_RESOLUTION"
+  },
+  "summary": {
+    "creates": 57,
+    "updates": 25,
+    "deletes": 80
+  },
+  "operations": {
+    "create": [
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0001",
+          "lineUp": "H03",
+          "bayNo": "02",
+          "label": "H03.02"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "label": "H03.02",
+          "lineUp": "H03",
+          "bayNo": "02"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0002",
+          "lineUp": "01",
+          "bayNo": "00",
+          "label": "01.00"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "label": "01.00",
+          "lineUp": "01",
+          "bayNo": "00"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0002",
+          "lineUp": "RR1",
+          "bayNo": "04",
+          "label": "RR1.04"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "label": "RR1.04",
+          "lineUp": "RR1",
+          "bayNo": "04"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0002",
+          "lineUp": "RR1",
+          "bayNo": "03",
+          "label": "RR1.03"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "label": "RR1.03",
+          "lineUp": "RR1",
+          "bayNo": "03"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0002",
+          "lineUp": "RR1",
+          "bayNo": "01",
+          "label": "RR1.01"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "label": "RR1.01",
+          "lineUp": "RR1",
+          "bayNo": "01"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "340",
+          "bayNo": "02",
+          "label": "340.02"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "340.02",
+          "lineUp": "340",
+          "bayNo": "02"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "340",
+          "bayNo": "03",
+          "label": "340.03"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "340.03",
+          "lineUp": "340",
+          "bayNo": "03"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "310",
+          "bayNo": "01",
+          "label": "310.01"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "310.01",
+          "lineUp": "310",
+          "bayNo": "01"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "310",
+          "bayNo": "02",
+          "label": "310.02"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "310.02",
+          "lineUp": "310",
+          "bayNo": "02"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "310",
+          "bayNo": "03",
+          "label": "310.03"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "310.03",
+          "lineUp": "310",
+          "bayNo": "03"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "310",
+          "bayNo": "04",
+          "label": "310.04"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "310.04",
+          "lineUp": "310",
+          "bayNo": "04"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "330",
+          "bayNo": "02",
+          "label": "330.02"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "330.02",
+          "lineUp": "330",
+          "bayNo": "02"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "330",
+          "bayNo": "03",
+          "label": "330.03"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "330.03",
+          "lineUp": "330",
+          "bayNo": "03"
+        }
+      },
+      {
+        "type": "RACK",
+        "name": "23 x 15 x 84 Generic Rack",
+        "details": {
+          "building": "0003",
+          "lineUp": "330",
+          "bayNo": "04",
+          "label": "330.04"
+        },
+        "attributes": {
+          "name": "23 x 15 x 84 Generic Rack",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "label": "330.04",
+          "lineUp": "330",
+          "bayNo": "04"
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.001",
+          "baseRMU": 15
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 15
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.001",
+          "baseRMU": 23
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 23
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.001",
+          "baseRMU": 8
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 8
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.001",
+          "baseRMU": 30
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 30
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.001",
+          "baseRMU": 1
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 1
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera DTN-X",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.002",
+          "baseRMU": 18
+        },
+        "attributes": {
+          "name": "Infinera DTN-X",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 18
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.002",
+          "baseRMU": 3
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 3
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.003",
+          "baseRMU": 7
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 7
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0001",
+          "rackLabel": "001.003",
+          "baseRMU": 17
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0001",
+          "vendorId": "V_CIENA",
+          "baseRMU": 17
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0002",
+          "rackLabel": "RR1.03",
+          "baseRMU": 1
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 0
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Infinera",
+        "details": {
+          "building": "0002",
+          "rackLabel": "RR1.03",
+          "baseRMU": 9
+        },
+        "attributes": {
+          "name": "Infinera",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 9
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 6U",
+        "details": {
+          "building": "0002",
+          "rackLabel": "RR1.03",
+          "baseRMU": 18
+        },
+        "attributes": {
+          "name": "Unidentified 6U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 18
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 6U",
+        "details": {
+          "building": "0002",
+          "rackLabel": "RR1.03",
+          "baseRMU": 27
+        },
+        "attributes": {
+          "name": "Unidentified 6U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 27
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 10U",
+        "details": {
+          "building": "0002",
+          "rackLabel": "RR1.04",
+          "baseRMU": 24
+        },
+        "attributes": {
+          "name": "Unidentified 10U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0002",
+          "vendorId": "V_CIENA",
+          "baseRMU": 24
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.04",
+          "baseRMU": 19
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 19
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.04",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.03",
+          "baseRMU": 10
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 10
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.03",
+          "baseRMU": 19
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 19
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.03",
+          "baseRMU": 1
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 1
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.03",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0003",
+          "rackLabel": "310.01",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0003",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "H03.01",
+          "baseRMU": 10
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 10
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 2U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "H03.01",
+          "baseRMU": 24
+        },
+        "attributes": {
+          "name": "Unidentified 2U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 24
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 2U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "H03.01",
+          "baseRMU": 22
+        },
+        "attributes": {
+          "name": "Unidentified 2U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 22
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 2U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "H03.01",
+          "baseRMU": 20
+        },
+        "attributes": {
+          "name": "Unidentified 2U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 20
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 2U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "H03.01",
+          "baseRMU": 26
+        },
+        "attributes": {
+          "name": "Unidentified 2U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 26
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 2U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "H03.01",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Unidentified 2U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.04",
+          "baseRMU": 24
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 24
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.04",
+          "baseRMU": 15
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 15
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.05",
+          "baseRMU": 1
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 1
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.05",
+          "baseRMU": 10
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 10
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.05",
+          "baseRMU": 20
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 20
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.05",
+          "baseRMU": 30
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 30
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Unidentified 4U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "420.05",
+          "baseRMU": 20
+        },
+        "attributes": {
+          "name": "Unidentified 4U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 20
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.07",
+          "baseRMU": 20
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 20
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.07",
+          "baseRMU": 11
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 11
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.07",
+          "baseRMU": 1
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 1
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "420.06",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "420.07",
+          "baseRMU": 17
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 17
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "420.07",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "420.09",
+          "baseRMU": 28
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 28
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Ciena 6500 MUX",
+        "details": {
+          "building": "0004",
+          "rackLabel": "420.09",
+          "baseRMU": 17
+        },
+        "attributes": {
+          "name": "Ciena 6500 MUX",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 17
+        }
+      },
+      {
+        "type": "EQUIPMENT",
+        "name": "Lucent Unidentified 6U",
+        "details": {
+          "building": "0004",
+          "rackLabel": "410.08",
+          "baseRMU": 24
+        },
+        "attributes": {
+          "name": "Lucent Unidentified 6U",
+          "status": "RETAIN",
+          "ownerId": "OWN_LUMEN",
+          "building": "0004",
+          "vendorId": "V_CIENA",
+          "baseRMU": 24
+        }
+      }
+    ],
+    "update": [
+      {
+        "id": "8612720",
+        "changes": [
+          "Line Up: BIM \"H03\" → PRO \"001\"",
+          "Bay No: BIM \"01\" → PRO \"001\""
+        ]
+      },
+      {
+        "id": "8651989",
+        "changes": [
+          "Line Up: BIM \"01\" → PRO \"001\"",
+          "Bay No: BIM \"04\" → PRO \"004\""
+        ]
+      },
+      {
+        "id": "8612720",
+        "changes": [
+          "Line Up: BIM \"340\" → PRO \"001\"",
+          "Bay No: BIM \"01\" → PRO \"001\""
+        ]
+      },
+      {
+        "id": "8612720",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"01\" → PRO \"001\""
+        ]
+      },
+      {
+        "id": "8612713",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"02\" → PRO \"002\""
+        ]
+      },
+      {
+        "id": "8612732",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"02\" → PRO \"002\""
+        ]
+      },
+      {
+        "id": "8629189",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"03\" → PRO \"003\""
+        ]
+      },
+      {
+        "id": "8652003",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"04\" → PRO \"004\""
+        ]
+      },
+      {
+        "id": "8612724",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"05\" → PRO \"005\""
+        ]
+      },
+      {
+        "id": "8612728",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"06\" → PRO \"006\""
+        ]
+      },
+      {
+        "id": "8629195",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"07\" → PRO \"007\""
+        ]
+      },
+      {
+        "id": "8629192",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"08\" → PRO \"008\""
+        ]
+      },
+      {
+        "id": "8629185",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"09\" → PRO \"009\""
+        ]
+      },
+      {
+        "id": "8652002",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"10\" → PRO \"010\""
+        ]
+      },
+      {
+        "id": "8612717",
+        "changes": [
+          "Line Up: BIM \"410\" → PRO \"001\"",
+          "Bay No: BIM \"11\" → PRO \"011\""
+        ]
+      },
+      {
+        "id": "8629177",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"01\" → PRO \"001\""
+        ]
+      },
+      {
+        "id": "8612709",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"03\" → PRO \"003\""
+        ]
+      },
+      {
+        "id": "8652000",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"04\" → PRO \"004\""
+        ]
+      },
+      {
+        "id": "8635149",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"05\" → PRO \"005\""
+        ]
+      },
+      {
+        "id": "8635146",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"06\" → PRO \"006\""
+        ]
+      },
+      {
+        "id": "8635152",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"07\" → PRO \"007\""
+        ]
+      },
+      {
+        "id": "8651999",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"08\" → PRO \"008\""
+        ]
+      },
+      {
+        "id": "8629181",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"09\" → PRO \"009\""
+        ]
+      },
+      {
+        "id": "8652001",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"10\" → PRO \"010\""
+        ]
+      },
+      {
+        "id": "8612705",
+        "changes": [
+          "Line Up: BIM \"420\" → PRO \"002\"",
+          "Bay No: BIM \"11\" → PRO \"011\""
+        ]
+      }
+    ],
+    "delete": [
+      {
+        "id": "8628918",
+        "original": {
+          "id": "8628918",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.130.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8628918",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 23,
+          "proInventoryId": "8628918"
+        }
+      },
+      {
+        "id": "8651982",
+        "original": {
+          "id": "8651982",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.130.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651982",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 27,
+          "proInventoryId": "8651982"
+        }
+      },
+      {
+        "id": "8635106",
+        "original": {
+          "id": "8635106",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.130.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635106",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 29,
+          "proInventoryId": "8635106"
+        }
+      },
+      {
+        "id": "8635108",
+        "original": {
+          "id": "8635108",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.130.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635108",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 31,
+          "proInventoryId": "8635108"
+        }
+      },
+      {
+        "id": "8628922",
+        "original": {
+          "id": "8628922",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.140.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "140",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8628922",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.140.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 33,
+          "proInventoryId": "8628922"
+        }
+      },
+      {
+        "id": "8612646",
+        "original": {
+          "id": "8612646",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.140.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "140",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612646",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.140.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 35,
+          "proInventoryId": "8612646"
+        }
+      },
+      {
+        "id": "8635110",
+        "original": {
+          "id": "8635110",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.140.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "140",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635110",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.140.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 37,
+          "proInventoryId": "8635110"
+        }
+      },
+      {
+        "id": "8612650",
+        "original": {
+          "id": "8612650",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0001.140.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "140",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612650",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.140.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 40,
+          "proInventoryId": "8612650"
+        }
+      },
+      {
+        "id": "8635137",
+        "original": {
+          "id": "8635137",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635137",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 41,
+          "proInventoryId": "8635137"
+        }
+      },
+      {
+        "id": "8629156",
+        "original": {
+          "id": "8629156",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629156",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 43,
+          "proInventoryId": "8629156"
+        }
+      },
+      {
+        "id": "8651993",
+        "original": {
+          "id": "8651993",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651993",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 45,
+          "proInventoryId": "8651993"
+        }
+      },
+      {
+        "id": "8651992",
+        "original": {
+          "id": "8651992",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651992",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 47,
+          "proInventoryId": "8651992"
+        }
+      },
+      {
+        "id": "8635134",
+        "original": {
+          "id": "8635134",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.002.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8635134",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.002.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 49,
+          "proInventoryId": "8635134"
+        }
+      },
+      {
+        "id": "8629150",
+        "original": {
+          "id": "8629150",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.002.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8629150",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.002.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 51,
+          "proInventoryId": "8629150"
+        }
+      },
+      {
+        "id": "8651990",
+        "original": {
+          "id": "8651990",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.002.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8651990",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.002.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 53,
+          "proInventoryId": "8651990"
+        }
+      },
+      {
+        "id": "8612680",
+        "original": {
+          "id": "8612680",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.002.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8612680",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.002.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 55,
+          "proInventoryId": "8612680"
+        }
+      },
+      {
+        "id": "8629153",
+        "original": {
+          "id": "8629153",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.003.005",
+          "type": "RACK",
+          "bayNo": "005",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "003",
+          "rackId": "8629153",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.003.005",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 58,
+          "proInventoryId": "8629153"
+        }
+      },
+      {
+        "id": "8651991",
+        "original": {
+          "id": "8651991",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.200.00Z.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "200",
+          "usage": "",
+          "lineUp": "00Z",
+          "rackId": "8651991",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.200.00Z.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 60,
+          "proInventoryId": "8651991"
+        }
+      },
+      {
+        "id": "8629168",
+        "original": {
+          "id": "8629168",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.210.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "210",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629168",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.210.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 62,
+          "proInventoryId": "8629168"
+        }
+      },
+      {
+        "id": "8629162",
+        "original": {
+          "id": "8629162",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.210.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "210",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629162",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.210.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 63,
+          "proInventoryId": "8629162"
+        }
+      },
+      {
+        "id": "8629165",
+        "original": {
+          "id": "8629165",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.210.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "210",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629165",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.210.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 65,
+          "proInventoryId": "8629165"
+        }
+      },
+      {
+        "id": "8612699",
+        "original": {
+          "id": "8612699",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.210.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "210",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612699",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.210.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 67,
+          "proInventoryId": "8612699"
+        }
+      },
+      {
+        "id": "8612696",
+        "original": {
+          "id": "8612696",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.210.001.005",
+          "type": "RACK",
+          "bayNo": "005",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "210",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612696",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.210.001.005",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 69,
+          "proInventoryId": "8612696"
+        }
+      },
+      {
+        "id": "8612676",
+        "original": {
+          "id": "8612676",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.220.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "220",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612676",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.220.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 71,
+          "proInventoryId": "8612676"
+        }
+      },
+      {
+        "id": "8651988",
+        "original": {
+          "id": "8651988",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.220.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "220",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651988",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.220.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 74,
+          "proInventoryId": "8651988"
+        }
+      },
+      {
+        "id": "8651987",
+        "original": {
+          "id": "8651987",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.220.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "220",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651987",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.220.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 75,
+          "proInventoryId": "8651987"
+        }
+      },
+      {
+        "id": "8635131",
+        "original": {
+          "id": "8635131",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.220.001.005",
+          "type": "RACK",
+          "bayNo": "005",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "220",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635131",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.220.001.005",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 79,
+          "proInventoryId": "8635131"
+        }
+      },
+      {
+        "id": "8635128",
+        "original": {
+          "id": "8635128",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.230.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "230",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635128",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.230.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 81,
+          "proInventoryId": "8635128"
+        }
+      },
+      {
+        "id": "8629147",
+        "original": {
+          "id": "8629147",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.230.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "230",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629147",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.230.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 84,
+          "proInventoryId": "8629147"
+        }
+      },
+      {
+        "id": "8651986",
+        "original": {
+          "id": "8651986",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.230.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "230",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651986",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.230.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 86,
+          "proInventoryId": "8651986"
+        }
+      },
+      {
+        "id": "8635125",
+        "original": {
+          "id": "8635125",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.230.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "230",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635125",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.230.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 87,
+          "proInventoryId": "8635125"
+        }
+      },
+      {
+        "id": "8612684",
+        "original": {
+          "id": "8612684",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.240.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "240",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612684",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.240.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 89,
+          "proInventoryId": "8612684"
+        }
+      },
+      {
+        "id": "8612692",
+        "original": {
+          "id": "8612692",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.240.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "240",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612692",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.240.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 91,
+          "proInventoryId": "8612692"
+        }
+      },
+      {
+        "id": "8612688",
+        "original": {
+          "id": "8612688",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.240.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "240",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612688",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.240.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 93,
+          "proInventoryId": "8612688"
+        }
+      },
+      {
+        "id": "8629159",
+        "original": {
+          "id": "8629159",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0002.240.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "240",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629159",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.240.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 95,
+          "proInventoryId": "8629159"
+        }
+      },
+      {
+        "id": "8612658",
+        "original": {
+          "id": "8612658",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.310.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "15",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "310",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612658",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.310.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 98,
+          "proInventoryId": "8612658"
+        }
+      },
+      {
+        "id": "8629135",
+        "original": {
+          "id": "8629135",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.310.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "15",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "310",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629135",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.310.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 99,
+          "proInventoryId": "8629135"
+        }
+      },
+      {
+        "id": "8612666",
+        "original": {
+          "id": "8612666",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.310.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "15",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "310",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612666",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.310.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 101,
+          "proInventoryId": "8612666"
+        }
+      },
+      {
+        "id": "8612662",
+        "original": {
+          "id": "8612662",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.310.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "15",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "310",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612662",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.310.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 103,
+          "proInventoryId": "8612662"
+        }
+      },
+      {
+        "id": "8612670",
+        "original": {
+          "id": "8612670",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.320.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "15",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "320",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612670",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.320.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 106,
+          "proInventoryId": "8612670"
+        }
+      },
+      {
+        "id": "8629141",
+        "original": {
+          "id": "8629141",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.320.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "320",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629141",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.320.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 107,
+          "proInventoryId": "8629141"
+        }
+      },
+      {
+        "id": "8629144",
+        "original": {
+          "id": "8629144",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.320.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "23",
+          "suite": "320",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629144",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.320.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 109,
+          "proInventoryId": "8629144"
+        }
+      },
+      {
+        "id": "8651984",
+        "original": {
+          "id": "8651984",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.330.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "330",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651984",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.330.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 113,
+          "proInventoryId": "8651984"
+        }
+      },
+      {
+        "id": "8651983",
+        "original": {
+          "id": "8651983",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.330.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "330",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651983",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.330.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 115,
+          "proInventoryId": "8651983"
+        }
+      },
+      {
+        "id": "8635113",
+        "original": {
+          "id": "8635113",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.330.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "330",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635113",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.330.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 118,
+          "proInventoryId": "8635113"
+        }
+      },
+      {
+        "id": "8612673",
+        "original": {
+          "id": "8612673",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.330.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "330",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612673",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.330.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 119,
+          "proInventoryId": "8612673"
+        }
+      },
+      {
+        "id": "8651985",
+        "original": {
+          "id": "8651985",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.340.001.001",
+          "type": "RACK",
+          "bayNo": "001",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651985",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.001",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 121,
+          "proInventoryId": "8651985"
+        }
+      },
+      {
+        "id": "8635119",
+        "original": {
+          "id": "8635119",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.340.001.002",
+          "type": "RACK",
+          "bayNo": "002",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635119",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.002",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 124,
+          "proInventoryId": "8635119"
+        }
+      },
+      {
+        "id": "8635122",
+        "original": {
+          "id": "8635122",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.340.001.003",
+          "type": "RACK",
+          "bayNo": "003",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "19",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635122",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.003",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 128,
+          "proInventoryId": "8635122"
+        }
+      },
+      {
+        "id": "8635116",
+        "original": {
+          "id": "8635116",
+          "rmu": "0",
+          "name": "PTVLCO03.001.0003.340.001.004",
+          "type": "RACK",
+          "bayNo": "004",
+          "rackD": "12",
+          "rackH": "84",
+          "rackW": "24",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635116",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.004",
+          "ownerName": "Lumen",
+          "definition": "Generic Rack",
+          "csvRowNumber": 129,
+          "proInventoryId": "8635116"
+        }
+      },
+      {
+        "id": "1651994",
+        "original": {
+          "id": "1651994",
+          "rmu": "0",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "INFINERA",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 2,
+          "proInventoryId": "1651994"
+        }
+      },
+      {
+        "id": "4124093",
+        "original": {
+          "id": "4124093",
+          "rmu": "0",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "INFINERA",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 3,
+          "proInventoryId": "4124093"
+        }
+      },
+      {
+        "id": "4098468",
+        "original": {
+          "id": "4098468",
+          "rmu": "1",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "INFINERA",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 4,
+          "proInventoryId": "4098468"
+        }
+      },
+      {
+        "id": "5660741",
+        "original": {
+          "id": "5660741",
+          "rmu": "1",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "INFINERA",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 5,
+          "proInventoryId": "5660741"
+        }
+      },
+      {
+        "id": "2894135",
+        "original": {
+          "id": "2894135",
+          "rmu": "1",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "DTN-X",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 6,
+          "proInventoryId": "2894135"
+        }
+      },
+      {
+        "id": "3028584",
+        "original": {
+          "id": "3028584",
+          "rmu": "1",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "DTN-X",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 7,
+          "proInventoryId": "3028584"
+        }
+      },
+      {
+        "id": "6203011",
+        "original": {
+          "id": "6203011",
+          "rmu": "1",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "DTN-X",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 8,
+          "proInventoryId": "6203011"
+        }
+      },
+      {
+        "id": "3851515",
+        "original": {
+          "id": "3851515",
+          "rmu": "1",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "DTN-X",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629129",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 9,
+          "proInventoryId": "3851515"
+        }
+      },
+      {
+        "id": "4733819",
+        "original": {
+          "id": "4733819",
+          "rmu": "2",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "INFINERA",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612654",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.002",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 11,
+          "proInventoryId": "4733819"
+        }
+      },
+      {
+        "id": "2984682",
+        "original": {
+          "id": "2984682",
+          "rmu": "1",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "INFINERA",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612654",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.002",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 12,
+          "proInventoryId": "2984682"
+        }
+      },
+      {
+        "id": "5458706",
+        "original": {
+          "id": "5458706",
+          "rmu": "0",
+          "name": "HUAWEI OPTIX",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "OPTIX",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629132",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.003",
+          "ownerName": "Lumen",
+          "vendorName": "HUAWEI",
+          "csvRowNumber": 14,
+          "proInventoryId": "5458706"
+        }
+      },
+      {
+        "id": "4063611",
+        "original": {
+          "id": "4063611",
+          "rmu": "0",
+          "name": "HUAWEI OPTIX",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "OPTIX",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629132",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.003",
+          "ownerName": "Lumen",
+          "vendorName": "HUAWEI",
+          "csvRowNumber": 15,
+          "proInventoryId": "4063611"
+        }
+      },
+      {
+        "id": "4682690",
+        "original": {
+          "id": "4682690",
+          "rmu": "0",
+          "name": "CIENA 6500",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "6500",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629132",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.003",
+          "ownerName": "Lumen",
+          "vendorName": "CIENA",
+          "csvRowNumber": 16,
+          "proInventoryId": "4682690"
+        }
+      },
+      {
+        "id": "9223566",
+        "original": {
+          "id": "9223566",
+          "rmu": "0",
+          "name": "HUAWEI OPTIX",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "OPTIX",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629132",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.003",
+          "ownerName": "Lumen",
+          "vendorName": "HUAWEI",
+          "csvRowNumber": 17,
+          "proInventoryId": "9223566"
+        }
+      },
+      {
+        "id": "6780706",
+        "original": {
+          "id": "6780706",
+          "rmu": "0",
+          "name": "CIENA 6500",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "6500",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629132",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.003",
+          "ownerName": "Lumen",
+          "vendorName": "CIENA",
+          "csvRowNumber": 19,
+          "proInventoryId": "6780706"
+        }
+      },
+      {
+        "id": "4903313",
+        "original": {
+          "id": "4903313",
+          "rmu": "0",
+          "name": "CIENA 6500",
+          "type": "EQUIPMENT",
+          "bayNo": "003",
+          "model": "6500",
+          "suite": "110",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8629132",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.110.001.003",
+          "ownerName": "Lumen",
+          "vendorName": "CIENA",
+          "csvRowNumber": 20,
+          "proInventoryId": "4903313"
+        }
+      },
+      {
+        "id": "3423242",
+        "original": {
+          "id": "3423242",
+          "rmu": "0",
+          "name": "HUAWEI OPTIX",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "OPTIX",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8628918",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "HUAWEI",
+          "csvRowNumber": 23,
+          "proInventoryId": "3423242"
+        }
+      },
+      {
+        "id": "2572581",
+        "original": {
+          "id": "2572581",
+          "rmu": "0",
+          "name": "HUAWEI OPTIX",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "OPTIX",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8628918",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "HUAWEI",
+          "csvRowNumber": 24,
+          "proInventoryId": "2572581"
+        }
+      },
+      {
+        "id": "4966053",
+        "original": {
+          "id": "4966053",
+          "rmu": "0",
+          "name": "HUAWEI OPTIX",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "OPTIX",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8628918",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "HUAWEI",
+          "csvRowNumber": 25,
+          "proInventoryId": "4966053"
+        }
+      },
+      {
+        "id": "1996480",
+        "original": {
+          "id": "1996480",
+          "rmu": "28",
+          "name": "Generic ISPR Frame",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "ISPR Frame",
+          "suite": "130",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651982",
+          "status": "RETAIN",
+          "building": "0001",
+          "location": "PTVLCO03.001.0001.130.001.002",
+          "ownerName": "Lumen",
+          "vendorName": "Generic",
+          "csvRowNumber": 27,
+          "proInventoryId": "1996480"
+        }
+      },
+      {
+        "id": "2656301",
+        "original": {
+          "id": "2656301",
+          "rmu": "041",
+          "name": "Unknown Unidentified Device",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "Unidentified Device",
+          "suite": "230",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635128",
+          "status": "RETAIN",
+          "building": "0002",
+          "location": "PTVLCO03.001.0002.230.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "Unknown",
+          "csvRowNumber": 81,
+          "proInventoryId": "2656301"
+        }
+      },
+      {
+        "id": "4869549",
+        "original": {
+          "id": "4869549",
+          "rmu": "3",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "DTN-X",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651985",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 121,
+          "proInventoryId": "4869549"
+        }
+      },
+      {
+        "id": "3795296",
+        "original": {
+          "id": "3795296",
+          "rmu": "2",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "001",
+          "model": "DTN-X",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8651985",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.001",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 122,
+          "proInventoryId": "3795296"
+        }
+      },
+      {
+        "id": "2402889",
+        "original": {
+          "id": "2402889",
+          "rmu": "5",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "DTN-X",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635119",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.002",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 124,
+          "proInventoryId": "2402889"
+        }
+      },
+      {
+        "id": "7831601",
+        "original": {
+          "id": "7831601",
+          "rmu": "4",
+          "name": "INFINERA DTN-X",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "DTN-X",
+          "suite": "340",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8635119",
+          "status": "RETAIN",
+          "building": "0003",
+          "location": "PTVLCO03.001.0003.340.001.002",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 125,
+          "proInventoryId": "7831601"
+        }
+      },
+      {
+        "id": "8925410",
+        "original": {
+          "id": "8925410",
+          "rmu": "039",
+          "name": "Unknown Unidentified Device",
+          "type": "EQUIPMENT",
+          "bayNo": "002",
+          "model": "Unidentified Device",
+          "suite": "",
+          "usage": "",
+          "lineUp": "001",
+          "rackId": "8612732",
+          "status": "RETAIN",
+          "building": "0004",
+          "location": "PTVLCO03.001.0004..001.002",
+          "ownerName": "Lumen",
+          "vendorName": "Unknown",
+          "csvRowNumber": 133,
+          "proInventoryId": "8925410"
+        }
+      },
+      {
+        "id": "2633810",
+        "original": {
+          "id": "2633810",
+          "rmu": "039",
+          "name": "Unknown Unidentified Device",
+          "type": "EQUIPMENT",
+          "bayNo": "006",
+          "model": "Unidentified Device",
+          "suite": "",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8635146",
+          "status": "RETAIN",
+          "building": "0004",
+          "location": "PTVLCO03.001.0004..002.006",
+          "ownerName": "Lumen",
+          "vendorName": "Unknown",
+          "csvRowNumber": 165,
+          "proInventoryId": "2633810"
+        }
+      },
+      {
+        "id": "3775143",
+        "original": {
+          "id": "3775143",
+          "rmu": "0",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "008",
+          "model": "INFINERA",
+          "suite": "",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8651999",
+          "status": "RETAIN",
+          "building": "0004",
+          "location": "PTVLCO03.001.0004..002.008",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 169,
+          "proInventoryId": "3775143"
+        }
+      },
+      {
+        "id": "2237903",
+        "original": {
+          "id": "2237903",
+          "rmu": "0",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "008",
+          "model": "INFINERA",
+          "suite": "",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8651999",
+          "status": "RETAIN",
+          "building": "0004",
+          "location": "PTVLCO03.001.0004..002.008",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 170,
+          "proInventoryId": "2237903"
+        }
+      },
+      {
+        "id": "4057123",
+        "original": {
+          "id": "4057123",
+          "rmu": "1",
+          "name": "INFINERA INFINERA",
+          "type": "EQUIPMENT",
+          "bayNo": "008",
+          "model": "INFINERA",
+          "suite": "",
+          "usage": "",
+          "lineUp": "002",
+          "rackId": "8651999",
+          "status": "RETAIN",
+          "building": "0004",
+          "location": "PTVLCO03.001.0004..002.008",
+          "ownerName": "Lumen",
+          "vendorName": "INFINERA",
+          "csvRowNumber": 171,
+          "proInventoryId": "4057123"
+        }
+      }
+    ]
+  }
+}

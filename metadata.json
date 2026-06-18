@@ -1,0 +1,7 @@
+{
+  "name": "Lumen Asset LCM V11",
+  "description": "A 3D BIM-style viewer for Data Center asset lifecycle management, featuring 4D status visualization, inventory reconciliation, and anomaly detection.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
