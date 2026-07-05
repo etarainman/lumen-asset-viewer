@@ -1,0 +1,1519 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Rack Review — Inventory Extraction Pilot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f14;
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    button { font-family: Arial, sans-serif; }
+
+    .app {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 52px 1fr;
+    }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      background: #0b0f14;
+      border-bottom: 1px solid #1b2430;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 16px;
+      position: relative;
+      z-index: 50;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .crumb { position: relative; flex: 0 0 auto; }
+
+    .crumb-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #e2e8f0;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .crumb-btn:hover { background: #182231; border-color: #334155; }
+    .crumb-btn.static { cursor: default; color: #94a3b8; }
+    .crumb-btn.static:hover { background: #121a24; border-color: #263141; }
+
+    .crumb-btn.open {
+      background: #0c2a35;
+      border-color: #22d3ee;
+      color: #67e8f9;
+    }
+
+    .crumb-btn .caret { font-size: 8px; color: #64748b; }
+
+    .crumb-sep { color: #3f4c5e; font-size: 12px; flex: 0 0 auto; }
+
+    .crumb-popover {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      background: #121a24;
+      border: 1px solid #263141;
+      border-radius: 10px;
+      padding: 6px;
+      min-width: 210px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.55);
+      display: none;
+      z-index: 60;
+    }
+
+    .crumb-popover.show { display: block; }
+
+    .popover-item {
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: #e2e8f0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .popover-item:hover { background: #1c2734; }
+    .popover-item.active { background: #0c2a35; color: #67e8f9; }
+    .popover-item .sub { color: #64748b; font-size: 10.5px; margin-left: 4px; }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+
+    .stats-line {
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .stats-line b { color: #94a3b8; }
+
+    .anomaly-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1013;
+      border: 1px solid #4c1d24;
+      color: #fca5a5;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .anomaly-badge:hover { background: #241318; }
+
+    .anomaly-badge.zero {
+      background: #121a24;
+      border-color: #263141;
+      color: #64748b;
+    }
+
+    .anomaly-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .anomaly-badge.zero .dot { background: #475569; }
+
+    /* ---------- Main split ---------- */
+    .main-split {
+      display: flex;
+      min-height: 0;
+      min-width: 0;
+      position: relative;
+    }
+
+    .pane-left {
+      position: relative;
+      height: 100%;
+      min-width: 160px;
+      background: #000;
+    }
+
+    #viewer { height: 100%; width: 100%; background: #000; }
+
+    .pano-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: #64748b;
+      font-size: 13px;
+      background: #05070f;
+      text-align: center;
+      padding: 20px;
+      z-index: 5;
+    }
+
+    .pano-placeholder.show { display: flex; }
+
+    .vsplitter {
+      flex: 0 0 6px;
+      width: 6px;
+      cursor: col-resize;
+      background: #0b0f14;
+      position: relative;
+    }
+
+    .vsplitter::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 2px;
+      width: 2px;
+      background: #1b2430;
+    }
+
+    .vsplitter:hover::after, .vsplitter.dragging::after { background: #22d3ee; }
+
+    .pane-right {
+      flex: 1 1 auto;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      background: #0b0f14;
+    }
+
+    /* ---------- 360 overlays ---------- */
+    .overlay-corner {
+      position: absolute;
+      z-index: 10;
+      display: flex;
+      gap: 6px;
+      background: rgba(11, 15, 20, 0.7);
+      backdrop-filter: blur(3px);
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+
+    .overlay-heights {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    .overlay-faces {
+      left: 12px;
+      bottom: 12px;
+    }
+
+    .overlay-position {
+      left: 12px;
+      top: 12px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 8px 12px;
+    }
+
+    .overlay-btn {
+      padding: 6px 10px;
+      border-radius: 7px;
+      border: 1px solid #334155;
+      background: rgba(15, 23, 42, 0.7);
+      color: #cbd5e1;
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .overlay-btn:hover { background: #1c2734; }
+
+    .overlay-btn.active {
+      background: #0891b2;
+      border-color: #22d3ee;
+      color: white;
+    }
+
+    .overlay-position .pos-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .overlay-position .pos-meta {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+
+    /* ---------- Right panel: elevation + table ---------- */
+    .elevation-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border-bottom: 1px solid #1b2430;
+      flex: 0 0 auto;
+    }
+
+    .rack-id-tag {
+      font-size: 13px;
+      font-weight: 800;
+      color: #67e8f9;
+    }
+
+    .rack-sub-tag {
+      font-size: 10.5px;
+      color: #64748b;
+      margin-left: 8px;
+    }
+
+    .toolbar-btns { display: flex; gap: 6px; align-items: center; }
+
+    .tbtn {
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1px solid #263141;
+      background: #121a24;
+      color: #cbd5e1;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .tbtn:hover { background: #1c2734; }
+    .tbtn.active { background: #0891b2; border-color: #22d3ee; color: white; }
+
+    .zoom-readout {
+      font-size: 10.5px;
+      color: #64748b;
+      min-width: 32px;
+      text-align: center;
+    }
+
+    .elevation-pane {
+      flex: 1 1 auto;
+      min-height: 60px;
+      overflow: auto;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.04), transparent 60%),
+        #090d13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .elevation-pane.zoomed { align-items: flex-start; justify-content: flex-start; }
+
+    .elevation-svg-wrap {
+      transform-origin: top left;
+    }
+
+    .hsplitter {
+      flex: 0 0 6px;
+      height: 6px;
+      cursor: row-resize;
+      background: #0b0f14;
+      position: relative;
+    }
+
+    .hsplitter::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 2px;
+      height: 2px;
+      background: #1b2430;
+    }
+
+    .hsplitter:hover::after, .hsplitter.dragging::after { background: #22d3ee; }
+
+    .hsplitter.collapsed { display: none; }
+
+    /* ---------- Table pane ---------- */
+    .table-pane {
+      flex: 0 0 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .table-pane.hidden { display: none; }
+
+    .table-scroll {
+      overflow: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .unit-table {
+      border-collapse: collapse;
+      font-size: 11px;
+      width: 100%;
+      min-width: 480px;
+    }
+
+    .unit-table thead th {
+      position: sticky;
+      top: 0;
+      background: #121a24;
+      text-align: left;
+      color: #64748b;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 8px;
+      border-bottom: 1px solid #263141;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .unit-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #131c2e;
+      color: #cbd5e1;
+      white-space: nowrap;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .unit-table tr { cursor: pointer; }
+    .unit-table tr:hover td { background: #111c33; }
+    .unit-table tr.selected td { background: #0c2a3a; }
+    .unit-table tr.flash td { background: #113247 !important; }
+
+    .unit-table .alarm-yes { color: #f87171; font-weight: 700; }
+    .unit-table .alarm-no { color: #475569; }
+
+    .table-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+    .conf-high { background: #4ade80; }
+    .conf-medium { background: #fbbf24; }
+    .conf-low { background: #f87171; }
+
+    /* ---------- SVG unit styling ---------- */
+    .u-rect { stroke-width: 1; }
+    .u-rect.type-transport { fill: #334155; stroke: #475569; }
+    .u-rect.type-power { fill: #3f3320; stroke: #78350f; }
+    .u-rect.type-fiber { fill: #1e3a3a; stroke: #0e7490; }
+    .u-rect.type-network { fill: #164e63; stroke: #0891b2; }
+    .u-rect.type-space {
+      fill: url(#hatch);
+      stroke: #263141;
+    }
+
+    .u-rect.selected { stroke: #22d3ee; stroke-width: 2; }
+    .u-rect:hover { filter: brightness(1.25); }
+
+    .u-leader { stroke: #334155; stroke-width: 1; fill: none; }
+    .u-leader.selected { stroke: #22d3ee; }
+
+    .u-label-group { cursor: pointer; }
+    .u-label-bg { fill: #121a24; stroke: #263141; stroke-width: 1; }
+    .u-label-bg.selected { stroke: #22d3ee; }
+    .u-label-bg.has-alarm { stroke: #7f1d1d; }
+    .u-label-text {
+      fill: #cbd5e1;
+      font-size: 9.5px;
+      font-family: Arial, sans-serif;
+    }
+    .u-label-text.alarm-tint { fill: #fca5a5; }
+    .u-label-sub {
+      fill: #64748b;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 8px;
+    }
+
+    .u-inline-text {
+      fill: #e2e8f0;
+      font-size: 10px;
+      font-family: Arial, sans-serif;
+      pointer-events: none;
+    }
+
+    .alarm-dot-svg {
+      animation: ledPulseSvg 1.1s ease-in-out infinite;
+    }
+
+    @keyframes ledPulseSvg {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .conf-dot-svg.conf-high { fill: #4ade80; }
+    .conf-dot-svg.conf-medium { fill: #fbbf24; }
+    .conf-dot-svg.conf-low { fill: #f87171; }
+
+    .plinth-label {
+      fill: #67e8f9;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ---------- Anomalies drawer ---------- */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 90;
+      display: none;
+    }
+
+    .drawer-overlay.show { display: block; }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 360px;
+      max-width: 90vw;
+      background: #0f1620;
+      border-left: 1px solid #263141;
+      z-index: 91;
+      transform: translateX(100%);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-panel.show { transform: translateX(0); }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid #1b2430;
+      flex: 0 0 auto;
+    }
+
+    .drawer-title { font-size: 14px; font-weight: 700; color: #e2e8f0; }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .drawer-close:hover { color: #e2e8f0; }
+
+    .drawer-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 12px 16px;
+    }
+
+    .anomaly-card {
+      background: #1a0f10;
+      border: 1px solid #4c1d24;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .anomaly-card:hover { border-color: #7f1d1d; }
+
+    .anomaly-rack {
+      font-weight: 700;
+      color: #67e8f9;
+      font-size: 11px;
+    }
+
+    .anomaly-unit {
+      font-weight: 700;
+      color: #fca5a5;
+      margin-top: 2px;
+    }
+
+    .anomaly-finding { color: #e2e8f0; margin-top: 2px; }
+
+    .no-anomalies { font-size: 12px; color: #64748b; font-style: italic; padding: 8px 2px; }
+
+    .kbd-hint {
+      font-size: 10px;
+      color: #475569;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="breadcrumbs" id="breadcrumbs"></div>
+      <div class="topbar-right">
+        <span class="kbd-hint">&larr;&rarr; position &middot; A/B face</span>
+        <span class="stats-line" id="statsLine"></span>
+        <button class="anomaly-badge" id="anomalyBadge" onclick="openDrawer()">
+          <span class="dot"></span>
+          <span id="anomalyBadgeText">Anomalies (0)</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="main-split" id="mainSplit">
+      <div class="pane-left" id="paneLeft">
+        <div id="viewer"></div>
+        <div class="pano-placeholder" id="panoPlaceholder">
+          360 image not found for this position/height.<br/>Expected file in "360 Images/".
+        </div>
+
+        <div class="overlay-corner overlay-position">
+          <div class="pos-title" id="overlayPosTitle">—</div>
+          <div class="pos-meta" id="overlayPosMeta">—</div>
+        </div>
+
+        <div class="overlay-corner overlay-faces" id="overlayFaces"></div>
+
+        <div class="overlay-corner overlay-heights" id="overlayHeights"></div>
+      </div>
+
+      <div class="vsplitter" id="vsplitter"></div>
+
+      <div class="pane-right" id="paneRight">
+        <div class="elevation-toolbar">
+          <div>
+            <span class="rack-id-tag" id="rackIdTag">—</span>
+            <span class="rack-sub-tag" id="rackSubTag"></span>
+          </div>
+          <div class="toolbar-btns">
+            <button class="tbtn" id="zoomOutBtn" onclick="zoomBy(-1)">&minus;</button>
+            <span class="zoom-readout" id="zoomReadout">1.0x</span>
+            <button class="tbtn" id="zoomInBtn" onclick="zoomBy(1)">+</button>
+            <button class="tbtn" id="fitBtn" onclick="resetZoom()" title="Fit to pane">&#10531;</button>
+            <button class="tbtn" id="tableToggleBtn" onclick="toggleTable()">Table</button>
+          </div>
+        </div>
+
+        <div class="elevation-pane" id="elevationPane">
+          <div class="elevation-svg-wrap" id="elevationSvgWrap"></div>
+        </div>
+
+        <div class="hsplitter collapsed" id="hsplitter"></div>
+
+        <div class="table-pane hidden" id="tablePane">
+          <div class="table-scroll">
+            <table class="unit-table" id="unitTable">
+              <thead>
+                <tr>
+                  <th>U-span</th>
+                  <th>Type</th>
+                  <th>Mfr</th>
+                  <th>Model</th>
+                  <th>Label</th>
+                  <th>Alarms</th>
+                  <th>Conf</th>
+                </tr>
+              </thead>
+              <tbody id="unitTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="drawer-panel" id="drawerPanel">
+    <div class="drawer-header">
+      <div class="drawer-title">Anomalies — this position</div>
+      <button class="drawer-close" onclick="closeDrawer()">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+  <script>
+    // ============================================================
+    // State
+    // ============================================================
+    let inventory = null;
+    let positionsById = {};
+    let buildingOrder = [];
+    let positionsByBuilding = {};
+
+    let currentBuilding = null;
+    let currentPositionId = null;
+    let currentHeight = "M";
+    let currentFace = "A";
+    let selectedUnitOrder = null;
+    let tableVisible = false;
+
+    let viewer = null;
+    let openPopoverKey = null;
+
+    // splitter ratios (persisted)
+    let vRatio = parseFloat(localStorage.getItem("rr_vRatio")) || 0.55; // left pane share
+    let hRatio = parseFloat(localStorage.getItem("rr_hRatio")) || 0.6; // elevation pane share (when table on)
+
+    // zoom
+    let zoomLevel = 1;
+    const ZOOM_MIN = 1, ZOOM_MAX = 8;
+
+    // rack geometry constants
+    const RACK_WIDTH_MM = 450;
+    const RACK_HEIGHT_MM = 2000;
+    const RACK_ASPECT = RACK_WIDTH_MM / RACK_HEIGHT_MM; // ~0.225
+
+    // ============================================================
+    // Helpers
+    // ============================================================
+    function imagePath(panoBase, height) {
+      return `360 Images/${panoBase} - ${height}.jpg`;
+    }
+
+    function heightName(h) {
+      if (h === "T") return "Top";
+      if (h === "M") return "Middle";
+      return "Bottom";
+    }
+
+    function typeFill(type) {
+      return "type-" + (type || "space");
+    }
+
+    // ============================================================
+    // Load
+    // ============================================================
+    fetch("inventory.json")
+      .then(r => r.json())
+      .then(data => {
+        inventory = data;
+        inventory.positions.forEach(p => positionsById[p.id] = p);
+        inventory.racksByIdOnly = {};
+        inventory.racks.forEach(r => inventory.racksByIdOnly[r.id] = r);
+
+        buildingOrder = Object.keys(inventory.meta.buildings);
+        buildingOrder.forEach(b => positionsByBuilding[b] = []);
+        inventory.positions.forEach(p => {
+          if (!positionsByBuilding[p.building]) positionsByBuilding[p.building] = [];
+          positionsByBuilding[p.building].push(p);
+        });
+
+        currentBuilding = inventory.positions[0].building;
+        currentPositionId = inventory.positions[0].id;
+
+        initStatsLine();
+        renderBreadcrumbs();
+        selectPosition(currentPositionId, true);
+
+        window.addEventListener("resize", () => renderElevation());
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("statsLine").textContent = "Failed to load inventory.json";
+      });
+
+    function initStatsLine() {
+      const s = inventory.stats;
+      document.getElementById("statsLine").innerHTML =
+        `<b>${s.positionsCaptured}</b> positions &middot; <b>${s.racksExtracted}</b> racks &middot; <b>${s.unitsExtracted}</b> units`;
+    }
+
+    // ============================================================
+    // Breadcrumbs
+    // ============================================================
+    function closeAllPopovers() {
+      openPopoverKey = null;
+      document.querySelectorAll(".crumb-popover").forEach(p => p.classList.remove("show"));
+      document.querySelectorAll(".crumb-btn").forEach(b => b.classList.remove("open"));
+    }
+
+    function togglePopover(key, evt) {
+      evt.stopPropagation();
+      const isOpen = openPopoverKey === key;
+      closeAllPopovers();
+      if (!isOpen) {
+        openPopoverKey = key;
+        const pop = document.getElementById("pop-" + key);
+        const btn = document.getElementById("btn-" + key);
+        if (pop) pop.classList.add("show");
+        if (btn) btn.classList.add("open");
+      }
+    }
+
+    document.addEventListener("click", () => closeAllPopovers());
+
+    function renderBreadcrumbs() {
+      const bar = document.getElementById("breadcrumbs");
+      bar.innerHTML = "";
+
+      const pos = positionsById[currentPositionId];
+      const bldgMeta = inventory.meta.buildings[currentBuilding];
+
+      const crumbs = [
+        { key: "site", label: "DNVRCO — Demo", popover: null, static: true },
+        { key: "building", label: `Building ${currentBuilding}`, popover: renderBuildingPopover },
+        { key: "bay", label: `${pos.id.replace("Rack_", "Position ")} — ${pos.faceA} / ${pos.faceB}`, popover: renderBayPopover }
+      ];
+
+      crumbs.forEach((c, idx) => {
+        if (idx > 0) {
+          const sep = document.createElement("span");
+          sep.className = "crumb-sep";
+          sep.textContent = "›";
+          bar.appendChild(sep);
+        }
+
+        const wrap = document.createElement("div");
+        wrap.className = "crumb";
+
+        const btn = document.createElement("button");
+        btn.className = "crumb-btn" + (c.static ? " static" : "");
+        btn.id = "btn-" + c.key;
+        btn.innerHTML = c.static
+          ? `<span>${c.label}</span>`
+          : `<span>${c.label}</span><span class="caret">&#9662;</span>`;
+        if (!c.static) btn.onclick = (e) => togglePopover(c.key, e);
+        wrap.appendChild(btn);
+
+        if (c.popover) {
+          const pop = document.createElement("div");
+          pop.className = "crumb-popover";
+          pop.id = "pop-" + c.key;
+          c.popover(pop);
+          wrap.appendChild(pop);
+        }
+
+        bar.appendChild(wrap);
+      });
+    }
+
+    function renderBuildingPopover(pop) {
+      buildingOrder.forEach(b => {
+        const meta = inventory.meta.buildings[b];
+        const item = document.createElement("div");
+        item.className = "popover-item" + (b === currentBuilding ? " active" : "");
+        item.innerHTML = `${meta.label}`;
+        item.onclick = () => {
+          if (b !== currentBuilding) {
+            currentBuilding = b;
+            const firstPos = positionsByBuilding[b][0];
+            selectPosition(firstPos.id, true);
+          }
+          closeAllPopovers();
+        };
+        pop.appendChild(item);
+      });
+    }
+
+    function renderBayPopover(pop) {
+      positionsByBuilding[currentBuilding].forEach(p => {
+        const item = document.createElement("div");
+        item.className = "popover-item" + (p.id === currentPositionId ? " active" : "");
+        item.innerHTML = `${p.id.replace("Rack_", "Position ")}<span class="sub">${p.faceA} / ${p.faceB}</span>`;
+        item.onclick = () => {
+          selectPosition(p.id, false);
+          closeAllPopovers();
+        };
+        pop.appendChild(item);
+      });
+    }
+
+    // ============================================================
+    // Position / face selection
+    // ============================================================
+    function selectPosition(positionId, resetBuilding) {
+      currentPositionId = positionId;
+      const pos = positionsById[positionId];
+      currentBuilding = pos.building;
+      currentFace = "A";
+      selectedUnitOrder = null;
+
+      renderBreadcrumbs();
+      loadViewer();
+      renderFaceOverlay();
+      renderHeightOverlay();
+      renderOverlayPosMeta();
+      renderRackPanel();
+    }
+
+    function stepPosition(direction) {
+      const list = inventory.positions;
+      const idx = list.findIndex(p => p.id === currentPositionId);
+      let next = idx + direction;
+      if (next < 0) next = 0;
+      if (next > list.length - 1) next = list.length - 1;
+      selectPosition(list[next].id, false);
+    }
+
+    function setHeight(height) {
+      currentHeight = height;
+      loadViewer();
+    }
+
+    function renderHeightOverlay() {
+      const wrap = document.getElementById("overlayHeights");
+      wrap.innerHTML = "";
+      [["B", "Bot"], ["M", "Mid"], ["T", "Top"]].forEach(([h, label]) => {
+        const btn = document.createElement("button");
+        btn.className = "overlay-btn" + (currentHeight === h ? " active" : "");
+        btn.textContent = label;
+        btn.onclick = () => { setHeight(h); renderHeightOverlay(); };
+        wrap.appendChild(btn);
+      });
+    }
+
+    function renderFaceOverlay() {
+      const pos = positionsById[currentPositionId];
+      const wrap = document.getElementById("overlayFaces");
+      wrap.innerHTML = "";
+
+      const btnA = document.createElement("button");
+      btnA.className = "overlay-btn" + (currentFace === "A" ? " active" : "");
+      btnA.textContent = `A · ${pos.faceA}`;
+      btnA.onclick = () => selectFace("A");
+      wrap.appendChild(btnA);
+
+      const btnB = document.createElement("button");
+      btnB.className = "overlay-btn" + (currentFace === "B" ? " active" : "");
+      btnB.textContent = `B · ${pos.faceB}`;
+      btnB.onclick = () => selectFace("B");
+      wrap.appendChild(btnB);
+    }
+
+    function renderOverlayPosMeta() {
+      const pos = positionsById[currentPositionId];
+      document.getElementById("overlayPosTitle").textContent =
+        `${pos.id.replace("Rack_", "Position ")} — ${heightName(currentHeight)}`;
+      document.getElementById("overlayPosMeta").textContent =
+        `Bldg ${pos.building} · Face A ${pos.faceA} · Face B ${pos.faceB}`;
+    }
+
+    function selectFace(face) {
+      currentFace = face;
+      selectedUnitOrder = null;
+      renderFaceOverlay();
+      renderRackPanel();
+
+      const pos = positionsById[currentPositionId];
+      const targetYaw = face === "B" ? pos.faceBYaw : pos.faceAYaw;
+
+      if (viewer) {
+        try { viewer.setYaw(targetYaw, true); } catch (e) {}
+      }
+    }
+
+    function getCurrentRack() {
+      const pos = positionsById[currentPositionId];
+      const rackId = currentFace === "B" ? pos.faceB : pos.faceA;
+      return inventory.racksByIdOnly[rackId];
+    }
+
+    // ============================================================
+    // Pannellum viewer
+    // ============================================================
+    function loadViewer() {
+      renderOverlayPosMeta();
+
+      const pos = positionsById[currentPositionId];
+      const panorama = imagePath(pos.panoBase, currentHeight);
+      const placeholder = document.getElementById("panoPlaceholder");
+      placeholder.classList.remove("show");
+
+      if (viewer) {
+        try { viewer.destroy(); } catch (e) {}
+        viewer = null;
+      }
+
+      viewer = pannellum.viewer("viewer", {
+        type: "equirectangular",
+        panorama: panorama,
+        autoLoad: true,
+        showControls: true,
+        compass: false,
+        hotSpotDebug: false,
+        hfov: 100,
+        yaw: currentFace === "B" ? pos.faceBYaw : pos.faceAYaw
+      });
+
+      viewer.on("error", () => placeholder.classList.add("show"));
+    }
+
+    // ============================================================
+    // Rack panel orchestration
+    // ============================================================
+    function renderRackPanel() {
+      const rack = getCurrentRack();
+      renderToolbarLabel(rack);
+      resetZoom(); // fit by default whenever rack changes
+      renderElevation();
+      renderTable(rack);
+      renderAnomalyBadge();
+    }
+
+    function renderToolbarLabel(rack) {
+      const pos = positionsById[currentPositionId];
+      document.getElementById("rackIdTag").textContent = rack ? rack.id : "No rack data";
+      document.getElementById("rackSubTag").textContent = rack
+        ? `Face ${rack.face} · Bldg ${rack.building}${rack.customer ? " · " + rack.customer : ""}`
+        : "";
+    }
+
+    // ============================================================
+    // Rack elevation (SVG, true aspect ratio)
+    // ============================================================
+    function cumulativeSpans(rack) {
+      // returns array parallel to rack.units with {topU, bottomU} using cumulative uHeight,
+      // top of rack = rackU, counting down as we go through units top->bottom
+      const totalU = rack.rackU || 45;
+      let cursor = totalU;
+      return rack.units.map(u => {
+        const uH = u.uHeight || 1;
+        const topU = cursor;
+        const bottomU = cursor - uH + 1;
+        cursor -= uH;
+        return { topU, bottomU };
+      });
+    }
+
+    function buildElevationSvg(rack) {
+      const totalU = rack.rackU || 45;
+
+      // Internal drawing coordinate system: rack body width = RACK_WIDTH_MM, height = RACK_HEIGHT_MM
+      const plinthH = 60; // px in svg-unit space, small plinth label bar at top
+      const bodyW = RACK_WIDTH_MM;
+      const bodyH = RACK_HEIGHT_MM;
+      const bodyX = 40; // left margin for rail/frame
+      const bodyY = plinthH;
+
+      const labelColW = 190; // label column to the right
+      const labelGutter = 26; // gap between rack body and label column start (leader line runs here)
+
+      const svgW = bodyX + bodyW + labelGutter + labelColW + 20;
+      const svgH = plinthH + bodyH + 20;
+
+      const spans = cumulativeSpans(rack);
+
+      let defs = `
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="6" height="6" fill="#0d131c"></rect>
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#1b2430" stroke-width="2"></line>
+          </pattern>
+        </defs>
+      `;
+
+      let parts = [];
+
+      // plinth
+      parts.push(`
+        <rect x="${bodyX}" y="8" width="${bodyW}" height="28" rx="3" fill="#0f1620" stroke="#263141"></rect>
+        <text class="plinth-label" x="${bodyX + bodyW / 2}" y="27" text-anchor="middle">${escapeXml(rack.id)}</text>
+      `);
+
+      // outer rack frame
+      parts.push(`<rect x="${bodyX}" y="${bodyY}" width="${bodyW}" height="${bodyH}" fill="#0a0e18" stroke="#1c232d" stroke-width="3" rx="4"></rect>`);
+
+      // rail dots (left rail)
+      let railDots = "";
+      const dotCount = 20;
+      for (let i = 0; i < dotCount; i++) {
+        const y = bodyY + 10 + (i * (bodyH - 20) / (dotCount - 1));
+        railDots += `<circle cx="${bodyX + 8}" cy="${y}" r="2" fill="#263141"></circle>`;
+      }
+      parts.push(railDots);
+
+      const unitInnerX = bodyX + 16;
+      const unitInnerW = bodyW - 32;
+
+      const leaderStartX = bodyX + bodyW;
+      const labelX = leaderStartX + labelGutter;
+
+      rack.units.forEach((unit, i) => {
+        const { topU, bottomU } = spans[i];
+        const uH = unit.uHeight || 1;
+        // y=0 at rack top (u=totalU), increases downward
+        const yTop = bodyY + ((totalU - topU) / totalU) * bodyH;
+        const yBottom = bodyY + ((totalU - bottomU + 1) / totalU) * bodyH;
+        const rectH = Math.max(yBottom - yTop, 1);
+        const rectY = yTop;
+        const isSpace = unit.type === "space";
+        const hasAlarm = unit.alarms && unit.alarms.length > 0;
+        const selected = unit.order === selectedUnitOrder;
+
+        parts.push(`
+          <rect class="u-rect ${typeFill(unit.type)}${selected ? ' selected' : ''}"
+                data-order="${unit.order}"
+                x="${unitInnerX}" y="${rectY}" width="${unitInnerW}" height="${rectH}"
+                onclick="selectUnit(${unit.order})">
+          </rect>
+        `);
+
+        // alarm dot on block
+        if (hasAlarm) {
+          parts.push(`<circle class="alarm-dot-svg" cx="${unitInnerX + 10}" cy="${rectY + rectH / 2}" r="5" fill="#ef4444"></circle>`);
+        }
+
+        const mfrModel = `${unit.mfr ? unit.mfr + " " : ""}${unit.model || ""}`.trim();
+
+        // inline text if block tall enough in *rendered* px - approximate using rectH share of bodyH mapped later;
+        // we mark with data attribute and JS will toggle visibility post-render based on actual pixel height.
+        if (!isSpace) {
+          parts.push(`
+            <text class="u-inline-text" data-inline-for="${unit.order}" x="${unitInnerX + unitInnerW / 2}" y="${rectY + rectH / 2 + 3.5}"
+                  text-anchor="middle" style="display:none">${escapeXml(truncate(unit.label || mfrModel, 26))}</text>
+          `);
+        }
+
+        if (!isSpace) {
+          // leader line: from mid-right edge of block to label row
+          const leaderY = rectY + rectH / 2;
+          const labelRowH = 30;
+          const labelY = clampLabelY(i, rack.units, spans, totalU, bodyY, bodyH, labelRowH);
+
+          parts.push(`
+            <path class="u-leader${selected ? ' selected' : ''}" data-order="${unit.order}"
+                  d="M ${unitInnerX + unitInnerW} ${leaderY} L ${leaderStartX + 10} ${leaderY} L ${labelX} ${labelY}"></path>
+          `);
+
+          const confClass = "conf-" + (unit.confidence || "medium");
+          const title = unit.label || mfrModel || "Unit";
+          const sub = unit.label ? mfrModel : (unit.mfr || "");
+
+          parts.push(`
+            <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
+              <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
+              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" x="8" y="13">${escapeXml(truncate(title, 30))}</text>
+              ${sub ? `<text class="u-label-sub" x="8" y="24">${escapeXml(truncate(sub, 34))}</text>` : ""}
+              <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 10}" cy="${labelRowH / 2}" r="4"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
+              ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 24}" cy="${labelRowH / 2}" r="4" fill="#ef4444"></circle>` : ""}
+            </g>
+          `);
+        }
+      });
+
+      return {
+        svg: `<svg id="elevationSvg" viewBox="0 0 ${svgW} ${svgH}" width="${svgW}" height="${svgH}" xmlns="http://www.w3.org/2000/svg">${defs}${parts.join("")}</svg>`,
+        svgW, svgH, bodyW, bodyH
+      };
+    }
+
+    // spread labels evenly to reduce overlap: bucket by index order (top to bottom), evenly distribute within available height
+    function clampLabelY(i, units, spans, totalU, bodyY, bodyH, rowH) {
+      const nonSpaceUnits = units.map((u, idx) => ({ u, idx })).filter(x => x.u.type !== "space");
+      const posInList = nonSpaceUnits.findIndex(x => x.idx === i);
+      const count = nonSpaceUnits.length;
+      if (count === 0) return bodyY + bodyH / 2;
+
+      // natural (unclamped) position = vertical center of the unit
+      const { topU, bottomU } = spans[i];
+      const yTop = bodyY + ((totalU - topU) / totalU) * bodyH;
+      const yBottom = bodyY + ((totalU - bottomU + 1) / totalU) * bodyH;
+      const natural = (yTop + yBottom) / 2;
+
+      // even slot fallback distributed across body height
+      const slotH = bodyH / count;
+      const evenSlot = bodyY + slotH * (posInList + 0.5);
+
+      // blend: mostly natural position, but avoid overlap by nudging toward even spacing
+      const blended = natural * 0.5 + evenSlot * 0.5;
+      return blended;
+    }
+
+    function truncate(str, n) {
+      if (!str) return "";
+      return str.length > n ? str.slice(0, n - 1) + "…" : str;
+    }
+
+    function escapeXml(str) {
+      if (str == null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderElevation() {
+      const rack = getCurrentRack();
+      const wrap = document.getElementById("elevationSvgWrap");
+      const pane = document.getElementById("elevationPane");
+
+      if (!rack) {
+        wrap.innerHTML = "";
+        return;
+      }
+
+      const built = buildElevationSvg(rack);
+      wrap.innerHTML = built.svg;
+
+      fitAndZoom(built);
+      updateInlineLabelVisibility();
+
+      // restore selection highlight (rebuilt DOM)
+      highlightUnit(selectedUnitOrder);
+    }
+
+    function fitAndZoom(built) {
+      const pane = document.getElementById("elevationPane");
+      const wrap = document.getElementById("elevationSvgWrap");
+      if (!built) {
+        const svgEl = document.getElementById("elevationSvg");
+        if (!svgEl) return;
+        const vb = svgEl.viewBox.baseVal;
+        built = { svgW: vb.width, svgH: vb.height };
+      }
+
+      const paneW = pane.clientWidth - 16;
+      const paneH = pane.clientHeight - 16;
+
+      const fitScale = Math.min(paneW / built.svgW, paneH / built.svgH, 1);
+      const appliedScale = fitScale * zoomLevel;
+
+      const svgEl = document.getElementById("elevationSvg");
+      if (svgEl) {
+        svgEl.style.width = (built.svgW * appliedScale) + "px";
+        svgEl.style.height = (built.svgH * appliedScale) + "px";
+      }
+
+      pane.classList.toggle("zoomed", zoomLevel > 1);
+
+      document.getElementById("zoomReadout").textContent = zoomLevel.toFixed(1) + "x";
+
+      // after layout, recompute which labels get inline text based on rendered px height
+      requestAnimationFrame(updateInlineLabelVisibility);
+    }
+
+    function updateInlineLabelVisibility() {
+      const svgEl = document.getElementById("elevationSvg");
+      if (!svgEl) return;
+      const rack = getCurrentRack();
+      if (!rack) return;
+
+      const rectEls = svgEl.querySelectorAll(".u-rect[data-order]");
+      rectEls.forEach(rect => {
+        const order = rect.getAttribute("data-order");
+        const bbox = rect.getBoundingClientRect();
+        const inlineText = svgEl.querySelector(`text[data-inline-for="${order}"]`);
+        if (inlineText) {
+          inlineText.style.display = bbox.height >= 14 ? "block" : "none";
+        }
+      });
+    }
+
+    function zoomBy(delta) {
+      zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomLevel + delta));
+      fitAndZoom();
+    }
+
+    function resetZoom() {
+      zoomLevel = 1;
+      fitAndZoom();
+    }
+
+    // ctrl+wheel zoom
+    document.addEventListener("wheel", (e) => {
+      const pane = document.getElementById("elevationPane");
+      if (!pane.contains(e.target)) return;
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.5 : -0.5;
+      zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomLevel + delta));
+      fitAndZoom();
+    }, { passive: false });
+
+    // ============================================================
+    // Table
+    // ============================================================
+    function renderTable(rack) {
+      const tbody = document.getElementById("unitTableBody");
+      tbody.innerHTML = "";
+      if (!rack) return;
+
+      const spans = cumulativeSpans(rack);
+
+      rack.units.forEach((unit, i) => {
+        const { topU, bottomU } = spans[i];
+        const tr = document.createElement("tr");
+        tr.dataset.order = unit.order;
+        tr.id = `row-${unit.order}`;
+        if (unit.order === selectedUnitOrder) tr.classList.add("selected");
+
+        const hasAlarm = unit.alarms && unit.alarms.length > 0;
+        const confClass = "conf-" + (unit.confidence || "medium");
+        const uspan = topU === bottomU ? `${topU}` : `${topU}–${bottomU}`;
+
+        tr.innerHTML = `
+          <td>${uspan}</td>
+          <td>${unit.type}</td>
+          <td>${unit.mfr || "—"}</td>
+          <td title="${escapeXml(unit.model || "")}">${escapeXml(unit.model || "—")}</td>
+          <td title="${escapeXml(unit.label || "")}">${escapeXml(unit.label || "—")}</td>
+          <td class="${hasAlarm ? "alarm-yes" : "alarm-no"}">${hasAlarm ? escapeXml(unit.alarms.join(", ")) : "—"}</td>
+          <td><span class="table-dot ${confClass}" title="${unit.confidence || "unknown"}"></span></td>
+        `;
+
+        tr.onclick = () => selectUnit(unit.order);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleTable() {
+      tableVisible = !tableVisible;
+      const tablePane = document.getElementById("tablePane");
+      const hsplitter = document.getElementById("hsplitter");
+      const btn = document.getElementById("tableToggleBtn");
+
+      tablePane.classList.toggle("hidden", !tableVisible);
+      hsplitter.classList.toggle("collapsed", !tableVisible);
+      btn.classList.toggle("active", tableVisible);
+
+      applyHSplit();
+      requestAnimationFrame(() => { fitAndZoom(); });
+    }
+
+    // ============================================================
+    // Selection sync (elevation <-> table)
+    // ============================================================
+    function selectUnit(order) {
+      selectedUnitOrder = order;
+      highlightUnit(order);
+
+      const row = document.getElementById(`row-${order}`);
+      if (row) {
+        row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        row.classList.add("flash");
+        setTimeout(() => row.classList.remove("flash"), 700);
+      }
+
+      const rect = document.querySelector(`.u-rect[data-order="${order}"]`);
+      if (rect) rect.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    }
+
+    function highlightUnit(order) {
+      document.querySelectorAll(".u-rect").forEach(el => {
+        el.classList.toggle("selected", Number(el.dataset.order) === order);
+      });
+      document.querySelectorAll(".u-leader").forEach(el => {
+        el.classList.toggle("selected", Number(el.dataset.order) === order);
+      });
+      document.querySelectorAll(".u-label-bg").forEach(el => {
+        const group = el.closest(".u-label-group");
+        const isSel = group && Number(group.dataset.order) === order;
+        el.classList.toggle("selected", isSel);
+      });
+      document.querySelectorAll("#unitTableBody tr").forEach(el => {
+        el.classList.toggle("selected", Number(el.dataset.order) === order);
+      });
+    }
+
+    // ============================================================
+    // Anomalies badge + drawer
+    // ============================================================
+    function currentAnomalies() {
+      const pos = positionsById[currentPositionId];
+      const rackA = inventory.racksByIdOnly[pos.faceA];
+      const rackB = inventory.racksByIdOnly[pos.faceB];
+      const ids = [rackA ? rackA.id : null, rackB ? rackB.id : null].filter(Boolean);
+      return (inventory.anomalies || []).filter(a => ids.includes(a.rack));
+    }
+
+    function renderAnomalyBadge() {
+      const matches = currentAnomalies();
+      const badge = document.getElementById("anomalyBadge");
+      const text = document.getElementById("anomalyBadgeText");
+      text.textContent = `Anomalies (${matches.length})`;
+      badge.classList.toggle("zero", matches.length === 0);
+    }
+
+    function openDrawer() {
+      renderDrawerBody();
+      document.getElementById("drawerOverlay").classList.add("show");
+      document.getElementById("drawerPanel").classList.add("show");
+    }
+
+    function closeDrawer() {
+      document.getElementById("drawerOverlay").classList.remove("show");
+      document.getElementById("drawerPanel").classList.remove("show");
+    }
+
+    function renderDrawerBody() {
+      const body = document.getElementById("drawerBody");
+      const matches = currentAnomalies();
+
+      if (!matches.length) {
+        body.innerHTML = `<div class="no-anomalies">No anomalies on either face of this position.</div>`;
+        return;
+      }
+
+      body.innerHTML = "";
+      matches.forEach(a => {
+        const div = document.createElement("div");
+        div.className = "anomaly-card";
+        div.innerHTML = `
+          <div class="anomaly-rack">Rack ${escapeXml(a.rack)}</div>
+          <div class="anomaly-unit">${a.unit && a.unit !== "-" ? escapeXml(a.unit) : ""}</div>
+          <div class="anomaly-finding">${escapeXml(a.finding)}</div>
+        `;
+        div.onclick = () => {
+          // jump to the face that owns this rack if it's not the current one
+          const pos = positionsById[currentPositionId];
+          if (a.rack === pos.faceA && currentFace !== "A") selectFace("A");
+          if (a.rack === pos.faceB && currentFace !== "B") selectFace("B");
+          closeDrawer();
+        };
+        body.appendChild(div);
+      });
+    }
+
+    // ============================================================
+    // Draggable splitters
+    // ============================================================
+    function applyVSplit() {
+      const paneLeft = document.getElementById("paneLeft");
+      const total = document.getElementById("mainSplit").clientWidth - 6; // minus splitter width
+      paneLeft.style.flex = `0 0 ${total * vRatio}px`;
+    }
+
+    function applyHSplit() {
+      const paneRight = document.getElementById("paneRight");
+      const elevationPane = document.getElementById("elevationPane");
+      const tablePane = document.getElementById("tablePane");
+
+      if (!tableVisible) {
+        elevationPane.style.flex = "1 1 auto";
+        tablePane.style.flex = "0 0 0px";
+        return;
+      }
+
+      const total = paneRight.clientHeight - 6 - 41; // minus splitter + toolbar height approx
+      const elevH = Math.max(60, total * hRatio);
+      const tableH = Math.max(60, total - elevH);
+      elevationPane.style.flex = `0 0 ${elevH}px`;
+      tablePane.style.flex = `0 0 ${tableH}px`;
+    }
+
+    (function setupVSplitter() {
+      const splitter = document.getElementById("vsplitter");
+      const mainSplit = document.getElementById("mainSplit");
+      let dragging = false;
+
+      splitter.addEventListener("mousedown", (e) => {
+        dragging = true;
+        splitter.classList.add("dragging");
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const rect = mainSplit.getBoundingClientRect();
+        let ratio = (e.clientX - rect.left) / rect.width;
+        ratio = Math.min(0.85, Math.max(0.15, ratio));
+        vRatio = ratio;
+        applyVSplit();
+        fitAndZoom();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        splitter.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        localStorage.setItem("rr_vRatio", String(vRatio));
+      });
+    })();
+
+    (function setupHSplitter() {
+      const splitter = document.getElementById("hsplitter");
+      const paneRight = document.getElementById("paneRight");
+      let dragging = false;
+
+      splitter.addEventListener("mousedown", (e) => {
+        if (!tableVisible) return;
+        dragging = true;
+        splitter.classList.add("dragging");
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const rect = paneRight.getBoundingClientRect();
+        const toolbarH = 41;
+        let ratio = (e.clientY - rect.top - toolbarH) / (rect.height - toolbarH);
+        ratio = Math.min(0.85, Math.max(0.15, ratio));
+        hRatio = ratio;
+        applyHSplit();
+        fitAndZoom();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        splitter.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        localStorage.setItem("rr_hRatio", String(hRatio));
+      });
+    })();
+
+    window.addEventListener("resize", () => {
+      applyVSplit();
+      applyHSplit();
+      fitAndZoom();
+    });
+
+    // initial split application (after first paint)
+    requestAnimationFrame(() => {
+      applyVSplit();
+      applyHSplit();
+    });
+
+    // ============================================================
+    // Keyboard shortcuts
+    // ============================================================
+    document.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft") { stepPosition(-1); }
+      else if (e.key === "ArrowRight") { stepPosition(1); }
+      else if (e.key === "a" || e.key === "A") { selectFace("A"); }
+      else if (e.key === "b" || e.key === "B") { selectFace("B"); }
+      else if (e.key === "Escape") { closeDrawer(); }
+    });
+  </script>
+</body>
+</html>

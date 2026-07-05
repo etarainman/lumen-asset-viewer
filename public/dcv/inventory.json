@@ -1,0 +1,1402 @@
+{
+  "meta": {
+    "site": "DUMSTX01 (demo alias)",
+    "description": "Auto-extracted rack inventory from 27 equirectangular 360 photos (9 capture positions x Bottom/Middle/Top heights). Every unit was read from full-resolution perspective crops of the panoramas. Confidence: high = label read directly; medium = partial read or inferred from adjacent evidence; low = inferred from pattern only.",
+    "extractedBy": "Claude vision pipeline v1",
+    "extractedOn": "2026-07-05",
+    "capturedOn": "2026-03-27",
+    "buildings": {
+      "0001": {
+        "label": "Building 0001",
+        "realSource": "Atlantic IA regen hut (ATLT / OMA02 route, Stuart-Omaha span)",
+        "positions": [
+          "Rack_001",
+          "Rack_002",
+          "Rack_003"
+        ]
+      },
+      "0003": {
+        "label": "Building 0003",
+        "realSource": "Stuart IA ILA hut (DSM02/DSM04 routes, us-ia-strt NEs)",
+        "positions": [
+          "Rack_004",
+          "Rack_005",
+          "Rack_006",
+          "Rack_007",
+          "Rack_008",
+          "Rack_009"
+        ]
+      }
+    }
+  },
+  "positions": [
+    {
+      "id": "Rack_001",
+      "building": "0001",
+      "panoBase": "Rack_001",
+      "faceA": "H01.03",
+      "faceB": "H02.03",
+      "faceAYaw": 13,
+      "faceBYaw": 180
+    },
+    {
+      "id": "Rack_002",
+      "building": "0001",
+      "panoBase": "Rack_002",
+      "faceA": "H01.02",
+      "faceB": "H02.02",
+      "faceAYaw": -4,
+      "faceBYaw": 180
+    },
+    {
+      "id": "Rack_003",
+      "building": "0001",
+      "panoBase": "Rack_003",
+      "faceA": "H01.01",
+      "faceB": "H02.01",
+      "faceAYaw": -14,
+      "faceBYaw": 180
+    },
+    {
+      "id": "Rack_004",
+      "building": "0003",
+      "panoBase": "Rack_004",
+      "faceA": "302.003",
+      "faceB": "301.003",
+      "faceAYaw": -6,
+      "faceBYaw": 180
+    },
+    {
+      "id": "Rack_005",
+      "building": "0003",
+      "panoBase": "Rack_005",
+      "faceA": "302.004",
+      "faceB": "301.004",
+      "faceAYaw": -7,
+      "faceBYaw": 180
+    },
+    {
+      "id": "Rack_006",
+      "building": "0003",
+      "panoBase": "Rack_006",
+      "faceA": "302.005",
+      "faceB": "301.005",
+      "faceAYaw": -4,
+      "faceBYaw": 180,
+      "note": "Source xlsx recorded 303.005/304.005 for M/T heights; plinth and shelf labels prove the camera stayed at the 302.005/301.005 pair. Xlsx entry corrected by image evidence."
+    },
+    {
+      "id": "Rack_007",
+      "building": "0003",
+      "panoBase": "Rack_007",
+      "faceA": "302.007",
+      "faceB": "301.007",
+      "faceAYaw": -2,
+      "faceBYaw": 180,
+      "note": "Source xlsx recorded 300.007/301.007 at B/M; plinth reads 302.007 (face A) and 301.007 (face B) at all heights. Xlsx entry corrected by image evidence."
+    },
+    {
+      "id": "Rack_008",
+      "building": "0003",
+      "panoBase": "Rack_008",
+      "faceA": "302.008",
+      "faceB": "301.008",
+      "faceAYaw": -8,
+      "faceBYaw": 180
+    },
+    {
+      "id": "Rack_009",
+      "building": "0003",
+      "panoBase": "Rack_009",
+      "faceA": "302.009",
+      "faceB": "301.009",
+      "faceAYaw": -8,
+      "faceBYaw": 180
+    }
+  ],
+  "racks": [
+    {
+      "id": "H01.03",
+      "building": "0001",
+      "position": "Rack_001",
+      "face": "A",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "ADC",
+          "model": "PowerWorx fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "Power A/B green, fuse alarm lamps unlit",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "fiber",
+          "mfr": "ADC",
+          "model": "FMT fiber management tray",
+          "label": "RMU 40",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM series chassis (alarm panel + multi-slot)",
+          "label": "NE: ATLTIAALIA.ATC1.MS313 (partial read)",
+          "alarms": [],
+          "leds": "POWER green; Critical/Major/Minor unlit",
+          "confidence": "medium",
+          "notes": "Includes OMM/OAM blank slots, 2x amplifier/TPA modules with LC jumpers, fan+power modules POWER green FAULT off",
+          "uHeight": 10
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (OME6500)",
+          "label": "OME6500 SH-1 / NE OMA02-206-01OLA / IP 10.62.64.114",
+          "alarms": [
+            "MINOR"
+          ],
+          "leds": "Minor amber lit; status LEDs green/blue",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 6,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH-1 / OMA02-22206-01OLA / IP 10.52.9.178",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major red lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 7,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "chassis section at floor level",
+          "label": "RMU 33 / NE ATLTIAALIA.ATC1.MS313 (partial)",
+          "alarms": [],
+          "confidence": "medium",
+          "uHeight": 4
+        },
+        {
+          "order": 8,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 5
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H02.03",
+      "building": "0001",
+      "position": "Rack_001",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (open shelf, maintenance panel + 8 modules)",
+          "label": null,
+          "alarms": [],
+          "leds": "module status blue",
+          "confidence": "medium",
+          "notes": "Many yellow LC jumpers to barcoded modules right side",
+          "uHeight": 10
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SHELF 1 / ATLTIAALCIA60742",
+          "alarms": [
+            "MAJOR",
+            "MINOR"
+          ],
+          "leds": "Major red + Minor amber lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "fiber",
+          "mfr": "ADVA",
+          "model": "FMT fiber tray",
+          "label": "FMT",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 4,
+          "type": "space",
+          "mfr": null,
+          "model": "Empty lower half",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 23
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H01.02",
+      "building": "0001",
+      "position": "Rack_002",
+      "face": "A",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "ADC",
+          "model": "PowerWorx fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Huawei",
+          "model": "OptiX OSN 8800 (control shelf + card cage, slots 1-10 incl. 9/10 XCS)",
+          "label": "handwritten 10042",
+          "alarms": [],
+          "leds": "PWR green; CRIT/MAJ/MIN unlit",
+          "confidence": "high",
+          "notes": "Partially populated card cage, LC jumpers on several cards, fan tray below",
+          "uHeight": 12
+        },
+        {
+          "order": 3,
+          "type": "space",
+          "mfr": null,
+          "model": "Empty lower rack",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 31
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H02.02",
+      "building": "0001",
+      "position": "Rack_002",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "NE plate blank (unlabelled shelf)",
+          "alarms": [],
+          "leds": "status blue",
+          "confidence": "medium",
+          "notes": "ANOMALY: shelf in service but NE/IP/Shelf ID fields empty",
+          "uHeight": 10
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH-1 / ATLTIAALCIA60273 / N923436",
+          "alarms": [],
+          "leds": "green/blue",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 25
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H01.01",
+      "building": "0001",
+      "position": "Rack_003",
+      "face": "A",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "PECO II Inc.",
+          "model": "-48VDC power plant / breaker panel (A+B load disconnect rows)",
+          "label": "meter reads 0009 (amps)",
+          "alarms": [],
+          "leds": "rectifier status green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "power",
+          "mfr": "ADC",
+          "model": "PowerWorx fuse panel",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 3,
+          "type": "network",
+          "mfr": "Cisco (probable)",
+          "model": "ISR-class management router",
+          "label": "unreadable asset tag",
+          "alarms": [],
+          "confidence": "medium",
+          "uHeight": 2
+        },
+        {
+          "order": 4,
+          "type": "network",
+          "mfr": "Uniprise/CommScope",
+          "model": "48-port Cat6 patch panel",
+          "label": null,
+          "alarms": [],
+          "confidence": "medium",
+          "uHeight": 2
+        },
+        {
+          "order": 5,
+          "type": "network",
+          "mfr": "Juniper",
+          "model": "EX-series 48-port access switch",
+          "label": "Network Access Ports",
+          "alarms": [],
+          "leds": "port LEDs green",
+          "confidence": "medium",
+          "uHeight": 2
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Empty lower rack",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 35
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H02.01",
+      "building": "0001",
+      "position": "Rack_003",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM DCM/amplifier shelf",
+          "label": "Rx From Stuart",
+          "alarms": [],
+          "leds": "POWER green FAULT off",
+          "confidence": "high",
+          "uHeight": 4
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM DCM/amplifier shelf",
+          "label": "Rx From Omaha",
+          "alarms": [],
+          "leds": "POWER green FAULT off",
+          "confidence": "high",
+          "uHeight": 4
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM nodal control and timing panel",
+          "label": "LAN1 D19",
+          "alarms": [],
+          "leds": "POWER green; Critical/Minor/ACO unlit",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM chassis: OMM slot + 2x OEM-CXH1/C201 amplifier modules",
+          "label": "slot 28 marking",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "medium",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 25
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.003",
+      "building": "0003",
+      "position": "Rack_004",
+      "face": "A",
+      "customer": "META",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "Ciena",
+          "model": "Fuse/breaker panel (A/B feeds, pos 1-6)",
+          "label": "In Service Equipment - ciena",
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-19-1",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major red lit; status green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-20-1",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-21-1",
+          "alarms": [],
+          "leds": "green/blue",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-22-1",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "notes": "COMMSCOPE optical fiber routing assembly runs vertically beside the stack",
+          "uHeight": 10
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 3
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.003",
+      "building": "0003",
+      "position": "Rack_004",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel (A/B, 707 series)",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI02.DSM04-ILA:1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (GPN 1129175)",
+          "label": "LI01.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "status blue",
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 open shelf (slots 19-36, 2 line cards populated, LC jumpers)",
+          "label": null,
+          "alarms": [],
+          "leds": "card status green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 21
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.004",
+      "building": "0003",
+      "position": "Rack_005",
+      "face": "A",
+      "customer": "META",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (open shelf: CTM 41/42 modules, fillers, power cards)",
+          "label": "unlabelled",
+          "alarms": [
+            "CRITICAL"
+          ],
+          "leds": "Critical/Major red lit; CTM blue",
+          "confidence": "medium",
+          "uHeight": 6
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (open shelf)",
+          "label": "unlabelled",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "red alarms lit; CTM blue",
+          "confidence": "medium",
+          "uHeight": 6
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (open shelf, barcoded modules, LC jumpers, ILAN/craft ports)",
+          "label": "serial 12307619 (partial)",
+          "alarms": [
+            "CRITICAL"
+          ],
+          "leds": "Critical+Major red on maintenance panel",
+          "confidence": "medium",
+          "notes": "NE hostname stickers absent on this stack - flagged for field labelling",
+          "uHeight": 6
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 25
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.004",
+      "building": "0003",
+      "position": "Rack_005",
+      "face": "B",
+      "customer": "GOOGLE",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": null,
+          "alarms": [
+            "FUSE"
+          ],
+          "leds": "A/B green + red fuse indicators lit",
+          "confidence": "medium",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI15.DSM04-ILA:1 / Shelf ID LI15",
+          "alarms": [],
+          "leds": "blue",
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI14 or LI05 (partial read)",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "red lit + green",
+          "confidence": "medium",
+          "uHeight": 6
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (GPN 1129175)",
+          "label": "LI04.DSM04-ILA:1 / GTR048.C",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 25
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.005",
+      "building": "0003",
+      "position": "Rack_006",
+      "face": "A",
+      "customer": "META",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-23-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-24-1",
+          "alarms": [
+            "MINOR (possible)"
+          ],
+          "leds": "small red indicators near alarm cluster",
+          "confidence": "medium",
+          "uHeight": 10
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-25-1",
+          "alarms": [],
+          "confidence": "medium",
+          "notes": "read from overview montage",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-26-1",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major red lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 3
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.005",
+      "building": "0003",
+      "position": "Rack_006",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI19.DSM04-ILA:1 / Shelf ID LI19",
+          "alarms": [],
+          "leds": "blue/green",
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI18.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI17.DSM04-ILA:1 / Shelf ID LI17",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI16.DSM04-ILA:1 / Shelf ID LI16",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 19
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.007",
+      "building": "0003",
+      "position": "Rack_007",
+      "face": "A",
+      "customer": "META (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": "bracket labelled 302.007",
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-23206-01OLA",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-24206-01OLA",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Empty lower half",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 21
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.007",
+      "building": "0003",
+      "position": "Rack_007",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": "bracket labelled 301.007",
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI10.DSM04-ILA:1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI09.DSM04-ILA:1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI08 (inferred from sequence)",
+          "alarms": [],
+          "confidence": "low",
+          "uHeight": 6
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI07.DSM04-ILA:1 (partial read)",
+          "alarms": [],
+          "confidence": "medium",
+          "uHeight": 6
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 19
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.008",
+      "building": "0003",
+      "position": "Rack_008",
+      "face": "A",
+      "customer": "MICROSOFT AZURE",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel (powered)",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "space",
+          "mfr": null,
+          "model": "ENTIRE RACK EMPTY - reserved/pre-provisioned",
+          "label": "plinth: MICROSOFT AZURE 302.008",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 43
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.008",
+      "building": "0003",
+      "position": "Rack_008",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": "bracket labelled 301.008",
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI14.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "blue; red In-Service caution sticker",
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI13.DSM04-ILA:1",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical+Major red lit",
+          "confidence": "high",
+          "uHeight": 6
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R",
+          "label": "LI12 (inferred from sequence)",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "low",
+          "uHeight": 6
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 25
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.009",
+      "building": "0003",
+      "position": "Rack_009",
+      "face": "A",
+      "customer": "META (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "notes": "Added 2026-07-05 from Top tile after review; sits at top of rack under plinth label"
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-25152-01OLA",
+          "alarms": [],
+          "leds": "blue",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-26152-01OLA",
+          "alarms": [],
+          "leds": "blue",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-23152-01OLA",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 6,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 7,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-24152-01OLA",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major red lit",
+          "confidence": "high",
+          "notes": "Unit order within rack partially uncertain (25/26 pair sits above 23/24 pair)",
+          "uHeight": 10
+        },
+        {
+          "order": 8,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 1
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.009",
+      "building": "0003",
+      "position": "Rack_009",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "notes": "Added 2026-07-05 from Top tile after review; sits at top of rack under plinth label"
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-21152-01OLA",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-22152-01OLA",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 21
+        }
+      ],
+      "rackU": 45
+    }
+  ],
+  "anomalies": [
+    {
+      "rack": "302.003",
+      "unit": "us-ia-strt-19-1",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "H01.03",
+      "unit": "OMA02-22206-01OLA",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "H01.03",
+      "unit": "OME6500 SH-1",
+      "finding": "MINOR alarm LED lit"
+    },
+    {
+      "rack": "H02.03",
+      "unit": "ATLTIAALCIA60742",
+      "finding": "MAJOR + MINOR alarm LEDs lit"
+    },
+    {
+      "rack": "H02.02",
+      "unit": "Ciena 6500 (top)",
+      "finding": "In-service shelf with blank NE/IP/Shelf ID plate - labelling gap"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R stack",
+      "finding": "CRITICAL/MAJOR alarms on multiple shelves; no NE hostname stickers on entire stack"
+    },
+    {
+      "rack": "301.004",
+      "unit": "middle 6500 R",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "301.004",
+      "unit": "TRIMM fuse panel",
+      "finding": "red fuse indicators lit alongside green - possible fuse alarm"
+    },
+    {
+      "rack": "302.005",
+      "unit": "us-ia-strt-26-1",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "301.008",
+      "unit": "LI13.DSM04-ILA:1",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.009",
+      "unit": "DSM02-24152-01OLA",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "302.008",
+      "unit": "-",
+      "finding": "Rack reserved for MICROSOFT AZURE: empty but fuse panel installed and powered"
+    }
+  ],
+  "stats": {
+    "positionsCaptured": 9,
+    "racksExtracted": 18,
+    "unitsExtracted": 75,
+    "unitsHighConfidence": 57,
+    "activeAlarms": 11,
+    "emptyOrReservedRacks": 1,
+    "vendors": {
+      "Ciena": 48,
+      "TRIMM": 11,
+      "Infinera": 6,
+      "ADC": 4,
+      "ADVA": 1,
+      "Huawei": 1,
+      "PECO II": 1,
+      "Cisco": 1,
+      "Uniprise": 1,
+      "Juniper": 1
+    }
+  }
+}
