@@ -424,7 +424,7 @@
     .conf-low { background: #f87171; }
 
     /* ---------- SVG unit styling ---------- */
-    .u-rect { stroke-width: 1; }
+    .u-rect { stroke-width: 2; }
     .u-rect.type-transport { fill: #334155; stroke: #475569; }
     .u-rect.type-power { fill: #3f3320; stroke: #78350f; }
     .u-rect.type-fiber { fill: #1e3a3a; stroke: #0e7490; }
@@ -437,7 +437,7 @@
     .u-rect.selected { stroke: #22d3ee; stroke-width: 2; }
     .u-rect:hover { filter: brightness(1.25); }
 
-    .u-leader { stroke: #334155; stroke-width: 1; fill: none; }
+    .u-leader { stroke: #334155; stroke-width: 2.5; fill: none; }
     .u-leader.selected { stroke: #22d3ee; }
 
     .u-label-group { cursor: pointer; }
@@ -446,19 +446,19 @@
     .u-label-bg.has-alarm { stroke: #7f1d1d; }
     .u-label-text {
       fill: #cbd5e1;
-      font-size: 13px;
+      font-size: 28px;
       font-family: Arial, sans-serif;
     }
     .u-label-text.alarm-tint { fill: #fca5a5; }
     .u-label-sub {
       fill: #64748b;
       font-family: Consolas, "Courier New", monospace;
-      font-size: 10.5px;
+      font-size: 21px;
     }
 
     .u-inline-text {
       fill: #e2e8f0;
-      font-size: 13px;
+      font-size: 26px;
       font-family: Arial, sans-serif;
       pointer-events: none;
     }
@@ -478,7 +478,7 @@
 
     .plinth-label {
       fill: #67e8f9;
-      font-size: 14px;
+      font-size: 30px;
       font-weight: 700;
       font-family: Arial, sans-serif;
     }
@@ -1018,8 +1018,8 @@
       const bodyX = 40; // left margin for rail/frame
       const bodyY = plinthH;
 
-      const labelColW = 240; // label column to the right
-      const labelGutter = 30; // gap between rack body and label column start (leader line runs here)
+      const labelColW = 520; // label column to the right
+      const labelGutter = 44; // gap between rack body and label column start (leader line runs here)
 
       const svgW = bodyX + bodyW + labelGutter + labelColW + 20;
       const svgH = plinthH + bodyH + 20;
@@ -1039,8 +1039,8 @@
 
       // plinth
       parts.push(`
-        <rect x="${bodyX}" y="8" width="${bodyW}" height="28" rx="3" fill="#0f1620" stroke="#263141"></rect>
-        <text class="plinth-label" x="${bodyX + bodyW / 2}" y="27" text-anchor="middle">${escapeXml(rack.id)}</text>
+        <rect x="${bodyX}" y="8" width="${bodyW}" height="48" rx="4" fill="#0f1620" stroke="#263141"></rect>
+        <text class="plinth-label" x="${bodyX + bodyW / 2}" y="42" text-anchor="middle">${escapeXml(rack.id)}</text>
       `);
 
       // outer rack frame
@@ -1083,7 +1083,7 @@
 
         // alarm dot on block
         if (hasAlarm) {
-          parts.push(`<circle class="alarm-dot-svg" cx="${unitInnerX + 10}" cy="${rectY + rectH / 2}" r="5" fill="#ef4444"></circle>`);
+          parts.push(`<circle class="alarm-dot-svg" cx="${unitInnerX + 18}" cy="${rectY + rectH / 2}" r="11" fill="#ef4444"></circle>`);
         }
 
         const mfrModel = `${unit.mfr ? unit.mfr + " " : ""}${unit.model || ""}`.trim();
@@ -1100,7 +1100,7 @@
         if (!isSpace) {
           // leader line: from mid-right edge of block to label row
           const leaderY = rectY + rectH / 2;
-          const labelRowH = 38;
+          const labelRowH = 72;
           const labelY = clampLabelY(i, rack.units, spans, totalU, bodyY, bodyH, labelRowH);
 
           parts.push(`
@@ -1115,10 +1115,10 @@
           parts.push(`
             <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
               <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
-              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" x="8" y="17">${escapeXml(truncate(title, 30))}</text>
-              ${sub ? `<text class="u-label-sub" x="8" y="32">${escapeXml(truncate(sub, 34))}</text>` : ""}
-              <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 10}" cy="${labelRowH / 2}" r="4"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
-              ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 24}" cy="${labelRowH / 2}" r="4" fill="#ef4444"></circle>` : ""}
+              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" x="14" y="30">${escapeXml(truncate(title, 30))}</text>
+              ${sub ? `<text class="u-label-sub" x="14" y="58">${escapeXml(truncate(sub, 34))}</text>` : ""}
+              <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 24}" cy="${labelRowH / 2}" r="9"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
+              ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 48}" cy="${labelRowH / 2}" r="9" fill="#ef4444"></circle>` : ""}
             </g>
           `);
         }
