@@ -270,27 +270,27 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
             <div class="p-6 border-b border-white/5 bg-slate-900/40">
                 <div class="flex items-center gap-2 mb-1">
                     <span style="width:6px;height:6px;border-radius:9999px;background:#a855f7;display:inline-block;"></span>
-                    <span class="text-[9px] font-black text-purple-400 uppercase tracking-widest">Demo Site</span>
+                    <span class="text-[9px] font-semibold text-purple-400 tracking-normal">Demo Site</span>
                 </div>
-                <h4 class="text-lg font-black text-white uppercase tracking-tight leading-tight">${site.code}</h4>
+                <h4 class="text-lg font-semibold text-white tracking-tight leading-tight">${site.code}</h4>
             </div>
             <div class="p-6 space-y-2">
                 <div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/[0.05]">
-                    <span class="text-[9px] font-black text-slate-500 uppercase tracking-widest">Location</span>
-                    <span class="text-[10px] font-black text-slate-200 uppercase tracking-tight">${site.city}, ${site.state}</span>
+                    <span class="text-[9px] font-semibold text-slate-500 tracking-normal">Location</span>
+                    <span class="text-[10px] font-semibold text-slate-200 tracking-tight">${site.city}, ${site.state}</span>
                 </div>
                 <div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/[0.05]">
-                    <span class="text-[9px] font-black text-slate-500 uppercase tracking-widest">Status</span>
-                    <span class="text-[10px] font-black text-emerald-400 uppercase tracking-tight">Surveyed</span>
+                    <span class="text-[9px] font-semibold text-slate-500 tracking-normal">Status</span>
+                    <span class="text-[10px] font-semibold text-emerald-400 tracking-tight">Surveyed</span>
                 </div>
                 <div class="pt-4 space-y-2">
-                  <button id="demo-360-${site.id}" class="w-full py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
+                  <button id="demo-360-${site.id}" class="w-full py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl text-[10px] font-semibold tracking-normal transition-all flex items-center justify-center gap-2">
                       360&deg; Viewer
                   </button>
-                  <button disabled title="Coming soon" class="w-full py-4 bg-white/[0.03] text-slate-600 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 cursor-not-allowed border border-white/[0.05]">
+                  <button disabled title="Coming soon" class="w-full py-4 bg-white/[0.03] text-slate-600 rounded-2xl text-[10px] font-semibold tracking-normal flex items-center justify-center gap-2 cursor-not-allowed border border-white/[0.05]">
                       3D Viewer
                   </button>
-                  <button disabled title="Coming soon" class="w-full py-4 bg-white/[0.03] text-slate-600 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 cursor-not-allowed border border-white/[0.05]">
+                  <button disabled title="Coming soon" class="w-full py-4 bg-white/[0.03] text-slate-600 rounded-2xl text-[10px] font-semibold tracking-normal flex items-center justify-center gap-2 cursor-not-allowed border border-white/[0.05]">
                       Documents Centre
                   </button>
                 </div>
@@ -342,9 +342,9 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
             <div>
                 <div className="flex items-center gap-2 mb-0.5">
                     <span style={{ width: 6, height: 6, borderRadius: 9999, background: '#a855f7', display: 'inline-block' }} />
-                    <span className="text-[9px] font-black text-purple-400 uppercase tracking-widest">Demo Site &middot; 360&deg; Viewer</span>
+                    <span className="text-[9px] font-semibold text-purple-400 tracking-normal">Demo Site &middot; 360&deg; Viewer</span>
                 </div>
-                <h3 className="text-lg font-black text-white uppercase tracking-tight leading-tight">
+                <h3 className="text-lg font-semibold text-white tracking-tight leading-tight">
                     {activeDemoSite.code} &mdash; {activeDemoSite.name}
                 </h3>
             </div>

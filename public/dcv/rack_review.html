@@ -393,9 +393,7 @@
       background: #121a24;
       text-align: left;
       color: #64748b;
-      font-size: 9.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      font-size: 11px;
       padding: 6px 8px;
       border-bottom: 1px solid #263141;
       white-space: nowrap;
@@ -448,19 +446,19 @@
     .u-label-bg.has-alarm { stroke: #7f1d1d; }
     .u-label-text {
       fill: #cbd5e1;
-      font-size: 9.5px;
+      font-size: 13px;
       font-family: Arial, sans-serif;
     }
     .u-label-text.alarm-tint { fill: #fca5a5; }
     .u-label-sub {
       fill: #64748b;
       font-family: Consolas, "Courier New", monospace;
-      font-size: 8px;
+      font-size: 10.5px;
     }
 
     .u-inline-text {
       fill: #e2e8f0;
-      font-size: 10px;
+      font-size: 13px;
       font-family: Arial, sans-serif;
       pointer-events: none;
     }
@@ -480,7 +478,7 @@
 
     .plinth-label {
       fill: #67e8f9;
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 700;
       font-family: Arial, sans-serif;
     }
@@ -1020,8 +1018,8 @@
       const bodyX = 40; // left margin for rail/frame
       const bodyY = plinthH;
 
-      const labelColW = 190; // label column to the right
-      const labelGutter = 26; // gap between rack body and label column start (leader line runs here)
+      const labelColW = 240; // label column to the right
+      const labelGutter = 30; // gap between rack body and label column start (leader line runs here)
 
       const svgW = bodyX + bodyW + labelGutter + labelColW + 20;
       const svgH = plinthH + bodyH + 20;
@@ -1102,7 +1100,7 @@
         if (!isSpace) {
           // leader line: from mid-right edge of block to label row
           const leaderY = rectY + rectH / 2;
-          const labelRowH = 30;
+          const labelRowH = 38;
           const labelY = clampLabelY(i, rack.units, spans, totalU, bodyY, bodyH, labelRowH);
 
           parts.push(`
@@ -1117,8 +1115,8 @@
           parts.push(`
             <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
               <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
-              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" x="8" y="13">${escapeXml(truncate(title, 30))}</text>
-              ${sub ? `<text class="u-label-sub" x="8" y="24">${escapeXml(truncate(sub, 34))}</text>` : ""}
+              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" x="8" y="17">${escapeXml(truncate(title, 30))}</text>
+              ${sub ? `<text class="u-label-sub" x="8" y="32">${escapeXml(truncate(sub, 34))}</text>` : ""}
               <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 10}" cy="${labelRowH / 2}" r="4"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
               ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 24}" cy="${labelRowH / 2}" r="4" fill="#ef4444"></circle>` : ""}
             </g>
@@ -1230,7 +1228,7 @@
         const bbox = rect.getBoundingClientRect();
         const inlineText = svgEl.querySelector(`text[data-inline-for="${order}"]`);
         if (inlineText) {
-          inlineText.style.display = bbox.height >= 14 ? "block" : "none";
+          inlineText.style.display = bbox.height >= 19 ? "block" : "none";
         }
       });
     }
