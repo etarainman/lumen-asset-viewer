@@ -246,7 +246,7 @@
           "model": "PowerWorx fuse panel",
           "label": null,
           "alarms": [],
-          "leds": "Power A/B green, fuse alarm lamps unlit",
+          "leds": "Status green",
           "confidence": "high",
           "uHeight": 2
         },
@@ -257,6 +257,7 @@
           "model": "FMT fiber management tray",
           "label": "RMU 40",
           "alarms": [],
+          "leds": null,
           "confidence": "high",
           "uHeight": 2
         },
@@ -264,16 +265,39 @@
           "order": 3,
           "type": "transport",
           "mfr": "Infinera",
-          "model": "XTM series chassis (alarm panel + multi-slot)",
-          "label": "NE: ATLTIAALIA.ATC1.MS313 (partial read)",
+          "model": "XTM series passive tray shelf (DCM/patch)",
+          "label": null,
           "alarms": [],
-          "leds": "POWER green; Critical/Major/Minor unlit",
+          "leds": "No status LEDs",
           "confidence": "medium",
-          "notes": "Includes OMM/OAM blank slots, 2x amplifier/TPA modules with LC jumpers, fan+power modules POWER green FAULT off",
-          "uHeight": 10
+          "uHeight": 5,
+          "notes": "Split from single XTM entry after review - open tray with patch cords and passive modules, no NE plate visible"
         },
         {
           "order": 4,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM series chassis (alarm panel + multi-slot)",
+          "label": "NE: ATLTIAALIA.ATC1.MS313 (partial read)",
+          "alarms": [],
+          "leds": "Status green; ACO panel",
+          "confidence": "medium",
+          "uHeight": 8,
+          "notes": "Second of two stacked Infinera chassis - alarm/comms module, OAM cards + blanks, side power modules (Power green)"
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 6,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 (OME6500)",
@@ -281,52 +305,56 @@
           "alarms": [
             "MINOR"
           ],
-          "leds": "Minor amber lit; status LEDs green/blue",
-          "confidence": "high",
-          "uHeight": 10
-        },
-        {
-          "order": 5,
-          "type": "fiber",
-          "mfr": "Ciena",
-          "model": "FMT-1 fiber manager",
-          "label": "FMT-1",
-          "alarms": [],
-          "confidence": "high",
-          "uHeight": 2
-        },
-        {
-          "order": 6,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500",
-          "label": "SH-1 / OMA02-22206-01OLA / IP 10.52.9.178",
-          "alarms": [
-            "MAJOR"
-          ],
-          "leds": "Major red lit",
+          "leds": "Minor amber lit",
           "confidence": "high",
           "uHeight": 10
         },
         {
           "order": 7,
-          "type": "transport",
-          "mfr": "Infinera",
-          "model": "chassis section at floor level",
-          "label": "RMU 33 / NE ATLTIAALIA.ATC1.MS313 (partial)",
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
           "alarms": [],
-          "confidence": "medium",
-          "uHeight": 4
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
         },
         {
           "order": 8,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH-1 / OMA02-22206-01OLA / IP 10.62.9.178",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major amber lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 9,
           "type": "space",
           "mfr": null,
           "model": "Free space",
           "label": null,
           "alarms": [],
+          "leds": null,
           "confidence": "high",
-          "uHeight": 5
+          "uHeight": 2
+        },
+        {
+          "order": 10,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "Chassis section at floor level",
+          "label": "RMU 33 / NE ATLTIAALIA.ATC1.MS313 (partial)",
+          "alarms": [],
+          "leds": null,
+          "confidence": "medium",
+          "uHeight": 4,
+          "notes": "Sits on the plinth"
         }
       ],
       "rackU": 45
@@ -1761,14 +1789,14 @@
   "stats": {
     "positionsCaptured": 9,
     "racksExtracted": 18,
-    "unitsExtracted": 77,
+    "unitsExtracted": 78,
     "unitsHighConfidence": 64,
     "activeAlarms": 14,
     "emptyOrReservedRacks": 1,
     "vendors": {
       "Ciena": 49,
       "TRIMM": 11,
-      "Infinera": 6,
+      "Infinera": 7,
       "ADC": 4,
       "ADVA": 1,
       "Huawei": 1,
