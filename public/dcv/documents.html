@@ -1,0 +1,1426 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Documents Centre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f14;
+      color: #e2e8f0;
+    }
+
+    button, input, select { font-family: Arial, sans-serif; }
+
+    .app {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    /* ---------- Header ---------- */
+    .header {
+      background: #0b0f14;
+      border-bottom: 1px solid #1b2430;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-left { display: flex; flex-direction: column; gap: 2px; }
+
+    .header-site {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .site-code {
+      font-size: 18px;
+      font-weight: 800;
+      color: #67e8f9;
+      letter-spacing: 0.5px;
+    }
+
+    .site-place {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .header-subtitle {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .header-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
+    }
+
+    /* ---------- Layout ---------- */
+    .main-split {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 0;
+    }
+
+    .sidebar {
+      background: #0e141d;
+      border-right: 1px solid #1b2430;
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      overflow-y: auto;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+    }
+
+    .nav-btn:hover { background: #121a24; color: #cbd5e1; }
+
+    .nav-btn.active {
+      background: #0c2a3a;
+      border-color: #164e63;
+      color: #67e8f9;
+    }
+
+    .nav-icon {
+      flex: 0 0 18px;
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon svg { width: 18px; height: 18px; }
+
+    .sidebar-footnote {
+      margin-top: auto;
+      font-size: 10.5px;
+      color: #3f4c5e;
+      padding: 10px 12px;
+      line-height: 1.5;
+    }
+
+    .content {
+      overflow-y: auto;
+      padding: 22px 26px 40px;
+      min-width: 0;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #e2e8f0;
+    }
+
+    .section-desc {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 3px;
+      margin-bottom: 16px;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .section-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #cbd5e1;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: #1c2734; }
+
+    .btn-primary {
+      background: #0891b2;
+      border-color: #22d3ee;
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #0a7f9c; }
+
+    .btn:disabled { opacity: 0.5; cursor: default; }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #94a3b8;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* ---------- Preview pane (shared) ---------- */
+    .preview-pane {
+      background: #10161f;
+      border: 1px solid #1b2430;
+      border-radius: 12px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #1b2430;
+      flex-wrap: wrap;
+    }
+
+    .preview-toolbar-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .preview-label {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .tab-btn {
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #94a3b8;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .tab-btn:hover { background: #1c2734; }
+
+    .tab-btn.active {
+      background: #0891b2;
+      border-color: #22d3ee;
+      color: #fff;
+    }
+
+    .preview-body {
+      background: #e8ecf2;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      min-height: 380px;
+    }
+
+    .preview-body svg { max-width: 100%; height: auto; display: block; }
+
+    .preview-caption {
+      padding: 10px 14px;
+      border-top: 1px solid #1b2430;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preview-caption .gen-flash {
+      color: #67e8f9;
+      transition: color 0.4s ease;
+    }
+
+    /* ---------- Floor plan / site plan SVG bits ---------- */
+    .fp-fresh { animation: fpFlash 0.6s ease; }
+    @keyframes fpFlash {
+      0% { opacity: 0.25; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* ---------- 3D card ---------- */
+    .card-3d {
+      background: #10161f;
+      border: 1px solid #1b2430;
+      border-radius: 12px;
+      margin-top: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      max-width: 520px;
+    }
+
+    .card-3d-caption {
+      font-size: 12px;
+      color: #64748b;
+      text-align: center;
+    }
+
+    /* ---------- Modal ---------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal-box {
+      background: #121a24;
+      border: 1px solid #263141;
+      border-radius: 14px;
+      padding: 26px;
+      max-width: 420px;
+      width: 90vw;
+      text-align: center;
+    }
+
+    .modal-icon { font-size: 30px; margin-bottom: 10px; }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #67e8f9;
+      margin-bottom: 10px;
+    }
+
+    .modal-text {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    /* ---------- Photos grid ---------- */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .photo-card {
+      background: #10161f;
+      border: 1px solid #1b2430;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .photo-card:hover { border-color: #334155; }
+
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #05070f;
+    }
+
+    .photo-caption {
+      padding: 8px 10px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .photo-caption b { color: #cbd5e1; }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 15, 0.94);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 110;
+      flex-direction: column;
+    }
+
+    .lightbox-overlay.show { display: flex; }
+
+    .lightbox-img {
+      max-width: 88vw;
+      max-height: 78vh;
+      border-radius: 6px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .lightbox-caption {
+      color: #cbd5e1;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .lightbox-close:hover { color: #fff; }
+
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(18, 26, 36, 0.8);
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      font-size: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-arrow:hover { background: #1c2734; }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+
+    /* ---------- Inventory ---------- */
+    .chips-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+
+    .stat-chip {
+      background: #10161f;
+      border: 1px solid #1b2430;
+      border-radius: 10px;
+      padding: 10px 16px;
+      min-width: 110px;
+    }
+
+    .stat-chip .stat-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #67e8f9;
+    }
+
+    .stat-chip .stat-label {
+      font-size: 10.5px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .filter-select, .filter-input {
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #e2e8f0;
+      font-size: 12.5px;
+      padding: 7px 10px;
+      border-radius: 8px;
+    }
+
+    .filter-select:focus, .filter-input:focus { outline: none; border-color: #22d3ee; }
+
+    .filter-input { min-width: 220px; }
+
+    .table-wrap {
+      background: #10161f;
+      border: 1px solid #1b2430;
+      border-radius: 10px;
+      overflow: auto;
+      max-height: calc(100vh - 340px);
+      min-height: 240px;
+    }
+
+    .inv-table {
+      border-collapse: collapse;
+      font-size: 12px;
+      width: 100%;
+      min-width: 760px;
+    }
+
+    .inv-table thead th {
+      position: sticky;
+      top: 0;
+      background: #121a24;
+      text-align: left;
+      color: #64748b;
+      font-size: 11px;
+      padding: 8px 10px;
+      border-bottom: 1px solid #263141;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .inv-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #131c2e;
+      color: #cbd5e1;
+      white-space: nowrap;
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .inv-table tr:hover td { background: #111c33; }
+
+    .inv-table .alarm-yes { color: #f87171; font-weight: 700; }
+    .inv-table .alarm-no { color: #475569; }
+
+    .table-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; }
+    .conf-high { background: #4ade80; }
+    .conf-medium { background: #fbbf24; }
+    .conf-low { background: #f87171; }
+
+    .empty-note {
+      font-size: 12px;
+      color: #64748b;
+      font-style: italic;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* ---------- Print ---------- */
+    @media print {
+      body * { visibility: hidden; }
+      #printArea, #printArea * { visibility: visible; }
+      #printArea {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%;
+        background: #fff;
+      }
+    }
+
+    #printArea { display: none; }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-site">
+          <span class="site-code" id="siteCode">—</span>
+          <span class="site-place" id="sitePlace">—</span>
+        </div>
+        <div class="header-subtitle">Documents are generated on demand from live survey data</div>
+      </div>
+      <div class="header-badge">
+        <span class="dot"></span>
+        <span>Survey Data Connected</span>
+      </div>
+    </div>
+
+    <div class="main-split">
+      <div class="sidebar" id="sidebar"></div>
+      <div class="content" id="content">
+
+        <!-- ================= Floor Plans ================= -->
+        <div class="section" id="section-floorplans">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Floor Plans</div>
+              <div class="section-desc">Schematic floor plans generated directly from the survey rack inventory — rack positions, line-ups and building outlines are drawn to scale from captured data, not a static drawing.</div>
+            </div>
+          </div>
+          <div class="section-actions" id="fpBuildingTabs"></div>
+
+          <div class="preview-pane">
+            <div class="preview-toolbar">
+              <div class="preview-toolbar-left">
+                <span class="preview-label">Preview</span>
+              </div>
+              <div class="section-actions">
+                <button class="btn" onclick="regenerateFloorPlan()">Regenerate From Survey</button>
+                <button class="btn btn-primary" onclick="generatePdf('floorplan')">Generate Pdf</button>
+              </div>
+            </div>
+            <div class="preview-body" id="floorPlanBody"></div>
+            <div class="preview-caption">
+              <span id="floorPlanCaption">—</span>
+              <span class="gen-flash" id="floorPlanGenTime">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= Site Plan ================= -->
+        <div class="section" id="section-siteplan">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Site Plan</div>
+              <div class="section-desc">Compound-level schematic showing the building footprints, access track and boundary — generated from survey and site metadata. Buildings with completed surveys are highlighted.</div>
+            </div>
+          </div>
+
+          <div class="preview-pane">
+            <div class="preview-toolbar">
+              <div class="preview-toolbar-left">
+                <span class="preview-label">Preview</span>
+              </div>
+              <div class="section-actions">
+                <button class="btn" onclick="regenerateSitePlan()">Regenerate From Survey</button>
+                <button class="btn btn-primary" onclick="generatePdf('siteplan')">Generate Pdf</button>
+              </div>
+            </div>
+            <div class="preview-body" id="sitePlanBody"></div>
+            <div class="preview-caption">
+              <span id="sitePlanCaption">—</span>
+              <span class="gen-flash" id="sitePlanGenTime">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= 3D Site Model ================= -->
+        <div class="section" id="section-3dmodel">
+          <div class="section-header">
+            <div>
+              <div class="section-title">3D Site Model</div>
+              <div class="section-desc">A three-dimensional impression of the site built from the survey point cloud and rack inventory, for spatial review and future BIM integration.</div>
+            </div>
+          </div>
+
+          <div class="card-3d">
+            <div id="isoBody"></div>
+            <div class="card-3d-caption">Auto-generated from survey capture</div>
+            <button class="btn btn-primary" onclick="open3dModal()">Open 3D Viewer</button>
+          </div>
+        </div>
+
+        <!-- ================= Site Photos ================= -->
+        <div class="section" id="section-photos">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Site Photos</div>
+              <div class="section-desc">Every capture position and height from the 360&deg; survey, exported as still frames for quick reference and reporting.</div>
+            </div>
+            <div class="section-actions">
+              <span class="chip" id="photoCountChip">0 Photos</span>
+              <button class="btn btn-primary" id="open360Btn" onclick="openIn360Viewer()">Open 360 Viewer</button>
+            </div>
+          </div>
+          <div class="photos-grid" id="photosGrid"></div>
+        </div>
+
+        <!-- ================= Inventory ================= -->
+        <div class="section" id="section-inventory">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Inventory</div>
+              <div class="section-desc">Full equipment inventory extracted from the survey, exportable on demand as a formatted document or raw data feed.</div>
+            </div>
+            <div class="section-actions">
+              <button class="btn" onclick="exportJson()">Export Json</button>
+              <button class="btn btn-primary" onclick="exportCsv()">Export Csv</button>
+            </div>
+          </div>
+
+          <div class="chips-row" id="invChips"></div>
+
+          <div class="filters-row">
+            <select class="filter-select" id="invBuildingFilter">
+              <option value="">All Buildings</option>
+            </select>
+            <select class="filter-select" id="invRackFilter">
+              <option value="">All Racks</option>
+            </select>
+            <input class="filter-input" id="invSearch" type="text" placeholder="Search mfr, model or label..." />
+          </div>
+
+          <div class="table-wrap">
+            <table class="inv-table">
+              <thead>
+                <tr>
+                  <th>Rack</th>
+                  <th>U-span</th>
+                  <th>Type</th>
+                  <th>Mfr</th>
+                  <th>Model</th>
+                  <th>Label</th>
+                  <th>Alarms</th>
+                  <th>Confidence</th>
+                </tr>
+              </thead>
+              <tbody id="invTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D modal -->
+  <div class="modal-overlay" id="modal3d" onclick="if(event.target===this) close3dModal()">
+    <div class="modal-box">
+      <div class="modal-icon">&#9704;</div>
+      <div class="modal-title">3D Site Model</div>
+      <div class="modal-text">The 3D site model is generated from the survey point cloud and inventory. Interactive viewer arrives with the BIM integration phase.</div>
+      <button class="btn btn-primary" onclick="close3dModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-arrow lightbox-prev" onclick="lightboxStep(-1)">&#8249;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+    <button class="lightbox-arrow lightbox-next" onclick="lightboxStep(1)">&#8250;</button>
+    <div class="lightbox-caption" id="lightboxCaption">—</div>
+  </div>
+
+  <!-- Print target (populated on demand) -->
+  <div id="printArea"></div>
+
+  <script>
+    // ============================================================
+    // Query params / site context
+    // ============================================================
+    const params = new URLSearchParams(window.location.search);
+    const siteCtx = {
+      site: params.get("site") || "DNVRCO",
+      name: params.get("name") || "",
+      city: params.get("city") || "Denver",
+      state: params.get("state") || "CO"
+    };
+
+    document.getElementById("siteCode").textContent = siteCtx.site;
+    document.getElementById("sitePlace").textContent =
+      (siteCtx.name ? siteCtx.name + " — " : "") + `${siteCtx.city}, ${siteCtx.state}`;
+
+    // ============================================================
+    // Sidebar nav
+    // ============================================================
+    const NAV_ICONS = {
+      floorplans: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg>`,
+      siteplan: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3z"></path><path d="M9 4v13M15 7v13"></path></svg>`,
+      "3dmodel": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9z"></path><path d="M12 2v9M12 11l8-4.5M12 11l-8-4.5M12 20v-9"></path></svg>`,
+      photos: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-4 4-3-3-6 6"></path></svg>`,
+      inventory: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>`
+    };
+
+    const NAV_ITEMS = [
+      { id: "floorplans", label: "Floor Plans" },
+      { id: "siteplan", label: "Site Plan" },
+      { id: "3dmodel", label: "3D Site Model" },
+      { id: "photos", label: "Site Photos" },
+      { id: "inventory", label: "Inventory" }
+    ];
+
+    function renderSidebar() {
+      const bar = document.getElementById("sidebar");
+      bar.innerHTML = "";
+      NAV_ITEMS.forEach(item => {
+        const btn = document.createElement("button");
+        btn.className = "nav-btn" + (item.id === "floorplans" ? " active" : "");
+        btn.id = "nav-" + item.id;
+        btn.innerHTML = `<span class="nav-icon">${NAV_ICONS[item.id]}</span><span>${item.label}</span>`;
+        btn.onclick = () => showSection(item.id);
+        bar.appendChild(btn);
+      });
+      const foot = document.createElement("div");
+      foot.className = "sidebar-footnote";
+      foot.textContent = "Documents Centre v1 — content is rendered live from inventory.json for this site.";
+      bar.appendChild(foot);
+    }
+
+    function showSection(id) {
+      NAV_ITEMS.forEach(item => {
+        document.getElementById("section-" + item.id).classList.toggle("active", item.id === id);
+        document.getElementById("nav-" + item.id).classList.toggle("active", item.id === id);
+      });
+    }
+
+    renderSidebar();
+    showSection("floorplans");
+
+    // ============================================================
+    // Load inventory
+    // ============================================================
+    let inventory = null;
+    let racksById = {};
+    let buildingOrder = [];
+
+    fetch("inventory.json")
+      .then(r => r.json())
+      .then(data => {
+        inventory = data;
+        inventory.racks.forEach(r => racksById[r.id] = r);
+        buildingOrder = Object.keys(inventory.meta.buildings || {});
+
+        initFloorPlanTabs();
+        renderFloorPlan(currentFpBuilding());
+        renderSitePlan();
+        renderIsoImpression();
+        initInventory();
+      })
+      .catch(err => {
+        console.error("Failed to load inventory.json", err);
+        document.getElementById("floorPlanBody").innerHTML =
+          `<div class="empty-note">Could not load inventory.json — floor plan cannot be generated.</div>`;
+      });
+
+    // ============================================================
+    // Helpers
+    // ============================================================
+    function escapeXml(str) {
+      if (str == null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function nowStamp() {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
+    function cumulativeSpans(rack) {
+      const totalU = rack.rackU || 45;
+      let cursor = totalU;
+      return rack.units.map(u => {
+        const uH = u.uHeight || 1;
+        const topU = cursor;
+        const bottomU = cursor - uH + 1;
+        cursor -= uH;
+        return { topU, bottomU };
+      });
+    }
+
+    function flashCaption(el) {
+      el.style.color = "#67e8f9";
+      setTimeout(() => { el.style.color = ""; }, 700);
+    }
+
+    // ============================================================
+    // Title block (shared SVG fragment)
+    // ============================================================
+    function titleBlockSvg(x, y, w, h, lines) {
+      const rowH = h / lines.length;
+      let rows = "";
+      lines.forEach((line, i) => {
+        rows += `<text x="${x + 12}" y="${y + rowH * i + rowH * 0.68}" font-family="Arial, sans-serif" font-size="${line.size || 13}" font-weight="${line.weight || 400}" fill="${line.color || '#334155'}">${escapeXml(line.text)}</text>`;
+      });
+      return `
+        <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"></rect>
+        ${rows}
+      `;
+    }
+
+    function northArrowSvg(cx, cy, r) {
+      return `
+        <g>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="#ffffff" stroke="#334155" stroke-width="1.2"></circle>
+          <path d="M ${cx} ${cy - r + 6} L ${cx + 6} ${cy + 6} L ${cx} ${cy + 1} L ${cx - 6} ${cy + 6} Z" fill="#0f172a"></path>
+          <text x="${cx}" y="${cy - r - 6}" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#334155">N</text>
+        </g>
+      `;
+    }
+
+    function scaleBarSvg(x, y, unitPx, label) {
+      const barW = unitPx * 5;
+      return `
+        <g>
+          <line x1="${x}" y1="${y}" x2="${x + barW}" y2="${y}" stroke="#334155" stroke-width="2"></line>
+          ${[0,1,2,3,4,5].map(i => `<line x1="${x + i*unitPx}" y1="${y-4}" x2="${x + i*unitPx}" y2="${y+4}" stroke="#334155" stroke-width="1.5"></line>`).join("")}
+          <text x="${x}" y="${y + 18}" font-family="Arial, sans-serif" font-size="11" fill="#334155">${escapeXml(label)}</text>
+        </g>
+      `;
+    }
+
+    // ============================================================
+    // Floor Plans
+    // ============================================================
+    function currentFpBuilding() {
+      return window._fpBuilding || buildingOrder[0];
+    }
+
+    function initFloorPlanTabs() {
+      window._fpBuilding = buildingOrder[0];
+      const wrap = document.getElementById("fpBuildingTabs");
+      wrap.innerHTML = "";
+      buildingOrder.forEach(b => {
+        const meta = inventory.meta.buildings[b];
+        const btn = document.createElement("button");
+        btn.className = "tab-btn" + (b === window._fpBuilding ? " active" : "");
+        btn.textContent = meta.label || ("Building " + b);
+        btn.onclick = () => {
+          window._fpBuilding = b;
+          Array.from(wrap.children).forEach(c => c.classList.remove("active"));
+          btn.classList.add("active");
+          renderFloorPlan(b);
+        };
+        wrap.appendChild(btn);
+      });
+    }
+
+    // Layout recipe per building: positions arranged as two facing line-ups
+    // along a centre aisle. Racks are placed using the position's faceA/faceB
+    // ids (drawn from inventory.json), not hardcoded equipment data.
+    function floorPlanLayout(building) {
+      const positions = inventory.positions.filter(p => p.building === building);
+      // sort by numeric suffix of position id for a stable left-to-right order
+      positions.sort((a, b) => a.id.localeCompare(b.id));
+      return positions;
+    }
+
+    function buildFloorPlanSvg(building, fresh) {
+      const positions = floorPlanLayout(building);
+      const meta = inventory.meta.buildings[building] || { label: "Building " + building };
+
+      const rackW = 70, rackH = 40, gap = 26;
+      const aisleW = 90;
+      const marginX = 60, marginTop = 110, marginBottom = 90;
+
+      const n = positions.length || 1;
+      const lineupLen = n * rackW + (n - 1) * gap;
+      const hutW = lineupLen + marginX * 2;
+      const hutH = rackH * 2 + aisleW + marginTop + marginBottom;
+
+      let parts = [];
+
+      // hut outline
+      parts.push(`<rect x="20" y="20" width="${hutW}" height="${hutH}" fill="#f4f6f9" stroke="#1e293b" stroke-width="3" rx="4"></rect>`);
+      // door
+      parts.push(`<rect x="${20 + hutW/2 - 22}" y="${20 + hutH - 4}" width="44" height="8" fill="#0891b2"></rect>`);
+      parts.push(`<text x="${20 + hutW/2}" y="${20 + hutH + 22}" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#64748b">Personnel Door</text>`);
+
+      const topRowY = 20 + marginTop;
+      const bottomRowY = topRowY + rackH + aisleW;
+
+      // centre aisle guide
+      parts.push(`<rect x="${20 + marginX - 10}" y="${topRowY + rackH}" width="${lineupLen + 20}" height="${aisleW}" fill="#eef2f6"></rect>`);
+      parts.push(`<text x="${20 + hutW/2}" y="${topRowY + rackH + aisleW/2 + 4}" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">Centre Aisle</text>`);
+
+      // determine line-up labels
+      let topLabel, bottomLabel;
+      if (building === "0003") { topLabel = "Line-up 302"; bottomLabel = "Line-up 301"; }
+      else { topLabel = "Row H01"; bottomLabel = "Row H02"; }
+
+      parts.push(`<text x="${20 + marginX}" y="${topRowY - 10}" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#475569">${escapeXml(topLabel)}</text>`);
+      parts.push(`<text x="${20 + marginX}" y="${bottomRowY + rackH + 20}" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#475569">${escapeXml(bottomLabel)}</text>`);
+
+      positions.forEach((pos, i) => {
+        const x = 20 + marginX + i * (rackW + gap);
+        const rackA = racksById[pos.faceA];
+        const rackB = racksById[pos.faceB];
+        const surveyedA = !!rackA;
+        const surveyedB = !!rackB;
+
+        // top rack (faceA)
+        parts.push(`
+          <rect x="${x}" y="${topRowY}" width="${rackW}" height="${rackH}" rx="3"
+                fill="${surveyedA ? '#a5f3fc' : '#e2e8f0'}" stroke="${surveyedA ? '#0891b2' : '#94a3b8'}" stroke-width="1.5"></rect>
+          <text x="${x + rackW/2}" y="${topRowY + rackH/2 + 4}" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#0f172a">${escapeXml(pos.faceA)}</text>
+        `);
+
+        // bottom rack (faceB)
+        parts.push(`
+          <rect x="${x}" y="${bottomRowY}" width="${rackW}" height="${rackH}" rx="3"
+                fill="${surveyedB ? '#a5f3fc' : '#e2e8f0'}" stroke="${surveyedB ? '#0891b2' : '#94a3b8'}" stroke-width="1.5"></rect>
+          <text x="${x + rackW/2}" y="${bottomRowY + rackH/2 + 4}" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#0f172a">${escapeXml(pos.faceB)}</text>
+        `);
+
+        // position id caption between rows (small, on aisle)
+        parts.push(`<text x="${x + rackW/2}" y="${topRowY + rackH + aisleW/2 + 4}" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#94a3b8">${escapeXml(pos.id.replace('Rack_','P'))}</text>`);
+      });
+
+      // north arrow + scale bar
+      parts.push(northArrowSvg(20 + hutW - 40, 55, 20));
+      parts.push(scaleBarSvg(20 + 20, 20 + hutH + 55, 18, "0    1m    2m    3m    4m    5m"));
+
+      // title block
+      const tbW = 260, tbH = 90;
+      const tbX = 20 + hutW - tbW;
+      const tbY = 20 + hutH + 40;
+      const svgH = tbY + tbH + 20;
+      const svgW = Math.max(20 + hutW + 20, tbX + tbW + 20);
+
+      parts.push(titleBlockSvg(tbX, tbY, tbW, tbH, [
+        { text: siteCtx.site, size: 15, weight: 800, color: "#0891b2" },
+        { text: `Floor Plan — Building ${building}`, size: 12, weight: 700, color: "#1e293b" },
+        { text: `Generated ${nowStamp()}`, size: 10.5, color: "#64748b" }
+      ]));
+
+      return {
+        svg: `<svg viewBox="0 0 ${svgW} ${svgH}" width="${Math.min(svgW, 900)}" xmlns="http://www.w3.org/2000/svg" class="${fresh ? 'fp-fresh' : ''}">${parts.join("")}</svg>`,
+        meta
+      };
+    }
+
+    function renderFloorPlan(building, fresh) {
+      const built = buildFloorPlanSvg(building, fresh);
+      document.getElementById("floorPlanBody").innerHTML = built.svg;
+      document.getElementById("floorPlanCaption").textContent =
+        `Building ${building} — ${positionsCountLabel(building)}`;
+      const genEl = document.getElementById("floorPlanGenTime");
+      genEl.textContent = `Generated ${nowStamp()}`;
+      if (fresh) flashCaption(genEl);
+    }
+
+    function positionsCountLabel(building) {
+      const positions = inventory.positions.filter(p => p.building === building);
+      const surveyed = positions.filter(p => racksById[p.faceA] || racksById[p.faceB]).length;
+      return `${positions.length} rack positions, ${surveyed} surveyed`;
+    }
+
+    function regenerateFloorPlan() {
+      renderFloorPlan(currentFpBuilding(), true);
+    }
+
+    // ============================================================
+    // Site Plan
+    // ============================================================
+    function buildSitePlanSvg(fresh) {
+      const surveyedBuildings = new Set(buildingOrder);
+      const allBuildings = ["0001", "0002", "0003", "0004"];
+
+      const compoundW = 640, compoundH = 420;
+      const pad = 30;
+
+      // plausible footprints: (relX, relY, w, h) within compound
+      const footprints = {
+        "0001": { x: 70, y: 60, w: 130, h: 70, label: "0001" },
+        "0002": { x: 230, y: 60, w: 90, h: 60, label: "0002" },
+        "0003": { x: 380, y: 220, w: 150, h: 90, label: "0003" },
+        "0004": { x: 90, y: 260, w: 100, h: 70, label: "0004" }
+      };
+
+      let parts = [];
+
+      const cx0 = pad, cy0 = pad;
+
+      // compound boundary fence
+      parts.push(`<rect x="${cx0}" y="${cy0}" width="${compoundW}" height="${compoundH}" fill="none" stroke="#475569" stroke-width="3" stroke-dasharray="10 6" rx="6"></rect>`);
+      parts.push(`<text x="${cx0 + 10}" y="${cy0 - 10}" font-family="Arial, sans-serif" font-size="11" fill="#64748b">Compound Boundary Fence</text>`);
+
+      // gate (on bottom edge)
+      const gateX = cx0 + compoundW * 0.5 - 20;
+      const gateY = cy0 + compoundH;
+      parts.push(`<rect x="${gateX}" y="${gateY - 3}" width="40" height="6" fill="#0891b2"></rect>`);
+      parts.push(`<text x="${gateX + 20}" y="${gateY + 20}" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="#64748b">Gate</text>`);
+
+      // access track from gate to buildings
+      parts.push(`<path d="M ${gateX + 20} ${gateY} L ${gateX + 20} ${cy0 + 330} L ${cx0 + 150} ${cy0 + 330} L ${cx0 + 150} ${cy0 + 200}" fill="none" stroke="#cbd5e1" stroke-width="14" stroke-linecap="round"></path>`);
+      parts.push(`<path d="M ${gateX + 20} ${gateY} L ${gateX + 20} ${cy0 + 330} L ${cx0 + 150} ${cy0 + 330} L ${cx0 + 150} ${cy0 + 200}" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6 5"></path>`);
+      parts.push(`<text x="${cx0 + 160}" y="${cy0 + 345}" font-family="Arial, sans-serif" font-size="10.5" fill="#64748b">Access Track</text>`);
+
+      // parking apron near gate
+      parts.push(`<rect x="${gateX - 60}" y="${gateY - 60}" width="70" height="45" fill="#eef2f6" stroke="#94a3b8" stroke-width="1.2"></rect>`);
+      parts.push(`<text x="${gateX - 25}" y="${gateY - 34}" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#64748b">Parking</text>`);
+
+      // buildings
+      Object.keys(footprints).forEach(bId => {
+        const fp = footprints[bId];
+        const surveyed = surveyedBuildings.has(bId);
+        const x = cx0 + fp.x, y = cy0 + fp.y;
+        parts.push(`
+          <rect x="${x}" y="${y}" width="${fp.w}" height="${fp.h}" rx="3"
+                fill="${surveyed ? '#a5f3fc' : '#e2e8f0'}" stroke="${surveyed ? '#0891b2' : '#94a3b8'}" stroke-width="1.8"></rect>
+          <text x="${x + fp.w/2}" y="${y + fp.h/2 - 2}" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#0f172a">Building ${escapeXml(fp.label)}</text>
+          <text x="${x + fp.w/2}" y="${y + fp.h/2 + 14}" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="${surveyed ? '#0e7490' : '#94a3b8'}">${surveyed ? 'Survey Complete' : 'Not Yet Surveyed'}</text>
+        `);
+      });
+
+      // north arrow + scale bar
+      parts.push(northArrowSvg(cx0 + compoundW - 30, cy0 + 30, 20));
+      parts.push(scaleBarSvg(cx0 + 20, cy0 + compoundH + 40, 14, "0    5m    10m    15m    20m    25m"));
+
+      const tbW = 260, tbH = 90;
+      const tbX = cx0 + compoundW - tbW;
+      const tbY = cy0 + compoundH + 60;
+      const svgH = tbY + tbH + 20;
+      const svgW = cx0 + compoundW + 30;
+
+      parts.push(titleBlockSvg(tbX, tbY, tbW, tbH, [
+        { text: siteCtx.site, size: 15, weight: 800, color: "#0891b2" },
+        { text: "Site Plan — Compound Overview", size: 12, weight: 700, color: "#1e293b" },
+        { text: `Generated ${nowStamp()}`, size: 10.5, color: "#64748b" }
+      ]));
+
+      return `<svg viewBox="0 0 ${svgW} ${svgH}" width="${Math.min(svgW, 900)}" xmlns="http://www.w3.org/2000/svg" class="${fresh ? 'fp-fresh' : ''}">${parts.join("")}</svg>`;
+    }
+
+    function renderSitePlan(fresh) {
+      document.getElementById("sitePlanBody").innerHTML = buildSitePlanSvg(fresh);
+      const surveyed = buildingOrder.join(", ");
+      document.getElementById("sitePlanCaption").textContent = `Compound overview — surveyed buildings: ${surveyed}`;
+      const genEl = document.getElementById("sitePlanGenTime");
+      genEl.textContent = `Generated ${nowStamp()}`;
+      if (fresh) flashCaption(genEl);
+    }
+
+    function regenerateSitePlan() {
+      renderSitePlan(true);
+    }
+
+    // ============================================================
+    // Generate Pdf (print-optimised view)
+    // ============================================================
+    function generatePdf(kind) {
+      const printArea = document.getElementById("printArea");
+      let svg, title;
+      if (kind === "floorplan") {
+        svg = buildFloorPlanSvg(currentFpBuilding(), false).svg;
+        title = `${siteCtx.site} — Floor Plan — Building ${currentFpBuilding()}`;
+      } else {
+        svg = buildSitePlanSvg(false);
+        title = `${siteCtx.site} — Site Plan`;
+      }
+      printArea.innerHTML = `
+        <div style="padding:24px; font-family: Arial, sans-serif;">
+          <h2 style="margin:0 0 4px; color:#0f172a;">${escapeXml(title)}</h2>
+          <div style="font-size:12px; color:#475569; margin-bottom:16px;">${escapeXml(siteCtx.city)}, ${escapeXml(siteCtx.state)} &middot; Generated ${nowStamp()}</div>
+          ${svg}
+        </div>
+      `;
+      printArea.style.display = "block";
+      window.print();
+      setTimeout(() => { printArea.style.display = "none"; }, 500);
+    }
+
+    // ============================================================
+    // 3D Site Model (isometric impression + modal)
+    // ============================================================
+    function renderIsoImpression() {
+      const svg = `
+        <svg viewBox="0 0 360 260" width="360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="cutaway">
+              <polygon points="70,150 180,90 290,150 180,210"></polygon>
+            </clipPath>
+          </defs>
+          <!-- ground -->
+          <polygon points="20,170 180,240 340,170 180,100" fill="#0f1a26" stroke="#1c2734" stroke-width="1"></polygon>
+          <!-- hut body (isometric box) -->
+          <polygon points="90,150 180,110 270,150 180,190" fill="#1c2734" stroke="#334155" stroke-width="1.5"></polygon>
+          <polygon points="90,150 90,95 180,55 180,110" fill="#233042" stroke="#334155" stroke-width="1.5"></polygon>
+          <polygon points="270,150 270,95 180,55 180,110" fill="#182130" stroke="#334155" stroke-width="1.5"></polygon>
+          <!-- cutaway front face revealing rack rows -->
+          <polygon points="90,150 90,95 180,110 180,150" fill="#0b0f14" stroke="#334155" stroke-width="1.5"></polygon>
+          <g>
+            <rect x="100" y="112" width="14" height="34" fill="#164e63" stroke="#0891b2" stroke-width="1"></rect>
+            <rect x="118" y="108" width="14" height="38" fill="#164e63" stroke="#0891b2" stroke-width="1"></rect>
+            <rect x="136" y="115" width="14" height="30" fill="#0e7490" stroke="#22d3ee" stroke-width="1"></rect>
+            <rect x="154" y="110" width="14" height="36" fill="#164e63" stroke="#0891b2" stroke-width="1"></rect>
+          </g>
+          <!-- roof -->
+          <polygon points="90,95 180,55 270,95 180,110" fill="#2c3b52" stroke="#475569" stroke-width="1.5"></polygon>
+          <!-- door -->
+          <rect x="172" y="150" width="16" height="30" fill="#0891b2" opacity="0.7"></rect>
+          <text x="180" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#64748b">Isometric impression — not to scale</text>
+        </svg>
+      `;
+      document.getElementById("isoBody").innerHTML = svg;
+    }
+
+    function open3dModal() {
+      document.getElementById("modal3d").classList.add("show");
+    }
+
+    function close3dModal() {
+      document.getElementById("modal3d").classList.remove("show");
+    }
+
+    // ============================================================
+    // Site Photos
+    // ============================================================
+    const HEIGHT_NAMES = { B: "Bottom", M: "Middle", T: "Top" };
+    let photoList = [];
+    let lightboxIndex = 0;
+
+    function buildPhotoList() {
+      // 9 positions x 3 heights = 27 photos, using panoBase from positions
+      const positions = (inventory && inventory.positions) || [];
+      const list = [];
+      positions.forEach((pos, i) => {
+        ["B", "M", "T"].forEach(h => {
+          list.push({
+            positionIndex: i + 1,
+            positionId: pos.id,
+            height: h,
+            file: `${pos.panoBase} - ${h}.jpg`
+          });
+        });
+      });
+      return list;
+    }
+
+    function renderPhotosGrid() {
+      photoList = buildPhotoList();
+      const grid = document.getElementById("photosGrid");
+      grid.innerHTML = "";
+      photoList.forEach((p, idx) => {
+        const card = document.createElement("div");
+        card.className = "photo-card";
+        card.onclick = () => openLightbox(idx);
+        card.innerHTML = `
+          <img src="360 Images/thumbs/${encodeURIComponent(p.file)}" loading="lazy" alt="${escapeXml(p.positionId)} ${p.height}" />
+          <div class="photo-caption">Position ${p.positionIndex} — <b>${HEIGHT_NAMES[p.height]}</b></div>
+        `;
+        grid.appendChild(card);
+      });
+      document.getElementById("photoCountChip").textContent = `${photoList.length} Photos`;
+    }
+
+    function openIn360Viewer() {
+      const qs = window.location.search || "";
+      window.location.href = "rack_review.html" + qs;
+    }
+
+    function openLightbox(idx) {
+      lightboxIndex = idx;
+      showLightboxImage();
+      document.getElementById("lightbox").classList.add("show");
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("show");
+    }
+
+    function showLightboxImage() {
+      const p = photoList[lightboxIndex];
+      if (!p) return;
+      document.getElementById("lightboxImg").src = `360 Images/${encodeURIComponent(p.file)}`;
+      document.getElementById("lightboxCaption").textContent =
+        `Position ${p.positionIndex} — ${HEIGHT_NAMES[p.height]} (${p.positionIndex} of ${Math.ceil(photoList.length/3)}, ${lightboxIndex + 1} of ${photoList.length})`;
+    }
+
+    function lightboxStep(dir) {
+      lightboxIndex = (lightboxIndex + dir + photoList.length) % photoList.length;
+      showLightboxImage();
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (!document.getElementById("lightbox").classList.contains("show")) return;
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowLeft") lightboxStep(-1);
+      else if (e.key === "ArrowRight") lightboxStep(1);
+    });
+
+    // ============================================================
+    // Inventory
+    // ============================================================
+    function initInventory() {
+      renderPhotosGrid();
+      renderInvChips();
+      populateInvFilters();
+      renderInvTable();
+
+      document.getElementById("invBuildingFilter").onchange = () => {
+        populateRackFilter();
+        renderInvTable();
+      };
+      document.getElementById("invRackFilter").onchange = renderInvTable;
+      document.getElementById("invSearch").oninput = renderInvTable;
+    }
+
+    function renderInvChips() {
+      const s = inventory.stats || {};
+      const wrap = document.getElementById("invChips");
+      const items = [
+        { value: s.racksExtracted ?? inventory.racks.length, label: "Racks" },
+        { value: s.unitsExtracted ?? "—", label: "Units" },
+        { value: s.unitsHighConfidence ?? "—", label: "High Confidence" },
+        { value: s.activeAlarms ?? "—", label: "Active Alarms" }
+      ];
+      wrap.innerHTML = items.map(it => `
+        <div class="stat-chip">
+          <div class="stat-value">${escapeXml(String(it.value))}</div>
+          <div class="stat-label">${escapeXml(it.label)}</div>
+        </div>
+      `).join("");
+    }
+
+    function populateInvFilters() {
+      const bSel = document.getElementById("invBuildingFilter");
+      bSel.innerHTML = `<option value="">All Buildings</option>` +
+        buildingOrder.map(b => `<option value="${escapeXml(b)}">${escapeXml(inventory.meta.buildings[b].label || b)}</option>`).join("");
+      populateRackFilter();
+    }
+
+    function populateRackFilter() {
+      const building = document.getElementById("invBuildingFilter").value;
+      const rSel = document.getElementById("invRackFilter");
+      const racks = inventory.racks.filter(r => !building || r.building === building);
+      rSel.innerHTML = `<option value="">All Racks</option>` +
+        racks.map(r => `<option value="${escapeXml(r.id)}">${escapeXml(r.id)}</option>`).join("");
+    }
+
+    function getFilteredRows() {
+      const building = document.getElementById("invBuildingFilter").value;
+      const rackFilter = document.getElementById("invRackFilter").value;
+      const search = (document.getElementById("invSearch").value || "").trim().toLowerCase();
+
+      const rows = [];
+      inventory.racks.forEach(rack => {
+        if (building && rack.building !== building) return;
+        if (rackFilter && rack.id !== rackFilter) return;
+
+        const spans = cumulativeSpans(rack);
+        rack.units.forEach((unit, i) => {
+          if (search) {
+            const hay = `${unit.mfr || ""} ${unit.model || ""} ${unit.label || ""}`.toLowerCase();
+            if (!hay.includes(search)) return;
+          }
+          const { topU, bottomU } = spans[i];
+          rows.push({
+            rack: rack.id,
+            uspan: topU === bottomU ? `${topU}` : `${topU}–${bottomU}`,
+            type: unit.type,
+            mfr: unit.mfr || "",
+            model: unit.model || "",
+            label: unit.label || "",
+            alarms: (unit.alarms && unit.alarms.length) ? unit.alarms.join(", ") : "",
+            confidence: unit.confidence || ""
+          });
+        });
+      });
+      return rows;
+    }
+
+    function renderInvTable() {
+      const rows = getFilteredRows();
+      const tbody = document.getElementById("invTableBody");
+
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="8"><div class="empty-note">No units match the current filters.</div></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rows.map(row => {
+        const hasAlarm = !!row.alarms;
+        const confClass = "conf-" + (row.confidence || "medium");
+        return `
+          <tr>
+            <td>${escapeXml(row.rack)}</td>
+            <td>${escapeXml(row.uspan)}</td>
+            <td>${escapeXml(row.type)}</td>
+            <td>${escapeXml(row.mfr || "—")}</td>
+            <td title="${escapeXml(row.model)}">${escapeXml(row.model || "—")}</td>
+            <td title="${escapeXml(row.label)}">${escapeXml(row.label || "—")}</td>
+            <td class="${hasAlarm ? 'alarm-yes' : 'alarm-no'}">${hasAlarm ? escapeXml(row.alarms) : "—"}</td>
+            <td><span class="table-dot ${confClass}"></span>${escapeXml(row.confidence || "—")}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function downloadBlob(content, filename, mime) {
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function csvEscape(val) {
+      const s = String(val == null ? "" : val);
+      if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+      return s;
+    }
+
+    function exportCsv() {
+      const rows = getFilteredRows();
+      const header = ["Rack", "U-span", "Type", "Mfr", "Model", "Label", "Alarms", "Confidence"];
+      const lines = [header.join(",")];
+      rows.forEach(r => {
+        lines.push([r.rack, r.uspan, r.type, r.mfr, r.model, r.label, r.alarms, r.confidence].map(csvEscape).join(","));
+      });
+      const csv = lines.join("\r\n");
+      downloadBlob(csv, `${siteCtx.site}_inventory.csv`, "text/csv;charset=utf-8;");
+    }
+
+    function exportJson() {
+      downloadBlob(JSON.stringify(inventory, null, 2), `${siteCtx.site}_inventory.json`, "application/json;charset=utf-8;");
+    }
+  </script>
+</body>
+</html>
