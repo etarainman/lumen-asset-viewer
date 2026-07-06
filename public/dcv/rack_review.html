@@ -1076,8 +1076,27 @@
     }
 
     function hotspotPitchDeg(rack, spans, i) {
-      const hc = CAMERA_HEIGHT_M[currentHeight] != null ? CAMERA_HEIGHT_M[currentHeight] : CAMERA_HEIGHT_M.M;
       const hu = unitCentreHeightM(rack, spans, i);
+      const pos = positionsById[currentPositionId];
+      const cal = pos && pos.cal;
+      if (cal) {
+        // Per-face calibration measured from the M-height pano: pitch of the
+        // plinth top (huBottom) and the top rail (huTop). tan(pitch) is
+        // linear in physical height for a fixed camera, so interpolate in
+        // tangent space; B/T captures are the same camera raised/lowered by
+        // cameraStepM, which shifts tan(pitch) by step/d.
+        const fc = cal[currentFace] || cal.A;
+        const rad = Math.PI / 180;
+        const tanB = Math.tan(fc.pitchBottom * rad);
+        const tanT = Math.tan(fc.pitchTop * rad);
+        const t = (hu - cal.huBottom) / (cal.huTop - cal.huBottom);
+        let tanU = tanB + t * (tanT - tanB);
+        const dInv = (tanT - tanB) / (cal.huTop - cal.huBottom); // 1/d
+        if (currentHeight === "B") tanU += cal.cameraStepM * dInv;
+        if (currentHeight === "T") tanU -= cal.cameraStepM * dInv;
+        return Math.atan(tanU) / rad;
+      }
+      const hc = CAMERA_HEIGHT_M[currentHeight] != null ? CAMERA_HEIGHT_M[currentHeight] : CAMERA_HEIGHT_M.M;
       return Math.atan2(hu - hc, CAMERA_DISTANCE_M) * 180 / Math.PI;
     }
 

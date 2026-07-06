@@ -37,7 +37,20 @@
       "faceA": "H01.03",
       "faceB": "H02.03",
       "faceAYaw": 13,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 68,
+          "pitchBottom": -70
+        },
+        "B": {
+          "pitchTop": 66,
+          "pitchBottom": -62
+        }
+      }
     },
     {
       "id": "Rack_002",
@@ -46,7 +59,20 @@
       "faceA": "H01.02",
       "faceB": "H02.02",
       "faceAYaw": -4,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 60,
+          "pitchBottom": -54
+        },
+        "B": {
+          "pitchTop": 64,
+          "pitchBottom": -63
+        }
+      }
     },
     {
       "id": "Rack_003",
@@ -55,7 +81,20 @@
       "faceA": "H01.01",
       "faceB": "H02.01",
       "faceAYaw": -14,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 58,
+          "pitchBottom": -62
+        },
+        "B": {
+          "pitchTop": 60,
+          "pitchBottom": -68
+        }
+      }
     },
     {
       "id": "Rack_004",
@@ -64,7 +103,20 @@
       "faceA": "302.003",
       "faceB": "301.003",
       "faceAYaw": -6,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 62,
+          "pitchBottom": -63
+        },
+        "B": {
+          "pitchTop": 63,
+          "pitchBottom": -73
+        }
+      }
     },
     {
       "id": "Rack_005",
@@ -73,7 +125,20 @@
       "faceA": "302.004",
       "faceB": "301.004",
       "faceAYaw": -7,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 63,
+          "pitchBottom": -71
+        },
+        "B": {
+          "pitchTop": 62,
+          "pitchBottom": -72
+        }
+      }
     },
     {
       "id": "Rack_006",
@@ -83,7 +148,20 @@
       "faceB": "301.005",
       "faceAYaw": -4,
       "faceBYaw": 180,
-      "note": "Source xlsx recorded 303.005/304.005 for M/T heights; plinth and shelf labels prove the camera stayed at the 302.005/301.005 pair. Xlsx entry corrected by image evidence."
+      "note": "Source xlsx recorded 303.005/304.005 for M/T heights; plinth and shelf labels prove the camera stayed at the 302.005/301.005 pair. Xlsx entry corrected by image evidence.",
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 60,
+          "pitchBottom": -74
+        },
+        "B": {
+          "pitchTop": 58,
+          "pitchBottom": -75
+        }
+      }
     },
     {
       "id": "Rack_007",
@@ -93,7 +171,20 @@
       "faceB": "301.007",
       "faceAYaw": -2,
       "faceBYaw": 180,
-      "note": "Source xlsx recorded 300.007/301.007 at B/M; plinth reads 302.007 (face A) and 301.007 (face B) at all heights. Xlsx entry corrected by image evidence."
+      "note": "Source xlsx recorded 300.007/301.007 at B/M; plinth reads 302.007 (face A) and 301.007 (face B) at all heights. Xlsx entry corrected by image evidence.",
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 58,
+          "pitchBottom": -70
+        },
+        "B": {
+          "pitchTop": 60,
+          "pitchBottom": -73
+        }
+      }
     },
     {
       "id": "Rack_008",
@@ -102,7 +193,20 @@
       "faceA": "302.008",
       "faceB": "301.008",
       "faceAYaw": -8,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 57,
+          "pitchBottom": -68
+        },
+        "B": {
+          "pitchTop": 56,
+          "pitchBottom": -73
+        }
+      }
     },
     {
       "id": "Rack_009",
@@ -111,7 +215,20 @@
       "faceA": "302.009",
       "faceB": "301.009",
       "faceAYaw": -8,
-      "faceBYaw": 180
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 58,
+          "pitchBottom": -79
+        },
+        "B": {
+          "pitchTop": 58,
+          "pitchBottom": -79
+        }
+      }
     }
   ],
   "racks": [
@@ -831,15 +948,15 @@
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 R (RLS, covered shelf)",
-          "label": "DSM04-ILA:1 (NE id partial)",
+          "label": "LI05.DSM04-ILA:1",
           "alarms": [
             "CRITICAL",
             "MAJOR"
           ],
           "leds": "Critical + Major red lit",
-          "confidence": "medium",
+          "confidence": "high",
           "uHeight": 9,
-          "notes": "Front cover fitted; NE plate partially legible - likely LI05 or LI06 from row sequence",
+          "notes": "Front cover fitted; NE plate confirmed on calibration re-read",
           "order": 5
         },
         {
@@ -1597,11 +1714,6 @@
     },
     {
       "rack": "301.004",
-      "unit": "middle 6500 R (DSM04-ILA:1)",
-      "finding": "CRITICAL + MAJOR alarm LEDs lit; NE plate only partially legible"
-    },
-    {
-      "rack": "301.004",
       "unit": "TRIMM fuse panel",
       "finding": "Red fuse indicators lit alongside green - possible fuse alarm"
     },
@@ -1650,7 +1762,7 @@
     "positionsCaptured": 9,
     "racksExtracted": 18,
     "unitsExtracted": 77,
-    "unitsHighConfidence": 63,
+    "unitsHighConfidence": 64,
     "activeAlarms": 14,
     "emptyOrReservedRacks": 1,
     "vendors": {
