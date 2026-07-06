@@ -461,6 +461,64 @@
     .u-leader { stroke: #334155; stroke-width: 2.5; fill: none; }
     .u-leader.selected { stroke: #22d3ee; }
 
+    /* ---------- Colour-referencing (per-unit colour) ---------- */
+    .u-label-accent { display: none; }
+    .u-label-accent.on { display: block; }
+
+    .table-swatch {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 7px;
+      vertical-align: middle;
+      flex: 0 0 auto;
+    }
+
+    .table-cell-uspan { display: flex; align-items: center; }
+
+    .pano-hotspot-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 6px 1px rgba(0,0,0,0.55), 0 0 10px 2px var(--hl-glow, rgba(255,255,255,0.4));
+      cursor: pointer;
+      transition: width 0.12s ease, height 0.12s ease, box-shadow 0.12s ease;
+      box-sizing: border-box;
+    }
+
+    .pano-hotspot-dot.selected {
+      width: 22px;
+      height: 22px;
+      border-width: 3px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 0 14px 4px var(--hl-glow, rgba(255,255,255,0.6));
+    }
+
+    .pano-hotspot-wrap { position: relative; }
+
+    .pano-hotspot-tip {
+      position: absolute;
+      bottom: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f1620;
+      border: 1px solid #263141;
+      color: #e2e8f0;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      white-space: nowrap;
+      padding: 4px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .pano-hotspot-wrap:hover .pano-hotspot-tip { opacity: 1; }
+
     .u-label-group { cursor: pointer; }
     .u-label-bg { fill: #121a24; stroke: #263141; stroke-width: 1; }
     .u-label-bg.selected { stroke: #22d3ee; }
@@ -601,6 +659,7 @@
           <span class="dot"></span>
           <span id="anomalyBadgeText">Anomalies (0)</span>
         </button>
+        <button class="tbtn" id="coloursToggleBtn" onclick="toggleColours()">Colours</button>
         <div class="topbar-edit-wrap">
           <button class="tbtn" id="editBtn" onclick="showEditToast(event)">Edit</button>
           <div class="edit-toast" id="editToast">Permissions not enabled for this user</div>
@@ -689,8 +748,18 @@
     let currentFace = "A";
     let selectedUnitOrder = null;
     let tableVisible = false;
+    let coloursOn = localStorage.getItem("rr_colours") === "1";
 
     let viewer = null;
+
+    // Camera capture heights (metres above floor) by height key, and
+    // horizontal camera->rack distance, used for hotspot pitch maths.
+    const CAMERA_HEIGHT_M = { B: 0.85, M: 1.35, T: 1.85 };
+    const CAMERA_DISTANCE_M = 1.1;
+
+    // map of order -> hotspot id currently registered on the viewer, so we
+    // can remove them cleanly on toggle-off / face change / reload.
+    let activeHotspotIds = [];
 
     // splitter ratios (persisted)
     let vRatio = parseFloat(localStorage.getItem("rr_vRatio")) || 0.55; // left pane share
@@ -723,6 +792,47 @@
     }
 
     // ============================================================
+    // Colour-referencing palette
+    // ============================================================
+    // 16 tab20-style hues, mid-saturation/mid-lightness so each reads clearly
+    // against both the light elevation pane (#e8ecf2) and the dark table/pano.
+    const UNIT_COLOUR_PALETTE = [
+      "#e6194b", "#3cb44b", "#4363d8", "#f58231",
+      "#911eb4", "#42d4f4", "#f032e6", "#bfa100",
+      "#008080", "#e6772e", "#9a6324", "#7a7ffa",
+      "#c04851", "#2f9e73", "#d67ab1", "#5c6bc0"
+    ];
+
+    function unitColour(index) {
+      return UNIT_COLOUR_PALETTE[index % UNIT_COLOUR_PALETTE.length];
+    }
+
+    function hexToRgb(hex) {
+      const m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex);
+      if (!m) return { r: 255, g: 255, b: 255 };
+      return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+    }
+
+    function colourWithAlpha(hex, alpha) {
+      const { r, g, b } = hexToRgb(hex);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // Assigns a stable colour to every non-space unit of `rack`, keyed by the
+    // unit's index within the rack's unit list (stable across views/renders).
+    function buildUnitColourMap(rack) {
+      const map = {};
+      if (!rack) return map;
+      let colourIdx = 0;
+      rack.units.forEach(unit => {
+        if (unit.type === "space") return;
+        map[unit.order] = unitColour(colourIdx);
+        colourIdx++;
+      });
+      return map;
+    }
+
+    // ============================================================
     // Load
     // ============================================================
     fetch("inventory.json")
@@ -742,6 +852,8 @@
 
         currentBuilding = inventory.positions[0].building;
         currentPositionId = inventory.positions[0].id;
+
+        document.getElementById("coloursToggleBtn").classList.toggle("active", coloursOn);
 
         renderBreadcrumbs();
         selectPosition(currentPositionId, true);
@@ -910,6 +1022,8 @@
         try { viewer.setYaw(targetYaw, true); } catch (e) {}
       }
     }
+    // Note: renderRackPanel() (called above) already calls refreshHotspots(),
+    // which rebuilds the dot set for the newly selected face's rack.
 
     function getCurrentRack() {
       const pos = positionsById[currentPositionId];
@@ -945,17 +1059,121 @@
       });
 
       viewer.on("error", () => placeholder.classList.add("show"));
+      viewer.on("load", () => { activeHotspotIds = []; refreshHotspots(); });
+    }
+
+    // ============================================================
+    // Colour-referencing: 360 hotspots
+    // ============================================================
+    // Unit centre-height above floor (metres), using the same cumulative
+    // bottom-up U computation the table/elevation use (bottom unit = U1).
+    function unitCentreHeightM(rack, spans, i) {
+      // spans[i].bottomU / topU are already bottom-up U indices (U1 = floor,
+      // rising toward the top of the rack) - same convention the table uses.
+      const { topU, bottomU } = spans[i];
+      const span = topU - bottomU + 1;
+      return 0.12 + ((bottomU - 1) + span / 2) / 45 * 1.95;
+    }
+
+    function hotspotPitchDeg(rack, spans, i) {
+      const hc = CAMERA_HEIGHT_M[currentHeight] != null ? CAMERA_HEIGHT_M[currentHeight] : CAMERA_HEIGHT_M.M;
+      const hu = unitCentreHeightM(rack, spans, i);
+      return Math.atan2(hu - hc, CAMERA_DISTANCE_M) * 180 / Math.PI;
+    }
+
+    function removeAllHotspots() {
+      if (!viewer) { activeHotspotIds = []; return; }
+      activeHotspotIds.forEach(id => {
+        try { viewer.removeHotSpot(id); } catch (e) {}
+      });
+      activeHotspotIds = [];
+    }
+
+    // (Re)builds the hotspot set for the currently selected face's rack.
+    // Safe to call repeatedly - always clears existing hotspots first so we
+    // never double-add.
+    function refreshHotspots() {
+      if (!viewer) return;
+      removeAllHotspots();
+      if (!coloursOn) return;
+
+      const rack = getCurrentRack();
+      if (!rack) return;
+
+      const pos = positionsById[currentPositionId];
+      const yaw = currentFace === "B" ? pos.faceBYaw : pos.faceAYaw;
+      const spans = cumulativeSpans(rack);
+
+      rack.units.forEach((unit, i) => {
+        if (unit.type === "space") return;
+        const colourHex = currentUnitColours[unit.order] || unitColour(0);
+        const pitch = hotspotPitchDeg(rack, spans, i);
+        const id = `hl-${unit.order}`;
+        const label = unit.label || `${unit.mfr || ""} ${unit.model || ""}`.trim() || `Unit ${unit.order}`;
+
+        try {
+          viewer.addHotSpot({
+            id,
+            pitch,
+            yaw,
+            type: "info",
+            cssClass: "pano-hotspot-wrap",
+            createTooltipFunc: (div, args) => {
+              div.classList.add("pano-hotspot-wrap");
+              const dot = document.createElement("div");
+              dot.className = "pano-hotspot-dot" + (args.order === selectedUnitOrder ? " selected" : "");
+              dot.style.background = args.colour;
+              dot.style.setProperty("--hl-glow", colourWithAlpha(args.colour, 0.65));
+              dot.dataset.hotspotOrder = String(args.order);
+
+              const tip = document.createElement("div");
+              tip.className = "pano-hotspot-tip";
+              tip.textContent = args.label;
+
+              div.appendChild(dot);
+              div.appendChild(tip);
+              div.style.cursor = "pointer";
+              div.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectUnit(args.order);
+              });
+            },
+            createTooltipArgs: { order: unit.order, colour: colourHex, label }
+          });
+          activeHotspotIds.push(id);
+        } catch (e) {}
+      });
+    }
+
+    // Updates just the enlarged/shrunk state of existing hotspot dots without
+    // rebuilding them (used on selection change so we don't thrash Pannellum).
+    function updateHotspotSelection(order) {
+      document.querySelectorAll(".pano-hotspot-dot").forEach(el => {
+        const isSel = Number(el.dataset.hotspotOrder) === order;
+        el.classList.toggle("selected", isSel);
+      });
+    }
+
+    function toggleColours() {
+      coloursOn = !coloursOn;
+      localStorage.setItem("rr_colours", coloursOn ? "1" : "0");
+      document.getElementById("coloursToggleBtn").classList.toggle("active", coloursOn);
+      renderRackPanel();
     }
 
     // ============================================================
     // Rack panel orchestration
     // ============================================================
+    let currentUnitColours = {};
+
     function renderRackPanel() {
       const rack = getCurrentRack();
       zoomLevel = 1; // fit by default whenever rack changes
+      currentUnitColours = buildUnitColourMap(rack);
       renderElevation();
       renderTable(rack);
       renderAnomalyBadge();
+      refreshHotspots();
     }
 
     // ============================================================
@@ -1046,12 +1264,16 @@
         const isSpace = unit.type === "space";
         const hasAlarm = unit.alarms && unit.alarms.length > 0;
         const selected = unit.order === selectedUnitOrder;
+        const unitColourHex = !isSpace && coloursOn ? currentUnitColours[unit.order] : null;
+        const rectStyle = unitColourHex
+          ? ` style="fill:${colourWithAlpha(unitColourHex, 0.45)}; stroke:${unitColourHex}; stroke-width:2.5;"`
+          : "";
 
         parts.push(`
           <rect class="u-rect ${typeFill(unit.type)}${selected ? ' selected' : ''}"
                 data-order="${unit.order}"
                 x="${unitInnerX}" y="${rectY}" width="${unitInnerW}" height="${rectH}"
-                onclick="selectUnit(${unit.order})">
+                onclick="selectUnit(${unit.order})"${rectStyle}>
           </rect>
         `);
 
@@ -1114,6 +1336,7 @@
           parts.push(`
             <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
               <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
+              ${unitColourHex ? `<rect class="u-label-accent on" x="0" y="0" width="${3 * k}" height="${labelRowH}" fill="${unitColourHex}"></rect>` : ""}
               <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" style="font-size:${BASE_LABEL_FONT * k}px" x="${14 * k}" y="${30 * k}">${escapeXml(truncate(title, 30))}</text>
               ${subMfrModel ? `<text class="u-label-sub" data-sub-variant="mfrModel" data-order="${unit.order}" style="font-size:${21 * k}px; display:none" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(subMfrModel, 34))}</text>` : ""}
               <text class="u-label-sub" data-sub-variant="uspan" data-order="${unit.order}" style="font-size:${21 * k}px; display:${subMfrModel ? 'none' : 'block'}" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(subUspan, 34))}</text>
@@ -1458,9 +1681,14 @@
         const hasAlarm = unit.alarms && unit.alarms.length > 0;
         const confClass = "conf-" + (unit.confidence || "medium");
         const uspan = topU === bottomU ? `${topU}` : `${bottomU}–${topU}`;
+        const isSpace = unit.type === "space";
+        const unitColourHex = !isSpace && coloursOn ? currentUnitColours[unit.order] : null;
+        const uspanCell = unitColourHex
+          ? `<div class="table-cell-uspan"><span class="table-swatch" style="background:${unitColourHex}"></span>${uspan}</div>`
+          : uspan;
 
         tr.innerHTML = `
-          <td>${uspan}</td>
+          <td>${uspanCell}</td>
           <td>${unit.type}</td>
           <td>${unit.mfr || "—"}</td>
           <td title="${escapeXml(unit.model || "")}">${escapeXml(unit.model || "—")}</td>
@@ -1536,6 +1764,7 @@
       document.querySelectorAll("#unitTableBody tr").forEach(el => {
         el.classList.toggle("selected", Number(el.dataset.order) === order);
       });
+      updateHotspotSelection(order);
     }
 
     // ============================================================
