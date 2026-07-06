@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import L from 'leaflet';
-import { SiteDefinition } from '../types';
+import { Building, BuildingDefinition, SiteDefinition, Status4D } from '../types';
 import { ArrowRight, X } from 'lucide-react';
 import { setOverlaySites, onFocusOverlaySite, OverlaySite } from '../services/overlayBridge';
+import SitePlanner2D from './SitePlanner2D';
 
 interface SiteMapViewProps {
   sites: SiteDefinition[];
@@ -27,6 +28,44 @@ function toTitleCase(input: string): string {
 const DEMO_SITES_VISIBLE_KEY = 'LAV_DEMO_SITES_VISIBLE';
 const OVERLAY_CUSTOMER_KEY = 'LAV_OVERLAY_CUSTOMER';
 const OVERLAY_LABEL_ZOOM_THRESHOLD = 7;
+
+// --- Demo 3D Viewer: synthetic site-plan data ---------------------------
+// Read-only lookalike of the real SITE-level view (SitePlanner2D), fed with
+// in-memory-only data structurally cloned from the real Plateville site's
+// four Type D buildings (see backups/LATEST_STABLE_BACKUP.json). This data
+// never touches App state, workspace localStorage, or Supabase — it lives
+// entirely in this module's scope and is only ever passed as read-only
+// props into SitePlanner2D (appMode="VIEW", all mutation callbacks no-op).
+const DEMO_3D_BUILDING_DEF: BuildingDefinition = {
+  id: 'DEMO_TYPE_D',
+  name: 'Type D (36 x 12)',
+  width: 36,
+  depth: 12,
+  height: 10,
+  color: '#a29260',
+  svgPath: 'M -18,-6 L 18,-6 L 18,6 L -18,6 Z',
+  roofColor: '#e1e1e1'
+};
+
+const DEMO_3D_BUILDING_DEFS: BuildingDefinition[] = [DEMO_3D_BUILDING_DEF];
+
+// 2x2 block matching the real Plateville layout: 0004 top-left, 0002
+// top-right, 0003 bottom-left, 0001 bottom-right.
+const DEMO_3D_BUILDINGS: Building[] = [
+  { id: 'DEMO-B-0004', siteId: 'DEMO', name: 'Building 0004', label: '0004', definitionId: 'DEMO_TYPE_D', x: 39, z: -7, lat: 0, lng: 0, racks: [], equipment: [], suites: [], auditStatus: 0, status: Status4D.RETAIN, ownerId: 'OWN_LUMEN' },
+  { id: 'DEMO-B-0002', siteId: 'DEMO', name: 'Building 0002', label: '0002', definitionId: 'DEMO_TYPE_D', x: 75, z: -7, lat: 0, lng: 0, racks: [], equipment: [], suites: [], auditStatus: 0, status: Status4D.RETAIN, ownerId: 'OWN_LUMEN' },
+  { id: 'DEMO-B-0003', siteId: 'DEMO', name: 'Building 0003', label: '0003', definitionId: 'DEMO_TYPE_D', x: 39, z: 4.5, lat: 0, lng: 0, racks: [], equipment: [], suites: [], auditStatus: 0, status: Status4D.RETAIN, ownerId: 'OWN_LUMEN' },
+  { id: 'DEMO-B-0001', siteId: 'DEMO', name: 'Building 0001', label: '0001', definitionId: 'DEMO_TYPE_D', x: 75, z: 5, lat: 0, lng: 0, racks: [], equipment: [], suites: [], auditStatus: 0, status: Status4D.RETAIN, ownerId: 'OWN_LUMEN' }
+];
+
+// No-op handlers passed into the read-only SitePlanner2D instance — the demo
+// 3D Viewer never mutates anything.
+const demoNoOpSelectBuilding = (_id: string | null) => {};
+const demoNoOpUpdateBuilding = (_id: string, _updates: Partial<Building>) => {};
+const demoNoOpAddBuilding = (_x: number, _y: number, _defId: string) => {};
+const demoNoOpSave = () => {};
+const demoNoOpDeleteBuilding = (_id: string) => {};
+const demoNoOpEnterBuilding = (_id: string) => {};
 
 type OverlayCustomer = 'DEMO' | 'LUMEN';
 
@@ -609,37 +648,50 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
 
       {show3DViewer && activeDemoSite && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 flex flex-col bg-slate-950"
           style={{ zIndex: 10000 }}
-          onClick={() => setShow3DViewer(false)}
         >
-          <div
-            className="w-full max-w-md mx-4 bg-slate-950 rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-6 border-b border-white/5 bg-slate-900/40 flex items-start justify-between gap-4">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <span style={{ width: 6, height: 6, borderRadius: 9999, background: '#a855f7', display: 'inline-block' }} />
-                        <span className="text-[9px] font-semibold text-purple-400 tracking-normal">Demo Site &middot; 3D Viewer</span>
-                    </div>
-                    <h4 className="text-lg font-semibold text-white tracking-tight leading-tight">
-                        {activeDemoSite.code} &mdash; {toTitleCase(activeDemoSite.name)}
-                    </h4>
+          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-900/90 backdrop-blur-md">
+            <div>
+                <div className="flex items-center gap-2 mb-0.5">
+                    <span style={{ width: 6, height: 6, borderRadius: 9999, background: '#a855f7', display: 'inline-block' }} />
+                    <span className="text-[9px] font-semibold text-purple-400 tracking-normal">Demo Site &middot; 3D Viewer</span>
                 </div>
-                <button
-                    onClick={() => setShow3DViewer(false)}
-                    aria-label="Close 3D viewer"
-                    className="p-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white transition-all shrink-0"
-                >
-                    <X size={18} />
-                </button>
+                <h3 className="text-lg font-semibold text-white tracking-tight leading-tight">
+                    {activeDemoSite.code} &mdash; 3D Viewer
+                </h3>
             </div>
-            <div className="p-6 space-y-2">
-                <p className="text-[12px] font-medium text-slate-300 leading-relaxed">
-                    The 3D site model is generated from the survey point cloud and inventory. The interactive viewer arrives with the BIM integration phase.
-                </p>
-            </div>
+            <button
+                onClick={() => setShow3DViewer(false)}
+                aria-label="Close 3D viewer"
+                className="p-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white transition-all"
+            >
+                <X size={20} />
+            </button>
+          </div>
+          <div className="flex-1 min-h-0">
+            <SitePlanner2D
+                buildings={DEMO_3D_BUILDINGS}
+                buildingDefs={DEMO_3D_BUILDING_DEFS}
+                selectedBuildingId={null}
+                appMode="VIEW"
+                colorMode="STATUS"
+                colorCodingEnabled={false}
+                onSelectBuilding={demoNoOpSelectBuilding}
+                onUpdateBuilding={demoNoOpUpdateBuilding}
+                onAddBuilding={demoNoOpAddBuilding}
+                statuses={[]}
+                owners={[]}
+                isDirty={false}
+                isSaving={false}
+                saveSuccess={false}
+                onSave={demoNoOpSave}
+                onDeleteBuilding={demoNoOpDeleteBuilding}
+                onEnterBuilding={demoNoOpEnterBuilding}
+                showLabels={true}
+                visibleStatuses={[Status4D.RETAIN]}
+                alerts={[]}
+            />
           </div>
         </div>
       )}
