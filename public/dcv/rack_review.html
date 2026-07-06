@@ -65,48 +65,35 @@
       white-space: nowrap;
     }
 
-    .crumb-btn:hover { background: #182231; border-color: #334155; }
     .crumb-btn.static { cursor: default; color: #94a3b8; }
     .crumb-btn.static:hover { background: #121a24; border-color: #263141; }
 
-    .crumb-btn.open {
-      background: #0c2a35;
-      border-color: #22d3ee;
-      color: #67e8f9;
-    }
-
-    .crumb-btn .caret { font-size: 8px; color: #64748b; }
-
     .crumb-sep { color: #3f4c5e; font-size: 12px; flex: 0 0 auto; }
 
-    .crumb-popover {
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 0;
+    .crumb-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      display: flex;
+      align-items: center;
       background: #121a24;
       border: 1px solid #263141;
-      border-radius: 10px;
-      padding: 6px;
-      min-width: 210px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.55);
-      display: none;
-      z-index: 60;
-    }
-
-    .crumb-popover.show { display: block; }
-
-    .popover-item {
-      padding: 7px 10px;
-      border-radius: 6px;
+      color: #67e8f9;
       font-size: 12.5px;
-      color: #e2e8f0;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      padding: 6px 26px 6px 11px;
+      border-radius: 999px;
       cursor: pointer;
       white-space: nowrap;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'><path d='M0 0 L8 0 L4 6 Z' fill='%2364748b'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 8px 6px;
     }
 
-    .popover-item:hover { background: #1c2734; }
-    .popover-item.active { background: #0c2a35; color: #67e8f9; }
-    .popover-item .sub { color: #64748b; font-size: 10.5px; margin-left: 4px; }
+    .crumb-select:hover { background-color: #182231; border-color: #334155; }
+    .crumb-select:focus { outline: none; border-color: #22d3ee; }
 
     .topbar-right {
       display: flex;
@@ -324,24 +311,36 @@
       text-align: center;
     }
 
+    .zoom-readout-light { color: #334155; }
+
     .elevation-pane {
       flex: 1 1 auto;
       min-height: 60px;
       overflow: auto;
       position: relative;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.04), transparent 60%),
-        #090d13;
+      background: #e8ecf2;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .elevation-pane.zoomed { align-items: flex-start; justify-content: flex-start; }
+    .elevation-pane.grabbable { cursor: grab; }
+    .elevation-pane.grabbing { cursor: grabbing; }
 
     .elevation-svg-wrap {
       transform-origin: top left;
     }
+
+    /* Zoom control buttons sit over the light elevation pane */
+    .tbtn-light {
+      background: #f4f6f9;
+      border: 1px solid #c7d0dc;
+      color: #334155;
+    }
+
+    .tbtn-light:hover { background: #e2e8f0; }
+    .tbtn-light.active { background: #0891b2; border-color: #22d3ee; color: white; }
 
     .hsplitter {
       flex: 0 0 6px;
@@ -617,10 +616,10 @@
             <span class="rack-sub-tag" id="rackSubTag"></span>
           </div>
           <div class="toolbar-btns">
-            <button class="tbtn" id="zoomOutBtn" onclick="zoomBy(-1)">&minus;</button>
-            <span class="zoom-readout" id="zoomReadout">1.0x</span>
-            <button class="tbtn" id="zoomInBtn" onclick="zoomBy(1)">+</button>
-            <button class="tbtn" id="fitBtn" onclick="resetZoom()" title="Fit to pane">&#10531;</button>
+            <button class="tbtn tbtn-light" id="zoomOutBtn" onclick="zoomBy(-1)">&minus;</button>
+            <span class="zoom-readout zoom-readout-light" id="zoomReadout">1.0x</span>
+            <button class="tbtn tbtn-light" id="zoomInBtn" onclick="zoomBy(1)">+</button>
+            <button class="tbtn tbtn-light" id="fitBtn" onclick="resetZoom()" title="Fit to pane">&#10531;</button>
             <button class="tbtn" id="tableToggleBtn" onclick="toggleTable()">Table</button>
           </div>
         </div>
@@ -681,7 +680,6 @@
     let tableVisible = false;
 
     let viewer = null;
-    let openPopoverKey = null;
 
     // splitter ratios (persisted)
     let vRatio = parseFloat(localStorage.getItem("rr_vRatio")) || 0.55; // left pane share
@@ -737,8 +735,6 @@
         initStatsLine();
         renderBreadcrumbs();
         selectPosition(currentPositionId, true);
-
-        window.addEventListener("resize", () => renderElevation());
       })
       .catch(err => {
         console.error(err);
@@ -754,100 +750,77 @@
     // ============================================================
     // Breadcrumbs
     // ============================================================
-    function closeAllPopovers() {
-      openPopoverKey = null;
-      document.querySelectorAll(".crumb-popover").forEach(p => p.classList.remove("show"));
-      document.querySelectorAll(".crumb-btn").forEach(b => b.classList.remove("open"));
-    }
-
-    function togglePopover(key, evt) {
-      evt.stopPropagation();
-      const isOpen = openPopoverKey === key;
-      closeAllPopovers();
-      if (!isOpen) {
-        openPopoverKey = key;
-        const pop = document.getElementById("pop-" + key);
-        const btn = document.getElementById("btn-" + key);
-        if (pop) pop.classList.add("show");
-        if (btn) btn.classList.add("open");
-      }
-    }
-
-    document.addEventListener("click", () => closeAllPopovers());
-
     function renderBreadcrumbs() {
       const bar = document.getElementById("breadcrumbs");
       bar.innerHTML = "";
 
-      const pos = positionsById[currentPositionId];
-      const bldgMeta = inventory.meta.buildings[currentBuilding];
+      // --- static site crumb ---
+      const siteWrap = document.createElement("div");
+      siteWrap.className = "crumb";
+      const siteBtn = document.createElement("button");
+      siteBtn.className = "crumb-btn static";
+      siteBtn.innerHTML = `<span>DNVRCO — Demo</span>`;
+      siteWrap.appendChild(siteBtn);
+      bar.appendChild(siteWrap);
 
-      const crumbs = [
-        { key: "site", label: "DNVRCO — Demo", popover: null, static: true },
-        { key: "building", label: `Building ${currentBuilding}`, popover: renderBuildingPopover },
-        { key: "bay", label: `${pos.id.replace("Rack_", "Position ")} — ${pos.faceA} / ${pos.faceB}`, popover: renderBayPopover }
-      ];
+      addSep(bar);
 
-      crumbs.forEach((c, idx) => {
-        if (idx > 0) {
-          const sep = document.createElement("span");
-          sep.className = "crumb-sep";
-          sep.textContent = "›";
-          bar.appendChild(sep);
-        }
-
-        const wrap = document.createElement("div");
-        wrap.className = "crumb";
-
-        const btn = document.createElement("button");
-        btn.className = "crumb-btn" + (c.static ? " static" : "");
-        btn.id = "btn-" + c.key;
-        btn.innerHTML = c.static
-          ? `<span>${c.label}</span>`
-          : `<span>${c.label}</span><span class="caret">&#9662;</span>`;
-        if (!c.static) btn.onclick = (e) => togglePopover(c.key, e);
-        wrap.appendChild(btn);
-
-        if (c.popover) {
-          const pop = document.createElement("div");
-          pop.className = "crumb-popover";
-          pop.id = "pop-" + c.key;
-          c.popover(pop);
-          wrap.appendChild(pop);
-        }
-
-        bar.appendChild(wrap);
-      });
-    }
-
-    function renderBuildingPopover(pop) {
+      // --- building select ---
+      const buildingWrap = document.createElement("div");
+      buildingWrap.className = "crumb";
+      const buildingSelect = document.createElement("select");
+      buildingSelect.className = "crumb-select";
+      buildingSelect.id = "buildingSelect";
       buildingOrder.forEach(b => {
         const meta = inventory.meta.buildings[b];
-        const item = document.createElement("div");
-        item.className = "popover-item" + (b === currentBuilding ? " active" : "");
-        item.innerHTML = `${meta.label}`;
-        item.onclick = () => {
-          if (b !== currentBuilding) {
-            currentBuilding = b;
-            const firstPos = positionsByBuilding[b][0];
-            selectPosition(firstPos.id, true);
-          }
-          closeAllPopovers();
-        };
-        pop.appendChild(item);
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = meta.label;
+        if (b === currentBuilding) opt.selected = true;
+        buildingSelect.appendChild(opt);
       });
+      buildingSelect.onchange = () => {
+        const b = buildingSelect.value;
+        if (b !== currentBuilding) {
+          currentBuilding = b;
+          const firstPos = positionsByBuilding[b][0];
+          selectPosition(firstPos.id, true);
+        }
+      };
+      buildingWrap.appendChild(buildingSelect);
+      bar.appendChild(buildingWrap);
+
+      addSep(bar);
+
+      // --- position select (options scoped to current building) ---
+      const posWrap = document.createElement("div");
+      posWrap.className = "crumb";
+      const posSelect = document.createElement("select");
+      posSelect.className = "crumb-select";
+      posSelect.id = "positionSelect";
+      populatePositionSelect(posSelect);
+      posSelect.onchange = () => {
+        selectPosition(posSelect.value, false);
+      };
+      posWrap.appendChild(posSelect);
+      bar.appendChild(posWrap);
     }
 
-    function renderBayPopover(pop) {
+    function addSep(bar) {
+      const sep = document.createElement("span");
+      sep.className = "crumb-sep";
+      sep.textContent = "›";
+      bar.appendChild(sep);
+    }
+
+    function populatePositionSelect(select) {
+      select.innerHTML = "";
       positionsByBuilding[currentBuilding].forEach(p => {
-        const item = document.createElement("div");
-        item.className = "popover-item" + (p.id === currentPositionId ? " active" : "");
-        item.innerHTML = `${p.id.replace("Rack_", "Position ")}<span class="sub">${p.faceA} / ${p.faceB}</span>`;
-        item.onclick = () => {
-          selectPosition(p.id, false);
-          closeAllPopovers();
-        };
-        pop.appendChild(item);
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        opt.textContent = `${p.id.replace("Rack_", "Position ")} — ${p.faceA} / ${p.faceB}`;
+        if (p.id === currentPositionId) opt.selected = true;
+        select.appendChild(opt);
       });
     }
 
@@ -977,7 +950,7 @@
     function renderRackPanel() {
       const rack = getCurrentRack();
       renderToolbarLabel(rack);
-      resetZoom(); // fit by default whenever rack changes
+      zoomLevel = 1; // fit by default whenever rack changes
       renderElevation();
       renderTable(rack);
       renderAnomalyBadge();
@@ -1008,18 +981,25 @@
       });
     }
 
-    function buildElevationSvg(rack) {
+    // Minimum on-screen label text size, in px, and the SVG-unit base label font size
+    // used to derive the counter-scale factor k in fitAndZoom().
+    const MIN_LABEL_PX = 12;
+    const BASE_LABEL_FONT = 28;
+
+    function buildElevationSvg(rack, k) {
+      k = k || 1;
       const totalU = rack.rackU || 45;
 
       // Internal drawing coordinate system: rack body width = RACK_WIDTH_MM, height = RACK_HEIGHT_MM
+      // Rack body geometry is FIXED regardless of k - only label-related geometry scales.
       const plinthH = 60; // px in svg-unit space, small plinth label bar at top
       const bodyW = RACK_WIDTH_MM;
       const bodyH = RACK_HEIGHT_MM;
       const bodyX = 40; // left margin for rail/frame
       const bodyY = plinthH;
 
-      const labelColW = 520; // label column to the right
-      const labelGutter = 44; // gap between rack body and label column start (leader line runs here)
+      const labelColW = 520 * k; // label column to the right
+      const labelGutter = 44 * k; // gap between rack body and label column start (leader line runs here)
 
       const svgW = bodyX + bodyW + labelGutter + labelColW + 20;
       const svgH = plinthH + bodyH + 20;
@@ -1030,17 +1010,17 @@
         <defs>
           <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
             <rect width="6" height="6" fill="#0d131c"></rect>
-            <line x1="0" y1="0" x2="0" y2="6" stroke="#1b2430" stroke-width="2"></line>
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#64748b" stroke-width="2"></line>
           </pattern>
         </defs>
       `;
 
       let parts = [];
 
-      // plinth
+      // plinth (bar geometry fixed; font counter-scales with k)
       parts.push(`
         <rect x="${bodyX}" y="8" width="${bodyW}" height="48" rx="4" fill="#0f1620" stroke="#263141"></rect>
-        <text class="plinth-label" x="${bodyX + bodyW / 2}" y="42" text-anchor="middle">${escapeXml(rack.id)}</text>
+        <text class="plinth-label" style="font-size:${30 * k}px" x="${bodyX + bodyW / 2}" y="42" text-anchor="middle">${escapeXml(rack.id)}</text>
       `);
 
       // outer rack frame
@@ -1083,7 +1063,7 @@
 
         // alarm dot on block
         if (hasAlarm) {
-          parts.push(`<circle class="alarm-dot-svg" cx="${unitInnerX + 18}" cy="${rectY + rectH / 2}" r="11" fill="#ef4444"></circle>`);
+          parts.push(`<circle class="alarm-dot-svg" cx="${unitInnerX + 18}" cy="${rectY + rectH / 2}" r="${11 * k}" fill="#ef4444"></circle>`);
         }
 
         const mfrModel = `${unit.mfr ? unit.mfr + " " : ""}${unit.model || ""}`.trim();
@@ -1093,18 +1073,18 @@
         if (!isSpace) {
           parts.push(`
             <text class="u-inline-text" data-inline-for="${unit.order}" x="${unitInnerX + unitInnerW / 2}" y="${rectY + rectH / 2 + 3.5}"
-                  text-anchor="middle" style="display:none">${escapeXml(truncate(unit.label || mfrModel, 26))}</text>
+                  text-anchor="middle" style="display:none; font-size:${26 * k}px">${escapeXml(truncate(unit.label || mfrModel, 26))}</text>
           `);
         }
 
         if (!isSpace) {
           // leader line: from mid-right edge of block to label row
           const leaderY = rectY + rectH / 2;
-          const labelRowH = 72;
+          const labelRowH = 72 * k;
           const labelY = clampLabelY(i, rack.units, spans, totalU, bodyY, bodyH, labelRowH);
 
           parts.push(`
-            <path class="u-leader${selected ? ' selected' : ''}" data-order="${unit.order}"
+            <path class="u-leader${selected ? ' selected' : ''}" data-order="${unit.order}" style="stroke-width:${2.5 * k}"
                   d="M ${unitInnerX + unitInnerW} ${leaderY} L ${leaderStartX + 10} ${leaderY} L ${labelX} ${labelY}"></path>
           `);
 
@@ -1115,10 +1095,10 @@
           parts.push(`
             <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
               <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
-              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" x="14" y="30">${escapeXml(truncate(title, 30))}</text>
-              ${sub ? `<text class="u-label-sub" x="14" y="58">${escapeXml(truncate(sub, 34))}</text>` : ""}
-              <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 24}" cy="${labelRowH / 2}" r="9"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
-              ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 48}" cy="${labelRowH / 2}" r="9" fill="#ef4444"></circle>` : ""}
+              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" style="font-size:${BASE_LABEL_FONT * k}px" x="${14 * k}" y="${30 * k}">${escapeXml(truncate(title, 30))}</text>
+              ${sub ? `<text class="u-label-sub" style="font-size:${21 * k}px" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(sub, 34))}</text>` : ""}
+              <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 24 * k}" cy="${labelRowH / 2}" r="${9 * k}"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
+              ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 48 * k}" cy="${labelRowH / 2}" r="${9 * k}" fill="#ef4444"></circle>` : ""}
             </g>
           `);
         }
@@ -1166,29 +1146,51 @@
         .replace(/"/g, "&quot;");
     }
 
+    // current label counter-scale factor (recomputed each render)
+    let currentK = 1;
+
+    function computeFitScale(svgW, svgH) {
+      const pane = document.getElementById("elevationPane");
+      const paneW = pane.clientWidth - 16;
+      const paneH = pane.clientHeight - 16;
+      return Math.min(paneW / svgW, paneH / svgH, 1);
+    }
+
     function renderElevation() {
       const rack = getCurrentRack();
       const wrap = document.getElementById("elevationSvgWrap");
-      const pane = document.getElementById("elevationPane");
 
       if (!rack) {
         wrap.innerHTML = "";
         return;
       }
 
-      const built = buildElevationSvg(rack);
+      // Pass 1: build at k=1 to get baseline geometry / fitScale.
+      let built = buildElevationSvg(rack, 1);
       wrap.innerHTML = built.svg;
+      let fitScale = computeFitScale(built.svgW, built.svgH);
+      let s = fitScale * zoomLevel;
+      let k = Math.max(1, MIN_LABEL_PX / (BASE_LABEL_FONT * s));
 
-      fitAndZoom(built);
+      // Pass 2 (only if labels need to grow): rebuild with k-scaled label geometry,
+      // then recompute fitScale once against the new (wider) viewBox. One extra
+      // iteration max - guards against feedback loops.
+      if (k > 1) {
+        built = buildElevationSvg(rack, k);
+        wrap.innerHTML = built.svg;
+        fitScale = computeFitScale(built.svgW, built.svgH);
+      }
+
+      currentK = k;
+      fitAndZoom(built, fitScale);
       updateInlineLabelVisibility();
 
       // restore selection highlight (rebuilt DOM)
       highlightUnit(selectedUnitOrder);
     }
 
-    function fitAndZoom(built) {
+    function fitAndZoom(built, precomputedFitScale) {
       const pane = document.getElementById("elevationPane");
-      const wrap = document.getElementById("elevationSvgWrap");
       if (!built) {
         const svgEl = document.getElementById("elevationSvg");
         if (!svgEl) return;
@@ -1196,10 +1198,7 @@
         built = { svgW: vb.width, svgH: vb.height };
       }
 
-      const paneW = pane.clientWidth - 16;
-      const paneH = pane.clientHeight - 16;
-
-      const fitScale = Math.min(paneW / built.svgW, paneH / built.svgH, 1);
+      const fitScale = precomputedFitScale != null ? precomputedFitScale : computeFitScale(built.svgW, built.svgH);
       const appliedScale = fitScale * zoomLevel;
 
       const svgEl = document.getElementById("elevationSvg");
@@ -1209,11 +1208,25 @@
       }
 
       pane.classList.toggle("zoomed", zoomLevel > 1);
+      pane.classList.toggle("grabbable", zoomLevel > 1);
 
       document.getElementById("zoomReadout").textContent = zoomLevel.toFixed(1) + "x";
 
       // after layout, recompute which labels get inline text based on rendered px height
       requestAnimationFrame(updateInlineLabelVisibility);
+    }
+
+    // Re-render the elevation whenever the effective on-screen scale changes
+    // (resize, splitter drag, zoom change) so label counter-scaling (k) stays correct.
+    // Debounced to one requestAnimationFrame so rapid-fire events (resize, drag)
+    // don't trigger a rebuild per event.
+    let renderElevationRafId = null;
+    function scheduleRenderElevation() {
+      if (renderElevationRafId != null) return;
+      renderElevationRafId = requestAnimationFrame(() => {
+        renderElevationRafId = null;
+        renderElevation();
+      });
     }
 
     function updateInlineLabelVisibility() {
@@ -1235,24 +1248,98 @@
 
     function zoomBy(delta) {
       zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomLevel + delta));
-      fitAndZoom();
+      renderElevation();
     }
 
     function resetZoom() {
       zoomLevel = 1;
-      fitAndZoom();
+      renderElevation();
     }
 
-    // ctrl+wheel zoom
+    // Zoom to a specific level, optionally keeping a given pane-relative point
+    // (clientX/clientY) fixed on screen (zoom-toward-cursor).
+    function zoomTo(newLevel, clientX, clientY) {
+      const pane = document.getElementById("elevationPane");
+      newLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, newLevel));
+      if (newLevel === zoomLevel) return;
+
+      let anchor = null;
+      if (clientX != null && clientY != null) {
+        const rect = pane.getBoundingClientRect();
+        const px = clientX - rect.left;
+        const py = clientY - rect.top;
+        // content-space coordinates (relative to scrolled content) under the cursor
+        const contentX = pane.scrollLeft + px;
+        const contentY = pane.scrollTop + py;
+        anchor = { px, py, contentX, contentY };
+      }
+
+      const ratio = newLevel / zoomLevel;
+      zoomLevel = newLevel;
+      renderElevation();
+
+      if (anchor) {
+        pane.scrollLeft = anchor.contentX * ratio - anchor.px;
+        pane.scrollTop = anchor.contentY * ratio - anchor.py;
+      }
+    }
+
+    // plain mouse-wheel zoom over the elevation pane (no Ctrl required)
     document.addEventListener("wheel", (e) => {
       const pane = document.getElementById("elevationPane");
       if (!pane.contains(e.target)) return;
-      if (!e.ctrlKey) return;
       e.preventDefault();
       const delta = e.deltaY < 0 ? 0.5 : -0.5;
-      zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomLevel + delta));
-      fitAndZoom();
+      zoomTo(zoomLevel + delta, e.clientX, e.clientY);
     }, { passive: false });
+
+    // drag-to-pan when zoomed in (>1x); clicks on units still work (only pan after >4px movement)
+    (function setupElevationPan() {
+      const pane = document.getElementById("elevationPane");
+      let dragging = false;
+      let moved = false;
+      let startX = 0, startY = 0;
+      let startScrollLeft = 0, startScrollTop = 0;
+
+      pane.addEventListener("mousedown", (e) => {
+        if (zoomLevel <= 1) return;
+        // ignore non-primary buttons
+        if (e.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        startScrollLeft = pane.scrollLeft;
+        startScrollTop = pane.scrollTop;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (!moved && Math.hypot(dx, dy) > 4) {
+          moved = true;
+          pane.classList.add("grabbing");
+        }
+        if (moved) {
+          pane.scrollLeft = startScrollLeft - dx;
+          pane.scrollTop = startScrollTop - dy;
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        pane.classList.remove("grabbing");
+        // if it turned into a drag, swallow the upcoming click so units aren't
+        // accidentally selected at the end of a pan gesture
+        if (moved) {
+          const swallow = (ev) => { ev.stopPropagation(); pane.removeEventListener("click", swallow, true); };
+          pane.addEventListener("click", swallow, true);
+        }
+        moved = false;
+      });
+    })();
 
     // ============================================================
     // Table
@@ -1301,7 +1388,7 @@
       btn.classList.toggle("active", tableVisible);
 
       applyHSplit();
-      requestAnimationFrame(() => { fitAndZoom(); });
+      scheduleRenderElevation();
     }
 
     // ============================================================
@@ -1405,7 +1492,16 @@
       const paneLeft = document.getElementById("paneLeft");
       const total = document.getElementById("mainSplit").clientWidth - 6; // minus splitter width
       paneLeft.style.flex = `0 0 ${total * vRatio}px`;
+      schedulePanoResize();
     }
+
+    // Pannellum only watches window resize, not container resizes — without
+    // this the WebGL canvas gets CSS-stretched when the splitter moves.
+    function schedulePanoResize() {
+      if (viewer && viewer.resize) viewer.resize();
+    }
+    new ResizeObserver(() => schedulePanoResize())
+      .observe(document.getElementById("paneLeft"));
 
     function applyHSplit() {
       const paneRight = document.getElementById("paneRight");
@@ -1443,7 +1539,7 @@
         ratio = Math.min(0.85, Math.max(0.15, ratio));
         vRatio = ratio;
         applyVSplit();
-        fitAndZoom();
+        scheduleRenderElevation();
       });
 
       window.addEventListener("mouseup", () => {
@@ -1475,7 +1571,7 @@
         ratio = Math.min(0.85, Math.max(0.15, ratio));
         hRatio = ratio;
         applyHSplit();
-        fitAndZoom();
+        scheduleRenderElevation();
       });
 
       window.addEventListener("mouseup", () => {
@@ -1490,7 +1586,7 @@
     window.addEventListener("resize", () => {
       applyVSplit();
       applyHSplit();
-      fitAndZoom();
+      scheduleRenderElevation();
     });
 
     // initial split application (after first paint)
