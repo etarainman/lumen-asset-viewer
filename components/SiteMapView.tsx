@@ -253,52 +253,45 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
             container.style.background = 'rgba(15, 23, 42, 0.9)';
             container.style.border = '1px solid rgba(255,255,255,0.1)';
             container.style.borderRadius = '10px';
-            container.style.padding = '3px';
+            container.style.padding = '4px 8px';
             container.style.display = 'flex';
-            container.style.gap = '2px';
+            container.style.alignItems = 'center';
+            container.style.gap = '6px';
             container.style.userSelect = 'none';
             container.style.backdropFilter = 'blur(6px)';
 
-            const makeOptionButton = (value: OverlayCustomer, label: string) => {
-                const button = L.DomUtil.create('button', '', container);
-                button.type = 'button';
-                button.style.padding = '7px 12px';
-                button.style.borderRadius = '8px';
-                button.style.border = 'none';
-                button.style.fontSize = '10px';
-                button.style.fontWeight = '900';
-                button.style.letterSpacing = 'normal';
-                button.style.whiteSpace = 'nowrap';
-                button.style.transition = 'all 0.15s ease';
-                button.dataset.value = value;
-                button.textContent = label;
-                return button;
-            };
+            const label = L.DomUtil.create('span', '', container);
+            label.textContent = 'Customer';
+            label.style.fontSize = '10px';
+            label.style.color = '#94a3b8';
+            label.style.whiteSpace = 'nowrap';
 
-            const demoBtn = makeOptionButton('DEMO', 'Demo Customer');
-            const lumenBtn = makeOptionButton('LUMEN', 'Lumen');
-            const buttons = [demoBtn, lumenBtn];
+            const select = L.DomUtil.create('select', '', container) as HTMLSelectElement;
+            select.style.background = '#1e293b';
+            select.style.color = '#ffffff';
+            select.style.border = '1px solid rgba(255,255,255,0.15)';
+            select.style.borderRadius = '8px';
+            select.style.padding = '6px 8px';
+            select.style.fontSize = '11px';
+            select.style.fontWeight = '700';
+            select.style.outline = 'none';
+            select.style.cursor = 'pointer';
 
-            const renderActive = () => {
-                buttons.forEach(btn => {
-                    const active = btn.dataset.value === overlayCustomerRef.current;
-                    btn.style.background = active ? '#a855f7' : 'transparent';
-                    btn.style.color = active ? '#ffffff' : '#e2e8f0';
-                    btn.style.boxShadow = active ? '0 0 8px rgba(168,85,247,0.5)' : 'none';
-                });
-            };
-            renderActive();
+            const optionDefs: Array<[OverlayCustomer, string]> = [['DEMO', 'Demo Customer'], ['LUMEN', 'Lumen']];
+            optionDefs.forEach(([value, text]) => {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = text;
+                select.appendChild(option);
+            });
+            select.value = overlayCustomerRef.current;
 
             L.DomEvent.disableClickPropagation(container);
-            buttons.forEach(btn => {
-                L.DomEvent.on(btn, 'click', (e) => {
-                    L.DomEvent.stop(e);
-                    const value = btn.dataset.value as OverlayCustomer;
-                    if (value === overlayCustomerRef.current) return;
-                    setOverlayCustomer(value);
-                    overlayCustomerRef.current = value;
-                    renderActive();
-                });
+            L.DomEvent.on(select, 'change', () => {
+                const value = select.value as OverlayCustomer;
+                if (value === overlayCustomerRef.current) return;
+                setOverlayCustomer(value);
+                overlayCustomerRef.current = value;
             });
 
             return container;
