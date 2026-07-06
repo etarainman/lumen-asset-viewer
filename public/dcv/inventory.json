@@ -596,7 +596,7 @@
           "label": "LI02.DSM04-ILA:1",
           "alarms": [],
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 3,
@@ -607,7 +607,7 @@
           "alarms": [],
           "leds": "status blue",
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 4,
@@ -628,7 +628,7 @@
           "label": null,
           "alarms": [],
           "confidence": "high",
-          "uHeight": 21
+          "uHeight": 13
         }
       ],
       "rackU": 45
@@ -644,63 +644,78 @@
           "order": 1,
           "type": "power",
           "mfr": "TRIMM Inc.",
-          "model": "-/+24-48VDC fuse panel",
+          "model": "-/+24-48VDC GMT fuse panel",
           "label": null,
           "alarms": [],
-          "leds": "A/B green",
+          "leds": "FUSE PWR A/B green",
           "confidence": "high",
           "uHeight": 2
         },
         {
           "order": 2,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500 R (open shelf: CTM 41/42 modules, fillers, power cards)",
-          "label": "unlabelled",
-          "alarms": [
-            "CRITICAL"
-          ],
-          "leds": "Critical/Major red lit; CTM blue",
-          "confidence": "medium",
-          "uHeight": 6
-        },
-        {
-          "order": 3,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500 R (open shelf)",
-          "label": "unlabelled",
-          "alarms": [
-            "CRITICAL",
-            "MAJOR"
-          ],
-          "leds": "red alarms lit; CTM blue",
-          "confidence": "medium",
-          "uHeight": 6
-        },
-        {
-          "order": 4,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500 R (open shelf, barcoded modules, LC jumpers, ILAN/craft ports)",
-          "label": "serial 12307619 (partial)",
-          "alarms": [
-            "CRITICAL"
-          ],
-          "leds": "Critical+Major red on maintenance panel",
-          "confidence": "medium",
-          "notes": "NE hostname stickers absent on this stack - flagged for field labelling",
-          "uHeight": 6
-        },
-        {
-          "order": 5,
           "type": "space",
           "mfr": null,
           "model": "Free space",
           "label": null,
           "alarms": [],
+          "leds": null,
           "confidence": "high",
-          "uHeight": 25
+          "uHeight": 2
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial 12307596",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical + Major red lit; CTM 41/42 blue",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover removed; no NE hostname plate, serial barcode only"
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial 12307612",
+          "alarms": [
+            "CRITICAL"
+          ],
+          "leds": "Critical red lit",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover removed; no NE hostname plate, serial barcode only"
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial 12307619",
+          "alarms": [
+            "CRITICAL",
+            "MINOR"
+          ],
+          "leds": "Critical + Minor red lit",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover removed; no NE hostname plate, serial barcode only"
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 11
         }
       ],
       "rackU": 45
@@ -716,59 +731,97 @@
           "order": 1,
           "type": "power",
           "mfr": "TRIMM Inc.",
-          "model": "-/+24-48VDC fuse panel",
+          "model": "-/+24-48VDC GMT fuse panel (707 Series)",
           "label": null,
           "alarms": [
             "FUSE"
           ],
-          "leds": "A/B green + red fuse indicators lit",
-          "confidence": "medium",
+          "leds": "Red fuse indicators lit alongside green - possible fuse alarm",
+          "confidence": "high",
           "uHeight": 2
         },
         {
           "order": 2,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500 R",
-          "label": "LI15.DSM04-ILA:1 / Shelf ID LI15",
-          "alarms": [],
-          "leds": "blue",
-          "confidence": "high",
-          "uHeight": 6
-        },
-        {
-          "order": 3,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500 R",
-          "label": "LI14 or LI05 (partial read)",
-          "alarms": [
-            "CRITICAL",
-            "MAJOR"
-          ],
-          "leds": "red lit + green",
-          "confidence": "medium",
-          "uHeight": 6
-        },
-        {
-          "order": 4,
-          "type": "transport",
-          "mfr": "Ciena",
-          "model": "6500 R (GPN 1129175)",
-          "label": "LI04.DSM04-ILA:1 / GTR048.C",
-          "alarms": [],
-          "confidence": "high",
-          "uHeight": 6
-        },
-        {
-          "order": 5,
           "type": "space",
           "mfr": null,
           "model": "Free space",
           "label": null,
           "alarms": [],
+          "leds": null,
           "confidence": "high",
-          "uHeight": 25
+          "uHeight": 7
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI15.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover fitted; Shelf ID LI15"
+        },
+        {
+          "order": 4,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "DSM04-ILA:1 (NE id partial)",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical + Major red lit",
+          "confidence": "medium",
+          "uHeight": 10,
+          "notes": "Front cover fitted; NE plate partially legible"
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 7,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI04.DSM04-ILA:1 / GTR048.C",
+          "alarms": [],
+          "leds": "Blue status LED",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover fitted"
+        },
+        {
+          "order": 8,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 3
         }
       ],
       "rackU": 45
@@ -878,7 +931,7 @@
           "alarms": [],
           "leds": "blue/green",
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 3,
@@ -889,7 +942,7 @@
           "alarms": [],
           "leds": "green",
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 4,
@@ -899,7 +952,7 @@
           "label": "LI17.DSM04-ILA:1 / Shelf ID LI17",
           "alarms": [],
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 5,
@@ -909,7 +962,7 @@
           "label": "LI16.DSM04-ILA:1 / Shelf ID LI16",
           "alarms": [],
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 6,
@@ -919,7 +972,7 @@
           "label": null,
           "alarms": [],
           "confidence": "high",
-          "uHeight": 19
+          "uHeight": 3
         }
       ],
       "rackU": 45
@@ -1012,7 +1065,7 @@
           "label": "LI10.DSM04-ILA:1",
           "alarms": [],
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 3,
@@ -1022,7 +1075,7 @@
           "label": "LI09.DSM04-ILA:1",
           "alarms": [],
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 4,
@@ -1032,7 +1085,7 @@
           "label": "LI08 (inferred from sequence)",
           "alarms": [],
           "confidence": "low",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 5,
@@ -1042,7 +1095,7 @@
           "label": "LI07.DSM04-ILA:1 (partial read)",
           "alarms": [],
           "confidence": "medium",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 6,
@@ -1052,7 +1105,7 @@
           "label": null,
           "alarms": [],
           "confidence": "high",
-          "uHeight": 19
+          "uHeight": 3
         }
       ],
       "rackU": 45
@@ -1115,7 +1168,7 @@
           "alarms": [],
           "leds": "blue; red In-Service caution sticker",
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 3,
@@ -1129,7 +1182,7 @@
           ],
           "leds": "Critical+Major red lit",
           "confidence": "high",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 4,
@@ -1140,7 +1193,7 @@
           "alarms": [],
           "leds": "green",
           "confidence": "low",
-          "uHeight": 6
+          "uHeight": 10
         },
         {
           "order": 5,
@@ -1150,7 +1203,7 @@
           "label": null,
           "alarms": [],
           "confidence": "high",
-          "uHeight": 25
+          "uHeight": 13
         }
       ],
       "rackU": 45
@@ -1344,21 +1397,6 @@
       "finding": "In-service shelf with blank NE/IP/Shelf ID plate - labelling gap"
     },
     {
-      "rack": "302.004",
-      "unit": "6500 R stack",
-      "finding": "CRITICAL/MAJOR alarms on multiple shelves; no NE hostname stickers on entire stack"
-    },
-    {
-      "rack": "301.004",
-      "unit": "middle 6500 R",
-      "finding": "CRITICAL + MAJOR alarm LEDs lit"
-    },
-    {
-      "rack": "301.004",
-      "unit": "TRIMM fuse panel",
-      "finding": "red fuse indicators lit alongside green - possible fuse alarm"
-    },
-    {
       "rack": "302.005",
       "unit": "us-ia-strt-26-1",
       "finding": "MAJOR alarm LED lit"
@@ -1377,14 +1415,44 @@
       "rack": "302.008",
       "unit": "-",
       "finding": "Rack reserved for MICROSOFT AZURE: empty but fuse panel installed and powered"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R serial 12307596",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R serial 12307612",
+      "finding": "CRITICAL alarm LED lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R serial 12307619",
+      "finding": "CRITICAL + MINOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R stack",
+      "finding": "No NE hostname plates on any shelf - serial barcodes only (labelling gap)"
+    },
+    {
+      "rack": "301.004",
+      "unit": "middle 6500 R (DSM04-ILA:1)",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit; NE plate only partially legible"
+    },
+    {
+      "rack": "301.004",
+      "unit": "TRIMM fuse panel",
+      "finding": "Red fuse indicators lit alongside green - possible fuse alarm"
     }
   ],
   "stats": {
     "positionsCaptured": 9,
     "racksExtracted": 18,
     "unitsExtracted": 75,
-    "unitsHighConfidence": 57,
-    "activeAlarms": 11,
+    "unitsHighConfidence": 61,
+    "activeAlarms": 13,
     "emptyOrReservedRacks": 1,
     "vendors": {
       "Ciena": 48,
