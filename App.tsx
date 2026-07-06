@@ -20,6 +20,7 @@ import { InventoryReconciliationModal } from './components/InventoryReconciliati
 import { INITIAL_BUILDING_DEFS, INITIAL_VENDORS, INITIAL_OWNERS, INITIAL_STATUSES, INITIAL_SITES, INITIAL_RACK_DEFS, INITIAL_EQUIPMENT_DEFS } from './constants';
 import { AppMode, Building, ViewLevel, Status4D, ColorMode, ActionLog, BuildingDefinition, VendorDefinition, OwnerDefinition, StatusDefinition, SiteDefinition, SupabaseConfig, Rack, RackDefinition, EquipmentDefinition, Equipment, ProInventoryItem } from './types';
 import { initSupabase, saveToCloud, loadFromCloud } from './services/supabaseService';
+import { focusOverlaySite } from './services/overlayBridge';
 
 const LOGO_URL = "https://ik.imagekit.io/gae3bdoli/ambiflo_full_white_clearance-256.png";
 const WORKSPACE_KEY = 'AMBIFLO_WORKSPACE_STABLE_V1';
@@ -535,6 +536,16 @@ const App: React.FC = () => {
     });
   };
 
+  // Overlay (demo) sites never enter workspace state — just ensure MAP view
+  // and hand off to SiteMapView (via the overlay bridge) to fly-to + open
+  // the popup.
+  const handleFocusOverlaySiteOnMap = (id: string) => {
+    navigateWithCheck(() => {
+      setViewLevel('MAP');
+      focusOverlaySite(id);
+    });
+  };
+
   const handleReturnToMap = () => {
     navigateWithCheck(() => {
       setViewLevel('MAP');
@@ -828,18 +839,18 @@ const App: React.FC = () => {
               <div className="hidden lg:flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full border border-white/10 animate-in fade-in slide-in-from-left duration-500">
                 <div className="flex items-center gap-2 text-slate-400 group cursor-pointer hover:text-white transition-colors" onClick={handleGoToGlobal}>
                   <Home size={12} />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Home</span>
+                  <span className="text-[10px] font-black tracking-tight text-slate-500">Home</span>
                 </div>
                 <ChevronRight size={10} className="text-slate-600" />
                 <div className="flex items-center gap-2 text-slate-300 group cursor-pointer hover:text-white transition-colors" onClick={handleGoToSite}>
                   <Layout size={12} className="text-blue-500" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">{activeSite.name}</span>
+                  <span className="text-[10px] font-black tracking-tight">{activeSite.name}</span>
                 </div>
                 {viewLevel === 'BUILDING' && activeBuilding && (
                   <>
                     <ChevronRight size={10} className="text-slate-600" />
                     <div className="flex items-center gap-2 text-white">
-                      <span className="px-2 py-0.5 bg-blue-600 rounded text-[9px] font-black uppercase">{activeBuilding.label.padStart(4, '0')}</span>
+                      <span className="px-2 py-0.5 bg-blue-600 rounded text-[9px] font-black">{activeBuilding.label.padStart(4, '0')}</span>
                     </div>
                   </>
                 )}
@@ -848,7 +859,7 @@ const App: React.FC = () => {
           </div>
           {viewLevel === 'MAP' && (
             <div className="flex-1 max-w-sm mx-4">
-              <OmniSearch sites={sites} onSelectSite={handleFocusSiteOnMap} />
+              <OmniSearch sites={sites} onSelectSite={handleFocusSiteOnMap} onSelectOverlaySite={handleFocusOverlaySiteOnMap} />
             </div>
           )}
           {viewLevel !== 'MAP' && (
@@ -861,7 +872,7 @@ const App: React.FC = () => {
                 <button
                   key={mode.id}
                   onClick={() => setAppMode(mode.id as AppMode)}
-                  className={`flex items-center gap-2 px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${appMode === mode.id ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+                  className={`flex items-center gap-2 px-5 py-2 rounded-xl text-[10px] font-black tracking-tight transition-all ${appMode === mode.id ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
                 >
                   <mode.icon size={14} />
                   <span className="hidden sm:inline">{mode.label}</span>
@@ -890,7 +901,7 @@ const App: React.FC = () => {
                       cloudStatus === 'ERROR' ? <AlertCircle size={18} /> :
                         cloudStatus === 'DISCONNECTED' ? <Cloud size={18} /> :
                           <Save size={18} />}
-                  <span className="text-[10px] font-black uppercase tracking-widest">
+                  <span className="text-[10px] font-black tracking-tight">
                     {cloudStatus === 'CONNECTING' ? 'Saving...' :
                       cloudStatus === 'SYNCED' ? 'Synced' :
                         cloudStatus === 'ERROR' ? 'Sync Error' :
@@ -912,7 +923,7 @@ const App: React.FC = () => {
             {viewLevel === 'BUILDING' && (
               <button onClick={() => setShowInventory(!showInventory)} className={`px-6 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2 ${showInventory ? 'bg-blue-600 text-white' : 'bg-slate-900/60 text-slate-400 hover:text-white'}`}>
                 <List size={18} />
-                <span className="text-[10px] font-black uppercase tracking-widest">Show Inventory</span>
+                <span className="text-[10px] font-black tracking-tight">Show Inventory</span>
               </button>
             )}
             {viewLevel === 'BUILDING' && filteredAlerts && filteredAlerts.length > 0 && (
@@ -925,12 +936,12 @@ const App: React.FC = () => {
                     <span className="text-[10px] font-black text-white">{filteredAlerts.length}</span>
                   </div>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest hidden sm:inline">Issues</span>
+                <span className="text-[10px] font-black tracking-tight hidden sm:inline">Issues</span>
               </button>
             )}
             <button onClick={handleReturnToMap} className="px-6 py-2.5 rounded-xl border border-white/10 bg-slate-900/60 text-slate-400 hover:text-white flex items-center gap-2">
               <MapIcon size={18} />
-              <span className="text-[10px] font-black uppercase tracking-widest">Back to map</span>
+              <span className="text-[10px] font-black tracking-tight">Back to Map</span>
             </button>
             <button onClick={() => setAppMode('ADMIN')} className="p-2.5 rounded-xl border border-white/5 bg-slate-900/60 text-slate-500 hover:text-white transition-all">
               <Settings size={18} />
