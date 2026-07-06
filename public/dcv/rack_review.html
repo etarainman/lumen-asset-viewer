@@ -495,7 +495,14 @@
       box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 0 14px 4px var(--hl-glow, rgba(255,255,255,0.6));
     }
 
-    .pano-hotspot-wrap { position: relative; }
+    /* Must stay absolutely positioned - Pannellum anchors the wrapper via
+       translate() and centres it by its own size; position:relative would
+       drop it into normal flow (full-width, stacked at the pane's left edge). */
+    .pano-hotspot-wrap {
+      position: absolute;
+      width: max-content;
+      height: max-content;
+    }
 
     .pano-hotspot-tip {
       position: absolute;
