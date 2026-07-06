@@ -660,7 +660,7 @@
           "alarms": [],
           "leds": null,
           "confidence": "high",
-          "uHeight": 2
+          "uHeight": 1
         },
         {
           "order": 3,
@@ -672,7 +672,7 @@
             "CRITICAL",
             "MAJOR"
           ],
-          "leds": "Critical + Major red lit; CTM 41/42 blue",
+          "leds": "Critical + Major red lit",
           "confidence": "high",
           "uHeight": 10,
           "notes": "Front cover removed; no NE hostname plate, serial barcode only"
@@ -696,6 +696,21 @@
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 R (RLS, open shelf)",
+          "label": "Serial not legible",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical red + Major amber lit",
+          "confidence": "medium",
+          "uHeight": 10,
+          "notes": "Front cover removed; third shelf in stack, serial barcode not readable at capture angle"
+        },
+        {
+          "order": 6,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
           "label": "Serial 12307619",
           "alarms": [
             "CRITICAL",
@@ -704,10 +719,10 @@
           "leds": "Critical + Minor red lit",
           "confidence": "high",
           "uHeight": 10,
-          "notes": "Front cover removed; no NE hostname plate, serial barcode only"
+          "notes": "Front cover removed; bottom shelf, sits just above plinth"
         },
         {
-          "order": 6,
+          "order": 7,
           "type": "space",
           "mfr": null,
           "model": "Free space",
@@ -715,7 +730,7 @@
           "alarms": [],
           "leds": null,
           "confidence": "high",
-          "uHeight": 11
+          "uHeight": 2
         }
       ],
       "rackU": 45
@@ -1417,6 +1432,16 @@
       "finding": "Rack reserved for MICROSOFT AZURE: empty but fuse panel installed and powered"
     },
     {
+      "rack": "301.004",
+      "unit": "middle 6500 R (DSM04-ILA:1)",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit; NE plate only partially legible"
+    },
+    {
+      "rack": "301.004",
+      "unit": "TRIMM fuse panel",
+      "finding": "Red fuse indicators lit alongside green - possible fuse alarm"
+    },
+    {
       "rack": "302.004",
       "unit": "6500 R serial 12307596",
       "finding": "CRITICAL + MAJOR alarm LEDs lit"
@@ -1428,34 +1453,29 @@
     },
     {
       "rack": "302.004",
+      "unit": "6500 R (3rd shelf, serial not legible)",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.004",
       "unit": "6500 R serial 12307619",
       "finding": "CRITICAL + MINOR alarm LEDs lit"
     },
     {
       "rack": "302.004",
       "unit": "6500 R stack",
-      "finding": "No NE hostname plates on any shelf - serial barcodes only (labelling gap)"
-    },
-    {
-      "rack": "301.004",
-      "unit": "middle 6500 R (DSM04-ILA:1)",
-      "finding": "CRITICAL + MAJOR alarm LEDs lit; NE plate only partially legible"
-    },
-    {
-      "rack": "301.004",
-      "unit": "TRIMM fuse panel",
-      "finding": "Red fuse indicators lit alongside green - possible fuse alarm"
+      "finding": "No NE hostname plates on any of the four shelves - serial barcodes only (labelling gap)"
     }
   ],
   "stats": {
     "positionsCaptured": 9,
     "racksExtracted": 18,
-    "unitsExtracted": 75,
+    "unitsExtracted": 76,
     "unitsHighConfidence": 61,
-    "activeAlarms": 13,
+    "activeAlarms": 14,
     "emptyOrReservedRacks": 1,
     "vendors": {
-      "Ciena": 48,
+      "Ciena": 49,
       "TRIMM": 11,
       "Infinera": 6,
       "ADC": 4,
