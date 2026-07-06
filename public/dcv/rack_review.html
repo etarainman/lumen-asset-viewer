@@ -1061,13 +1061,28 @@
         }
 
         const mfrModel = `${unit.mfr ? unit.mfr + " " : ""}${unit.model || ""}`.trim();
+        const uspanLabel = topU === bottomU ? `U ${topU}` : `U ${bottomU}–${topU}`;
 
-        // inline text if block tall enough in *rendered* px - approximate using rectH share of bodyH mapped later;
-        // we mark with data attribute and JS will toggle visibility post-render based on actual pixel height.
-        if (!isSpace) {
+        // On-block text: manufacturer + model, word-wrapped over up to 3 centred
+        // lines. Sized to the block's inner width using the same k-scaled font
+        // size as before; chars-per-line estimated from font size x 0.55 avg
+        // glyph width. Whether any lines actually fit (block tall enough for
+        // >=1 full line) is decided post-render from the real rendered pixel
+        // height of the block, since the SVG is drawn in a fixed coordinate
+        // system with counter-scaled (k-scaled) fonts - same pattern as before.
+        const inlineFontSize = 26 * k;
+        const inlineLines = !isSpace ? wrapTextLines(mfrModel, inlineFontSize, unitInnerW - 12 * k, 3) : [];
+        if (!isSpace && inlineLines.length) {
+          const lineH = inlineFontSize * 1.15;
+          // vertically centre the (up to 3) tspans as a block around rectY + rectH/2
+          const totalTextH = lineH * inlineLines.length;
+          const firstBaselineY = rectY + rectH / 2 - totalTextH / 2 + lineH * 0.78;
+          const tspans = inlineLines.map((line, li) =>
+            `<tspan data-inline-line="${li}" x="${unitInnerX + unitInnerW / 2}" y="${firstBaselineY + li * lineH}">${escapeXml(line)}</tspan>`
+          ).join("");
           parts.push(`
-            <text class="u-inline-text" data-inline-for="${unit.order}" x="${unitInnerX + unitInnerW / 2}" y="${rectY + rectH / 2 + 3.5}"
-                  text-anchor="middle" style="display:none; font-size:${26 * k}px">${escapeXml(truncate(unit.label || mfrModel, 26))}</text>
+            <text class="u-inline-text" data-inline-for="${unit.order}" data-line-h="${lineH}" data-line-count="${inlineLines.length}"
+                  text-anchor="middle" style="display:none; font-size:${inlineFontSize}px">${tspans}</text>
           `);
         }
 
@@ -1083,14 +1098,25 @@
           `);
 
           const confClass = "conf-" + (unit.confidence || "medium");
+          // Primary label line: unit label (hostname/serial) if present,
+          // otherwise fall back to mfr+model as before.
           const title = unit.label || mfrModel || "Unit";
-          const sub = unit.label ? mfrModel : (unit.mfr || "");
+          // Secondary line has two candidate contents - which one is shown is
+          // resolved post-render (updateInlineLabelVisibility), once we know
+          // whether the block itself ended up showing inline mfr/model text:
+          //  - "mfrModel" variant: shown only when the block did NOT show inline text
+          //  - "uspan" variant: shown when the block DID show inline text (or has no label)
+          // If there's no label at all, the primary line already carries mfrModel,
+          // so the secondary line is always the U-span in that case.
+          const subMfrModel = unit.label ? mfrModel : "";
+          const subUspan = uspanLabel;
 
           parts.push(`
             <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
               <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
               <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" style="font-size:${BASE_LABEL_FONT * k}px" x="${14 * k}" y="${30 * k}">${escapeXml(truncate(title, 30))}</text>
-              ${sub ? `<text class="u-label-sub" style="font-size:${21 * k}px" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(sub, 34))}</text>` : ""}
+              ${subMfrModel ? `<text class="u-label-sub" data-sub-variant="mfrModel" data-order="${unit.order}" style="font-size:${21 * k}px; display:none" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(subMfrModel, 34))}</text>` : ""}
+              <text class="u-label-sub" data-sub-variant="uspan" data-order="${unit.order}" style="font-size:${21 * k}px; display:${subMfrModel ? 'none' : 'block'}" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(subUspan, 34))}</text>
               <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 24 * k}" cy="${labelRowH / 2}" r="${9 * k}"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
               ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 48 * k}" cy="${labelRowH / 2}" r="${9 * k}" fill="#ef4444"></circle>` : ""}
             </g>
@@ -1129,6 +1155,48 @@
     function truncate(str, n) {
       if (!str) return "";
       return str.length > n ? str.slice(0, n - 1) + "…" : str;
+    }
+
+    // Word-wrap `str` into an array of lines, estimating chars-per-line from
+    // fontSize using an average glyph width factor (0.55x font size), capped
+    // at `maxLines`. If a single word is longer than one line, it's hard-broken.
+    function wrapTextLines(str, fontSize, availWidth, maxLines) {
+      if (!str) return [];
+      const avgGlyphW = fontSize * 0.55;
+      const charsPerLine = Math.max(1, Math.floor(availWidth / avgGlyphW));
+
+      const words = str.split(/\s+/).filter(Boolean);
+      const lines = [];
+      let current = "";
+
+      const pushCurrent = () => {
+        if (current) { lines.push(current); current = ""; }
+      };
+
+      for (const word of words) {
+        if (lines.length >= maxLines) break;
+        let candidate = current ? current + " " + word : word;
+        if (candidate.length <= charsPerLine) {
+          current = candidate;
+          continue;
+        }
+        // candidate too long for the line
+        if (current) {
+          pushCurrent();
+          if (lines.length >= maxLines) break;
+        }
+        // word itself may be longer than a full line - hard-break it
+        let remaining = word;
+        while (remaining.length > charsPerLine && lines.length < maxLines - 1) {
+          lines.push(remaining.slice(0, charsPerLine));
+          remaining = remaining.slice(charsPerLine);
+        }
+        current = remaining;
+      }
+      pushCurrent();
+
+      if (lines.length > maxLines) lines.length = maxLines;
+      return lines;
     }
 
     function escapeXml(str) {
@@ -1234,8 +1302,43 @@
         const order = rect.getAttribute("data-order");
         const bbox = rect.getBoundingClientRect();
         const inlineText = svgEl.querySelector(`text[data-inline-for="${order}"]`);
+        let blockShowsText = false;
+
         if (inlineText) {
-          inlineText.style.display = bbox.height >= 19 ? "block" : "none";
+          // internal (SVG-unit) rect height vs its own bbox gives us the
+          // current render scale, so we can convert the internal line-height
+          // (data-line-h, already k-scaled) into rendered px and work out how
+          // many of the up to-3 wrapped lines actually fit vertically.
+          const internalRectH = parseFloat(rect.getAttribute("height")) || 1;
+          const renderScale = bbox.height / internalRectH;
+          const internalLineH = parseFloat(inlineText.getAttribute("data-line-h")) || 0;
+          const renderedLineH = internalLineH * renderScale;
+          const totalLines = parseInt(inlineText.getAttribute("data-line-count"), 10) || 0;
+
+          const fittingLines = renderedLineH > 0 ? Math.floor(bbox.height / renderedLineH) : 0;
+          const visibleLines = Math.max(0, Math.min(totalLines, fittingLines));
+
+          if (visibleLines >= 1) {
+            inlineText.style.display = "block";
+            blockShowsText = true;
+            const tspans = inlineText.querySelectorAll("tspan[data-inline-line]");
+            tspans.forEach(tspan => {
+              const li = parseInt(tspan.getAttribute("data-inline-line"), 10);
+              tspan.style.display = li < visibleLines ? "inline" : "none";
+            });
+          } else {
+            inlineText.style.display = "none";
+          }
+        }
+
+        // pick the right secondary leader-label line: mfr+model when the block
+        // did NOT show inline text (and a label exists to make it the primary
+        // line), otherwise the U-span.
+        const subMfrModel = svgEl.querySelector(`text.u-label-sub[data-sub-variant="mfrModel"][data-order="${order}"]`);
+        const subUspan = svgEl.querySelector(`text.u-label-sub[data-sub-variant="uspan"][data-order="${order}"]`);
+        if (subMfrModel && subUspan) {
+          subMfrModel.style.display = blockShowsText ? "none" : "block";
+          subUspan.style.display = blockShowsText ? "block" : "none";
         }
       });
     }
@@ -1354,7 +1457,7 @@
 
         const hasAlarm = unit.alarms && unit.alarms.length > 0;
         const confClass = "conf-" + (unit.confidence || "medium");
-        const uspan = topU === bottomU ? `${topU}` : `${topU}–${bottomU}`;
+        const uspan = topU === bottomU ? `${topU}` : `${bottomU}–${topU}`;
 
         tr.innerHTML = `
           <td>${uspan}</td>

@@ -1349,7 +1349,7 @@
           const { topU, bottomU } = spans[i];
           rows.push({
             rack: rack.id,
-            uspan: topU === bottomU ? `${topU}` : `${topU}–${bottomU}`,
+            uspan: topU === bottomU ? `${topU}` : `${bottomU}–${topU}`,
             type: unit.type,
             mfr: unit.mfr || "",
             model: unit.model || "",
