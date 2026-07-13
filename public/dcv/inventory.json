@@ -367,6 +367,7 @@
       "customer": null,
       "units": [
         {
+          "order": 1,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 (covered shelf)",
@@ -377,11 +378,22 @@
           ],
           "leds": "Major + Minor lit",
           "confidence": "medium",
-          "uHeight": 9,
-          "notes": "No NE plate visible from aisle",
-          "order": 1
+          "uHeight": 13,
+          "notes": "No NE plate visible from aisle; large D-series style shelf, green tape strip"
         },
         {
+          "order": 2,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 3,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 (open shelf, door removed)",
@@ -389,45 +401,35 @@
           "alarms": [],
           "leds": "Sled status blue",
           "confidence": "medium",
-          "uHeight": 9,
-          "notes": "Cards and jumpers exposed; no NE plate visible",
-          "order": 2
+          "uHeight": 10,
+          "notes": "Cards and jumpers exposed; no NE plate visible"
         },
         {
+          "order": 4,
           "type": "fiber",
           "mfr": "ADVA",
           "model": "FMT fiber tray",
           "label": "FMT",
           "alarms": [],
           "leds": null,
-          "confidence": "medium",
-          "uHeight": 2,
-          "order": 3
+          "confidence": "low",
+          "uHeight": 1,
+          "notes": "Slim tray at the open shelf's lower edge - FMT label read in first-pass extraction, not separately verifiable in ortho"
         },
         {
-          "type": "space",
-          "mfr": null,
-          "model": "Free space",
-          "label": null,
-          "alarms": [],
-          "leds": null,
-          "confidence": "high",
-          "uHeight": 7,
-          "order": 4
-        },
-        {
+          "order": 5,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500",
           "label": "SHELF 1 / ATLTIAALCIA60742",
           "alarms": [],
-          "leds": "Status LEDs not legible",
+          "leds": "Status blue",
           "confidence": "high",
-          "uHeight": 10,
-          "notes": "NE plate reattributed from the middle shelf during ortho QA - this bottom shelf was missing from the original extraction",
-          "order": 5
+          "uHeight": 12,
+          "notes": "NE plate reattributed during ortho QA; large covered shelf"
         },
         {
+          "order": 6,
           "type": "space",
           "mfr": null,
           "model": "Free space",
@@ -435,8 +437,7 @@
           "alarms": [],
           "leds": null,
           "confidence": "high",
-          "uHeight": 8,
-          "order": 6
+          "uHeight": 7
         }
       ],
       "rackU": 45
@@ -516,6 +517,7 @@
       "customer": null,
       "units": [
         {
+          "order": 1,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 (open shelf, door removed)",
@@ -523,11 +525,11 @@
           "alarms": [],
           "leds": "Sled status blue",
           "confidence": "medium",
-          "uHeight": 9,
-          "notes": "Cards and jumpers exposed; no NE plate",
-          "order": 1
+          "uHeight": 12,
+          "notes": "Cards and jumpers exposed; no NE plate"
         },
         {
+          "order": 2,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500 (covered shelf)",
@@ -535,11 +537,11 @@
           "alarms": [],
           "leds": "Status blue",
           "confidence": "medium",
-          "uHeight": 10,
-          "notes": "In-service shelf with blank NE/IP/Shelf ID plate - labelling gap",
-          "order": 2
+          "uHeight": 13,
+          "notes": "In-service shelf with blank NE/IP/Shelf ID plate - labelling gap"
         },
         {
+          "order": 3,
           "type": "space",
           "mfr": null,
           "model": "Free space",
@@ -547,10 +549,10 @@
           "alarms": [],
           "leds": null,
           "confidence": "high",
-          "uHeight": 3,
-          "order": 3
+          "uHeight": 1
         },
         {
+          "order": 4,
           "type": "transport",
           "mfr": "Ciena",
           "model": "6500",
@@ -558,11 +560,11 @@
           "alarms": [],
           "leds": "Status blue",
           "confidence": "high",
-          "uHeight": 10,
-          "notes": "NE plate reattributed from the shelf above during ortho QA - this shelf was missing from the original extraction",
-          "order": 4
+          "uHeight": 12,
+          "notes": "NE plate reattributed during ortho QA; shelf was missing from original extraction"
         },
         {
+          "order": 5,
           "type": "space",
           "mfr": null,
           "model": "Free space",
@@ -570,10 +572,10 @@
           "alarms": [],
           "leds": null,
           "confidence": "high",
-          "uHeight": 4,
-          "order": 5
+          "uHeight": 2
         },
         {
+          "order": 6,
           "type": "fiber",
           "mfr": null,
           "model": "Fiber storage tray (coiled patch cords)",
@@ -582,19 +584,7 @@
           "leds": null,
           "confidence": "low",
           "uHeight": 5,
-          "notes": "Low tray holding coiled purple patch cords and packaging",
-          "order": 6
-        },
-        {
-          "type": "space",
-          "mfr": null,
-          "model": "Free space",
-          "label": null,
-          "alarms": [],
-          "leds": null,
-          "confidence": "high",
-          "uHeight": 4,
-          "order": 7
+          "notes": "Low tray holding coiled purple patch cords and packaging"
         }
       ],
       "rackU": 45
