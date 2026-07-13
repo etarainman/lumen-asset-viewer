@@ -194,6 +194,99 @@
       background: #0b0f14;
     }
 
+    .vsplitter.collapsed { display: none; }
+
+    /* ---------- Centre photo panel ---------- */
+    .pane-photo {
+      display: none;
+      flex-direction: column;
+      min-width: 160px;
+      min-height: 0;
+      background: #e8ecf2;
+      position: relative;
+    }
+
+    .pane-photo.on { display: flex; }
+
+    .photo-viewport {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-viewport.zoomed { align-items: flex-start; justify-content: flex-start; }
+    .photo-viewport.grabbable { cursor: grab; }
+    .photo-viewport.grabbing { cursor: grabbing; }
+
+    .photo-img-box { position: relative; flex: 0 0 auto; }
+
+    .photo-img {
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .photo-overlay-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .photo-band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background: rgba(34, 211, 238, 0.22);
+      border-top: 2px solid #22d3ee;
+      border-bottom: 2px solid #22d3ee;
+      box-sizing: border-box;
+    }
+
+    .photo-strip-seg {
+      position: absolute;
+      left: 0;
+      width: 6px;
+    }
+
+    .photo-broken {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background: #0b0f14;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.5;
+      z-index: 6;
+    }
+
+    .photo-broken.show { display: flex; }
+
+    .photo-zoom-overlay {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(244, 246, 249, 0.82);
+      backdrop-filter: blur(3px);
+      border: 1px solid #c7d0dc;
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .photo-zoom-overlay .tbtn-light { background: rgba(255, 255, 255, 0.6); }
+    .photo-zoom-overlay .tbtn-light:hover { background: #ffffff; }
+
     /* ---------- 360 overlays ---------- */
     .overlay-corner {
       position: absolute;
@@ -667,6 +760,7 @@
           <span id="anomalyBadgeText">Anomalies (0)</span>
         </button>
         <button class="tbtn" id="coloursToggleBtn" onclick="toggleColours()">Colours</button>
+        <button class="tbtn" id="photoToggleBtn" onclick="togglePhoto()">Photo</button>
         <div class="topbar-edit-wrap">
           <button class="tbtn" id="editBtn" onclick="showEditToast(event)">Edit</button>
           <div class="edit-toast" id="editToast">Permissions not enabled for this user</div>
@@ -693,6 +787,24 @@
       </div>
 
       <div class="vsplitter" id="vsplitter"></div>
+
+      <div class="pane-photo" id="panePhoto">
+        <div class="photo-viewport" id="photoViewport">
+          <div class="photo-img-box" id="photoImgBox">
+            <img class="photo-img" id="photoImg" alt="Rack face photo elevation" draggable="false" />
+            <div class="photo-overlay-layer" id="photoOverlayLayer"></div>
+          </div>
+        </div>
+        <div class="photo-broken" id="photoBroken">Photo elevation not generated for this face.<br/>Expected file in "ortho/".</div>
+        <div class="photo-zoom-overlay" id="photoZoomOverlay">
+          <button class="tbtn-light" id="photoZoomOutBtn" onclick="photoZoomBy(-1)">&minus;</button>
+          <span class="zoom-readout zoom-readout-light" id="photoZoomReadout">1.0x</span>
+          <button class="tbtn-light" id="photoZoomInBtn" onclick="photoZoomBy(1)">+</button>
+          <button class="tbtn-light" id="photoFitBtn" onclick="resetPhotoZoom()" title="Fit to pane">&#10531;</button>
+        </div>
+      </div>
+
+      <div class="vsplitter collapsed" id="vsplitter2"></div>
 
       <div class="pane-right" id="paneRight">
         <div class="elevation-pane" id="elevationPane">
@@ -756,6 +868,7 @@
     let selectedUnitOrder = null;
     let tableVisible = false;
     let coloursOn = localStorage.getItem("rr_colours") === "1";
+    let photoOn = localStorage.getItem("rr_photo") === "1";
 
     let viewer = null;
 
@@ -771,10 +884,21 @@
     // splitter ratios (persisted)
     let vRatio = parseFloat(localStorage.getItem("rr_vRatio")) || 0.55; // left pane share
     let hRatio = parseFloat(localStorage.getItem("rr_hRatio")) || 0.6; // elevation pane share (when table on)
+    let photoRatio = parseFloat(localStorage.getItem("rr_photoRatio")) || 0.22; // centre photo pane share (when photo on)
 
     // zoom
     let zoomLevel = 1;
     const ZOOM_MIN = 1, ZOOM_MAX = 8;
+
+    // ---- Photo panel state ----
+    let photoZoomLevel = 1;
+    const PHOTO_ZOOM_MIN = 1, PHOTO_ZOOM_MAX = 6;
+    // Ortho photo elevation image geometry - fixed by the generation pipeline:
+    // 700px wide x 2199px tall, 1px = 1mm. Row 0 = 2.15m above floor, bottom row = -0.05m.
+    const PHOTO_IMG_W = 700, PHOTO_IMG_H = 2199;
+    let currentPhotoScale = 1; // last applied displayed-px-per-source-px scale
+    let photoImageOk = false; // whether the currently requested photo loaded successfully
+    let currentPhotoSrc = null; // last src assigned to #photoImg, to avoid redundant reloads
 
     // rack geometry constants
     const RACK_WIDTH_MM = 450;
@@ -838,6 +962,14 @@
       });
       return map;
     }
+
+    // ============================================================
+    // Initial DOM state for persisted toggles that don't depend on
+    // inventory data (safe to apply before the fetch resolves).
+    // ============================================================
+    document.getElementById("photoToggleBtn").classList.toggle("active", photoOn);
+    document.getElementById("panePhoto").classList.toggle("on", photoOn);
+    document.getElementById("vsplitter2").classList.toggle("collapsed", !photoOn);
 
     // ============================================================
     // Load
@@ -1188,6 +1320,292 @@
     }
 
     // ============================================================
+    // Centre photo panel (orthorectified rack-face photo elevation)
+    // ============================================================
+    // Converts a top/bottom U index pair (bottom-up, matching cumulativeSpans)
+    // into image row numbers per the fixed generation-pipeline mapping:
+    // row 0 = 2.15m above floor, bottom row = -0.05m, 1px = 1mm.
+    function photoRowsForUnit(topU, bottomU) {
+      const yTop = (2.15 - (0.10 + topU * (2.0 / 45))) * 1000;
+      const yBottom = (2.15 - (0.10 + (bottomU - 1) * (2.0 / 45))) * 1000;
+      return { yTop, yBottom };
+    }
+
+    function togglePhoto() {
+      photoOn = !photoOn;
+      localStorage.setItem("rr_photo", photoOn ? "1" : "0");
+      document.getElementById("photoToggleBtn").classList.toggle("active", photoOn);
+      document.getElementById("panePhoto").classList.toggle("on", photoOn);
+      document.getElementById("vsplitter2").classList.toggle("collapsed", !photoOn);
+      applyVSplit();
+      scheduleRenderElevation();
+      renderPhotoPane();
+    }
+
+    // (Re)loads (or relayouts, if the image is already current) the photo for
+    // the currently selected rack face. Safe to call whenever the rack panel
+    // re-renders (position/face change, colours toggle) - skips the network
+    // request entirely if the target image hasn't changed.
+    function renderPhotoPane() {
+      photoZoomLevel = 1; // fit by default whenever the rack panel re-renders
+      if (!photoOn) return;
+
+      const rack = getCurrentRack();
+      const img = document.getElementById("photoImg");
+      const broken = document.getElementById("photoBroken");
+
+      if (!rack) {
+        currentPhotoSrc = null;
+        photoImageOk = false;
+        img.removeAttribute("src");
+        img.style.display = "none";
+        broken.classList.add("show");
+        renderPhotoOverlay();
+        return;
+      }
+
+      const src = `ortho/${rack.id}.jpg`;
+      if (src === currentPhotoSrc) {
+        // Same image already requested for this rack - just relayout (zoom
+        // reset above, pane size may have changed) and redraw the overlay.
+        layoutPhotoImage();
+        return;
+      }
+
+      currentPhotoSrc = src;
+      photoImageOk = false;
+      img.style.display = "none";
+      broken.classList.remove("show");
+
+      img.onload = () => {
+        photoImageOk = true;
+        img.style.display = "block";
+        broken.classList.remove("show");
+        layoutPhotoImage();
+      };
+      img.onerror = () => {
+        photoImageOk = false;
+        img.style.display = "none";
+        broken.classList.add("show");
+        renderPhotoOverlay();
+      };
+      img.src = src;
+    }
+
+    // Sizes the image to fit the panel HEIGHT (letterboxed horizontally),
+    // scaled further by photoZoomLevel, then redraws the selection band /
+    // colour strip overlay to match.
+    function layoutPhotoImage() {
+      if (!photoOn || !photoImageOk) return;
+      const viewport = document.getElementById("photoViewport");
+      const img = document.getElementById("photoImg");
+      const box = document.getElementById("photoImgBox");
+
+      const paneH = viewport.clientHeight;
+      const fitScale = paneH > 0 ? paneH / PHOTO_IMG_H : 1;
+      const scale = fitScale * photoZoomLevel;
+      const w = PHOTO_IMG_W * scale;
+      const h = PHOTO_IMG_H * scale;
+
+      img.style.width = w + "px";
+      img.style.height = h + "px";
+      box.style.width = w + "px";
+      box.style.height = h + "px";
+      currentPhotoScale = scale;
+
+      viewport.classList.toggle("zoomed", photoZoomLevel > 1);
+      viewport.classList.toggle("grabbable", photoZoomLevel > 1);
+
+      const readout = document.getElementById("photoZoomReadout");
+      if (readout) readout.textContent = photoZoomLevel.toFixed(1) + "x";
+
+      renderPhotoOverlay();
+    }
+
+    let photoLayoutRafId = null;
+    function schedulePhotoLayout() {
+      if (photoLayoutRafId != null) return;
+      photoLayoutRafId = requestAnimationFrame(() => {
+        photoLayoutRafId = null;
+        layoutPhotoImage();
+      });
+    }
+
+    // Draws the per-unit left-edge colour strip (Colours on) and the
+    // selected-unit highlight band as positioned divs over the image, scaled
+    // to the current displayed size - never repainted onto a canvas.
+    function renderPhotoOverlay() {
+      const layer = document.getElementById("photoOverlayLayer");
+      if (!layer) return;
+      layer.innerHTML = "";
+      if (!photoOn || !photoImageOk) return;
+
+      const rack = getCurrentRack();
+      if (!rack) return;
+      const spans = cumulativeSpans(rack);
+      const scale = currentPhotoScale;
+
+      if (coloursOn) {
+        rack.units.forEach((unit, i) => {
+          if (unit.type === "space") return;
+          const colourHex = currentUnitColours[unit.order];
+          if (!colourHex) return;
+          const { topU, bottomU } = spans[i];
+          const { yTop, yBottom } = photoRowsForUnit(topU, bottomU);
+          const seg = document.createElement("div");
+          seg.className = "photo-strip-seg";
+          seg.style.top = (yTop * scale) + "px";
+          seg.style.height = Math.max(1, (yBottom - yTop) * scale) + "px";
+          seg.style.background = colourHex;
+          layer.appendChild(seg);
+        });
+      }
+
+      if (selectedUnitOrder != null) {
+        const idx = rack.units.findIndex(u => u.order === selectedUnitOrder);
+        if (idx !== -1) {
+          const { topU, bottomU } = spans[idx];
+          const { yTop, yBottom } = photoRowsForUnit(topU, bottomU);
+          const band = document.createElement("div");
+          band.className = "photo-band";
+          band.style.top = (yTop * scale) + "px";
+          band.style.height = Math.max(1, (yBottom - yTop) * scale) + "px";
+
+          const unit = rack.units[idx];
+          const colourHex = (coloursOn && unit.type !== "space") ? currentUnitColours[unit.order] : null;
+          if (colourHex) {
+            band.style.background = colourWithAlpha(colourHex, 0.28);
+            band.style.borderTop = "2px solid " + colourHex;
+            band.style.borderBottom = "2px solid " + colourHex;
+          }
+          layer.appendChild(band);
+        }
+      }
+    }
+
+    function photoZoomBy(delta) {
+      photoZoomLevel = Math.min(PHOTO_ZOOM_MAX, Math.max(PHOTO_ZOOM_MIN, photoZoomLevel + delta));
+      layoutPhotoImage();
+    }
+
+    function resetPhotoZoom() {
+      photoZoomLevel = 1;
+      layoutPhotoImage();
+    }
+
+    // Zoom to a specific level, optionally keeping a given viewport-relative
+    // point (clientX/clientY) fixed on screen (zoom-toward-cursor) - mirrors
+    // the elevation pane's zoomTo().
+    function photoZoomTo(newLevel, clientX, clientY) {
+      const viewport = document.getElementById("photoViewport");
+      newLevel = Math.min(PHOTO_ZOOM_MAX, Math.max(PHOTO_ZOOM_MIN, newLevel));
+      if (newLevel === photoZoomLevel) return;
+
+      let anchor = null;
+      if (clientX != null && clientY != null) {
+        const rect = viewport.getBoundingClientRect();
+        const px = clientX - rect.left;
+        const py = clientY - rect.top;
+        const contentX = viewport.scrollLeft + px;
+        const contentY = viewport.scrollTop + py;
+        anchor = { px, py, contentX, contentY };
+      }
+
+      const ratio = newLevel / photoZoomLevel;
+      photoZoomLevel = newLevel;
+      layoutPhotoImage();
+
+      if (anchor) {
+        viewport.scrollLeft = anchor.contentX * ratio - anchor.px;
+        viewport.scrollTop = anchor.contentY * ratio - anchor.py;
+      }
+    }
+
+    // plain mouse-wheel zoom over the photo viewport (mirrors the elevation
+    // pane's global wheel listener)
+    document.addEventListener("wheel", (e) => {
+      const viewport = document.getElementById("photoViewport");
+      if (!photoOn || !viewport.contains(e.target)) return;
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.5 : -0.5;
+      photoZoomTo(photoZoomLevel + delta, e.clientX, e.clientY);
+    }, { passive: false });
+
+    // drag-to-pan when zoomed in (>1x), click-to-select-unit, double-click to
+    // reset to fit - mirrors the elevation pane's pan/click handling.
+    (function setupPhotoInteraction() {
+      const viewport = document.getElementById("photoViewport");
+      const box = document.getElementById("photoImgBox");
+      let dragging = false;
+      let moved = false;
+      let startX = 0, startY = 0;
+      let startScrollLeft = 0, startScrollTop = 0;
+
+      viewport.addEventListener("mousedown", (e) => {
+        if (photoZoomLevel <= 1) return;
+        if (e.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        startScrollLeft = viewport.scrollLeft;
+        startScrollTop = viewport.scrollTop;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (!moved && Math.hypot(dx, dy) > 4) {
+          moved = true;
+          viewport.classList.add("grabbing");
+        }
+        if (moved) {
+          viewport.scrollLeft = startScrollLeft - dx;
+          viewport.scrollTop = startScrollTop - dy;
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        viewport.classList.remove("grabbing");
+        if (moved) {
+          const swallow = (ev) => { ev.stopPropagation(); viewport.removeEventListener("click", swallow, true); };
+          viewport.addEventListener("click", swallow, true);
+        }
+        moved = false;
+      });
+
+      box.addEventListener("click", (e) => {
+        if (!photoImageOk) return;
+        const rack = getCurrentRack();
+        if (!rack) return;
+
+        const rect = box.getBoundingClientRect();
+        const clickY = e.clientY - rect.top;
+        const row = clickY / currentPhotoScale;
+        const heightM = 2.15 - row / 1000;
+        if (heightM < 0.10 || heightM > 2.10) return;
+
+        const spans = cumulativeSpans(rack);
+        for (let i = 0; i < rack.units.length; i++) {
+          const { topU, bottomU } = spans[i];
+          const bandBottom = 0.10 + (bottomU - 1) * (2.0 / 45);
+          const bandTop = 0.10 + topU * (2.0 / 45);
+          if (heightM >= bandBottom && heightM < bandTop) {
+            selectUnit(rack.units[i].order);
+            return;
+          }
+        }
+      });
+
+      viewport.addEventListener("dblclick", () => {
+        resetPhotoZoom();
+      });
+    })();
+
+    // ============================================================
     // Rack panel orchestration
     // ============================================================
     let currentUnitColours = {};
@@ -1200,6 +1618,7 @@
       renderTable(rack);
       renderAnomalyBadge();
       refreshHotspots();
+      renderPhotoPane();
     }
 
     // ============================================================
@@ -1791,6 +2210,7 @@
         el.classList.toggle("selected", Number(el.dataset.order) === order);
       });
       updateHotspotSelection(order);
+      renderPhotoOverlay();
     }
 
     // ============================================================
@@ -1857,8 +2277,13 @@
     // ============================================================
     function applyVSplit() {
       const paneLeft = document.getElementById("paneLeft");
-      const total = document.getElementById("mainSplit").clientWidth - 6; // minus splitter width
+      const panePhoto = document.getElementById("panePhoto");
+      const splitterCount = photoOn ? 2 : 1;
+      const total = document.getElementById("mainSplit").clientWidth - 6 * splitterCount; // minus splitter widths
       paneLeft.style.flex = `0 0 ${total * vRatio}px`;
+      if (photoOn) {
+        panePhoto.style.flex = `0 0 ${total * photoRatio}px`;
+      }
       schedulePanoResize();
     }
 
@@ -1869,6 +2294,12 @@
     }
     new ResizeObserver(() => schedulePanoResize())
       .observe(document.getElementById("paneLeft"));
+
+    // The photo panel's own size changes independently of the pano pane
+    // (e.g. when the vsplitter2 boundary moves, or on window resize) - refit
+    // the image height whenever it does.
+    new ResizeObserver(() => schedulePhotoLayout())
+      .observe(document.getElementById("panePhoto"));
 
     function applyHSplit() {
       const paneRight = document.getElementById("paneRight");
@@ -1903,7 +2334,8 @@
         if (!dragging) return;
         const rect = mainSplit.getBoundingClientRect();
         let ratio = (e.clientX - rect.left) / rect.width;
-        ratio = Math.min(0.85, Math.max(0.15, ratio));
+        const maxRatio = photoOn ? 0.7 : 0.85;
+        ratio = Math.min(maxRatio, Math.max(0.15, ratio));
         vRatio = ratio;
         applyVSplit();
         scheduleRenderElevation();
@@ -1915,6 +2347,40 @@
         splitter.classList.remove("dragging");
         document.body.style.userSelect = "";
         localStorage.setItem("rr_vRatio", String(vRatio));
+      });
+    })();
+
+    // Boundary between the centre photo pane and the right pane. Only
+    // draggable while the photo panel is on (it's hidden otherwise).
+    (function setupVSplitter2() {
+      const splitter = document.getElementById("vsplitter2");
+      const mainSplit = document.getElementById("mainSplit");
+      let dragging = false;
+
+      splitter.addEventListener("mousedown", (e) => {
+        if (!photoOn) return;
+        dragging = true;
+        splitter.classList.add("dragging");
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const rect = mainSplit.getBoundingClientRect();
+        let ratio2 = (e.clientX - rect.left) / rect.width;
+        ratio2 = Math.min(0.9, Math.max(vRatio + 0.10, ratio2));
+        photoRatio = ratio2 - vRatio;
+        applyVSplit();
+        scheduleRenderElevation();
+        schedulePhotoLayout();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        splitter.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        localStorage.setItem("rr_photoRatio", String(photoRatio));
       });
     })();
 
@@ -1953,6 +2419,7 @@
       applyVSplit();
       applyHSplit();
       scheduleRenderElevation();
+      schedulePhotoLayout();
     });
 
     // initial split application (after first paint)
