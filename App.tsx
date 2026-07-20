@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import {
   Settings, Save, Palette, Eye, Edit3, PenTool, ChevronRight, Home, Layout, Box, Layers, AlignLeft,
-  Type, List, Maximize, Maximize2, Map as MapIcon, SlidersHorizontal, ChevronUp, ChevronDown, Check, X, Plus, Cloud, Loader2, Hash, Grid, FileText, AlertCircle, Video, Sun, Moon
+  Type, List, Maximize, Maximize2, Map as MapIcon, SlidersHorizontal, ChevronUp, ChevronDown, Check, X, Plus, Cloud, Loader2, Hash, Grid, FileText, AlertCircle, Video, Sun, Moon, LogOut
 } from 'lucide-react';
 import Viewer3D, { Viewer3DHandle } from './components/Viewer3D';
 import SitePlanner2D from './components/SitePlanner2D';
@@ -52,6 +52,15 @@ const App: React.FC = () => {
     setCustomer(chosen);
     try { localStorage.setItem('LAV_OVERLAY_CUSTOMER', chosen); } catch { /* ignore */ }
     setAuthed(true);
+  }, []);
+  // Log out — clear the session and return to the login screen, where the
+  // dataset (Demo/Lumen) can be re-selected.
+  const handleLogout = useCallback(() => {
+    try {
+      localStorage.removeItem('dds_token');
+      localStorage.removeItem('dds_user');
+    } catch { /* ignore */ }
+    setAuthed(false);
   }, []);
   const [viewLevel, setViewLevel] = useState<ViewLevel>('MAP');
   const [activeSiteId, setActiveSiteId] = useState<string>('');
@@ -985,6 +994,10 @@ const App: React.FC = () => {
             </button>
             <button onClick={() => setAppMode('ADMIN')} className="p-2.5 rounded-xl border border-white/5 bg-slate-900/60 text-slate-500 hover:text-white transition-all">
               <Settings size={18} />
+            </button>
+            <button onClick={handleLogout} title="Log out — return to sign-in to switch dataset" className="px-4 py-2.5 rounded-xl border border-white/10 bg-slate-900/60 text-slate-400 hover:text-white transition-all flex items-center gap-2">
+              <LogOut size={18} />
+              <span className="text-[10px] font-black tracking-tight">Log out</span>
             </button>
           </div>
         </header>
