@@ -2,11 +2,12 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import {
   Settings, Save, Palette, Eye, Edit3, PenTool, ChevronRight, Home, Layout, Box, Layers, AlignLeft,
-  Type, List, Maximize, Maximize2, Map as MapIcon, SlidersHorizontal, ChevronUp, ChevronDown, Check, X, Plus, Cloud, Loader2, Hash, Grid, FileText, AlertCircle, Video
+  Type, List, Maximize, Maximize2, Map as MapIcon, SlidersHorizontal, ChevronUp, ChevronDown, Check, X, Plus, Cloud, Loader2, Hash, Grid, FileText, AlertCircle, Video, Sun, Moon
 } from 'lucide-react';
 import Viewer3D, { Viewer3DHandle } from './components/Viewer3D';
 import SitePlanner2D from './components/SitePlanner2D';
 import SiteMapView from './components/SiteMapView';
+import LoginScreen, { Customer } from './components/LoginScreen';
 import EditBuildingCard from './components/EditBuildingCard';
 import EditRackCard from './components/EditRackCard';
 import EditPropertyCard from './components/EditPropertyCard';
@@ -21,6 +22,7 @@ import { INITIAL_BUILDING_DEFS, INITIAL_VENDORS, INITIAL_OWNERS, INITIAL_STATUSE
 import { AppMode, Building, ViewLevel, Status4D, ColorMode, ActionLog, BuildingDefinition, VendorDefinition, OwnerDefinition, StatusDefinition, SiteDefinition, SupabaseConfig, Rack, RackDefinition, EquipmentDefinition, Equipment, ProInventoryItem } from './types';
 import { initSupabase, saveToCloud, loadFromCloud } from './services/supabaseService';
 import { focusOverlaySite } from './services/overlayBridge';
+import { useTheme } from './context/ThemeContext';
 
 const LOGO_URL = "https://ik.imagekit.io/gae3bdoli/ambiflo_full_white_clearance-256.png";
 const WORKSPACE_KEY = 'AMBIFLO_WORKSPACE_STABLE_V1';
@@ -32,6 +34,25 @@ const PROVISIONED_CONFIG: SupabaseConfig = {
 };
 
 const App: React.FC = () => {
+  const { viewerTheme, toggleViewerTheme } = useTheme();
+  // --- Login gate -------------------------------------------------------
+  // The app is gated behind a password + customer (dataset) choice. Once
+  // entered, the customer is locked for the session (no in-app switch) — the
+  // only way to change dataset is to reload. The chosen customer is passed to
+  // SiteMapView, which shows either the demo overlay or the real 3 sites.
+  const [authed, setAuthed] = useState(false);
+  const [customer, setCustomer] = useState<Customer>(() => {
+    try {
+      return localStorage.getItem('LAV_OVERLAY_CUSTOMER') === 'LUMEN' ? 'LUMEN' : 'DEMO';
+    } catch {
+      return 'DEMO';
+    }
+  });
+  const handleEnter = useCallback((chosen: Customer) => {
+    setCustomer(chosen);
+    try { localStorage.setItem('LAV_OVERLAY_CUSTOMER', chosen); } catch { /* ignore */ }
+    setAuthed(true);
+  }, []);
   const [viewLevel, setViewLevel] = useState<ViewLevel>('MAP');
   const [activeSiteId, setActiveSiteId] = useState<string>('');
   const [mapFocusSiteId, setMapFocusSiteId] = useState<string | null>(null);
@@ -827,6 +848,10 @@ const App: React.FC = () => {
     }
   });
 
+  if (!authed) {
+    return <LoginScreen onEnter={handleEnter} initialCustomer={customer} />;
+  }
+
   return (
     <div className="flex flex-col h-screen w-screen bg-slate-950 text-slate-200 overflow-hidden font-sans">
       {appMode !== 'ADMIN' && (
@@ -881,6 +906,21 @@ const App: React.FC = () => {
             </div>
           )}
           <div className="flex items-center gap-3">
+            {viewLevel === 'BUILDING' && (
+              <button
+                type="button"
+                onClick={toggleViewerTheme}
+                className={`w-11 h-11 rounded-xl border transition-all flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${viewerTheme === 'light'
+                  ? 'bg-sky-500/15 border-sky-400/50 text-sky-300 hover:bg-sky-500/25'
+                  : 'bg-slate-900/60 border-white/10 text-slate-400 hover:text-white hover:border-white/30'
+                  }`}
+                aria-label={viewerTheme === 'dark' ? 'Use Light Viewer' : 'Use Dark Viewer'}
+                aria-pressed={viewerTheme === 'light'}
+                title={viewerTheme === 'dark' ? 'Use Light Viewer' : 'Use Dark Viewer'}
+              >
+                {viewerTheme === 'dark' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
+              </button>
+            )}
             {/* Save / Sync Status Indicator */}
             {(isDirty || (cloudStatus !== 'IDLE' && cloudStatus !== 'DISCONNECTED')) && (
               <div className="flex items-center gap-2">
@@ -1007,7 +1047,7 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {viewLevel === 'MAP' ? <SiteMapView sites={sites} onOpenSite={handleOpenSiteFromMap} focusSiteId={mapFocusSiteId} /> :
+        {viewLevel === 'MAP' ? <SiteMapView sites={sites} onOpenSite={handleOpenSiteFromMap} focusSiteId={mapFocusSiteId} overlayCustomer={customer} /> :
           viewLevel === 'SITE' ? <SitePlanner2D buildings={siteBuildings} buildingDefs={buildingDefs} selectedBuildingId={selectedBuildingId} appMode={appMode} colorMode={colorMode} colorCodingEnabled={colorCodingEnabled} onSelectBuilding={setSelectedBuildingId} onUpdateBuilding={handleUpdateBuilding} onAddBuilding={handleAddBuildingAt} statuses={statuses} owners={owners} isDirty={isDirty} isSaving={cloudStatus === 'CONNECTING'} saveSuccess={cloudStatus === 'SYNCED'} onSave={handleSaveToCloud} onDeleteBuilding={handleDeleteBuilding} onEnterBuilding={handleEnterBuilding} showLabels={showRackLabels} visibleStatuses={visibleStatuses} alerts={alerts || []} /> :
             <Viewer3D
               clashingIds={clashingEquipmentIds}

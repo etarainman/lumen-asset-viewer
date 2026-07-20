@@ -9,6 +9,9 @@ interface SiteMapViewProps {
   sites: SiteDefinition[];
   onOpenSite: (id: string) => void;
   focusSiteId: string | null;
+  // Which dataset to show. Chosen at the login screen and fixed for the
+  // session — DEMO shows the 787 demo overlay, LUMEN shows the 3 real sites.
+  overlayCustomer: OverlayCustomer;
 }
 
 // --- Demo overlay types & constants -----------------------------------
@@ -25,8 +28,6 @@ function toTitleCase(input: string): string {
   return input.replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 }
 
-const DEMO_SITES_VISIBLE_KEY = 'LAV_DEMO_SITES_VISIBLE';
-const OVERLAY_CUSTOMER_KEY = 'LAV_OVERLAY_CUSTOMER';
 const OVERLAY_LABEL_ZOOM_THRESHOLD = 7;
 
 // --- Demo 3D Viewer: synthetic site-plan data ---------------------------
@@ -69,7 +70,7 @@ const demoNoOpEnterBuilding = (_id: string) => {};
 
 type OverlayCustomer = 'DEMO' | 'LUMEN';
 
-const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteId }) => {
+const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteId, overlayCustomer }) => {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<Record<string, L.Marker>>({});
@@ -80,37 +81,22 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
   const [mapEpoch, setMapEpoch] = useState(0);
 
   // --- Overlay (demo) state ---
+  // `overlayCustomer` arrives as a prop (chosen at login, fixed for the
+  // session). The ref mirrors it so the imperative Leaflet effects can read
+  // the current value without re-subscribing.
   const [demoSites, setDemoSites] = useState<DemoSite[]>([]);
-  const [overlayCustomer, setOverlayCustomer] = useState<OverlayCustomer>(() => {
-    try {
-      const stored = localStorage.getItem(OVERLAY_CUSTOMER_KEY);
-      return stored === 'LUMEN' ? 'LUMEN' : 'DEMO';
-    } catch {
-      return 'DEMO';
-    }
-  });
   const overlayCustomerRef = useRef(overlayCustomer);
-  // "Demo Sites" toggle only applies in Lumen mode (the overlay is always-on
-  // in Demo Customer mode). Preserves the pre-existing toggle behaviour.
-  const [demoVisible, setDemoVisible] = useState<boolean>(() => {
-    try {
-      const stored = localStorage.getItem(DEMO_SITES_VISIBLE_KEY);
-      return stored === null ? true : stored === 'true';
-    } catch {
-      return true;
-    }
-  });
   const demoLayerRef = useRef<L.LayerGroup | null>(null);
-  const demoVisibleRef = useRef(demoVisible);
   const [activeDemoSite, setActiveDemoSite] = useState<DemoSite | null>(null);
   const [show360Viewer, setShow360Viewer] = useState(false);
   const [show3DViewer, setShow3DViewer] = useState(false);
   const [showDocumentsCentre, setShowDocumentsCentre] = useState(false);
 
-  // Whether the demo/overlay layer should actually be shown on the map.
-  // Demo Customer: always on. Lumen: follows the on/off toggle.
+  // Whether the demo/overlay layer should be shown on the map.
+  // Demo mode: on. Lumen mode: never — the two datasets are fully separate
+  // (Lumen shows only the 3 real sites, Demo shows only the demo sites).
   const isOverlayEffectivelyVisible = useCallback(() => {
-    return overlayCustomerRef.current === 'DEMO' ? true : demoVisibleRef.current;
+    return overlayCustomerRef.current === 'DEMO';
   }, []);
 
   // Fetch the overlay sites at runtime. If it fails, fail silently — real
@@ -141,11 +127,6 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
 
   useEffect(() => {
     overlayCustomerRef.current = overlayCustomer;
-    try {
-      localStorage.setItem(OVERLAY_CUSTOMER_KEY, overlayCustomer);
-    } catch {
-      // ignore storage failures (e.g. private browsing)
-    }
     // Toggle real workspace pin visibility (render-time only).
     if (realLayerRef.current && mapRef.current) {
       const map = mapRef.current;
@@ -166,23 +147,6 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
       }
     }
   }, [overlayCustomer, isOverlayEffectivelyVisible]);
-
-  useEffect(() => {
-    demoVisibleRef.current = demoVisible;
-    try {
-      localStorage.setItem(DEMO_SITES_VISIBLE_KEY, String(demoVisible));
-    } catch {
-      // ignore storage failures (e.g. private browsing)
-    }
-    if (demoLayerRef.current && mapRef.current) {
-      const map = mapRef.current;
-      if (isOverlayEffectivelyVisible()) {
-        if (!map.hasLayer(demoLayerRef.current)) demoLayerRef.current.addTo(map);
-      } else {
-        if (map.hasLayer(demoLayerRef.current)) map.removeLayer(demoLayerRef.current);
-      }
-    }
-  }, [demoVisible, isOverlayEffectivelyVisible]);
 
   const handleOpen360Viewer = useCallback((site: DemoSite) => {
     setActiveDemoSite(site);
@@ -284,117 +248,9 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
         map.setView([sites[0].lat, sites[0].lng], 10);
     }
 
-    // --- Customer selector control (top-right) ---
-    const CustomerSelectorControl = L.Control.extend({
-        options: { position: 'topright' },
-        onAdd: function () {
-            const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control customer-selector-control');
-            container.style.background = 'rgba(15, 23, 42, 0.9)';
-            container.style.border = '1px solid rgba(255,255,255,0.1)';
-            container.style.borderRadius = '10px';
-            container.style.padding = '4px 8px';
-            container.style.display = 'flex';
-            container.style.alignItems = 'center';
-            container.style.gap = '6px';
-            container.style.userSelect = 'none';
-            container.style.backdropFilter = 'blur(6px)';
-
-            const label = L.DomUtil.create('span', '', container);
-            label.textContent = 'Customer';
-            label.style.fontSize = '10px';
-            label.style.color = '#94a3b8';
-            label.style.whiteSpace = 'nowrap';
-
-            const select = L.DomUtil.create('select', '', container) as HTMLSelectElement;
-            select.style.background = '#1e293b';
-            select.style.color = '#ffffff';
-            select.style.border = '1px solid rgba(255,255,255,0.15)';
-            select.style.borderRadius = '8px';
-            select.style.padding = '6px 8px';
-            select.style.fontSize = '11px';
-            select.style.fontWeight = '700';
-            select.style.outline = 'none';
-            select.style.cursor = 'pointer';
-
-            const optionDefs: Array<[OverlayCustomer, string]> = [['DEMO', 'Demo Customer'], ['LUMEN', 'Lumen']];
-            optionDefs.forEach(([value, text]) => {
-                const option = document.createElement('option');
-                option.value = value;
-                option.textContent = text;
-                select.appendChild(option);
-            });
-            select.value = overlayCustomerRef.current;
-
-            L.DomEvent.disableClickPropagation(container);
-            L.DomEvent.on(select, 'change', () => {
-                const value = select.value as OverlayCustomer;
-                if (value === overlayCustomerRef.current) return;
-                setOverlayCustomer(value);
-                overlayCustomerRef.current = value;
-            });
-
-            return container;
-        }
-    });
-    const customerSelectorControl = new CustomerSelectorControl();
-    customerSelectorControl.addTo(map);
-
-    // --- Demo sites on/off toggle (Lumen mode only) ---
-    const DemoToggleControl = L.Control.extend({
-        options: { position: 'topright' },
-        onAdd: function () {
-            const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control demo-toggle-control');
-            container.style.background = 'rgba(15, 23, 42, 0.9)';
-            container.style.border = '1px solid rgba(255,255,255,0.1)';
-            container.style.borderRadius = '10px';
-            container.style.padding = '2px';
-            container.style.cursor = 'pointer';
-            container.style.userSelect = 'none';
-            container.style.backdropFilter = 'blur(6px)';
-
-            const button = L.DomUtil.create('button', '', container);
-            button.type = 'button';
-            button.style.display = 'flex';
-            button.style.alignItems = 'center';
-            button.style.gap = '6px';
-            button.style.padding = '8px 12px';
-            button.style.background = 'transparent';
-            button.style.border = 'none';
-            button.style.color = '#e2e8f0';
-            button.style.fontSize = '10px';
-            button.style.fontWeight = '900';
-            button.style.letterSpacing = 'normal';
-            button.style.whiteSpace = 'nowrap';
-
-            const renderLabel = () => {
-                const on = demoVisibleRef.current;
-                button.innerHTML = `
-                    <span style="display:inline-block;width:8px;height:8px;border-radius:9999px;background:${on ? '#a855f7' : '#475569'};box-shadow:${on ? '0 0 6px #a855f7' : 'none'};"></span>
-                    <span>Demo Sites ${on ? 'On' : 'Off'}</span>
-                `;
-            };
-            const renderVisibility = () => {
-                container.style.display = overlayCustomerRef.current === 'LUMEN' ? '' : 'none';
-            };
-            renderLabel();
-            renderVisibility();
-
-            L.DomEvent.disableClickPropagation(container);
-            L.DomEvent.on(button, 'click', (e) => {
-                L.DomEvent.stop(e);
-                setDemoVisible(prev => {
-                    const next = !prev;
-                    demoVisibleRef.current = next;
-                    renderLabel();
-                    return next;
-                });
-            });
-
-            return container;
-        }
-    });
-    const demoToggleControl = new DemoToggleControl();
-    demoToggleControl.addTo(map);
+    // The customer (dataset) is chosen at the login screen and passed in as a
+    // prop — there is no on-map selector. The map simply renders the dataset
+    // for the current `overlayCustomer`.
 
     // Track zoom level for the overlay pin label threshold.
     const applyLabelZoomClass = () => {
@@ -411,28 +267,9 @@ const SiteMapView: React.FC<SiteMapViewProps> = ({ sites, onOpenSite, focusSiteI
 
     return () => {
         map.off('zoomend', applyLabelZoomClass);
-        customerSelectorControl.remove();
-        demoToggleControl.remove();
         if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
     };
   }, [sites, onOpenSite]);
-
-  // Re-sync the demo-toggle control's visibility whenever customer mode changes
-  // (the control itself is only created once, in the effect above).
-  useEffect(() => {
-    const toggleEl = containerRef.current?.parentElement?.querySelector('.demo-toggle-control') as HTMLElement | null;
-    if (toggleEl) {
-        toggleEl.style.display = overlayCustomer === 'LUMEN' ? '' : 'none';
-    }
-    const selectorButtons = containerRef.current?.parentElement?.querySelectorAll('.customer-selector-control button');
-    selectorButtons?.forEach((btn) => {
-        const el = btn as HTMLButtonElement;
-        const active = el.dataset.value === overlayCustomer;
-        el.style.background = active ? '#a855f7' : 'transparent';
-        el.style.color = active ? '#ffffff' : '#e2e8f0';
-        el.style.boxShadow = active ? '0 0 8px rgba(168,85,247,0.5)' : 'none';
-    });
-  }, [overlayCustomer]);
 
   // Handle programmatic focus/zoom
   useEffect(() => {
