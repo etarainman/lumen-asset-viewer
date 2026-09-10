@@ -3,6 +3,47 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 import { Status4D, Building, ViewLevel, BuildingDefinition, StatusDefinition, EquipmentDefinition, ColorMode, OwnerDefinition, RackDefinition } from '../types';
+import { useTheme, ViewerTheme } from '../context/ThemeContext';
+import { updateGridHelperColours, VIEWER_PALETTES } from '../utils/viewerTheme';
+
+type ViewerLabelRole = 'suite' | 'rmu' | 'rack' | 'tour' | 'equipment';
+
+const applyViewerLabelTheme = (element: HTMLElement, theme: ViewerTheme) => {
+  const role = element.dataset.viewerLabel as ViewerLabelRole | undefined;
+  const isSelected = element.dataset.selected === 'true';
+
+  if (role === 'suite') {
+    element.className = theme === 'dark'
+      ? 'text-xs font-black uppercase tracking-widest border px-2 py-1 rounded bg-black/50'
+      : 'text-xs font-black tracking-widest border px-2 py-1 rounded bg-white/90 shadow-lg';
+  } else if (role === 'rmu') {
+    element.className = theme === 'dark'
+      ? `text-[13px] font-black font-mono transition-all ${isSelected ? 'text-blue-400 drop-shadow-[0_0_5px_rgba(59,130,246,0.8)]' : 'text-slate-400'}`
+      : `text-[13px] font-black font-mono transition-all ${isSelected ? 'text-sky-700 drop-shadow-[0_0_4px_rgba(14,165,233,0.3)]' : 'text-slate-600'}`;
+  } else if (role === 'rack') {
+    element.className = theme === 'dark' ? 'building-label-3d' : 'building-label-3d viewer-label-rack-light';
+    if (isSelected) {
+      const accent = theme === 'dark' ? '#3b82f6' : '#0ea5e9';
+      element.style.borderColor = accent;
+      element.style.color = accent;
+      element.style.boxShadow = theme === 'dark'
+        ? '0 0 10px rgba(59, 130, 246, 0.5)'
+        : '0 0 10px rgba(14, 165, 233, 0.35)';
+    } else {
+      element.style.removeProperty('border-color');
+      element.style.removeProperty('color');
+      element.style.removeProperty('box-shadow');
+    }
+  } else if (role === 'tour') {
+    element.className = theme === 'dark'
+      ? 'px-1.5 py-0.5 rounded-full bg-red-500/20 border border-red-400/50 text-red-400 text-[8px] font-black tracking-widest backdrop-blur-sm pointer-events-none'
+      : 'px-1.5 py-0.5 rounded-full bg-red-50/95 border border-red-200 text-red-700 text-[8px] font-black tracking-widest backdrop-blur-sm pointer-events-none shadow-sm';
+  } else if (role === 'equipment') {
+    element.className = theme === 'dark'
+      ? 'text-[11px] font-black uppercase tracking-tighter text-white/90 bg-black/60 px-1.5 py-0.5 rounded border border-white/10 pointer-events-none whitespace-nowrap text-center flex flex-col items-center justify-center min-w-[50px] shadow-lg'
+      : 'text-[11px] font-black tracking-tighter text-slate-700 bg-white/90 px-1.5 py-0.5 rounded border border-slate-200 pointer-events-none whitespace-nowrap text-center flex flex-col items-center justify-center min-w-[50px] shadow-lg';
+  }
+};
 
 export interface Viewer3DHandle {
   setCameraPreset: (preset: '3D' | 'PLAN' | 'ELEVATION' | 'ROW_A' | 'ROW_B', lineup?: string) => void;
@@ -42,6 +83,7 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
   selectedRackId, selectedEquipmentId, shellOpacity, statuses, owners, colorMode, colorCodingEnabled,
   rackDefs, equipmentDefs = [], showRackLabels = true, showRMULabels = false, showEqLabels = true, showRoof = false, showGrid = false, showSuites = true, showVirtualTours = true, visibleStatuses = Object.values(Status4D), onSelectRack, onSelectEquipment, focusTrigger = 0, clashingIds, hiddenLineUps
 }, ref) => {
+  const { viewerTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const onSelectRackRef = useRef(onSelectRack);
   const onSelectEquipmentRef = useRef(onSelectEquipment);
@@ -255,7 +297,7 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
     const h = containerRef.current.clientHeight;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x020617);
+    scene.background = new THREE.Color(VIEWER_PALETTES[viewerTheme].background);
 
     const perspectiveCamera = new THREE.PerspectiveCamera(40, w / h, 0.1, 10000);
     perspectiveCamera.position.set(25, 20, 25);
@@ -508,20 +550,21 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
     sun.castShadow = true;
     ctx.scene.add(sun);
 
-    const grid = new THREE.GridHelper(100, 100, 0x1e293b, 0x0f172a);
+    const palette = VIEWER_PALETTES[viewerTheme];
+    const grid = new THREE.GridHelper(100, 100, palette.gridMajor, palette.gridMinor);
     grid.position.y = 0.01;
-    grid.userData = { type: 'GRID' };
+    grid.userData = { type: 'GRID', themeRole: 'main', divisions: 100 };
     grid.visible = showGrid;
     ctx.scene.add(grid);
 
-    const subGrid = new THREE.GridHelper(100, 400, 0x8a5a7a, 0x4a2a3a);
+    const subGrid = new THREE.GridHelper(100, 400, palette.subGridMajor, palette.subGridMinor);
     subGrid.position.y = 0.02;
     if (subGrid.material instanceof THREE.Material) {
       subGrid.material.transparent = true;
       subGrid.material.opacity = 0.35;
       subGrid.material.depthWrite = false;
     }
-    subGrid.userData = { type: 'GRID' };
+    subGrid.userData = { type: 'GRID', themeRole: 'sub', divisions: 400 };
     subGrid.visible = showGrid;
     ctx.scene.add(subGrid);
 
@@ -663,7 +706,8 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
             const labelDiv = document.createElement('div');
             labelDiv.style.color = suite.color || '#f59e0b';
             labelDiv.style.borderColor = (suite.color || '#f59e0b') + '80';
-            labelDiv.className = 'text-xs font-black uppercase tracking-widest border px-2 py-1 rounded bg-black/50';
+            labelDiv.dataset.viewerLabel = 'suite';
+            applyViewerLabelTheme(labelDiv, viewerTheme);
             labelDiv.textContent = 'Suite ' + suite.name;
             const labelObj = new CSS2DObject(labelDiv);
             labelObj.position.set(0, wallH + 0.5, 0);
@@ -746,7 +790,9 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
               labelIncrements.forEach(u => {
                 [-1, 1].forEach(side => {
                   const labelDiv = document.createElement('div');
-                  labelDiv.className = `text-[13px] font-black font-mono transition-all ${isSelected ? 'text-blue-400 drop-shadow-[0_0_5px_rgba(59,130,246,0.8)]' : 'text-slate-400'}`;
+                  labelDiv.dataset.viewerLabel = 'rmu';
+                  labelDiv.dataset.selected = String(isSelected);
+                  applyViewerLabelTheme(labelDiv, viewerTheme);
                   labelDiv.textContent = `${u}`;
                   const labelObj = new CSS2DObject(labelDiv);
                   const yPos = ((u - 1) * rUStep);
@@ -758,7 +804,9 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
 
             if (showRackLabels) {
               const labelDiv = document.createElement('div');
-              labelDiv.className = 'building-label-3d';
+              labelDiv.dataset.viewerLabel = 'rack';
+              labelDiv.dataset.selected = String(isSelected);
+              applyViewerLabelTheme(labelDiv, viewerTheme);
               labelDiv.style.pointerEvents = 'auto';
               labelDiv.onclick = (e) => {
                 if (e.ctrlKey) {
@@ -769,9 +817,6 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
                 }
               };
               labelDiv.textContent = rack.label;
-              if (isSelected) {
-                labelDiv.style.borderColor = '#3b82f6'; labelDiv.style.color = '#3b82f6'; labelDiv.style.boxShadow = '0 0 10px rgba(59, 130, 246, 0.5)';
-              }
               const labelObj = new CSS2DObject(labelDiv);
               labelObj.position.set(0, rHeight + 0.5, 0);
               rackGroup.add(labelObj);
@@ -801,7 +846,8 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
 
               // 360 Label for Hotspot
               const tourLabelDiv = document.createElement('div');
-              tourLabelDiv.className = 'px-1.5 py-0.5 rounded-full bg-red-500/20 border border-red-400/50 text-red-400 text-[8px] font-black tracking-widest backdrop-blur-sm pointer-events-none';
+              tourLabelDiv.dataset.viewerLabel = 'tour';
+              applyViewerLabelTheme(tourLabelDiv, viewerTheme);
               tourLabelDiv.textContent = '360° TOUR';
               const tourLabel = new CSS2DObject(tourLabelDiv);
               tourLabel.position.set(0, 0.6, 0);
@@ -840,7 +886,8 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
               const labelDiv = document.createElement('div');
               const vendor = eqDef?.manufacturer || '';
               const model = eqDef?.name || '';
-              labelDiv.className = 'text-[11px] font-black uppercase tracking-tighter text-white/90 bg-black/60 px-1.5 py-0.5 rounded border border-white/10 pointer-events-none whitespace-nowrap text-center flex flex-col items-center justify-center min-w-[50px] shadow-lg';
+              labelDiv.dataset.viewerLabel = 'equipment';
+              applyViewerLabelTheme(labelDiv, viewerTheme);
               labelDiv.innerHTML = `<span class="opacity-60 text-[8px] leading-tight">${vendor}</span><span class="leading-tight">${model}</span>`;
               const labelObj = new CSS2DObject(labelDiv);
               // Position on the front face (z increases towards the front in this setup)
@@ -853,7 +900,29 @@ const Viewer3D = forwardRef<Viewer3DHandle, Viewer3DProps>(({
     });
   }, [buildings, buildingDefs, activeBuildingId, viewLevel, shellOpacity, statuses, owners, colorMode, colorCodingEnabled, rackDefs, equipmentDefs, showRackLabels, showRMULabels, showEqLabels, showRoof, showSuites, showVirtualTours, visibleStatuses, selectedRackId, selectedEquipmentId, clashingIds, hiddenLineUps]);
 
-  return <div ref={containerRef} className="w-full h-full relative bg-slate-950 overflow-hidden" />;
+  useEffect(() => {
+    const ctx = contextRef.current;
+    if (!ctx) return;
+
+    const palette = VIEWER_PALETTES[viewerTheme];
+    ctx.scene.background = new THREE.Color(palette.background);
+    ctx.scene.traverse(object => {
+      if (!(object instanceof THREE.GridHelper) || object.userData?.type !== 'GRID') return;
+      const isSubGrid = object.userData.themeRole === 'sub';
+      updateGridHelperColours(
+        object,
+        object.userData.divisions,
+        isSubGrid ? palette.subGridMajor : palette.gridMajor,
+        isSubGrid ? palette.subGridMinor : palette.gridMinor
+      );
+    });
+
+    containerRef.current
+      ?.querySelectorAll<HTMLElement>('[data-viewer-label]')
+      .forEach(element => applyViewerLabelTheme(element, viewerTheme));
+  }, [viewerTheme]);
+
+  return <div ref={containerRef} className="viewer-surface w-full h-full relative overflow-hidden" />;
 });
 Viewer3D.displayName = 'Viewer3D';
 export default Viewer3D;

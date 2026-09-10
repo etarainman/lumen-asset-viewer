@@ -1,0 +1,2446 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Rack Review — Inventory Extraction Pilot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f14;
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    button { font-family: Arial, sans-serif; }
+
+    .app {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 52px 1fr;
+    }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      background: #0b0f14;
+      border-bottom: 1px solid #1b2430;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 16px;
+      position: relative;
+      z-index: 50;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .crumb { position: relative; flex: 0 0 auto; }
+
+    .crumb-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #e2e8f0;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .crumb-btn.static { cursor: default; color: #94a3b8; }
+    .crumb-btn.static:hover { background: #121a24; border-color: #263141; }
+
+    .crumb-sep { color: #3f4c5e; font-size: 12px; flex: 0 0 auto; }
+
+    .crumb-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      display: flex;
+      align-items: center;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #67e8f9;
+      font-size: 12.5px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      padding: 6px 26px 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'><path d='M0 0 L8 0 L4 6 Z' fill='%2364748b'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 8px 6px;
+    }
+
+    .crumb-select:hover { background-color: #182231; border-color: #334155; }
+    .crumb-select:focus { outline: none; border-color: #22d3ee; }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+
+    .anomaly-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1013;
+      border: 1px solid #4c1d24;
+      color: #fca5a5;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .anomaly-badge:hover { background: #241318; }
+
+    .anomaly-badge.zero {
+      background: #121a24;
+      border-color: #263141;
+      color: #64748b;
+    }
+
+    .anomaly-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .anomaly-badge.zero .dot { background: #475569; }
+
+    /* ---------- Main split ---------- */
+    .main-split {
+      display: flex;
+      min-height: 0;
+      min-width: 0;
+      position: relative;
+    }
+
+    .pane-left {
+      position: relative;
+      height: 100%;
+      min-width: 160px;
+      background: #000;
+    }
+
+    #viewer { height: 100%; width: 100%; background: #000; }
+
+    .pano-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: #64748b;
+      font-size: 13px;
+      background: #05070f;
+      text-align: center;
+      padding: 20px;
+      z-index: 5;
+    }
+
+    .pano-placeholder.show { display: flex; }
+
+    .vsplitter {
+      flex: 0 0 6px;
+      width: 6px;
+      cursor: col-resize;
+      background: #0b0f14;
+      position: relative;
+    }
+
+    .vsplitter::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 2px;
+      width: 2px;
+      background: #1b2430;
+    }
+
+    .vsplitter:hover::after, .vsplitter.dragging::after { background: #22d3ee; }
+
+    .pane-right {
+      flex: 1 1 auto;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      background: #0b0f14;
+    }
+
+    .vsplitter.collapsed { display: none; }
+
+    /* ---------- Centre photo panel ---------- */
+    .pane-photo {
+      display: none;
+      flex-direction: column;
+      min-width: 160px;
+      min-height: 0;
+      background: #e8ecf2;
+      position: relative;
+    }
+
+    .pane-photo.on { display: flex; }
+
+    .photo-viewport {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-viewport.zoomed { align-items: flex-start; justify-content: flex-start; }
+    .photo-viewport.grabbable { cursor: grab; }
+    .photo-viewport.grabbing { cursor: grabbing; }
+
+    .photo-img-box { position: relative; flex: 0 0 auto; }
+
+    .photo-img {
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .photo-overlay-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .photo-band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background: rgba(34, 211, 238, 0.22);
+      border-top: 2px solid #22d3ee;
+      border-bottom: 2px solid #22d3ee;
+      box-sizing: border-box;
+    }
+
+    .photo-strip-seg {
+      position: absolute;
+      left: 0;
+      width: 6px;
+    }
+
+    .photo-broken {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background: #0b0f14;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.5;
+      z-index: 6;
+    }
+
+    .photo-broken.show { display: flex; }
+
+    .photo-zoom-overlay {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(244, 246, 249, 0.82);
+      backdrop-filter: blur(3px);
+      border: 1px solid #c7d0dc;
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .photo-zoom-overlay .tbtn-light { background: rgba(255, 255, 255, 0.6); }
+    .photo-zoom-overlay .tbtn-light:hover { background: #ffffff; }
+
+    /* ---------- 360 overlays ---------- */
+    .overlay-corner {
+      position: absolute;
+      z-index: 10;
+      display: flex;
+      gap: 6px;
+      background: rgba(11, 15, 20, 0.7);
+      backdrop-filter: blur(3px);
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+
+    .overlay-heights {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    .overlay-faces {
+      left: 12px;
+      bottom: 12px;
+    }
+
+    .overlay-position {
+      left: 12px;
+      top: 12px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 8px 12px;
+    }
+
+    .overlay-btn {
+      padding: 6px 10px;
+      border-radius: 7px;
+      border: 1px solid #334155;
+      background: rgba(15, 23, 42, 0.7);
+      color: #cbd5e1;
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .overlay-btn:hover { background: #1c2734; }
+
+    .overlay-btn.active {
+      background: #0891b2;
+      border-color: #22d3ee;
+      color: white;
+    }
+
+    .overlay-position .pos-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .overlay-position .pos-meta {
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+
+    /* ---------- Right panel: elevation + table ---------- */
+    .tbtn {
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1px solid #263141;
+      background: #121a24;
+      color: #cbd5e1;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .tbtn:hover { background: #1c2734; }
+    .tbtn.active { background: #0891b2; border-color: #22d3ee; color: white; }
+
+    .zoom-readout {
+      font-size: 10.5px;
+      color: #64748b;
+      min-width: 32px;
+      text-align: center;
+    }
+
+    .zoom-readout-light { color: #334155; }
+
+    .elevation-pane {
+      flex: 1 1 auto;
+      min-height: 60px;
+      overflow: auto;
+      position: relative;
+      background: #e8ecf2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .elevation-pane.zoomed { align-items: flex-start; justify-content: flex-start; }
+    .elevation-pane.grabbable { cursor: grab; }
+    .elevation-pane.grabbing { cursor: grabbing; }
+
+    .elevation-svg-wrap {
+      transform-origin: top left;
+    }
+
+    /* Zoom control buttons sit over the light elevation pane */
+    .tbtn-light {
+      background: #f4f6f9;
+      border: 1px solid #c7d0dc;
+      color: #334155;
+    }
+
+    .tbtn-light:hover { background: #e2e8f0; }
+    .tbtn-light.active { background: #0891b2; border-color: #22d3ee; color: white; }
+
+    /* Floating zoom overlay, top-right corner of the elevation pane */
+    .elevation-zoom-overlay {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(244, 246, 249, 0.82);
+      backdrop-filter: blur(3px);
+      border: 1px solid #c7d0dc;
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .elevation-zoom-overlay .tbtn-light {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .elevation-zoom-overlay .tbtn-light:hover { background: #ffffff; }
+
+    /* ---------- Top bar: Edit button toast ---------- */
+    .topbar-edit-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .edit-toast {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #121a24;
+      border: 1px solid #263141;
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 60;
+    }
+
+    .edit-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hsplitter {
+      flex: 0 0 6px;
+      height: 6px;
+      cursor: row-resize;
+      background: #0b0f14;
+      position: relative;
+    }
+
+    .hsplitter::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 2px;
+      height: 2px;
+      background: #1b2430;
+    }
+
+    .hsplitter:hover::after, .hsplitter.dragging::after { background: #22d3ee; }
+
+    .hsplitter.collapsed { display: none; }
+
+    /* ---------- Table pane ---------- */
+    .table-pane {
+      flex: 0 0 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .table-pane.hidden { display: none; }
+
+    .table-scroll {
+      overflow: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .unit-table {
+      border-collapse: collapse;
+      font-size: 11px;
+      width: 100%;
+      min-width: 480px;
+    }
+
+    .unit-table thead th {
+      position: sticky;
+      top: 0;
+      background: #121a24;
+      text-align: left;
+      color: #64748b;
+      font-size: 11px;
+      padding: 6px 8px;
+      border-bottom: 1px solid #263141;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .unit-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #131c2e;
+      color: #cbd5e1;
+      white-space: nowrap;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .unit-table tr { cursor: pointer; }
+    .unit-table tr:hover td { background: #111c33; }
+    .unit-table tr.selected td { background: #0c2a3a; }
+    .unit-table tr.flash td { background: #113247 !important; }
+
+    .unit-table .alarm-yes { color: #f87171; font-weight: 700; }
+    .unit-table .alarm-no { color: #475569; }
+
+    .table-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+    .conf-high { background: #4ade80; }
+    .conf-medium { background: #fbbf24; }
+    .conf-low { background: #f87171; }
+
+    /* ---------- SVG unit styling ---------- */
+    .u-rect { stroke-width: 2; }
+    .u-rect.type-transport { fill: #334155; stroke: #475569; }
+    .u-rect.type-power { fill: #3f3320; stroke: #78350f; }
+    .u-rect.type-fiber { fill: #1e3a3a; stroke: #0e7490; }
+    .u-rect.type-network { fill: #164e63; stroke: #0891b2; }
+    .u-rect.type-space {
+      fill: url(#hatch);
+      stroke: #263141;
+    }
+
+    .u-rect.selected { stroke: #22d3ee; stroke-width: 2; }
+    .u-rect:hover { filter: brightness(1.25); }
+
+    .u-leader { stroke: #334155; stroke-width: 2.5; fill: none; }
+    .u-leader.selected { stroke: #22d3ee; }
+
+    /* ---------- Colour-referencing (per-unit colour) ---------- */
+    .u-label-accent { display: none; }
+    .u-label-accent.on { display: block; }
+
+    .table-swatch {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 7px;
+      vertical-align: middle;
+      flex: 0 0 auto;
+    }
+
+    .table-cell-uspan { display: flex; align-items: center; }
+
+    .pano-hotspot-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 6px 1px rgba(0,0,0,0.55), 0 0 10px 2px var(--hl-glow, rgba(255,255,255,0.4));
+      cursor: pointer;
+      transition: width 0.12s ease, height 0.12s ease, box-shadow 0.12s ease;
+      box-sizing: border-box;
+    }
+
+    .pano-hotspot-dot.selected {
+      width: 22px;
+      height: 22px;
+      border-width: 3px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 0 14px 4px var(--hl-glow, rgba(255,255,255,0.6));
+    }
+
+    /* Must stay absolutely positioned - Pannellum anchors the wrapper via
+       translate() and centres it by its own size; position:relative would
+       drop it into normal flow (full-width, stacked at the pane's left edge). */
+    .pano-hotspot-wrap {
+      position: absolute;
+      width: max-content;
+      height: max-content;
+    }
+
+    .pano-hotspot-tip {
+      position: absolute;
+      bottom: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f1620;
+      border: 1px solid #263141;
+      color: #e2e8f0;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      white-space: nowrap;
+      padding: 4px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .pano-hotspot-wrap:hover .pano-hotspot-tip { opacity: 1; }
+
+    .u-label-group { cursor: pointer; }
+    .u-label-bg { fill: #121a24; stroke: #263141; stroke-width: 1; }
+    .u-label-bg.selected { stroke: #22d3ee; }
+    .u-label-bg.has-alarm { stroke: #7f1d1d; }
+    .u-label-text {
+      fill: #cbd5e1;
+      font-size: 28px;
+      font-family: Arial, sans-serif;
+    }
+    .u-label-text.alarm-tint { fill: #fca5a5; }
+    .u-label-sub {
+      fill: #64748b;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 21px;
+    }
+
+    .u-inline-text {
+      fill: #e2e8f0;
+      font-size: 26px;
+      font-family: Arial, sans-serif;
+      pointer-events: none;
+    }
+
+    .alarm-dot-svg {
+      animation: ledPulseSvg 1.1s ease-in-out infinite;
+    }
+
+    @keyframes ledPulseSvg {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .conf-dot-svg.conf-high { fill: #4ade80; }
+    .conf-dot-svg.conf-medium { fill: #fbbf24; }
+    .conf-dot-svg.conf-low { fill: #f87171; }
+
+    .plinth-label {
+      fill: #67e8f9;
+      font-size: 30px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ---------- Anomalies drawer ---------- */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 90;
+      display: none;
+    }
+
+    .drawer-overlay.show { display: block; }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 360px;
+      max-width: 90vw;
+      background: #0f1620;
+      border-left: 1px solid #263141;
+      z-index: 91;
+      transform: translateX(100%);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-panel.show { transform: translateX(0); }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid #1b2430;
+      flex: 0 0 auto;
+    }
+
+    .drawer-title { font-size: 14px; font-weight: 700; color: #e2e8f0; }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .drawer-close:hover { color: #e2e8f0; }
+
+    .drawer-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 12px 16px;
+    }
+
+    .anomaly-card {
+      background: #1a0f10;
+      border: 1px solid #4c1d24;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .anomaly-card:hover { border-color: #7f1d1d; }
+
+    .anomaly-rack {
+      font-weight: 700;
+      color: #67e8f9;
+      font-size: 11px;
+    }
+
+    .anomaly-unit {
+      font-weight: 700;
+      color: #fca5a5;
+      margin-top: 2px;
+    }
+
+    .anomaly-finding { color: #e2e8f0; margin-top: 2px; }
+
+    .no-anomalies { font-size: 12px; color: #64748b; font-style: italic; padding: 8px 2px; }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="breadcrumbs" id="breadcrumbs"></div>
+      <div class="topbar-right">
+        <button class="anomaly-badge" id="anomalyBadge" onclick="openDrawer()">
+          <span class="dot"></span>
+          <span id="anomalyBadgeText">Anomalies (0)</span>
+        </button>
+        <button class="tbtn" id="coloursToggleBtn" onclick="toggleColours()">Colours</button>
+        <button class="tbtn" id="photoToggleBtn" onclick="togglePhoto()">Photo</button>
+        <div class="topbar-edit-wrap">
+          <button class="tbtn" id="editBtn" onclick="showEditToast(event)">Edit</button>
+          <div class="edit-toast" id="editToast">Permissions not enabled for this user</div>
+        </div>
+        <button class="tbtn" id="tableToggleBtn" onclick="toggleTable()">Table</button>
+      </div>
+    </div>
+
+    <div class="main-split" id="mainSplit">
+      <div class="pane-left" id="paneLeft">
+        <div id="viewer"></div>
+        <div class="pano-placeholder" id="panoPlaceholder">
+          360 image not found for this position/height.<br/>Expected file in "360 Images/".
+        </div>
+
+        <div class="overlay-corner overlay-position">
+          <div class="pos-title" id="overlayPosTitle">—</div>
+          <div class="pos-meta" id="overlayPosMeta">—</div>
+        </div>
+
+        <div class="overlay-corner overlay-faces" id="overlayFaces"></div>
+
+        <div class="overlay-corner overlay-heights" id="overlayHeights"></div>
+      </div>
+
+      <div class="vsplitter" id="vsplitter"></div>
+
+      <div class="pane-photo" id="panePhoto">
+        <div class="photo-viewport" id="photoViewport">
+          <div class="photo-img-box" id="photoImgBox">
+            <img class="photo-img" id="photoImg" alt="Rack face photo elevation" draggable="false" />
+            <div class="photo-overlay-layer" id="photoOverlayLayer"></div>
+          </div>
+        </div>
+        <div class="photo-broken" id="photoBroken">Photo elevation not generated for this face.<br/>Expected file in "ortho/".</div>
+        <div class="photo-zoom-overlay" id="photoZoomOverlay">
+          <button class="tbtn-light" id="photoZoomOutBtn" onclick="photoZoomBy(-1)">&minus;</button>
+          <span class="zoom-readout zoom-readout-light" id="photoZoomReadout">1.0x</span>
+          <button class="tbtn-light" id="photoZoomInBtn" onclick="photoZoomBy(1)">+</button>
+          <button class="tbtn-light" id="photoFitBtn" onclick="resetPhotoZoom()" title="Fit to pane">&#10531;</button>
+        </div>
+      </div>
+
+      <div class="vsplitter collapsed" id="vsplitter2"></div>
+
+      <div class="pane-right" id="paneRight">
+        <div class="elevation-pane" id="elevationPane">
+          <div class="elevation-svg-wrap" id="elevationSvgWrap"></div>
+          <div class="elevation-zoom-overlay" id="elevationZoomOverlay">
+            <button class="tbtn-light" id="zoomOutBtn" onclick="zoomBy(-1)">&minus;</button>
+            <span class="zoom-readout zoom-readout-light" id="zoomReadout">1.0x</span>
+            <button class="tbtn-light" id="zoomInBtn" onclick="zoomBy(1)">+</button>
+            <button class="tbtn-light" id="fitBtn" onclick="resetZoom()" title="Fit to pane">&#10531;</button>
+          </div>
+        </div>
+
+        <div class="hsplitter collapsed" id="hsplitter"></div>
+
+        <div class="table-pane hidden" id="tablePane">
+          <div class="table-scroll">
+            <table class="unit-table" id="unitTable">
+              <thead>
+                <tr>
+                  <th>U-span</th>
+                  <th>Type</th>
+                  <th>Mfr</th>
+                  <th>Model</th>
+                  <th>Label</th>
+                  <th>Alarms</th>
+                  <th>Conf</th>
+                </tr>
+              </thead>
+              <tbody id="unitTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="drawer-panel" id="drawerPanel">
+    <div class="drawer-header">
+      <div class="drawer-title">Anomalies — this position</div>
+      <button class="drawer-close" onclick="closeDrawer()">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+  <script>
+    // ============================================================
+    // State
+    // ============================================================
+    let inventory = null;
+    let positionsById = {};
+    let buildingOrder = [];
+    let positionsByBuilding = {};
+
+    let currentBuilding = null;
+    let currentPositionId = null;
+    let currentHeight = "M";
+    let currentFace = "A";
+    let selectedUnitOrder = null;
+    let tableVisible = false;
+    let coloursOn = localStorage.getItem("rr_colours") === "1";
+    let photoOn = localStorage.getItem("rr_photo") === "1";
+
+    let viewer = null;
+
+    // Camera capture heights (metres above floor) by height key, and
+    // horizontal camera->rack distance, used for hotspot pitch maths.
+    const CAMERA_HEIGHT_M = { B: 0.85, M: 1.35, T: 1.85 };
+    const CAMERA_DISTANCE_M = 1.1;
+
+    // map of order -> hotspot id currently registered on the viewer, so we
+    // can remove them cleanly on toggle-off / face change / reload.
+    let activeHotspotIds = [];
+
+    // splitter ratios (persisted)
+    let vRatio = parseFloat(localStorage.getItem("rr_vRatio")) || 0.55; // left pane share
+    let hRatio = parseFloat(localStorage.getItem("rr_hRatio")) || 0.6; // elevation pane share (when table on)
+    let photoRatio = parseFloat(localStorage.getItem("rr_photoRatio")) || 0.22; // centre photo pane share (when photo on)
+
+    // zoom
+    let zoomLevel = 1;
+    const ZOOM_MIN = 1, ZOOM_MAX = 8;
+
+    // ---- Photo panel state ----
+    let photoZoomLevel = 1;
+    const PHOTO_ZOOM_MIN = 1, PHOTO_ZOOM_MAX = 6;
+    // Ortho photo elevation image geometry - fixed by the generation pipeline:
+    // 700px wide x 2199px tall, 1px = 1mm. Row 0 = 2.15m above floor, bottom row = -0.05m.
+    const PHOTO_IMG_W = 700, PHOTO_IMG_H = 2199;
+    let currentPhotoScale = 1; // last applied displayed-px-per-source-px scale
+    let photoImageOk = false; // whether the currently requested photo loaded successfully
+    let currentPhotoSrc = null; // last src assigned to #photoImg, to avoid redundant reloads
+
+    // rack geometry constants
+    const RACK_WIDTH_MM = 450;
+    const RACK_HEIGHT_MM = 2000;
+    const RACK_ASPECT = RACK_WIDTH_MM / RACK_HEIGHT_MM; // ~0.225
+
+    // ============================================================
+    // Helpers
+    // ============================================================
+    function imagePath(panoBase, height) {
+      return `360 Images/${panoBase} - ${height}.jpg`;
+    }
+
+    function heightName(h) {
+      if (h === "T") return "Top";
+      if (h === "M") return "Middle";
+      return "Bottom";
+    }
+
+    function typeFill(type) {
+      return "type-" + (type || "space");
+    }
+
+    // ============================================================
+    // Colour-referencing palette
+    // ============================================================
+    // 16 tab20-style hues, mid-saturation/mid-lightness so each reads clearly
+    // against both the light elevation pane (#e8ecf2) and the dark table/pano.
+    const UNIT_COLOUR_PALETTE = [
+      "#e6194b", "#3cb44b", "#4363d8", "#f58231",
+      "#911eb4", "#42d4f4", "#f032e6", "#bfa100",
+      "#008080", "#e6772e", "#9a6324", "#7a7ffa",
+      "#c04851", "#2f9e73", "#d67ab1", "#5c6bc0"
+    ];
+
+    function unitColour(index) {
+      return UNIT_COLOUR_PALETTE[index % UNIT_COLOUR_PALETTE.length];
+    }
+
+    function hexToRgb(hex) {
+      const m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex);
+      if (!m) return { r: 255, g: 255, b: 255 };
+      return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+    }
+
+    function colourWithAlpha(hex, alpha) {
+      const { r, g, b } = hexToRgb(hex);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // Assigns a stable colour to every non-space unit of `rack`, keyed by the
+    // unit's index within the rack's unit list (stable across views/renders).
+    function buildUnitColourMap(rack) {
+      const map = {};
+      if (!rack) return map;
+      let colourIdx = 0;
+      rack.units.forEach(unit => {
+        if (unit.type === "space") return;
+        map[unit.order] = unitColour(colourIdx);
+        colourIdx++;
+      });
+      return map;
+    }
+
+    // ============================================================
+    // Initial DOM state for persisted toggles that don't depend on
+    // inventory data (safe to apply before the fetch resolves).
+    // ============================================================
+    document.getElementById("photoToggleBtn").classList.toggle("active", photoOn);
+    document.getElementById("panePhoto").classList.toggle("on", photoOn);
+    document.getElementById("vsplitter2").classList.toggle("collapsed", !photoOn);
+
+    // ============================================================
+    // Load
+    // ============================================================
+    fetch("inventory.json")
+      .then(r => r.json())
+      .then(data => {
+        inventory = data;
+        inventory.positions.forEach(p => positionsById[p.id] = p);
+        inventory.racksByIdOnly = {};
+        inventory.racks.forEach(r => inventory.racksByIdOnly[r.id] = r);
+
+        buildingOrder = Object.keys(inventory.meta.buildings);
+        buildingOrder.forEach(b => positionsByBuilding[b] = []);
+        inventory.positions.forEach(p => {
+          if (!positionsByBuilding[p.building]) positionsByBuilding[p.building] = [];
+          positionsByBuilding[p.building].push(p);
+        });
+
+        currentBuilding = inventory.positions[0].building;
+        currentPositionId = inventory.positions[0].id;
+
+        document.getElementById("coloursToggleBtn").classList.toggle("active", coloursOn);
+
+        renderBreadcrumbs();
+        selectPosition(currentPositionId, true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    // ============================================================
+    // Breadcrumbs
+    // ============================================================
+    function renderBreadcrumbs() {
+      const bar = document.getElementById("breadcrumbs");
+      bar.innerHTML = "";
+
+      // --- static site crumb ---
+      const siteWrap = document.createElement("div");
+      siteWrap.className = "crumb";
+      const siteBtn = document.createElement("button");
+      siteBtn.className = "crumb-btn static";
+      siteBtn.innerHTML = `<span>DNVRCO — Demo</span>`;
+      siteWrap.appendChild(siteBtn);
+      bar.appendChild(siteWrap);
+
+      addSep(bar);
+
+      // --- building select ---
+      const buildingWrap = document.createElement("div");
+      buildingWrap.className = "crumb";
+      const buildingSelect = document.createElement("select");
+      buildingSelect.className = "crumb-select";
+      buildingSelect.id = "buildingSelect";
+      buildingOrder.forEach(b => {
+        const meta = inventory.meta.buildings[b];
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = meta.label;
+        if (b === currentBuilding) opt.selected = true;
+        buildingSelect.appendChild(opt);
+      });
+      buildingSelect.onchange = () => {
+        const b = buildingSelect.value;
+        if (b !== currentBuilding) {
+          currentBuilding = b;
+          const firstPos = positionsByBuilding[b][0];
+          selectPosition(firstPos.id, true);
+        }
+      };
+      buildingWrap.appendChild(buildingSelect);
+      bar.appendChild(buildingWrap);
+
+      addSep(bar);
+
+      // --- position select (options scoped to current building) ---
+      const posWrap = document.createElement("div");
+      posWrap.className = "crumb";
+      const posSelect = document.createElement("select");
+      posSelect.className = "crumb-select";
+      posSelect.id = "positionSelect";
+      populatePositionSelect(posSelect);
+      posSelect.onchange = () => {
+        selectPosition(posSelect.value, false);
+      };
+      posWrap.appendChild(posSelect);
+      bar.appendChild(posWrap);
+    }
+
+    function addSep(bar) {
+      const sep = document.createElement("span");
+      sep.className = "crumb-sep";
+      sep.textContent = "›";
+      bar.appendChild(sep);
+    }
+
+    function populatePositionSelect(select) {
+      select.innerHTML = "";
+      positionsByBuilding[currentBuilding].forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        opt.textContent = `${p.id.replace("Rack_", "Position ")} — ${p.faceA} / ${p.faceB}`;
+        if (p.id === currentPositionId) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    // ============================================================
+    // Position / face selection
+    // ============================================================
+    function selectPosition(positionId, resetBuilding) {
+      currentPositionId = positionId;
+      const pos = positionsById[positionId];
+      currentBuilding = pos.building;
+      currentFace = "A";
+      selectedUnitOrder = null;
+
+      renderBreadcrumbs();
+      loadViewer();
+      renderFaceOverlay();
+      renderHeightOverlay();
+      renderOverlayPosMeta();
+      renderRackPanel();
+    }
+
+    function stepPosition(direction) {
+      const list = inventory.positions;
+      const idx = list.findIndex(p => p.id === currentPositionId);
+      let next = idx + direction;
+      if (next < 0) next = 0;
+      if (next > list.length - 1) next = list.length - 1;
+      selectPosition(list[next].id, false);
+    }
+
+    function setHeight(height) {
+      currentHeight = height;
+      loadViewer();
+    }
+
+    function renderHeightOverlay() {
+      const wrap = document.getElementById("overlayHeights");
+      wrap.innerHTML = "";
+      [["B", "Bot"], ["M", "Mid"], ["T", "Top"]].forEach(([h, label]) => {
+        const btn = document.createElement("button");
+        btn.className = "overlay-btn" + (currentHeight === h ? " active" : "");
+        btn.textContent = label;
+        btn.onclick = () => { setHeight(h); renderHeightOverlay(); };
+        wrap.appendChild(btn);
+      });
+    }
+
+    function renderFaceOverlay() {
+      const pos = positionsById[currentPositionId];
+      const wrap = document.getElementById("overlayFaces");
+      wrap.innerHTML = "";
+
+      const btnA = document.createElement("button");
+      btnA.className = "overlay-btn" + (currentFace === "A" ? " active" : "");
+      btnA.textContent = `A · ${pos.faceA}`;
+      btnA.onclick = () => selectFace("A");
+      wrap.appendChild(btnA);
+
+      const btnB = document.createElement("button");
+      btnB.className = "overlay-btn" + (currentFace === "B" ? " active" : "");
+      btnB.textContent = `B · ${pos.faceB}`;
+      btnB.onclick = () => selectFace("B");
+      wrap.appendChild(btnB);
+    }
+
+    function renderOverlayPosMeta() {
+      const pos = positionsById[currentPositionId];
+      document.getElementById("overlayPosTitle").textContent =
+        `${pos.id.replace("Rack_", "Position ")} — ${heightName(currentHeight)}`;
+      document.getElementById("overlayPosMeta").textContent =
+        `Bldg ${pos.building} · Face A ${pos.faceA} · Face B ${pos.faceB}`;
+    }
+
+    function selectFace(face) {
+      currentFace = face;
+      selectedUnitOrder = null;
+      renderFaceOverlay();
+      renderRackPanel();
+
+      const pos = positionsById[currentPositionId];
+      const targetYaw = face === "B" ? pos.faceBYaw : pos.faceAYaw;
+
+      if (viewer) {
+        try { viewer.setYaw(targetYaw, true); } catch (e) {}
+      }
+    }
+    // Note: renderRackPanel() (called above) already calls refreshHotspots(),
+    // which rebuilds the dot set for the newly selected face's rack.
+
+    function getCurrentRack() {
+      const pos = positionsById[currentPositionId];
+      const rackId = currentFace === "B" ? pos.faceB : pos.faceA;
+      return inventory.racksByIdOnly[rackId];
+    }
+
+    // ============================================================
+    // Pannellum viewer
+    // ============================================================
+    function loadViewer() {
+      renderOverlayPosMeta();
+
+      const pos = positionsById[currentPositionId];
+      const panorama = imagePath(pos.panoBase, currentHeight);
+      const placeholder = document.getElementById("panoPlaceholder");
+      placeholder.classList.remove("show");
+
+      if (viewer) {
+        try { viewer.destroy(); } catch (e) {}
+        viewer = null;
+      }
+
+      viewer = pannellum.viewer("viewer", {
+        type: "equirectangular",
+        panorama: panorama,
+        autoLoad: true,
+        showControls: true,
+        compass: false,
+        hotSpotDebug: false,
+        hfov: 100,
+        yaw: currentFace === "B" ? pos.faceBYaw : pos.faceAYaw
+      });
+
+      viewer.on("error", () => placeholder.classList.add("show"));
+      viewer.on("load", () => { activeHotspotIds = []; refreshHotspots(); });
+    }
+
+    // ============================================================
+    // Colour-referencing: 360 hotspots
+    // ============================================================
+    // Unit centre-height above floor (metres), using the same cumulative
+    // bottom-up U computation the table/elevation use (bottom unit = U1).
+    function unitCentreHeightM(rack, spans, i) {
+      // spans[i].bottomU / topU are already bottom-up U indices (U1 = floor,
+      // rising toward the top of the rack) - same convention the table uses.
+      const { topU, bottomU } = spans[i];
+      const span = topU - bottomU + 1;
+      return 0.12 + ((bottomU - 1) + span / 2) / 45 * 1.95;
+    }
+
+    function hotspotPitchDeg(rack, spans, i) {
+      const hu = unitCentreHeightM(rack, spans, i);
+      const pos = positionsById[currentPositionId];
+      const cal = pos && pos.cal;
+      if (cal) {
+        // Per-face calibration measured from the M-height pano: pitch of the
+        // plinth top (huBottom) and the top rail (huTop). tan(pitch) is
+        // linear in physical height for a fixed camera, so interpolate in
+        // tangent space; B/T captures are the same camera raised/lowered by
+        // cameraStepM, which shifts tan(pitch) by step/d.
+        const fc = cal[currentFace] || cal.A;
+        const rad = Math.PI / 180;
+        const tanB = Math.tan(fc.pitchBottom * rad);
+        const tanT = Math.tan(fc.pitchTop * rad);
+        const t = (hu - cal.huBottom) / (cal.huTop - cal.huBottom);
+        let tanU = tanB + t * (tanT - tanB);
+        const dInv = (tanT - tanB) / (cal.huTop - cal.huBottom); // 1/d
+        if (currentHeight === "B") tanU += cal.cameraStepM * dInv;
+        if (currentHeight === "T") tanU -= cal.cameraStepM * dInv;
+        return Math.atan(tanU) / rad;
+      }
+      const hc = CAMERA_HEIGHT_M[currentHeight] != null ? CAMERA_HEIGHT_M[currentHeight] : CAMERA_HEIGHT_M.M;
+      return Math.atan2(hu - hc, CAMERA_DISTANCE_M) * 180 / Math.PI;
+    }
+
+    function removeAllHotspots() {
+      if (!viewer) { activeHotspotIds = []; return; }
+      activeHotspotIds.forEach(id => {
+        try { viewer.removeHotSpot(id); } catch (e) {}
+      });
+      activeHotspotIds = [];
+    }
+
+    // (Re)builds the hotspot set for the currently selected face's rack.
+    // Safe to call repeatedly - always clears existing hotspots first so we
+    // never double-add.
+    function refreshHotspots() {
+      if (!viewer) return;
+      removeAllHotspots();
+      if (!coloursOn) return;
+
+      const rack = getCurrentRack();
+      if (!rack) return;
+
+      const pos = positionsById[currentPositionId];
+      const yaw = currentFace === "B" ? pos.faceBYaw : pos.faceAYaw;
+      const spans = cumulativeSpans(rack);
+
+      rack.units.forEach((unit, i) => {
+        if (unit.type === "space") return;
+        const colourHex = currentUnitColours[unit.order] || unitColour(0);
+        const pitch = hotspotPitchDeg(rack, spans, i);
+        const id = `hl-${unit.order}`;
+        const label = unit.label || `${unit.mfr || ""} ${unit.model || ""}`.trim() || `Unit ${unit.order}`;
+
+        try {
+          viewer.addHotSpot({
+            id,
+            pitch,
+            yaw,
+            type: "info",
+            cssClass: "pano-hotspot-wrap",
+            createTooltipFunc: (div, args) => {
+              div.classList.add("pano-hotspot-wrap");
+              const dot = document.createElement("div");
+              dot.className = "pano-hotspot-dot" + (args.order === selectedUnitOrder ? " selected" : "");
+              dot.style.background = args.colour;
+              dot.style.setProperty("--hl-glow", colourWithAlpha(args.colour, 0.65));
+              dot.dataset.hotspotOrder = String(args.order);
+
+              const tip = document.createElement("div");
+              tip.className = "pano-hotspot-tip";
+              tip.textContent = args.label;
+
+              div.appendChild(dot);
+              div.appendChild(tip);
+              div.style.cursor = "pointer";
+              div.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectUnit(args.order);
+              });
+            },
+            createTooltipArgs: { order: unit.order, colour: colourHex, label }
+          });
+          activeHotspotIds.push(id);
+        } catch (e) {}
+      });
+    }
+
+    // Updates just the enlarged/shrunk state of existing hotspot dots without
+    // rebuilding them (used on selection change so we don't thrash Pannellum).
+    function updateHotspotSelection(order) {
+      document.querySelectorAll(".pano-hotspot-dot").forEach(el => {
+        const isSel = Number(el.dataset.hotspotOrder) === order;
+        el.classList.toggle("selected", isSel);
+      });
+    }
+
+    function toggleColours() {
+      coloursOn = !coloursOn;
+      localStorage.setItem("rr_colours", coloursOn ? "1" : "0");
+      document.getElementById("coloursToggleBtn").classList.toggle("active", coloursOn);
+      renderRackPanel();
+    }
+
+    // ============================================================
+    // Centre photo panel (orthorectified rack-face photo elevation)
+    // ============================================================
+    // Converts a top/bottom U index pair (bottom-up, matching cumulativeSpans)
+    // into image row numbers per the fixed generation-pipeline mapping:
+    // row 0 = 2.15m above floor, bottom row = -0.05m, 1px = 1mm.
+    function photoRowsForUnit(topU, bottomU) {
+      const yTop = (2.15 - (0.10 + topU * (2.0 / 45))) * 1000;
+      const yBottom = (2.15 - (0.10 + (bottomU - 1) * (2.0 / 45))) * 1000;
+      return { yTop, yBottom };
+    }
+
+    function togglePhoto() {
+      photoOn = !photoOn;
+      localStorage.setItem("rr_photo", photoOn ? "1" : "0");
+      document.getElementById("photoToggleBtn").classList.toggle("active", photoOn);
+      document.getElementById("panePhoto").classList.toggle("on", photoOn);
+      document.getElementById("vsplitter2").classList.toggle("collapsed", !photoOn);
+      applyVSplit();
+      scheduleRenderElevation();
+      renderPhotoPane();
+    }
+
+    // (Re)loads (or relayouts, if the image is already current) the photo for
+    // the currently selected rack face. Safe to call whenever the rack panel
+    // re-renders (position/face change, colours toggle) - skips the network
+    // request entirely if the target image hasn't changed.
+    function renderPhotoPane() {
+      photoZoomLevel = 1; // fit by default whenever the rack panel re-renders
+      if (!photoOn) return;
+
+      const rack = getCurrentRack();
+      const img = document.getElementById("photoImg");
+      const broken = document.getElementById("photoBroken");
+
+      if (!rack) {
+        currentPhotoSrc = null;
+        photoImageOk = false;
+        img.removeAttribute("src");
+        img.style.display = "none";
+        broken.classList.add("show");
+        renderPhotoOverlay();
+        return;
+      }
+
+      const src = `ortho/${rack.id}.jpg`;
+      if (src === currentPhotoSrc) {
+        // Same image already requested for this rack - just relayout (zoom
+        // reset above, pane size may have changed) and redraw the overlay.
+        layoutPhotoImage();
+        return;
+      }
+
+      currentPhotoSrc = src;
+      photoImageOk = false;
+      img.style.display = "none";
+      broken.classList.remove("show");
+
+      img.onload = () => {
+        photoImageOk = true;
+        img.style.display = "block";
+        broken.classList.remove("show");
+        layoutPhotoImage();
+      };
+      img.onerror = () => {
+        photoImageOk = false;
+        img.style.display = "none";
+        broken.classList.add("show");
+        renderPhotoOverlay();
+      };
+      img.src = src;
+    }
+
+    // Sizes the image to fit the panel HEIGHT (letterboxed horizontally),
+    // scaled further by photoZoomLevel, then redraws the selection band /
+    // colour strip overlay to match.
+    function layoutPhotoImage() {
+      if (!photoOn || !photoImageOk) return;
+      const viewport = document.getElementById("photoViewport");
+      const img = document.getElementById("photoImg");
+      const box = document.getElementById("photoImgBox");
+
+      const paneH = viewport.clientHeight;
+      const fitScale = paneH > 0 ? paneH / PHOTO_IMG_H : 1;
+      const scale = fitScale * photoZoomLevel;
+      const w = PHOTO_IMG_W * scale;
+      const h = PHOTO_IMG_H * scale;
+
+      img.style.width = w + "px";
+      img.style.height = h + "px";
+      box.style.width = w + "px";
+      box.style.height = h + "px";
+      currentPhotoScale = scale;
+
+      viewport.classList.toggle("zoomed", photoZoomLevel > 1);
+      viewport.classList.toggle("grabbable", photoZoomLevel > 1);
+
+      const readout = document.getElementById("photoZoomReadout");
+      if (readout) readout.textContent = photoZoomLevel.toFixed(1) + "x";
+
+      renderPhotoOverlay();
+    }
+
+    let photoLayoutRafId = null;
+    function schedulePhotoLayout() {
+      if (photoLayoutRafId != null) return;
+      photoLayoutRafId = requestAnimationFrame(() => {
+        photoLayoutRafId = null;
+        layoutPhotoImage();
+      });
+    }
+
+    // Draws the per-unit left-edge colour strip (Colours on) and the
+    // selected-unit highlight band as positioned divs over the image, scaled
+    // to the current displayed size - never repainted onto a canvas.
+    function renderPhotoOverlay() {
+      const layer = document.getElementById("photoOverlayLayer");
+      if (!layer) return;
+      layer.innerHTML = "";
+      if (!photoOn || !photoImageOk) return;
+
+      const rack = getCurrentRack();
+      if (!rack) return;
+      const spans = cumulativeSpans(rack);
+      const scale = currentPhotoScale;
+
+      if (coloursOn) {
+        rack.units.forEach((unit, i) => {
+          if (unit.type === "space") return;
+          const colourHex = currentUnitColours[unit.order];
+          if (!colourHex) return;
+          const { topU, bottomU } = spans[i];
+          const { yTop, yBottom } = photoRowsForUnit(topU, bottomU);
+          const seg = document.createElement("div");
+          seg.className = "photo-strip-seg";
+          seg.style.top = (yTop * scale) + "px";
+          seg.style.height = Math.max(1, (yBottom - yTop) * scale) + "px";
+          seg.style.background = colourHex;
+          layer.appendChild(seg);
+        });
+      }
+
+      if (selectedUnitOrder != null) {
+        const idx = rack.units.findIndex(u => u.order === selectedUnitOrder);
+        if (idx !== -1) {
+          const { topU, bottomU } = spans[idx];
+          const { yTop, yBottom } = photoRowsForUnit(topU, bottomU);
+          const band = document.createElement("div");
+          band.className = "photo-band";
+          band.style.top = (yTop * scale) + "px";
+          band.style.height = Math.max(1, (yBottom - yTop) * scale) + "px";
+
+          const unit = rack.units[idx];
+          const colourHex = (coloursOn && unit.type !== "space") ? currentUnitColours[unit.order] : null;
+          if (colourHex) {
+            band.style.background = colourWithAlpha(colourHex, 0.28);
+            band.style.borderTop = "2px solid " + colourHex;
+            band.style.borderBottom = "2px solid " + colourHex;
+          }
+          layer.appendChild(band);
+        }
+      }
+    }
+
+    function photoZoomBy(delta) {
+      photoZoomLevel = Math.min(PHOTO_ZOOM_MAX, Math.max(PHOTO_ZOOM_MIN, photoZoomLevel + delta));
+      layoutPhotoImage();
+    }
+
+    function resetPhotoZoom() {
+      photoZoomLevel = 1;
+      layoutPhotoImage();
+    }
+
+    // Zoom to a specific level, optionally keeping a given viewport-relative
+    // point (clientX/clientY) fixed on screen (zoom-toward-cursor) - mirrors
+    // the elevation pane's zoomTo().
+    function photoZoomTo(newLevel, clientX, clientY) {
+      const viewport = document.getElementById("photoViewport");
+      newLevel = Math.min(PHOTO_ZOOM_MAX, Math.max(PHOTO_ZOOM_MIN, newLevel));
+      if (newLevel === photoZoomLevel) return;
+
+      let anchor = null;
+      if (clientX != null && clientY != null) {
+        const rect = viewport.getBoundingClientRect();
+        const px = clientX - rect.left;
+        const py = clientY - rect.top;
+        const contentX = viewport.scrollLeft + px;
+        const contentY = viewport.scrollTop + py;
+        anchor = { px, py, contentX, contentY };
+      }
+
+      const ratio = newLevel / photoZoomLevel;
+      photoZoomLevel = newLevel;
+      layoutPhotoImage();
+
+      if (anchor) {
+        viewport.scrollLeft = anchor.contentX * ratio - anchor.px;
+        viewport.scrollTop = anchor.contentY * ratio - anchor.py;
+      }
+    }
+
+    // plain mouse-wheel zoom over the photo viewport (mirrors the elevation
+    // pane's global wheel listener)
+    document.addEventListener("wheel", (e) => {
+      const viewport = document.getElementById("photoViewport");
+      if (!photoOn || !viewport.contains(e.target)) return;
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.5 : -0.5;
+      photoZoomTo(photoZoomLevel + delta, e.clientX, e.clientY);
+    }, { passive: false });
+
+    // drag-to-pan when zoomed in (>1x), click-to-select-unit, double-click to
+    // reset to fit - mirrors the elevation pane's pan/click handling.
+    (function setupPhotoInteraction() {
+      const viewport = document.getElementById("photoViewport");
+      const box = document.getElementById("photoImgBox");
+      let dragging = false;
+      let moved = false;
+      let startX = 0, startY = 0;
+      let startScrollLeft = 0, startScrollTop = 0;
+
+      viewport.addEventListener("mousedown", (e) => {
+        if (photoZoomLevel <= 1) return;
+        if (e.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        startScrollLeft = viewport.scrollLeft;
+        startScrollTop = viewport.scrollTop;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (!moved && Math.hypot(dx, dy) > 4) {
+          moved = true;
+          viewport.classList.add("grabbing");
+        }
+        if (moved) {
+          viewport.scrollLeft = startScrollLeft - dx;
+          viewport.scrollTop = startScrollTop - dy;
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        viewport.classList.remove("grabbing");
+        if (moved) {
+          const swallow = (ev) => { ev.stopPropagation(); viewport.removeEventListener("click", swallow, true); };
+          viewport.addEventListener("click", swallow, true);
+        }
+        moved = false;
+      });
+
+      box.addEventListener("click", (e) => {
+        if (!photoImageOk) return;
+        const rack = getCurrentRack();
+        if (!rack) return;
+
+        const rect = box.getBoundingClientRect();
+        const clickY = e.clientY - rect.top;
+        const row = clickY / currentPhotoScale;
+        const heightM = 2.15 - row / 1000;
+        if (heightM < 0.10 || heightM > 2.10) return;
+
+        const spans = cumulativeSpans(rack);
+        for (let i = 0; i < rack.units.length; i++) {
+          const { topU, bottomU } = spans[i];
+          const bandBottom = 0.10 + (bottomU - 1) * (2.0 / 45);
+          const bandTop = 0.10 + topU * (2.0 / 45);
+          if (heightM >= bandBottom && heightM < bandTop) {
+            selectUnit(rack.units[i].order);
+            return;
+          }
+        }
+      });
+
+      viewport.addEventListener("dblclick", () => {
+        resetPhotoZoom();
+      });
+    })();
+
+    // ============================================================
+    // Rack panel orchestration
+    // ============================================================
+    let currentUnitColours = {};
+
+    function renderRackPanel() {
+      const rack = getCurrentRack();
+      zoomLevel = 1; // fit by default whenever rack changes
+      currentUnitColours = buildUnitColourMap(rack);
+      renderElevation();
+      renderTable(rack);
+      renderAnomalyBadge();
+      refreshHotspots();
+      renderPhotoPane();
+    }
+
+    // ============================================================
+    // Rack elevation (SVG, true aspect ratio)
+    // ============================================================
+    function cumulativeSpans(rack) {
+      // returns array parallel to rack.units with {topU, bottomU} using cumulative uHeight,
+      // top of rack = rackU, counting down as we go through units top->bottom
+      const totalU = rack.rackU || 45;
+      let cursor = totalU;
+      return rack.units.map(u => {
+        const uH = u.uHeight || 1;
+        const topU = cursor;
+        const bottomU = cursor - uH + 1;
+        cursor -= uH;
+        return { topU, bottomU };
+      });
+    }
+
+    // Minimum on-screen label text size, in px, and the SVG-unit base label font size
+    // used to derive the counter-scale factor k in fitAndZoom().
+    const MIN_LABEL_PX = 12;
+    const BASE_LABEL_FONT = 28;
+
+    function buildElevationSvg(rack, k) {
+      k = k || 1;
+      const totalU = rack.rackU || 45;
+
+      // Internal drawing coordinate system: rack body width = RACK_WIDTH_MM, height = RACK_HEIGHT_MM
+      // Rack body geometry is FIXED regardless of k - only label-related geometry scales.
+      const plinthH = 60; // px in svg-unit space, small plinth label bar at top
+      const bodyW = RACK_WIDTH_MM;
+      const bodyH = RACK_HEIGHT_MM;
+      const bodyX = 40; // left margin for rail/frame
+      const bodyY = plinthH;
+
+      const labelColW = 520 * k; // label column to the right
+      const labelGutter = 44 * k; // gap between rack body and label column start (leader line runs here)
+
+      const svgW = bodyX + bodyW + labelGutter + labelColW + 20;
+      const svgH = plinthH + bodyH + 20;
+
+      const spans = cumulativeSpans(rack);
+
+      let defs = `
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="6" height="6" fill="#0d131c"></rect>
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#64748b" stroke-width="2"></line>
+          </pattern>
+        </defs>
+      `;
+
+      let parts = [];
+
+      // plinth (bar geometry fixed; font counter-scales with k)
+      parts.push(`
+        <rect x="${bodyX}" y="8" width="${bodyW}" height="48" rx="4" fill="#0f1620" stroke="#263141"></rect>
+        <text class="plinth-label" style="font-size:${30 * k}px" x="${bodyX + bodyW / 2}" y="42" text-anchor="middle">${escapeXml(rack.id)}</text>
+      `);
+
+      // outer rack frame
+      parts.push(`<rect x="${bodyX}" y="${bodyY}" width="${bodyW}" height="${bodyH}" fill="#0a0e18" stroke="#1c232d" stroke-width="3" rx="4"></rect>`);
+
+      // rail dots (left rail)
+      let railDots = "";
+      const dotCount = 20;
+      for (let i = 0; i < dotCount; i++) {
+        const y = bodyY + 10 + (i * (bodyH - 20) / (dotCount - 1));
+        railDots += `<circle cx="${bodyX + 8}" cy="${y}" r="2" fill="#263141"></circle>`;
+      }
+      parts.push(railDots);
+
+      const unitInnerX = bodyX + 16;
+      const unitInnerW = bodyW - 32;
+
+      const leaderStartX = bodyX + bodyW;
+      const labelX = leaderStartX + labelGutter;
+
+      rack.units.forEach((unit, i) => {
+        const { topU, bottomU } = spans[i];
+        const uH = unit.uHeight || 1;
+        // y=0 at rack top (u=totalU), increases downward
+        const yTop = bodyY + ((totalU - topU) / totalU) * bodyH;
+        const yBottom = bodyY + ((totalU - bottomU + 1) / totalU) * bodyH;
+        const rectH = Math.max(yBottom - yTop, 1);
+        const rectY = yTop;
+        const isSpace = unit.type === "space";
+        const hasAlarm = unit.alarms && unit.alarms.length > 0;
+        const selected = unit.order === selectedUnitOrder;
+        const unitColourHex = !isSpace && coloursOn ? currentUnitColours[unit.order] : null;
+        const rectStyle = unitColourHex
+          ? ` style="fill:${colourWithAlpha(unitColourHex, 0.45)}; stroke:${unitColourHex}; stroke-width:2.5;"`
+          : "";
+
+        parts.push(`
+          <rect class="u-rect ${typeFill(unit.type)}${selected ? ' selected' : ''}"
+                data-order="${unit.order}"
+                x="${unitInnerX}" y="${rectY}" width="${unitInnerW}" height="${rectH}"
+                onclick="selectUnit(${unit.order})"${rectStyle}>
+          </rect>
+        `);
+
+        // alarm dot on block
+        if (hasAlarm) {
+          parts.push(`<circle class="alarm-dot-svg" cx="${unitInnerX + 18}" cy="${rectY + rectH / 2}" r="${11 * k}" fill="#ef4444"></circle>`);
+        }
+
+        const mfrModel = `${unit.mfr ? unit.mfr + " " : ""}${unit.model || ""}`.trim();
+        const uspanLabel = topU === bottomU ? `U ${topU}` : `U ${bottomU}–${topU}`;
+
+        // On-block text: manufacturer + model, word-wrapped over up to 3 centred
+        // lines. Sized to the block's inner width using the same k-scaled font
+        // size as before; chars-per-line estimated from font size x 0.55 avg
+        // glyph width. Whether any lines actually fit (block tall enough for
+        // >=1 full line) is decided post-render from the real rendered pixel
+        // height of the block, since the SVG is drawn in a fixed coordinate
+        // system with counter-scaled (k-scaled) fonts - same pattern as before.
+        const inlineFontSize = 26 * k;
+        const inlineLines = !isSpace ? wrapTextLines(mfrModel, inlineFontSize, unitInnerW - 12 * k, 3) : [];
+        if (!isSpace && inlineLines.length) {
+          const lineH = inlineFontSize * 1.15;
+          // vertically centre the (up to 3) tspans as a block around rectY + rectH/2
+          const totalTextH = lineH * inlineLines.length;
+          const firstBaselineY = rectY + rectH / 2 - totalTextH / 2 + lineH * 0.78;
+          const tspans = inlineLines.map((line, li) =>
+            `<tspan data-inline-line="${li}" x="${unitInnerX + unitInnerW / 2}" y="${firstBaselineY + li * lineH}">${escapeXml(line)}</tspan>`
+          ).join("");
+          parts.push(`
+            <text class="u-inline-text" data-inline-for="${unit.order}" data-line-h="${lineH}" data-line-count="${inlineLines.length}"
+                  text-anchor="middle" style="display:none; font-size:${inlineFontSize}px">${tspans}</text>
+          `);
+        }
+
+        if (!isSpace) {
+          // leader line: from mid-right edge of block to label row
+          const leaderY = rectY + rectH / 2;
+          const labelRowH = 72 * k;
+          const labelY = clampLabelY(i, rack.units, spans, totalU, bodyY, bodyH, labelRowH);
+
+          parts.push(`
+            <path class="u-leader${selected ? ' selected' : ''}" data-order="${unit.order}" style="stroke-width:${2.5 * k}"
+                  d="M ${unitInnerX + unitInnerW} ${leaderY} L ${leaderStartX + 10} ${leaderY} L ${labelX} ${labelY}"></path>
+          `);
+
+          const confClass = "conf-" + (unit.confidence || "medium");
+          // Primary label line: unit label (hostname/serial) if present,
+          // otherwise fall back to mfr+model as before.
+          const title = unit.label || mfrModel || "Unit";
+          // Secondary line has two candidate contents - which one is shown is
+          // resolved post-render (updateInlineLabelVisibility), once we know
+          // whether the block itself ended up showing inline mfr/model text:
+          //  - "mfrModel" variant: shown only when the block did NOT show inline text
+          //  - "uspan" variant: shown when the block DID show inline text (or has no label)
+          // If there's no label at all, the primary line already carries mfrModel,
+          // so the secondary line is always the U-span in that case.
+          const subMfrModel = unit.label ? mfrModel : "";
+          const subUspan = uspanLabel;
+
+          parts.push(`
+            <g class="u-label-group" data-order="${unit.order}" onclick="selectUnit(${unit.order})" transform="translate(${labelX}, ${labelY - labelRowH / 2})">
+              <rect class="u-label-bg${selected ? ' selected' : ''}${hasAlarm ? ' has-alarm' : ''}" x="0" y="0" width="${labelColW}" height="${labelRowH}" rx="5"></rect>
+              ${unitColourHex ? `<rect class="u-label-accent on" x="0" y="0" width="${3 * k}" height="${labelRowH}" fill="${unitColourHex}"></rect>` : ""}
+              <text class="u-label-text${hasAlarm ? ' alarm-tint' : ''}" style="font-size:${BASE_LABEL_FONT * k}px" x="${14 * k}" y="${30 * k}">${escapeXml(truncate(title, 30))}</text>
+              ${subMfrModel ? `<text class="u-label-sub" data-sub-variant="mfrModel" data-order="${unit.order}" style="font-size:${21 * k}px; display:none" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(subMfrModel, 34))}</text>` : ""}
+              <text class="u-label-sub" data-sub-variant="uspan" data-order="${unit.order}" style="font-size:${21 * k}px; display:${subMfrModel ? 'none' : 'block'}" x="${14 * k}" y="${58 * k}">${escapeXml(truncate(subUspan, 34))}</text>
+              <circle class="conf-dot-svg ${confClass}" cx="${labelColW - 24 * k}" cy="${labelRowH / 2}" r="${9 * k}"><title>Confidence: ${unit.confidence || "unknown"}</title></circle>
+              ${hasAlarm ? `<circle class="alarm-dot-svg" cx="${labelColW - 48 * k}" cy="${labelRowH / 2}" r="${9 * k}" fill="#ef4444"></circle>` : ""}
+            </g>
+          `);
+        }
+      });
+
+      return {
+        svg: `<svg id="elevationSvg" viewBox="0 0 ${svgW} ${svgH}" width="${svgW}" height="${svgH}" xmlns="http://www.w3.org/2000/svg">${defs}${parts.join("")}</svg>`,
+        svgW, svgH, bodyW, bodyH
+      };
+    }
+
+    // spread labels evenly to reduce overlap: bucket by index order (top to bottom), evenly distribute within available height
+    function clampLabelY(i, units, spans, totalU, bodyY, bodyH, rowH) {
+      const nonSpaceUnits = units.map((u, idx) => ({ u, idx })).filter(x => x.u.type !== "space");
+      const posInList = nonSpaceUnits.findIndex(x => x.idx === i);
+      const count = nonSpaceUnits.length;
+      if (count === 0) return bodyY + bodyH / 2;
+
+      // natural (unclamped) position = vertical center of the unit
+      const { topU, bottomU } = spans[i];
+      const yTop = bodyY + ((totalU - topU) / totalU) * bodyH;
+      const yBottom = bodyY + ((totalU - bottomU + 1) / totalU) * bodyH;
+      const natural = (yTop + yBottom) / 2;
+
+      // even slot fallback distributed across body height
+      const slotH = bodyH / count;
+      const evenSlot = bodyY + slotH * (posInList + 0.5);
+
+      // blend: mostly natural position, but avoid overlap by nudging toward even spacing
+      const blended = natural * 0.5 + evenSlot * 0.5;
+      return blended;
+    }
+
+    function truncate(str, n) {
+      if (!str) return "";
+      return str.length > n ? str.slice(0, n - 1) + "…" : str;
+    }
+
+    // Word-wrap `str` into an array of lines, estimating chars-per-line from
+    // fontSize using an average glyph width factor (0.55x font size), capped
+    // at `maxLines`. If a single word is longer than one line, it's hard-broken.
+    function wrapTextLines(str, fontSize, availWidth, maxLines) {
+      if (!str) return [];
+      const avgGlyphW = fontSize * 0.55;
+      const charsPerLine = Math.max(1, Math.floor(availWidth / avgGlyphW));
+
+      const words = str.split(/\s+/).filter(Boolean);
+      const lines = [];
+      let current = "";
+
+      const pushCurrent = () => {
+        if (current) { lines.push(current); current = ""; }
+      };
+
+      for (const word of words) {
+        if (lines.length >= maxLines) break;
+        let candidate = current ? current + " " + word : word;
+        if (candidate.length <= charsPerLine) {
+          current = candidate;
+          continue;
+        }
+        // candidate too long for the line
+        if (current) {
+          pushCurrent();
+          if (lines.length >= maxLines) break;
+        }
+        // word itself may be longer than a full line - hard-break it
+        let remaining = word;
+        while (remaining.length > charsPerLine && lines.length < maxLines - 1) {
+          lines.push(remaining.slice(0, charsPerLine));
+          remaining = remaining.slice(charsPerLine);
+        }
+        current = remaining;
+      }
+      pushCurrent();
+
+      if (lines.length > maxLines) lines.length = maxLines;
+      return lines;
+    }
+
+    function escapeXml(str) {
+      if (str == null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // current label counter-scale factor (recomputed each render)
+    let currentK = 1;
+
+    function computeFitScale(svgW, svgH) {
+      const pane = document.getElementById("elevationPane");
+      const paneW = pane.clientWidth - 16;
+      const paneH = pane.clientHeight - 16;
+      return Math.min(paneW / svgW, paneH / svgH, 1);
+    }
+
+    function renderElevation() {
+      const rack = getCurrentRack();
+      const wrap = document.getElementById("elevationSvgWrap");
+
+      if (!rack) {
+        wrap.innerHTML = "";
+        return;
+      }
+
+      // Pass 1: build at k=1 to get baseline geometry / fitScale.
+      let built = buildElevationSvg(rack, 1);
+      wrap.innerHTML = built.svg;
+      let fitScale = computeFitScale(built.svgW, built.svgH);
+      let s = fitScale * zoomLevel;
+      let k = Math.max(1, MIN_LABEL_PX / (BASE_LABEL_FONT * s));
+
+      // Pass 2 (only if labels need to grow): rebuild with k-scaled label geometry,
+      // then recompute fitScale once against the new (wider) viewBox. One extra
+      // iteration max - guards against feedback loops.
+      if (k > 1) {
+        built = buildElevationSvg(rack, k);
+        wrap.innerHTML = built.svg;
+        fitScale = computeFitScale(built.svgW, built.svgH);
+      }
+
+      currentK = k;
+      fitAndZoom(built, fitScale);
+      updateInlineLabelVisibility();
+
+      // restore selection highlight (rebuilt DOM)
+      highlightUnit(selectedUnitOrder);
+    }
+
+    function fitAndZoom(built, precomputedFitScale) {
+      const pane = document.getElementById("elevationPane");
+      if (!built) {
+        const svgEl = document.getElementById("elevationSvg");
+        if (!svgEl) return;
+        const vb = svgEl.viewBox.baseVal;
+        built = { svgW: vb.width, svgH: vb.height };
+      }
+
+      const fitScale = precomputedFitScale != null ? precomputedFitScale : computeFitScale(built.svgW, built.svgH);
+      const appliedScale = fitScale * zoomLevel;
+
+      const svgEl = document.getElementById("elevationSvg");
+      if (svgEl) {
+        svgEl.style.width = (built.svgW * appliedScale) + "px";
+        svgEl.style.height = (built.svgH * appliedScale) + "px";
+      }
+
+      pane.classList.toggle("zoomed", zoomLevel > 1);
+      pane.classList.toggle("grabbable", zoomLevel > 1);
+
+      document.getElementById("zoomReadout").textContent = zoomLevel.toFixed(1) + "x";
+
+      // after layout, recompute which labels get inline text based on rendered px height
+      requestAnimationFrame(updateInlineLabelVisibility);
+    }
+
+    // Re-render the elevation whenever the effective on-screen scale changes
+    // (resize, splitter drag, zoom change) so label counter-scaling (k) stays correct.
+    // Debounced to one requestAnimationFrame so rapid-fire events (resize, drag)
+    // don't trigger a rebuild per event.
+    let renderElevationRafId = null;
+    function scheduleRenderElevation() {
+      if (renderElevationRafId != null) return;
+      renderElevationRafId = requestAnimationFrame(() => {
+        renderElevationRafId = null;
+        renderElevation();
+      });
+    }
+
+    function updateInlineLabelVisibility() {
+      const svgEl = document.getElementById("elevationSvg");
+      if (!svgEl) return;
+      const rack = getCurrentRack();
+      if (!rack) return;
+
+      const rectEls = svgEl.querySelectorAll(".u-rect[data-order]");
+      rectEls.forEach(rect => {
+        const order = rect.getAttribute("data-order");
+        const bbox = rect.getBoundingClientRect();
+        const inlineText = svgEl.querySelector(`text[data-inline-for="${order}"]`);
+        let blockShowsText = false;
+
+        if (inlineText) {
+          // internal (SVG-unit) rect height vs its own bbox gives us the
+          // current render scale, so we can convert the internal line-height
+          // (data-line-h, already k-scaled) into rendered px and work out how
+          // many of the up to-3 wrapped lines actually fit vertically.
+          const internalRectH = parseFloat(rect.getAttribute("height")) || 1;
+          const renderScale = bbox.height / internalRectH;
+          const internalLineH = parseFloat(inlineText.getAttribute("data-line-h")) || 0;
+          const renderedLineH = internalLineH * renderScale;
+          const totalLines = parseInt(inlineText.getAttribute("data-line-count"), 10) || 0;
+
+          const fittingLines = renderedLineH > 0 ? Math.floor(bbox.height / renderedLineH) : 0;
+          const visibleLines = Math.max(0, Math.min(totalLines, fittingLines));
+
+          if (visibleLines >= 1) {
+            inlineText.style.display = "block";
+            blockShowsText = true;
+            const tspans = inlineText.querySelectorAll("tspan[data-inline-line]");
+            tspans.forEach(tspan => {
+              const li = parseInt(tspan.getAttribute("data-inline-line"), 10);
+              tspan.style.display = li < visibleLines ? "inline" : "none";
+            });
+          } else {
+            inlineText.style.display = "none";
+          }
+        }
+
+        // pick the right secondary leader-label line: mfr+model when the block
+        // did NOT show inline text (and a label exists to make it the primary
+        // line), otherwise the U-span.
+        const subMfrModel = svgEl.querySelector(`text.u-label-sub[data-sub-variant="mfrModel"][data-order="${order}"]`);
+        const subUspan = svgEl.querySelector(`text.u-label-sub[data-sub-variant="uspan"][data-order="${order}"]`);
+        if (subMfrModel && subUspan) {
+          subMfrModel.style.display = blockShowsText ? "none" : "block";
+          subUspan.style.display = blockShowsText ? "block" : "none";
+        }
+      });
+    }
+
+    function zoomBy(delta) {
+      zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomLevel + delta));
+      renderElevation();
+    }
+
+    function resetZoom() {
+      zoomLevel = 1;
+      renderElevation();
+    }
+
+    // Zoom to a specific level, optionally keeping a given pane-relative point
+    // (clientX/clientY) fixed on screen (zoom-toward-cursor).
+    function zoomTo(newLevel, clientX, clientY) {
+      const pane = document.getElementById("elevationPane");
+      newLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, newLevel));
+      if (newLevel === zoomLevel) return;
+
+      let anchor = null;
+      if (clientX != null && clientY != null) {
+        const rect = pane.getBoundingClientRect();
+        const px = clientX - rect.left;
+        const py = clientY - rect.top;
+        // content-space coordinates (relative to scrolled content) under the cursor
+        const contentX = pane.scrollLeft + px;
+        const contentY = pane.scrollTop + py;
+        anchor = { px, py, contentX, contentY };
+      }
+
+      const ratio = newLevel / zoomLevel;
+      zoomLevel = newLevel;
+      renderElevation();
+
+      if (anchor) {
+        pane.scrollLeft = anchor.contentX * ratio - anchor.px;
+        pane.scrollTop = anchor.contentY * ratio - anchor.py;
+      }
+    }
+
+    // plain mouse-wheel zoom over the elevation pane (no Ctrl required)
+    document.addEventListener("wheel", (e) => {
+      const pane = document.getElementById("elevationPane");
+      if (!pane.contains(e.target)) return;
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.5 : -0.5;
+      zoomTo(zoomLevel + delta, e.clientX, e.clientY);
+    }, { passive: false });
+
+    // drag-to-pan when zoomed in (>1x); clicks on units still work (only pan after >4px movement)
+    (function setupElevationPan() {
+      const pane = document.getElementById("elevationPane");
+      let dragging = false;
+      let moved = false;
+      let startX = 0, startY = 0;
+      let startScrollLeft = 0, startScrollTop = 0;
+
+      pane.addEventListener("mousedown", (e) => {
+        if (zoomLevel <= 1) return;
+        // ignore non-primary buttons
+        if (e.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        startScrollLeft = pane.scrollLeft;
+        startScrollTop = pane.scrollTop;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (!moved && Math.hypot(dx, dy) > 4) {
+          moved = true;
+          pane.classList.add("grabbing");
+        }
+        if (moved) {
+          pane.scrollLeft = startScrollLeft - dx;
+          pane.scrollTop = startScrollTop - dy;
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        pane.classList.remove("grabbing");
+        // if it turned into a drag, swallow the upcoming click so units aren't
+        // accidentally selected at the end of a pan gesture
+        if (moved) {
+          const swallow = (ev) => { ev.stopPropagation(); pane.removeEventListener("click", swallow, true); };
+          pane.addEventListener("click", swallow, true);
+        }
+        moved = false;
+      });
+    })();
+
+    // ============================================================
+    // Table
+    // ============================================================
+    function renderTable(rack) {
+      const tbody = document.getElementById("unitTableBody");
+      tbody.innerHTML = "";
+      if (!rack) return;
+
+      const spans = cumulativeSpans(rack);
+
+      rack.units.forEach((unit, i) => {
+        const { topU, bottomU } = spans[i];
+        const tr = document.createElement("tr");
+        tr.dataset.order = unit.order;
+        tr.id = `row-${unit.order}`;
+        if (unit.order === selectedUnitOrder) tr.classList.add("selected");
+
+        const hasAlarm = unit.alarms && unit.alarms.length > 0;
+        const confClass = "conf-" + (unit.confidence || "medium");
+        const uspan = topU === bottomU ? `${topU}` : `${bottomU}–${topU}`;
+        const isSpace = unit.type === "space";
+        const unitColourHex = !isSpace && coloursOn ? currentUnitColours[unit.order] : null;
+        const uspanCell = unitColourHex
+          ? `<div class="table-cell-uspan"><span class="table-swatch" style="background:${unitColourHex}"></span>${uspan}</div>`
+          : uspan;
+
+        tr.innerHTML = `
+          <td>${uspanCell}</td>
+          <td>${unit.type}</td>
+          <td>${unit.mfr || "—"}</td>
+          <td title="${escapeXml(unit.model || "")}">${escapeXml(unit.model || "—")}</td>
+          <td title="${escapeXml(unit.label || "")}">${escapeXml(unit.label || "—")}</td>
+          <td class="${hasAlarm ? "alarm-yes" : "alarm-no"}">${hasAlarm ? escapeXml(unit.alarms.join(", ")) : "—"}</td>
+          <td><span class="table-dot ${confClass}" title="${unit.confidence || "unknown"}"></span></td>
+        `;
+
+        tr.onclick = () => selectUnit(unit.order);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleTable() {
+      tableVisible = !tableVisible;
+      const tablePane = document.getElementById("tablePane");
+      const hsplitter = document.getElementById("hsplitter");
+      const btn = document.getElementById("tableToggleBtn");
+
+      tablePane.classList.toggle("hidden", !tableVisible);
+      hsplitter.classList.toggle("collapsed", !tableVisible);
+      btn.classList.toggle("active", tableVisible);
+
+      applyHSplit();
+      scheduleRenderElevation();
+    }
+
+    // ============================================================
+    // Edit button (showcase stub)
+    // ============================================================
+    let editToastTimer = null;
+    function showEditToast(e) {
+      if (e) e.stopPropagation();
+      const toast = document.getElementById("editToast");
+      toast.classList.add("show");
+      if (editToastTimer) clearTimeout(editToastTimer);
+      editToastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+        editToastTimer = null;
+      }, 2500);
+    }
+
+    // ============================================================
+    // Selection sync (elevation <-> table)
+    // ============================================================
+    function selectUnit(order) {
+      selectedUnitOrder = order;
+      highlightUnit(order);
+
+      const row = document.getElementById(`row-${order}`);
+      if (row) {
+        row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        row.classList.add("flash");
+        setTimeout(() => row.classList.remove("flash"), 700);
+      }
+
+      const rect = document.querySelector(`.u-rect[data-order="${order}"]`);
+      if (rect) rect.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    }
+
+    function highlightUnit(order) {
+      document.querySelectorAll(".u-rect").forEach(el => {
+        el.classList.toggle("selected", Number(el.dataset.order) === order);
+      });
+      document.querySelectorAll(".u-leader").forEach(el => {
+        el.classList.toggle("selected", Number(el.dataset.order) === order);
+      });
+      document.querySelectorAll(".u-label-bg").forEach(el => {
+        const group = el.closest(".u-label-group");
+        const isSel = group && Number(group.dataset.order) === order;
+        el.classList.toggle("selected", isSel);
+      });
+      document.querySelectorAll("#unitTableBody tr").forEach(el => {
+        el.classList.toggle("selected", Number(el.dataset.order) === order);
+      });
+      updateHotspotSelection(order);
+      renderPhotoOverlay();
+    }
+
+    // ============================================================
+    // Anomalies badge + drawer
+    // ============================================================
+    function currentAnomalies() {
+      const pos = positionsById[currentPositionId];
+      const rackA = inventory.racksByIdOnly[pos.faceA];
+      const rackB = inventory.racksByIdOnly[pos.faceB];
+      const ids = [rackA ? rackA.id : null, rackB ? rackB.id : null].filter(Boolean);
+      return (inventory.anomalies || []).filter(a => ids.includes(a.rack));
+    }
+
+    function renderAnomalyBadge() {
+      const matches = currentAnomalies();
+      const badge = document.getElementById("anomalyBadge");
+      const text = document.getElementById("anomalyBadgeText");
+      text.textContent = `Anomalies (${matches.length})`;
+      badge.classList.toggle("zero", matches.length === 0);
+    }
+
+    function openDrawer() {
+      renderDrawerBody();
+      document.getElementById("drawerOverlay").classList.add("show");
+      document.getElementById("drawerPanel").classList.add("show");
+    }
+
+    function closeDrawer() {
+      document.getElementById("drawerOverlay").classList.remove("show");
+      document.getElementById("drawerPanel").classList.remove("show");
+    }
+
+    function renderDrawerBody() {
+      const body = document.getElementById("drawerBody");
+      const matches = currentAnomalies();
+
+      if (!matches.length) {
+        body.innerHTML = `<div class="no-anomalies">No anomalies on either face of this position.</div>`;
+        return;
+      }
+
+      body.innerHTML = "";
+      matches.forEach(a => {
+        const div = document.createElement("div");
+        div.className = "anomaly-card";
+        div.innerHTML = `
+          <div class="anomaly-rack">Rack ${escapeXml(a.rack)}</div>
+          <div class="anomaly-unit">${a.unit && a.unit !== "-" ? escapeXml(a.unit) : ""}</div>
+          <div class="anomaly-finding">${escapeXml(a.finding)}</div>
+        `;
+        div.onclick = () => {
+          // jump to the face that owns this rack if it's not the current one
+          const pos = positionsById[currentPositionId];
+          if (a.rack === pos.faceA && currentFace !== "A") selectFace("A");
+          if (a.rack === pos.faceB && currentFace !== "B") selectFace("B");
+          closeDrawer();
+        };
+        body.appendChild(div);
+      });
+    }
+
+    // ============================================================
+    // Draggable splitters
+    // ============================================================
+    function applyVSplit() {
+      const paneLeft = document.getElementById("paneLeft");
+      const panePhoto = document.getElementById("panePhoto");
+      const splitterCount = photoOn ? 2 : 1;
+      const total = document.getElementById("mainSplit").clientWidth - 6 * splitterCount; // minus splitter widths
+      paneLeft.style.flex = `0 0 ${total * vRatio}px`;
+      if (photoOn) {
+        panePhoto.style.flex = `0 0 ${total * photoRatio}px`;
+      }
+      schedulePanoResize();
+    }
+
+    // Pannellum only watches window resize, not container resizes — without
+    // this the WebGL canvas gets CSS-stretched when the splitter moves.
+    function schedulePanoResize() {
+      if (viewer && viewer.resize) viewer.resize();
+    }
+    new ResizeObserver(() => schedulePanoResize())
+      .observe(document.getElementById("paneLeft"));
+
+    // The photo panel's own size changes independently of the pano pane
+    // (e.g. when the vsplitter2 boundary moves, or on window resize) - refit
+    // the image height whenever it does.
+    new ResizeObserver(() => schedulePhotoLayout())
+      .observe(document.getElementById("panePhoto"));
+
+    function applyHSplit() {
+      const paneRight = document.getElementById("paneRight");
+      const elevationPane = document.getElementById("elevationPane");
+      const tablePane = document.getElementById("tablePane");
+
+      if (!tableVisible) {
+        elevationPane.style.flex = "1 1 auto";
+        tablePane.style.flex = "0 0 0px";
+        return;
+      }
+
+      const total = paneRight.clientHeight - 6; // minus splitter height
+      const elevH = Math.max(60, total * hRatio);
+      const tableH = Math.max(60, total - elevH);
+      elevationPane.style.flex = `0 0 ${elevH}px`;
+      tablePane.style.flex = `0 0 ${tableH}px`;
+    }
+
+    (function setupVSplitter() {
+      const splitter = document.getElementById("vsplitter");
+      const mainSplit = document.getElementById("mainSplit");
+      let dragging = false;
+
+      splitter.addEventListener("mousedown", (e) => {
+        dragging = true;
+        splitter.classList.add("dragging");
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const rect = mainSplit.getBoundingClientRect();
+        let ratio = (e.clientX - rect.left) / rect.width;
+        const maxRatio = photoOn ? 0.7 : 0.85;
+        ratio = Math.min(maxRatio, Math.max(0.15, ratio));
+        vRatio = ratio;
+        applyVSplit();
+        scheduleRenderElevation();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        splitter.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        localStorage.setItem("rr_vRatio", String(vRatio));
+      });
+    })();
+
+    // Boundary between the centre photo pane and the right pane. Only
+    // draggable while the photo panel is on (it's hidden otherwise).
+    (function setupVSplitter2() {
+      const splitter = document.getElementById("vsplitter2");
+      const mainSplit = document.getElementById("mainSplit");
+      let dragging = false;
+
+      splitter.addEventListener("mousedown", (e) => {
+        if (!photoOn) return;
+        dragging = true;
+        splitter.classList.add("dragging");
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const rect = mainSplit.getBoundingClientRect();
+        let ratio2 = (e.clientX - rect.left) / rect.width;
+        ratio2 = Math.min(0.9, Math.max(vRatio + 0.10, ratio2));
+        photoRatio = ratio2 - vRatio;
+        applyVSplit();
+        scheduleRenderElevation();
+        schedulePhotoLayout();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        splitter.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        localStorage.setItem("rr_photoRatio", String(photoRatio));
+      });
+    })();
+
+    (function setupHSplitter() {
+      const splitter = document.getElementById("hsplitter");
+      const paneRight = document.getElementById("paneRight");
+      let dragging = false;
+
+      splitter.addEventListener("mousedown", (e) => {
+        if (!tableVisible) return;
+        dragging = true;
+        splitter.classList.add("dragging");
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const rect = paneRight.getBoundingClientRect();
+        let ratio = (e.clientY - rect.top) / rect.height;
+        ratio = Math.min(0.85, Math.max(0.15, ratio));
+        hRatio = ratio;
+        applyHSplit();
+        scheduleRenderElevation();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        splitter.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        localStorage.setItem("rr_hRatio", String(hRatio));
+      });
+    })();
+
+    window.addEventListener("resize", () => {
+      applyVSplit();
+      applyHSplit();
+      scheduleRenderElevation();
+      schedulePhotoLayout();
+    });
+
+    // initial split application (after first paint)
+    requestAnimationFrame(() => {
+      applyVSplit();
+      applyHSplit();
+    });
+
+    // ============================================================
+    // Keyboard shortcuts
+    // ============================================================
+    document.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft") { stepPosition(-1); }
+      else if (e.key === "ArrowRight") { stepPosition(1); }
+      else if (e.key === "a" || e.key === "A") { selectFace("A"); }
+      else if (e.key === "b" || e.key === "B") { selectFace("B"); }
+      else if (e.key === "Escape") { closeDrawer(); }
+    });
+  </script>
+</body>
+</html>

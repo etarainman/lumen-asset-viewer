@@ -1,0 +1,2019 @@
+{
+  "meta": {
+    "site": "DUMSTX01 (demo alias)",
+    "description": "Auto-extracted rack inventory from 27 equirectangular 360 photos (9 capture positions x Bottom/Middle/Top heights). Every unit was read from full-resolution perspective crops of the panoramas. Confidence: high = label read directly; medium = partial read or inferred from adjacent evidence; low = inferred from pattern only.",
+    "extractedBy": "Claude vision pipeline v1",
+    "extractedOn": "2026-07-05",
+    "capturedOn": "2026-03-27",
+    "buildings": {
+      "0001": {
+        "label": "Building 0001",
+        "realSource": "Atlantic IA regen hut (ATLT / OMA02 route, Stuart-Omaha span)",
+        "positions": [
+          "Rack_001",
+          "Rack_002",
+          "Rack_003"
+        ]
+      },
+      "0003": {
+        "label": "Building 0003",
+        "realSource": "Stuart IA ILA hut (DSM02/DSM04 routes, us-ia-strt NEs)",
+        "positions": [
+          "Rack_004",
+          "Rack_005",
+          "Rack_006",
+          "Rack_007",
+          "Rack_008",
+          "Rack_009"
+        ]
+      }
+    }
+  },
+  "positions": [
+    {
+      "id": "Rack_001",
+      "building": "0001",
+      "panoBase": "Rack_001",
+      "faceA": "H01.03",
+      "faceB": "H02.03",
+      "faceAYaw": 13,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 68,
+          "pitchBottom": -70
+        },
+        "B": {
+          "pitchTop": 66,
+          "pitchBottom": -62
+        }
+      }
+    },
+    {
+      "id": "Rack_002",
+      "building": "0001",
+      "panoBase": "Rack_002",
+      "faceA": "H01.02",
+      "faceB": "H02.02",
+      "faceAYaw": -4,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 60,
+          "pitchBottom": -54
+        },
+        "B": {
+          "pitchTop": 64,
+          "pitchBottom": -63
+        }
+      }
+    },
+    {
+      "id": "Rack_003",
+      "building": "0001",
+      "panoBase": "Rack_003",
+      "faceA": "H01.01",
+      "faceB": "H02.01",
+      "faceAYaw": -14,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 58,
+          "pitchBottom": -62
+        },
+        "B": {
+          "pitchTop": 60,
+          "pitchBottom": -68
+        }
+      }
+    },
+    {
+      "id": "Rack_004",
+      "building": "0003",
+      "panoBase": "Rack_004",
+      "faceA": "302.003",
+      "faceB": "301.003",
+      "faceAYaw": -6,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 62,
+          "pitchBottom": -63
+        },
+        "B": {
+          "pitchTop": 63,
+          "pitchBottom": -73
+        }
+      }
+    },
+    {
+      "id": "Rack_005",
+      "building": "0003",
+      "panoBase": "Rack_005",
+      "faceA": "302.004",
+      "faceB": "301.004",
+      "faceAYaw": -7,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 63,
+          "pitchBottom": -71
+        },
+        "B": {
+          "pitchTop": 62,
+          "pitchBottom": -72
+        }
+      }
+    },
+    {
+      "id": "Rack_006",
+      "building": "0003",
+      "panoBase": "Rack_006",
+      "faceA": "302.005",
+      "faceB": "301.005",
+      "faceAYaw": -4,
+      "faceBYaw": 180,
+      "note": "Source xlsx recorded 303.005/304.005 for M/T heights; plinth and shelf labels prove the camera stayed at the 302.005/301.005 pair. Xlsx entry corrected by image evidence.",
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 60,
+          "pitchBottom": -74
+        },
+        "B": {
+          "pitchTop": 58,
+          "pitchBottom": -75
+        }
+      }
+    },
+    {
+      "id": "Rack_007",
+      "building": "0003",
+      "panoBase": "Rack_007",
+      "faceA": "302.007",
+      "faceB": "301.007",
+      "faceAYaw": -2,
+      "faceBYaw": 180,
+      "note": "Source xlsx recorded 300.007/301.007 at B/M; plinth reads 302.007 (face A) and 301.007 (face B) at all heights. Xlsx entry corrected by image evidence.",
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 58,
+          "pitchBottom": -70
+        },
+        "B": {
+          "pitchTop": 60,
+          "pitchBottom": -73
+        }
+      }
+    },
+    {
+      "id": "Rack_008",
+      "building": "0003",
+      "panoBase": "Rack_008",
+      "faceA": "302.008",
+      "faceB": "301.008",
+      "faceAYaw": -8,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 57,
+          "pitchBottom": -68
+        },
+        "B": {
+          "pitchTop": 56,
+          "pitchBottom": -73
+        }
+      }
+    },
+    {
+      "id": "Rack_009",
+      "building": "0003",
+      "panoBase": "Rack_009",
+      "faceA": "302.009",
+      "faceB": "301.009",
+      "faceAYaw": -8,
+      "faceBYaw": 180,
+      "cal": {
+        "huBottom": 0.1,
+        "huTop": 2.1,
+        "cameraStepM": 0.5,
+        "A": {
+          "pitchTop": 58,
+          "pitchBottom": -79
+        },
+        "B": {
+          "pitchTop": 58,
+          "pitchBottom": -79
+        }
+      }
+    }
+  ],
+  "racks": [
+    {
+      "id": "H01.03",
+      "building": "0001",
+      "position": "Rack_001",
+      "face": "A",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "ADC",
+          "model": "PowerWorx fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "Status green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "fiber",
+          "mfr": "ADC",
+          "model": "FMT fiber management tray",
+          "label": "RMU 40",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM series passive tray shelf (DCM/patch)",
+          "label": null,
+          "alarms": [],
+          "leds": "No status LEDs",
+          "confidence": "medium",
+          "uHeight": 5,
+          "notes": "Split from single XTM entry after review - open tray with patch cords and passive modules, no NE plate visible"
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM series chassis (alarm panel + multi-slot)",
+          "label": "NE: ATLTIAALIA.ATC1.MS313 (partial read)",
+          "alarms": [],
+          "leds": "Status green; ACO panel",
+          "confidence": "medium",
+          "uHeight": 8,
+          "notes": "Second of two stacked Infinera chassis - alarm/comms module, OAM cards + blanks, side power modules (Power green)"
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 6,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (OME6500)",
+          "label": "OME6500 SH-1 / NE OMA02-206-01OLA / IP 10.62.64.114",
+          "alarms": [
+            "MINOR"
+          ],
+          "leds": "Minor amber lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 7,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 8,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH-1 / OMA02-22206-01OLA / IP 10.62.9.178",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major amber lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 9,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 10,
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "Chassis section at floor level",
+          "label": "RMU 33 / NE ATLTIAALIA.ATC1.MS313 (partial)",
+          "alarms": [],
+          "leds": null,
+          "confidence": "medium",
+          "uHeight": 4,
+          "notes": "Sits on the plinth"
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H02.03",
+      "building": "0001",
+      "position": "Rack_001",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (covered shelf)",
+          "label": null,
+          "alarms": [
+            "MAJOR",
+            "MINOR"
+          ],
+          "leds": "Major + Minor lit",
+          "confidence": "medium",
+          "uHeight": 13,
+          "notes": "No NE plate visible from aisle; large D-series style shelf, green tape strip"
+        },
+        {
+          "order": 2,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (open shelf, door removed)",
+          "label": null,
+          "alarms": [],
+          "leds": "Sled status blue",
+          "confidence": "medium",
+          "uHeight": 10,
+          "notes": "Cards and jumpers exposed; no NE plate visible"
+        },
+        {
+          "order": 4,
+          "type": "fiber",
+          "mfr": "ADVA",
+          "model": "FMT fiber tray",
+          "label": "FMT",
+          "alarms": [],
+          "leds": null,
+          "confidence": "low",
+          "uHeight": 1,
+          "notes": "Slim tray at the open shelf's lower edge - FMT label read in first-pass extraction, not separately verifiable in ortho"
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SHELF 1 / ATLTIAALCIA60742",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 12,
+          "notes": "NE plate reattributed during ortho QA; large covered shelf"
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 7
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H01.02",
+      "building": "0001",
+      "position": "Rack_002",
+      "face": "A",
+      "customer": null,
+      "units": [
+        {
+          "type": "power",
+          "mfr": "ADC",
+          "model": "PowerWorx fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Huawei",
+          "model": "OptiX OSN 8800 (control shelf + line cards)",
+          "label": "handwritten 10042",
+          "alarms": [],
+          "leds": "PWR green",
+          "confidence": "high",
+          "uHeight": 14,
+          "notes": "Height corrected 12U to 14U during ortho QA",
+          "order": 3
+        },
+        {
+          "type": "other",
+          "mfr": null,
+          "model": "Unidentified chassis (dark blue, warning sticker)",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "low",
+          "uHeight": 2,
+          "notes": "Found during ortho QA directly below the OSN 8800 - not identifiable from imagery",
+          "order": 4
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 26,
+          "order": 5
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H02.02",
+      "building": "0001",
+      "position": "Rack_002",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "order": 1,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (open shelf, door removed)",
+          "label": null,
+          "alarms": [],
+          "leds": "Sled status blue",
+          "confidence": "medium",
+          "uHeight": 12,
+          "notes": "Cards and jumpers exposed; no NE plate"
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 (covered shelf)",
+          "label": null,
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "medium",
+          "uHeight": 13,
+          "notes": "In-service shelf with blank NE/IP/Shelf ID plate - labelling gap"
+        },
+        {
+          "order": 3,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH-1 / ATLTIAALCIA60273 / N923436",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 12,
+          "notes": "NE plate reattributed during ortho QA; shelf was missing from original extraction"
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 6,
+          "type": "fiber",
+          "mfr": null,
+          "model": "Fiber storage tray (coiled patch cords)",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "low",
+          "uHeight": 5,
+          "notes": "Low tray holding coiled purple patch cords and packaging"
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H01.01",
+      "building": "0001",
+      "position": "Rack_003",
+      "face": "A",
+      "customer": null,
+      "units": [
+        {
+          "type": "power",
+          "mfr": "PECO II Inc.",
+          "model": "-48VDC power plant (distribution, breakers, controller)",
+          "label": "meter reads 0009 (amps)",
+          "alarms": [],
+          "leds": "Controller display lit",
+          "confidence": "high",
+          "uHeight": 6,
+          "notes": "Height corrected during ortho QA - includes breaker rows and LCD controller",
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 2
+        },
+        {
+          "type": "power",
+          "mfr": "ADC",
+          "model": "PowerWorx distribution strip",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 3
+        },
+        {
+          "type": "network",
+          "mfr": "Cisco (probable)",
+          "model": "ISR-class management router",
+          "label": "unreadable asset tag",
+          "alarms": [],
+          "leds": null,
+          "confidence": "medium",
+          "uHeight": 1,
+          "order": 4
+        },
+        {
+          "type": "network",
+          "mfr": "Uniprise/CommScope",
+          "model": "48-port Cat6 patch panel",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 5
+        },
+        {
+          "type": "network",
+          "mfr": "Juniper",
+          "model": "EX-series 48-port access switch",
+          "label": "Network Access Ports",
+          "alarms": [],
+          "leds": "Port LEDs green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 6
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 32,
+          "order": 7
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "H02.01",
+      "building": "0001",
+      "position": "Rack_003",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM DCM/amplifier shelf",
+          "label": "Rx From Stuart",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 4,
+          "order": 2
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 3
+        },
+        {
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM DCM/amplifier shelf",
+          "label": "Rx From Omaha",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 4,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM nodal control and timing panel",
+          "label": "LAN1 D19",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 5
+        },
+        {
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "XTM chassis (OMM slot + modules)",
+          "label": "RMU 28 / slot 28 marking",
+          "alarms": [],
+          "leds": "Status green",
+          "confidence": "high",
+          "uHeight": 10,
+          "order": 6
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 17,
+          "order": 7
+        },
+        {
+          "type": "transport",
+          "mfr": "Infinera",
+          "model": "Chassis section at floor level",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "low",
+          "uHeight": 5,
+          "notes": "Found during ortho QA - beige Infinera chassis resting on the plinth, appears tilted/leaning (possibly staged, not racked)",
+          "order": 8
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.003",
+      "building": "0003",
+      "position": "Rack_004",
+      "face": "A",
+      "customer": "META",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "Ciena",
+          "model": "Fuse/breaker panel (A/B feeds, pos 1-6)",
+          "label": "In Service Equipment - ciena",
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-19-1",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major red lit; status green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-20-1",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-21-1",
+          "alarms": [],
+          "leds": "green/blue",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-22-1",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "notes": "COMMSCOPE optical fiber routing assembly runs vertically beside the stack",
+          "uHeight": 10
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 3
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.003",
+      "building": "0003",
+      "position": "Rack_004",
+      "face": "B",
+      "customer": null,
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI02.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 9,
+          "notes": "Front cover fitted",
+          "order": 3
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 3,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI01.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 9,
+          "notes": "Front cover fitted",
+          "order": 5
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 6
+        },
+        {
+          "type": "transport",
+          "mfr": "Nokia",
+          "model": "1830 PSS-32 (dual-row shelf)",
+          "label": "LI03.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "Card status LEDs green",
+          "confidence": "high",
+          "uHeight": 17,
+          "notes": "Corrected from '6500 open shelf slots 19-36' - the slot numbers 19-36 belong to the PSS-32 lower card row; chassis reaches the plinth",
+          "order": 7
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 8
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.004",
+      "building": "0003",
+      "position": "Rack_005",
+      "face": "A",
+      "customer": "META",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial 12307596",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical + Major red lit",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover removed; no NE hostname plate, serial barcode only"
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial 12307612",
+          "alarms": [
+            "CRITICAL"
+          ],
+          "leds": "Critical red lit",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover removed; no NE hostname plate, serial barcode only"
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial not legible",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical red + Major amber lit",
+          "confidence": "medium",
+          "uHeight": 10,
+          "notes": "Front cover removed; third shelf in stack, serial barcode not readable at capture angle"
+        },
+        {
+          "order": 6,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, open shelf)",
+          "label": "Serial 12307619",
+          "alarms": [
+            "CRITICAL",
+            "MINOR"
+          ],
+          "leds": "Critical + Minor red lit",
+          "confidence": "high",
+          "uHeight": 10,
+          "notes": "Front cover removed; bottom shelf, sits just above plinth"
+        },
+        {
+          "order": 7,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.004",
+      "building": "0003",
+      "position": "Rack_005",
+      "face": "B",
+      "customer": "GOOGLE",
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel (707 Series)",
+          "label": null,
+          "alarms": [
+            "FUSE"
+          ],
+          "leds": "Red fuse indicators lit alongside green - possible fuse alarm",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 8,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI15.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Shelf ID LI15",
+          "order": 3
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 3,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI05.DSM04-ILA:1",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical + Major red lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; NE plate confirmed on calibration re-read",
+          "order": 5
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 6
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI04.DSM04-ILA:1 / GTR048.C",
+          "alarms": [],
+          "leds": "Blue status LED",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted",
+          "order": 7
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 9,
+          "order": 8
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.005",
+      "building": "0003",
+      "position": "Rack_006",
+      "face": "A",
+      "customer": "META",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-23-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-24-1",
+          "alarms": [
+            "MINOR (possible)"
+          ],
+          "leds": "small red indicators near alarm cluster",
+          "confidence": "medium",
+          "uHeight": 10
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-25-1",
+          "alarms": [],
+          "confidence": "medium",
+          "notes": "read from overview montage",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "us-ia-strt-26-1",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major red lit",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 6,
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 3
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.005",
+      "building": "0003",
+      "position": "Rack_006",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 5,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI19.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Shelf ID LI19",
+          "order": 3
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 4,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI18.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Shelf ID LI18",
+          "order": 5
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 6
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI17.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Shelf ID LI17",
+          "order": 7
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 3,
+          "order": 8
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI16.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Shelf ID LI16; sits on plinth",
+          "order": 9
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 10
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.007",
+      "building": "0003",
+      "position": "Rack_007",
+      "face": "A",
+      "customer": "META (inferred from row)",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel",
+          "label": "bracket labelled 302.007",
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-23206-01OLA",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 3,
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 4,
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-24206-01OLA",
+          "alarms": [],
+          "leds": "green",
+          "confidence": "high",
+          "uHeight": 10
+        },
+        {
+          "order": 5,
+          "type": "space",
+          "mfr": null,
+          "model": "Empty lower half",
+          "label": null,
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 21
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.007",
+      "building": "0003",
+      "position": "Rack_007",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 4,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI10.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted",
+          "order": 3
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 5,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI09.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted",
+          "order": 5
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 6
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI08.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "medium",
+          "uHeight": 7,
+          "notes": "Front cover fitted; NE id partly inferred from row sequence",
+          "order": 7
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 3,
+          "order": 8
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI07.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; sits on plinth",
+          "order": 9
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 10
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.008",
+      "building": "0003",
+      "position": "Rack_008",
+      "face": "A",
+      "customer": "MICROSOFT AZURE",
+      "units": [
+        {
+          "order": 1,
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC fuse panel (powered)",
+          "label": null,
+          "alarms": [],
+          "leds": "A/B green",
+          "confidence": "high",
+          "uHeight": 2
+        },
+        {
+          "order": 2,
+          "type": "space",
+          "mfr": null,
+          "model": "ENTIRE RACK EMPTY - reserved/pre-provisioned",
+          "label": "plinth: MICROSOFT AZURE 302.008",
+          "alarms": [],
+          "confidence": "high",
+          "uHeight": 43
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.008",
+      "building": "0003",
+      "position": "Rack_008",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 4,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI14.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Caution In Service Equipment sticker",
+          "order": 3
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 5,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI13.DSM04-ILA:1",
+          "alarms": [
+            "CRITICAL",
+            "MAJOR"
+          ],
+          "leds": "Critical + Major red lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Caution In Service Equipment sticker",
+          "order": 5
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 6
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI12.DSM04-ILA:1",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "high",
+          "uHeight": 7,
+          "notes": "Front cover fitted; Caution In Service Equipment sticker",
+          "order": 7
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 3,
+          "order": 8
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500 R (RLS, covered shelf)",
+          "label": "LI11.DSM04-ILA:1 (inferred)",
+          "alarms": [],
+          "leds": "No alarm LEDs lit",
+          "confidence": "low",
+          "uHeight": 7,
+          "notes": "Bottom shelf on plinth, Caution sticker visible; id inferred from descending row sequence",
+          "order": 9
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 10
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "302.009",
+      "building": "0003",
+      "position": "Rack_009",
+      "face": "A",
+      "customer": "META (inferred from row)",
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-21152-01OLA",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 8,
+          "notes": "Hostname corrected during ortho QA - the 25152/26152 pair actually lives on 301.009",
+          "order": 3
+        },
+        {
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-22152-01OLA",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 8,
+          "order": 5
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-23152-01OLA",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 8,
+          "order": 6
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-24152-01OLA",
+          "alarms": [
+            "MAJOR"
+          ],
+          "leds": "Major lit",
+          "confidence": "high",
+          "uHeight": 8,
+          "order": 7
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 9,
+          "order": 8
+        }
+      ],
+      "rackU": 45
+    },
+    {
+      "id": "301.009",
+      "building": "0003",
+      "position": "Rack_009",
+      "face": "B",
+      "customer": "GOOGLE (inferred from row)",
+      "units": [
+        {
+          "type": "power",
+          "mfr": "TRIMM Inc.",
+          "model": "-/+24-48VDC GMT fuse panel",
+          "label": null,
+          "alarms": [],
+          "leds": "FUSE PWR A/B green",
+          "confidence": "high",
+          "uHeight": 2,
+          "order": 1
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 2
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-25152-01OLA",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 8,
+          "notes": "Hostname corrected during ortho QA - swapped with 302.009's 21152/22152 pair",
+          "order": 3
+        },
+        {
+          "type": "fiber",
+          "mfr": "Ciena",
+          "model": "FMT-1 fiber manager",
+          "label": "FMT-1",
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 1,
+          "order": 4
+        },
+        {
+          "type": "transport",
+          "mfr": "Ciena",
+          "model": "6500",
+          "label": "SH 1 / DSM02-26152-01OLA",
+          "alarms": [],
+          "leds": "Status blue",
+          "confidence": "high",
+          "uHeight": 8,
+          "order": 5
+        },
+        {
+          "type": "space",
+          "mfr": null,
+          "model": "Free space",
+          "label": null,
+          "alarms": [],
+          "leds": null,
+          "confidence": "high",
+          "uHeight": 25,
+          "order": 6
+        }
+      ],
+      "rackU": 45
+    }
+  ],
+  "anomalies": [
+    {
+      "rack": "302.003",
+      "unit": "us-ia-strt-19-1",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "H01.03",
+      "unit": "OMA02-22206-01OLA",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "H01.03",
+      "unit": "OME6500 SH-1",
+      "finding": "MINOR alarm LED lit"
+    },
+    {
+      "rack": "H02.03",
+      "unit": "SHELF 1 / ATLTIAALCIA60742 (bottom shelf)",
+      "finding": "MAJOR + MINOR alarm LEDs lit"
+    },
+    {
+      "rack": "H02.02",
+      "unit": "Ciena 6500 (top)",
+      "finding": "In-service shelf with blank NE/IP/Shelf ID plate - labelling gap"
+    },
+    {
+      "rack": "302.005",
+      "unit": "us-ia-strt-26-1",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "302.008",
+      "unit": "-",
+      "finding": "Rack reserved for MICROSOFT AZURE: empty but fuse panel installed and powered"
+    },
+    {
+      "rack": "301.004",
+      "unit": "TRIMM fuse panel",
+      "finding": "Red fuse indicators lit alongside green - possible fuse alarm"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R serial 12307596",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R serial 12307612",
+      "finding": "CRITICAL alarm LED lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R (3rd shelf, serial not legible)",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R serial 12307619",
+      "finding": "CRITICAL + MINOR alarm LEDs lit"
+    },
+    {
+      "rack": "302.004",
+      "unit": "6500 R stack",
+      "finding": "No NE hostname plates on any of the four shelves - serial barcodes only (labelling gap)"
+    },
+    {
+      "rack": "301.008",
+      "unit": "LI13.DSM04-ILA:1",
+      "finding": "CRITICAL + MAJOR alarm LEDs lit"
+    },
+    {
+      "rack": "301.008",
+      "unit": "bottom shelf (LI11 inferred)",
+      "finding": "NE plate not readable from aisle - labelling/verification gap"
+    },
+    {
+      "rack": "301.003",
+      "unit": "LI03.DSM04-ILA:1",
+      "finding": "Vendor corrected to Nokia 1830 PSS-32 on re-read - mixed-vendor row"
+    },
+    {
+      "rack": "302.009",
+      "unit": "DSM02-24152-01OLA",
+      "finding": "MAJOR alarm LED lit"
+    },
+    {
+      "rack": "302.009",
+      "unit": "face attribution",
+      "finding": "NE hostnames 25152/26152 were recorded on the wrong face pre-QA - corrected via ortho review"
+    },
+    {
+      "rack": "H02.02",
+      "unit": "covered shelf (2nd from top)",
+      "finding": "In-service shelf with blank NE plate - labelling gap"
+    },
+    {
+      "rack": "H01.02",
+      "unit": "unidentified 2U chassis",
+      "finding": "Dark blue chassis below OSN 8800 not identifiable from imagery - site follow-up required"
+    },
+    {
+      "rack": "H02.01",
+      "unit": "Infinera floor chassis",
+      "finding": "Chassis resting on plinth, tilted - possibly staged rather than installed"
+    }
+  ],
+  "stats": {
+    "positionsCaptured": 9,
+    "racksExtracted": 18,
+    "unitsExtracted": 82,
+    "unitsHighConfidence": 65,
+    "activeAlarms": 14,
+    "emptyOrReservedRacks": 1,
+    "vendors": {
+      "Ciena": 50,
+      "TRIMM": 11,
+      "Infinera": 8,
+      "ADC": 4,
+      "ADVA": 1,
+      "Huawei": 1,
+      "PECO II": 1,
+      "Cisco": 1,
+      "Uniprise": 1,
+      "Juniper": 1,
+      "Nokia": 1
+    }
+  }
+}

@@ -3,12 +3,15 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BuildingDefinition } from '../types';
+import { useTheme } from '../context/ThemeContext';
+import { updateGridHelperColours, VIEWER_PALETTES } from '../utils/viewerTheme';
 
 interface DefinitionPreview3DProps {
   definition: BuildingDefinition;
 }
 
 const DefinitionPreview3D: React.FC<DefinitionPreview3DProps> = ({ definition }) => {
+  const { viewerTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const contextRef = useRef<{
     renderer: THREE.WebGLRenderer;
@@ -25,7 +28,7 @@ const DefinitionPreview3D: React.FC<DefinitionPreview3DProps> = ({ definition })
     const h = containerRef.current.clientHeight;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172a);
+    scene.background = new THREE.Color(VIEWER_PALETTES[viewerTheme].previewBackground);
     const camera = new THREE.PerspectiveCamera(45, w / h, 1, 20000);
     camera.position.set(2000, 1500, 2000);
 
@@ -72,7 +75,9 @@ const DefinitionPreview3D: React.FC<DefinitionPreview3DProps> = ({ definition })
     ctx.scene.add(sun);
     
     // Grid Helper
-    const grid = new THREE.GridHelper(5000, 20, 0x1e293b, 0x0f172a);
+    const palette = VIEWER_PALETTES[viewerTheme];
+    const grid = new THREE.GridHelper(5000, 20, palette.gridMajor, palette.gridMinor);
+    grid.userData = { type: 'GRID', divisions: 20 };
     ctx.scene.add(grid);
 
     // BIM Extrusion
@@ -146,7 +151,19 @@ const DefinitionPreview3D: React.FC<DefinitionPreview3DProps> = ({ definition })
     }
   }, [definition]);
 
-  return <div ref={containerRef} className="w-full h-full" />;
+  useEffect(() => {
+    const ctx = contextRef.current;
+    if (!ctx) return;
+
+    const palette = VIEWER_PALETTES[viewerTheme];
+    ctx.scene.background = new THREE.Color(palette.previewBackground);
+    ctx.scene.traverse(object => {
+      if (!(object instanceof THREE.GridHelper) || object.userData?.type !== 'GRID') return;
+      updateGridHelperColours(object, object.userData.divisions, palette.gridMajor, palette.gridMinor);
+    });
+  }, [viewerTheme]);
+
+  return <div ref={containerRef} className="viewer-surface w-full h-full" />;
 };
 
 export default DefinitionPreview3D;

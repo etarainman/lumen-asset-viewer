@@ -1,0 +1,47 @@
+:root {
+  --accent: #0ea5e9;
+  --accent-text: #0369a1;
+  --accent-tint: #e0f2fe;
+  --text-title: #1e293b;
+  --text-body: #475569;
+  --text-muted: #94a3b8;
+  --text-faint: #cbd5e1;
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --success: #16a34a;
+  --success-bright: #22c55e;
+  --success-tint: #f0fdf4;
+  --success-border: #86efac;
+  --warning: #f97316;
+  --danger: #dc2626;
+
+  /* Viewer defaults preserve the existing dark presentation. */
+  --viewer-background: #020617;
+  --viewer-label-surface: rgba(0, 0, 0, 0.6);
+  --viewer-label-text: rgba(255, 255, 255, 0.9);
+  --viewer-label-border: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-viewer-theme='light'] {
+  --viewer-background: #f8fafc;
+  --viewer-label-surface: rgba(255, 255, 255, 0.92);
+  --viewer-label-text: #475569;
+  --viewer-label-border: #e2e8f0;
+}
+
+.viewer-surface {
+  background: var(--viewer-background);
+}
+
+.viewer-label-rack-light {
+  color: var(--text-body);
+  background: var(--viewer-label-surface);
+  border-color: var(--viewer-label-border);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.viewer-label-rack-light[data-selected='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.35);
+}
